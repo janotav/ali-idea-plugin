@@ -1,0 +1,345 @@
+<idea-plugin>
+    <id>com.hp.alm.ali</id>
+    <name>HP ALI</name>
+    <description>Application Lifecycle Intelligence for HP ALM</description>
+    <version>3.6.@{idea.build}.@{ali.buildNumber}</version>
+    <vendor logo="/ali_icon.png" url="https://hpln.hp.com/group/application-lifecycle-intelligence">HP</vendor>
+
+    <idea-version since-build="@{idea.build}"/>
+
+    <change-notes>
+        <![CDATA[
+      <h3>Changes in @{ali.sourceRevision}</h3>
+      <ul>
+        <li>[enhancement] improved attachment handling</li>
+      </ul>
+
+      <h3>Changes in Rev. 137338</h3>
+      <ul>
+        <li>This is a major version upgrade that includes many feature and usability enhancements</li>
+        <li>Beta support for HP Agile Manager</li>
+      </ul>
+
+      <h3>Changes in Rev. 134369</h3>
+      <ul>
+        <li>[compatibility] IDEA 12.1 compatibility fixes</li>
+      </ul>
+
+      <h3>Changes in Rev. 132161</h3>
+      <ul>
+        <li>[compatibility] IDEA 12 compatibility fixes</li>
+        <li>[compatibility] IDEA 10.5.x no longer supported</li>
+      </ul>
+
+      <h3>Changes in Rev. 128589</h3>
+      <ul>
+        <li>[enhancement] improved editing of html fields (&lt;br&gt; now supported)</li>
+        <li>[bugfix] IllegalArgumentException during comments editing</li>
+      </ul>
+
+      <h3>Changes in Rev. 127089</h3>
+      <ul>
+        <li>[enhancement] new defect status according to IDE Customizer settings</li>
+        <li>[bugfix] unable to link defects/requirements</li>
+      </ul>
+      ]]>
+    </change-notes>
+
+    <depends optional="true" config-file="plugin-subversion.xml">Subversion</depends>
+    <depends optional="true" config-file="plugin-tasks.xml">com.intellij.tasks</depends>
+
+    <application-components>
+      <component>
+        <implementation-class>com.hp.alm.ali.idea.cfg.AliConfiguration</implementation-class>
+        <interface-class>com.hp.alm.ali.idea.cfg.AliConfiguration</interface-class>
+      </component>
+      <component>
+        <implementation-class>com.hp.alm.ali.idea.rest.TroubleShootService</implementation-class>
+        <interface-class>com.hp.alm.ali.idea.rest.TroubleShootService</interface-class>
+      </component>
+    </application-components>
+
+    <project-components>
+      <component>
+          <implementation-class>com.hp.alm.ali.idea.cfg.AliProjectConfiguration</implementation-class>
+          <interface-class>com.hp.alm.ali.idea.cfg.AliProjectConfiguration</interface-class>
+          <loadForDefaultProject/>
+      </component>
+      <component>
+          <implementation-class>com.hp.alm.ali.idea.services.ActiveItemService</implementation-class>
+          <interface-class>com.hp.alm.ali.idea.services.ActiveItemService</interface-class>
+      </component>
+      <component>
+          <implementation-class>com.hp.alm.ali.idea.rest.RestService</implementation-class>
+          <interface-class>com.hp.alm.ali.idea.rest.RestService</interface-class>
+      </component>
+      <component>
+          <implementation-class>com.hp.alm.ali.idea.services.ProjectUserService</implementation-class>
+          <interface-class>com.hp.alm.ali.idea.services.ProjectUserService</interface-class>
+      </component>
+      <component>
+          <implementation-class>com.hp.alm.ali.idea.services.EntityLabelService</implementation-class>
+          <interface-class>com.hp.alm.ali.idea.services.EntityLabelService</interface-class>
+      </component>
+      <component>
+          <implementation-class>com.hp.alm.ali.idea.services.FavoritesService</implementation-class>
+          <interface-class>com.hp.alm.ali.idea.services.FavoritesService</interface-class>
+      </component>
+      <component>
+          <implementation-class>com.hp.alm.ali.idea.services.EntityService</implementation-class>
+          <interface-class>com.hp.alm.ali.idea.services.EntityService</interface-class>
+      </component>
+      <component>
+          <implementation-class>com.hp.alm.ali.idea.entity.tree.HierarchicalModelFactory</implementation-class>
+          <interface-class>com.hp.alm.ali.idea.entity.tree.HierarchicalModelFactory</interface-class>
+      </component>
+      <component>
+          <implementation-class>com.hp.alm.ali.idea.services.CustomizationService</implementation-class>
+          <interface-class>com.hp.alm.ali.idea.services.CustomizationService</interface-class>
+      </component>
+      <component>
+          <implementation-class>com.hp.alm.ali.idea.entity.EntityEditManager</implementation-class>
+          <interface-class>com.hp.alm.ali.idea.entity.EntityEditManager</interface-class>
+      </component>
+      <component>
+          <implementation-class>com.hp.alm.ali.idea.services.SprintService</implementation-class>
+          <interface-class>com.hp.alm.ali.idea.services.SprintService</interface-class>
+      </component>
+      <component>
+         <implementation-class>com.hp.alm.ali.idea.cfg.TaskboardConfiguration</implementation-class>
+         <interface-class>com.hp.alm.ali.idea.cfg.TaskboardConfiguration</interface-class>
+      </component>
+      <component>
+         <implementation-class>com.hp.alm.ali.idea.services.TeamMemberService</implementation-class>
+         <interface-class>com.hp.alm.ali.idea.services.TeamMemberService</interface-class>
+      </component>
+      <component>
+         <implementation-class>com.hp.alm.ali.idea.services.ThemeFeatureService</implementation-class>
+         <interface-class>com.hp.alm.ali.idea.services.ThemeFeatureService</interface-class>
+      </component>
+      <component>
+         <implementation-class>com.hp.alm.ali.idea.services.MetadataService</implementation-class>
+         <interface-class>com.hp.alm.ali.idea.services.MetadataService</interface-class>
+      </component>
+      <component>
+         <implementation-class>com.hp.alm.ali.idea.services.MetadataSimpleService</implementation-class>
+         <interface-class>com.hp.alm.ali.idea.services.MetadataSimpleService</interface-class>
+      </component>
+      <component>
+         <implementation-class>com.hp.alm.ali.idea.services.ProjectListService</implementation-class>
+         <interface-class>com.hp.alm.ali.idea.services.ProjectListService</interface-class>
+      </component>
+      <component>
+         <implementation-class>com.hp.alm.ali.idea.translate.TranslateService</implementation-class>
+         <interface-class>com.hp.alm.ali.idea.translate.TranslateService</interface-class>
+      </component>
+      <component>
+          <implementation-class>com.hp.alm.ali.idea.services.RequirementTypeService</implementation-class>
+          <interface-class>com.hp.alm.ali.idea.services.RequirementTypeService</interface-class>
+      </component>
+      <component>
+         <implementation-class>com.hp.alm.ali.idea.services.ApmUIService</implementation-class>
+         <interface-class>com.hp.alm.ali.idea.services.ApmUIService</interface-class>
+      </component>
+      <component>
+         <implementation-class>com.hp.alm.ali.idea.services.AttachmentService</implementation-class>
+         <interface-class>com.hp.alm.ali.idea.services.AttachmentService</interface-class>
+      </component>
+        <component>
+            <implementation-class>com.hp.alm.ali.idea.model.HorizonStrategy</implementation-class>
+            <interface-class>com.hp.alm.ali.idea.model.HorizonStrategy</interface-class>
+        </component>
+        <component>
+            <implementation-class>com.hp.alm.ali.idea.model.ApolloStrategy</implementation-class>
+            <interface-class>com.hp.alm.ali.idea.model.ApolloStrategy</interface-class>
+        </component>
+        <component>
+            <implementation-class>com.hp.alm.ali.idea.model.MayaStrategy</implementation-class>
+            <interface-class>com.hp.alm.ali.idea.model.MayaStrategy</interface-class>
+        </component>
+        <component>
+            <implementation-class>com.hp.alm.ali.idea.model.AliStrategy</implementation-class>
+            <interface-class>com.hp.alm.ali.idea.model.AliStrategy</interface-class>
+        </component>
+        <component>
+            <implementation-class>com.hp.alm.ali.idea.model.Ali2Strategy</implementation-class>
+            <interface-class>com.hp.alm.ali.idea.model.Ali2Strategy</interface-class>
+        </component>
+        <component>
+            <implementation-class>com.hp.alm.ali.idea.model.type.PercentType</implementation-class>
+            <interface-class>com.hp.alm.ali.idea.model.type.PercentType</interface-class>
+        </component>
+        <component>
+            <implementation-class>com.hp.alm.ali.idea.filter.FilterManager</implementation-class>
+            <interface-class>com.hp.alm.ali.idea.filter.FilterManager</interface-class>
+        </component>
+        <component>
+            <implementation-class>com.hp.alm.ali.idea.model.type.UserType</implementation-class>
+            <interface-class>com.hp.alm.ali.idea.model.type.UserType</interface-class>
+        </component>
+        <component>
+            <implementation-class>com.hp.alm.ali.idea.model.type.BuildStatusType</implementation-class>
+            <interface-class>com.hp.alm.ali.idea.model.type.BuildStatusType</interface-class>
+        </component>
+        <component>
+            <implementation-class>com.hp.alm.ali.idea.model.type.BuildDurationType</implementation-class>
+            <interface-class>com.hp.alm.ali.idea.model.type.BuildDurationType</interface-class>
+        </component>
+        <component>
+            <implementation-class>com.hp.alm.ali.idea.model.type.RequirementTypeType</implementation-class>
+            <interface-class>com.hp.alm.ali.idea.model.type.RequirementTypeType</interface-class>
+        </component>
+        <component>
+            <implementation-class>com.hp.alm.ali.idea.model.type.TargetReleaseType</implementation-class>
+            <interface-class>com.hp.alm.ali.idea.model.type.TargetReleaseType</interface-class>
+        </component>
+        <component>
+            <implementation-class>com.hp.alm.ali.idea.model.type.TargetReleaseCycleType</implementation-class>
+            <interface-class>com.hp.alm.ali.idea.model.type.TargetReleaseCycleType</interface-class>
+        </component>
+        <component>
+            <implementation-class>com.hp.alm.ali.idea.model.type.BacklogEntityType</implementation-class>
+            <interface-class>com.hp.alm.ali.idea.model.type.BacklogEntityType</interface-class>
+        </component>
+        <component>
+            <implementation-class>com.hp.alm.ali.idea.model.type.SprintType</implementation-class>
+            <interface-class>com.hp.alm.ali.idea.model.type.SprintType</interface-class>
+        </component>
+        <component>
+            <implementation-class>com.hp.alm.ali.idea.model.type.ReleaseType</implementation-class>
+            <interface-class>com.hp.alm.ali.idea.model.type.ReleaseType</interface-class>
+        </component>
+        <component>
+            <implementation-class>com.hp.alm.ali.idea.model.type.TeamType</implementation-class>
+            <interface-class>com.hp.alm.ali.idea.model.type.TeamType</interface-class>
+        </component>
+        <component>
+            <implementation-class>com.hp.alm.ali.idea.model.type.ThemeType</implementation-class>
+            <interface-class>com.hp.alm.ali.idea.model.type.ThemeType</interface-class>
+        </component>
+        <component>
+            <implementation-class>com.hp.alm.ali.idea.model.type.FeatureType</implementation-class>
+            <interface-class>com.hp.alm.ali.idea.model.type.FeatureType</interface-class>
+        </component>
+        <component>
+            <implementation-class>com.hp.alm.ali.idea.model.type.BacklogBlockedType</implementation-class>
+            <interface-class>com.hp.alm.ali.idea.model.type.BacklogBlockedType</interface-class>
+        </component>
+        <component>
+            <implementation-class>com.hp.alm.ali.idea.model.type.DefectStatusType</implementation-class>
+            <interface-class>com.hp.alm.ali.idea.model.type.DefectStatusType</interface-class>
+        </component>
+        <component>
+            <implementation-class>com.hp.alm.ali.idea.model.type.BacklogStatusDefectType</implementation-class>
+            <interface-class>com.hp.alm.ali.idea.model.type.BacklogStatusDefectType</interface-class>
+        </component>
+        <component>
+            <implementation-class>com.hp.alm.ali.idea.entity.table.QuerySharingManager</implementation-class>
+            <interface-class>com.hp.alm.ali.idea.entity.table.QuerySharingManager</interface-class>
+        </component>
+        <component>
+            <implementation-class>com.hp.alm.ali.idea.entity.edit.EntityEditStrategyImpl</implementation-class>
+            <interface-class>com.hp.alm.ali.idea.entity.edit.EntityEditStrategyImpl</interface-class>
+        </component>
+        <component>
+            <implementation-class>com.hp.alm.ali.idea.entity.edit.HorizonEditStrategy</implementation-class>
+            <interface-class>com.hp.alm.ali.idea.entity.edit.HorizonEditStrategy</interface-class>
+        </component>
+        <component>
+            <implementation-class>com.hp.alm.ali.idea.model.type.DefectLinkStatusType</implementation-class>
+            <interface-class>com.hp.alm.ali.idea.model.type.DefectLinkStatusType</interface-class>
+        </component>
+        <component>
+            <implementation-class>com.hp.alm.ali.idea.model.type.DefectLinkNameType</implementation-class>
+            <interface-class>com.hp.alm.ali.idea.model.type.DefectLinkNameType</interface-class>
+        </component>
+        <component>
+            <implementation-class>com.hp.alm.ali.idea.model.type.DefectLinkIdType</implementation-class>
+            <interface-class>com.hp.alm.ali.idea.model.type.DefectLinkIdType</interface-class>
+        </component>
+        <component>
+            <implementation-class>com.hp.alm.ali.idea.model.type.DefectLinkTypeType</implementation-class>
+            <interface-class>com.hp.alm.ali.idea.model.type.DefectLinkTypeType</interface-class>
+        </component>
+        <component>
+            <implementation-class>com.hp.alm.ali.idea.model.type.PlainTextType</implementation-class>
+            <interface-class>com.hp.alm.ali.idea.model.type.PlainTextType</interface-class>
+        </component>
+        <component>
+            <implementation-class>com.hp.alm.ali.idea.model.type.FileSizeType</implementation-class>
+            <interface-class>com.hp.alm.ali.idea.model.type.FileSizeType</interface-class>
+        </component>
+        <component>
+            <implementation-class>com.hp.alm.ali.idea.services.TeamService</implementation-class>
+            <interface-class>com.hp.alm.ali.idea.services.TeamService</interface-class>
+        </component>
+    </project-components>
+
+    <actions>
+        <group id="hpali.task">
+            <action id="hpali.task.modify" class="com.hp.alm.ali.idea.action.task.TaskEditAction"/>
+            <action id="hpali.task.delete" class="com.hp.alm.ali.idea.action.task.TaskDeleteAction"/>
+        </group>
+        <group id="hpali.entity">
+            <action id="hpali.entity.detail" class="com.hp.alm.ali.idea.action.ViewDetailAction"/>
+            <action id="hpali.entity.refresh" class="com.hp.alm.ali.idea.action.RefreshAction"/>
+            <action id="hpali.entity.history" class="com.hp.alm.ali.idea.action.ShowHistoryAction"/>
+            <action id="hpali.entity.fields" class="com.hp.alm.ali.idea.action.FieldsAction"/>
+            <action id="hpali.entity.changes" class="com.hp.alm.ali.idea.action.ShowChangesAction"/>
+            <action id="hpali.entity.modify" class="com.hp.alm.ali.idea.action.ModifyAction"/>
+            <action id="hpali.entity.delete" class="com.hp.alm.ali.idea.action.DeleteEntityAction"/>
+            <action id="hpali.entity.activate" class="com.hp.alm.ali.idea.action.ActivateItemAction"/>
+            <action id="hpali.entity.browser" class="com.hp.alm.ali.idea.action.BrowserAction"/>
+            <action id="hpali.entity.attachmentOpen" class="com.hp.alm.ali.idea.action.attachment.AttachmentOpenAction"/>
+            <action id="hpali.entity.attachmentBrowser" class="com.hp.alm.ali.idea.action.attachment.AttachmentBrowserAction"/>
+            <action id="hpali.entity.attachmentDownload" class="com.hp.alm.ali.idea.action.attachment.AttachmentDownloadAction"/>
+            <action id="hpali.entity.attachmentEdit" class="com.hp.alm.ali.idea.action.attachment.AttachmentEditAction"/>
+            <action id="hpali.entity.attachmentDelete" class="com.hp.alm.ali.idea.action.attachment.AttachmentDeleteAction"/>
+            <action id="hpali.entity.linkEdit" class="com.hp.alm.ali.idea.action.link.LinkEditAction"/>
+            <action id="hpali.entity.linkView" class="com.hp.alm.ali.idea.action.link.LinkViewAction"/>
+            <action id="hpali.entity.linkDelete" class="com.hp.alm.ali.idea.action.link.LinkDeleteAction"/>
+            <reference ref="hpali.task.modify"/>
+            <reference ref="hpali.task.delete"/>
+        </group>
+        <group id="hpali.backlog">
+            <action id="hpali.backlog.new.story" class="com.hp.alm.ali.idea.action.backlog.BacklogNewStoryAction"/>
+            <action id="hpali.backlog.new.defect" class="com.hp.alm.ali.idea.action.backlog.BacklogNewDefectAction"/>
+        </group>
+        <group id="hpali.taskboard">
+            <action id="hpali.taskboard.new.story" class="com.hp.alm.ali.idea.action.taskboard.TaskBoardNewStoryAction"/>
+            <action id="hpali.taskboard.new.defect" class="com.hp.alm.ali.idea.action.taskboard.TaskBoardNewDefectAction"/>
+        </group>
+        <group id="hpali.defects">
+            <action id="hpali.new.defect" class="com.hp.alm.ali.idea.action.NewDefectAction"/>
+        </group>
+        <!-- detail tables -->
+        <group id="hpali.attachment">
+            <action id="hpali.new.attachment" class="com.hp.alm.ali.idea.action.attachment.AttachmentNewAction"/>
+        </group>
+        <group id="hpali.project-task">
+            <action id="hpali.task.new" class="com.hp.alm.ali.idea.action.task.TaskNewAction"/>
+        </group>
+        <group id="hpali.defect-link">
+            <action id="hpali.link.new" class="com.hp.alm.ali.idea.action.link.LinkNewAction"/>
+        </group>
+        <!-- end of detail tables -->
+        <action id="genesisActionBig" class="com.hp.alm.ali.idea.genesis.GenesisAction" text="Environment Provisioning" description="Setup your development environment using HP ALI" icon="/ali_icon_64x64.png">
+            <add-to-group group-id="WelcomeScreen.QuickStart.IDEA" anchor="first"/>
+        </action>
+        <action id="genesisAction" class="com.hp.alm.ali.idea.genesis.GenesisAction" text="Environment Provisioning" description="Setup your development environment using HP ALI" icon="/ali_icon.png">
+            <add-to-group group-id="OpenProjectGroup" anchor="last"/>
+        </action>
+    </actions>
+
+    <extensionPoints>
+       <extensionPoint name="genesisCheckout" interface="com.hp.alm.ali.idea.genesis.checkout.CheckoutFactory"/>
+    </extensionPoints>
+
+    <extensions defaultExtensionNs="com.intellij">
+       <toolWindow id="HP ALI" icon="/ali_icon.png" anchor="bottom" factoryClass="com.hp.alm.ali.idea.content.AliContentFactory"/>
+       <applicationConfigurable implementation="com.hp.alm.ali.idea.cfg.AliConfigurable"/>
+       <projectConfigurable implementation="com.hp.alm.ali.idea.cfg.AliProjectConfigurable"/>
+       <checkinHandlerFactory implementation="com.hp.alm.ali.idea.content.AliCheckinHandlerFactory"/>
+    </extensions>
+
+</idea-plugin>

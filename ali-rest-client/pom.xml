@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.hp.alm.ali</groupId>
+        <artifactId>ali-parent</artifactId>
+        <version>3.6</version>
+        <relativePath>../ali-parent</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.hp.alm.ali</groupId>
+    <artifactId>ali-rest-client</artifactId>
+    <packaging>jar</packaging>
+    <name>${project.artifactId}:${project.version}</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.hp.alm.ali</groupId>
+            <artifactId>ali-lang</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-httpclient</groupId>
+            <artifactId>commons-httpclient</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jdom</groupId>
+            <artifactId>jdom</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+</project>

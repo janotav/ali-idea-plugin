@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.hp.alm.ali</groupId>
+    <artifactId>ali-root</artifactId>
+    <name>${project.artifactId}:${project.version}</name>
+    <description>HP ALI Intellij Plugin</description>
+    <packaging>pom</packaging>
+    <version>3.6</version>
+
+    <modules>
+        <module>ali-parent</module>
+        <module>ali-lang</module>
+        <module>ali-rest-client</module>
+        <module>ali-plugin-main</module>
+    </modules>
+
+</project>

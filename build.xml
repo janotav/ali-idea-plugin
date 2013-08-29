@@ -1,0 +1,107 @@
+<project name="HP ALI custom build">
+
+    <property environment="env"/>
+
+    <target name="check-args">
+        <property name="IDEA_HOME" value="${env.IDEA_HOME}"/>
+        <fail message="IDEA_HOME not specified or invalid">
+            <condition>
+                <not>
+                    <available file="${IDEA_HOME}" type="dir"/>
+                </not>
+            </condition>
+        </fail>
+        <fail message="Dependencies not found, your IDEA version is probably unsupported">
+            <condition>
+                <not>
+                    <and>
+                        <resourcecount count="1">
+                            <fileset id="root" dir="${IDEA_HOME}" includes="build.txt"/>
+                        </resourcecount>
+                        <resourcecount count="5">
+                            <fileset id="lib" dir="${IDEA_HOME}/lib" includes="util.jar,annotations.jar,extensions.jar,idea.jar,openapi.jar"/>
+                        </resourcecount>
+                        <resourcecount count="1">
+                            <fileset id="tasks" dir="${IDEA_HOME}/plugins/tasks/lib" includes="tasks-api.jar"/>
+                        </resourcecount>
+                    </and>
+                </not>
+            </condition>
+        </fail>
+
+        <loadfile property="IDEA_VERSION" srcFile="${IDEA_HOME}/build.txt"/>
+        <loadresource property="IDEA_BUILD">
+            <propertyresource name="IDEA_VERSION"/>
+            <filterchain>
+                <tokenfilter>
+                    <replaceregex pattern=".*-(\d+\.\d+)" replace="\1"/>
+                </tokenfilter>
+            </filterchain>
+        </loadresource>
+
+        <echo>Found IDEA build: ${IDEA_VERSION} (${IDEA_BUILD})</echo>
+    </target>
+
+    <target name="install-libs" depends="check-args">
+        <exec executable="mvn">
+            <arg value="install:install-file"/>
+            <arg value="-Dfile=${IDEA_HOME}/lib/util.jar"/>
+            <arg value="-DgroupId=com.intellij"/>
+            <arg value="-DartifactId=util"/>
+            <arg value="-Dversion=${IDEA_VERSION}"/>
+            <arg value="-Dpackaging=jar"/>
+        </exec>
+        <exec executable="mvn">
+            <arg value="install:install-file"/>
+            <arg value="-Dfile=${IDEA_HOME}/lib/annotations.jar"/>
+            <arg value="-DgroupId=com.intellij"/>
+            <arg value="-DartifactId=annotations"/>
+            <arg value="-Dversion=${IDEA_VERSION}"/>
+            <arg value="-Dpackaging=jar"/>
+        </exec>
+        <exec executable="mvn">
+            <arg value="install:install-file"/>
+            <arg value="-Dfile=${IDEA_HOME}/lib/extensions.jar"/>
+            <arg value="-DgroupId=com.intellij"/>
+            <arg value="-DartifactId=extensions"/>
+            <arg value="-Dversion=${IDEA_VERSION}"/>
+            <arg value="-Dpackaging=jar"/>
+        </exec>
+        <exec executable="mvn">
+            <arg value="install:install-file"/>
+            <arg value="-Dfile=${IDEA_HOME}/lib/idea.jar"/>
+            <arg value="-DgroupId=com.intellij"/>
+            <arg value="-DartifactId=idea"/>
+            <arg value="-Dversion=${IDEA_VERSION}"/>
+            <arg value="-Dpackaging=jar"/>
+        </exec>
+        <exec executable="mvn">
+            <arg value="install:install-file"/>
+            <arg value="-Dfile=${IDEA_HOME}/lib/openapi.jar"/>
+            <arg value="-DgroupId=com.intellij"/>
+            <arg value="-DartifactId=openapi"/>
+            <arg value="-Dversion=${IDEA_VERSION}"/>
+            <arg value="-Dpackaging=jar"/>
+        </exec>
+        <exec executable="mvn">
+            <arg value="install:install-file"/>
+            <arg value="-Dfile=${IDEA_HOME}/plugins/tasks/lib/tasks-api.jar"/>
+            <arg value="-DgroupId=com.intellij.plugins"/>
+            <arg value="-DartifactId=tasks-api"/>
+            <arg value="-Dversion=${IDEA_VERSION}"/>
+            <arg value="-Dpackaging=jar"/>
+        </exec>
+    </target>
+
+    <target name="build" depends="install-libs">
+        <exec executable="mvn">
+            <arg value="package"/>
+            <arg value="-Didea.build=${IDEA_BUILD}"/>
+            <arg value="-Didea.version=${IDEA_VERSION}"/>
+            <!-- in regular build following values are provided by CI -->
+            <arg value="-DsourceRevision=latest"/>
+            <arg value="-DbuildNumber=999999"/>
+        </exec>
+    </target>
+
+</project>

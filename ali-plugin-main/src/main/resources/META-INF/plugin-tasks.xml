@@ -1,0 +1,13 @@
+<idea-plugin>
+
+    <project-components>
+        <component>
+            <implementation-class>com.hp.alm.ali.idea.tasks.TaskManagerIntegration</implementation-class>
+            <interface-class>com.hp.alm.ali.idea.tasks.TaskManagerIntegration</interface-class>
+        </component>
+    </project-components>
+
+    <extensions defaultExtensionNs="com.intellij.tasks">
+       <repositoryType implementation="com.hp.alm.ali.idea.tasks.HpAlmRepositoryType"/>
+    </extensions>
+</idea-plugin>
