@@ -26,9 +26,9 @@ simplify this task. Before using this script make sure that IDEA_HOME points to 
 
 When invoked this takes care of the following:
 
-  1 installs relevant jars from the IDEA_HOME installation using "mvn install:install-file"
-  1 invokes "mvn package" overriding version identifiers to match your IDEA version
-  1 resulting plugin is located in "target/ali-idea-plugin.zip"
+1. installs relevant jars from the IDEA_HOME installation using "mvn install:install-file"
+2. invokes "mvn package" overriding version identifiers to match your IDEA version
+3. resulting plugin is located in "target/ali-idea-plugin.zip"
 
 Alternatively if you need to tweak the build somehow, you may also run:
 
