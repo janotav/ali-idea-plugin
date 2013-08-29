@@ -23,10 +23,10 @@ import com.hp.alm.ali.idea.model.Entity;
 import com.hp.alm.ali.idea.entity.EntityQuery;
 import com.hp.alm.ali.idea.model.Metadata;
 import com.hp.alm.ali.idea.rest.RestService;
-import com.hp.alm.ali.utils.StringUtils;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.ui.UIUtil;
+import org.apache.commons.lang.StringUtils;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
@@ -147,7 +147,7 @@ public class HierarchicalEntityModel extends DefaultTreeModel {
     private List<Entity> queryForChildren(String entityType, List<String> parentIds) {
         EntityQuery query = new EntityQuery(entityType);
         query.addColumn("parent-id", 75);
-        query.setValue("parent-id", StringUtils.joinWithSeparator(" or ", parentIds.toArray(new String[0])));
+        query.setValue("parent-id", StringUtils.join(parentIds.toArray(new String[0]), " or "));
         return queryForNodes(query);
     }
 

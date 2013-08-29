@@ -18,8 +18,8 @@ package com.hp.alm.ali.idea.entity.tree;
 
 import com.hp.alm.ali.idea.model.Entity;
 import com.hp.alm.ali.idea.model.Metadata;
-import com.hp.alm.ali.utils.StringUtils;
 import com.intellij.openapi.util.Pair;
+import org.apache.commons.lang.StringUtils;
 
 import javax.swing.tree.TreeNode;
 import java.util.ArrayList;
@@ -209,7 +209,7 @@ public class EntityNode implements TreeNode, Comparable<EntityNode> {
         for(int i = 0; i < tokens.length; i++) {
             tokens[i] = Pattern.quote(tokens[i]);
         }
-        return StringUtils.joinWithSeparator(".*", tokens);
+        return StringUtils.join(tokens, ".*");
     }
 
     public boolean isChildMatching() {

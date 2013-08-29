@@ -17,7 +17,7 @@
 package com.hp.alm.ali.idea.entity;
 
 import com.hp.alm.ali.idea.model.Metadata;
-import com.hp.alm.ali.utils.StringUtils;
+import org.apache.commons.lang.StringUtils;
 import org.jdom.Element;
 
 import javax.swing.SortOrder;
@@ -68,7 +68,7 @@ public class EntityQuery extends AbstractEntityFilter<EntityQuery> {
     }
 
     public synchronized boolean setOrValues(String prop, List<String> values) {
-        return setValue(prop, StringUtils.joinWithSeparator(" OR ", values.toArray(new String[values.size()])));
+        return setValue(prop, StringUtils.join(values.toArray(new String[values.size()]), " OR "));
     }
 
     public synchronized void setOrder(LinkedHashMap<String, SortOrder> order) {

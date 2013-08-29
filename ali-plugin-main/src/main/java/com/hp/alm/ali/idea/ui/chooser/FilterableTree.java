@@ -21,9 +21,9 @@ import com.hp.alm.ali.idea.entity.tree.HierarchicalEntityModel;
 import com.hp.alm.ali.idea.model.Entity;
 import com.hp.alm.ali.idea.entity.EntityQuery;
 import com.hp.alm.ali.idea.model.Metadata;
-import com.hp.alm.ali.utils.StringUtils;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.util.ui.UIUtil;
+import org.apache.commons.lang.StringUtils;
 
 import javax.swing.*;
 import javax.swing.tree.TreePath;
@@ -104,10 +104,10 @@ class FilterableTree extends JTree implements Runnable {
                         } while (pathValue.length() > length);
                     }
                 }
-                parentQuery.setValue(pathProperty, StringUtils.joinWithSeparator(" or ", parentPaths.toArray(new String[0])));
+                parentQuery.setValue(pathProperty, StringUtils.join(parentPaths.toArray(new String[0]), " or "));
             } else {
                 // only search for immediate parent
-                parentQuery.setValue("id", StringUtils.joinWithSeparator(" or ", missingParents.keySet().toArray(new String[0])));
+                parentQuery.setValue("id", StringUtils.join(missingParents.keySet().toArray(new String[0]), " or "));
             }
             return parentQuery;
         } else {

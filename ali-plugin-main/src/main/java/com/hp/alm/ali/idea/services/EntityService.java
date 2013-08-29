@@ -33,11 +33,11 @@ import com.hp.alm.ali.idea.model.parser.EntityList;
 import com.hp.alm.ali.idea.rest.RestException;
 import com.hp.alm.ali.idea.rest.RestService;
 import com.hp.alm.ali.idea.ui.dialog.RestErrorDetailDialog;
-import com.hp.alm.ali.utils.StringUtils;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
 import org.apache.commons.httpclient.HttpStatus;
+import org.apache.commons.lang.StringUtils;
 import org.jdom.output.XMLOutputter;
 
 import javax.swing.SortOrder;
@@ -185,7 +185,7 @@ public class EntityService {
         StringBuffer buf = new StringBuffer();
         buf.append("fields=");
         LinkedHashMap<String,Integer> columns = clone.getColumns();
-        buf.append(StringUtils.joinWithSeparator(",", columns.keySet().toArray(new String[columns.size()])));
+        buf.append(StringUtils.join(columns.keySet().toArray(new String[columns.size()]), ","));
         buf.append("&query=");
         buf.append(EntityQuery.encode("{" + filterToString(clone, project, project.getComponent(MetadataService.class)) + "}"));
         buf.append("&order-by=");

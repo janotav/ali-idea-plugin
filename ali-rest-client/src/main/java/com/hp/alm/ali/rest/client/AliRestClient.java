@@ -16,8 +16,7 @@
 
 package com.hp.alm.ali.rest.client;
 
-
-import static com.hp.alm.ali.utils.StringUtils.joinWithSeparator;
+import static com.hp.alm.ali.utils.PathUtils.pathJoin;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -268,7 +267,7 @@ public class AliRestClient {
             @Override
             public void run() {
                 // first try Apollo style login
-                String authPoint = joinWithSeparator("/", location, "/authentication-point/alm-authenticate");
+                String authPoint = pathJoin("/", location, "/authentication-point/alm-authenticate");
                 PostMethod post = new PostMethod(authPoint);
                 String xml = createAuthXml();
                 post.setRequestEntity(createRequestEntity(InputData.create(xml)));
@@ -290,7 +289,7 @@ public class AliRestClient {
                     authPrefs.add(AuthPolicy.BASIC);
                     httpClient.getParams().setParameter(AuthPolicy.AUTH_SCHEME_PRIORITY, authPrefs);
 
-                    authPoint = joinWithSeparator("/", location, "/authentication-point/authenticate");
+                    authPoint = pathJoin("/", location, "/authentication-point/authenticate");
                     GetMethod get = new GetMethod(authPoint);
                     resultInfo = ResultInfo.create(false, null);
                     executeAndWriteResponse(get, resultInfo, Collections.<Integer>emptySet());
@@ -352,7 +351,7 @@ public class AliRestClient {
         handleConcurrency(new Runnable() {
             @Override
             public void run() {
-                GetMethod get = new GetMethod(joinWithSeparator("/", location, "/authentication-point/logout"));
+                GetMethod get = new GetMethod(pathJoin("/", location, "/authentication-point/logout"));
                 ResultInfo resultInfo = ResultInfo.create(false, null);
                 executeAndWriteResponse(get, resultInfo, Collections.<Integer>emptySet());
                 HttpStatusBasedException.throwForError(resultInfo.getHttpStatus(), resultInfo.getLocation());
@@ -649,11 +648,11 @@ public class AliRestClient {
         Object encDomain = encodeParams(new Object[]{domain})[0];
         Object encProject = encodeParams(new Object[]{project})[0];
         if (encDomain == null) {
-            return joinWithSeparator("/", location, "/rest", substituted);
+            return pathJoin("/", location, "/rest", substituted);
         } else if (encProject == null) {
-            return joinWithSeparator("/", location, "/rest/domains", encDomain.toString(), substituted);
+            return pathJoin("/", location, "/rest/domains", encDomain.toString(), substituted);
         }
-        return joinWithSeparator("/", location, "/rest/domains", encDomain.toString(), "projects", encProject.toString(), substituted);
+        return pathJoin("/", location, "/rest/domains", encDomain.toString(), "projects", encProject.toString(), substituted);
     }
 
     private Object[] encodeParams(Object params[]) {
