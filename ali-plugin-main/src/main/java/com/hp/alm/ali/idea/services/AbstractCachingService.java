@@ -18,10 +18,10 @@ package com.hp.alm.ali.idea.services;
 
 import com.hp.alm.ali.idea.rest.RestListener;
 import com.hp.alm.ali.idea.rest.RestService;
-import com.hp.alm.ali.Pair;
 
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.Pair;
 import com.intellij.util.ui.UIUtil;
 
 import java.util.Collections;

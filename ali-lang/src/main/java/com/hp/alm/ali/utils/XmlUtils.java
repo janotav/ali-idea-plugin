@@ -16,13 +16,7 @@
 
 package com.hp.alm.ali.utils;
 
-import javax.xml.namespace.QName;
-import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.events.Characters;
-import javax.xml.stream.events.EndElement;
-import javax.xml.stream.events.StartElement;
 
 public class XmlUtils {
 
@@ -34,21 +28,5 @@ public class XmlUtils {
         XMLInputFactory xmlFactory = XMLInputFactory.newInstance();
         xmlFactory.setProperty(XMLInputFactory.SUPPORT_DTD, false);
         return xmlFactory;
-    }
-    
-    public static String getAttrValue(StartElement element, String attr) {
-        return element.getAttributeByName(new QName(attr)).getValue();
-    }
-    
-    public static String getElementLocalName(StartElement element) {
-        return element.getName().getLocalPart();
-    }
-    
-    public static String getElementLocalName(EndElement element) {
-        return element.getName().getLocalPart();
-    }
-
-    public static String readElementContent(XMLEventReader reader) throws XMLStreamException {
-        return ((Characters) reader.nextEvent()).getData();
     }
 }
