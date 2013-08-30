@@ -31,6 +31,7 @@ import org.junit.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collections;
 
 public class AliRestClientTest {
 
@@ -317,5 +318,41 @@ public class AliRestClientTest {
                     getServerUrl("/qcbin/rest/domains/domain/projects/project/path/arg1/arg2") + "]"), e.getLocation());
             Assert.assertEquals("bad request", e.getReasonPhrase());
         }
+    }
+
+    @Test
+    public void testPost() throws IOException {
+        handler.addRequest("POST", "/qcbin/authentication-point/alm-authenticate", 200)
+                .expectBody("<alm-authentication><user>user</user><password>password</password></alm-authentication>");
+        handler.addRequest("POST", "/qcbin/rest/domains/domain/projects/project/path/arg1/arg2", 200)
+                .expectHeader("header-input", "value-input")
+                .expectBody("input")
+                .responseHeader("header-output", "value-output")
+                .responseBody("output");
+
+        AliRestClient client = AliRestClient.create(getQcUrl(), "domain", "project", "user", "password", AliRestClient.SessionStrategy.AUTO_LOGIN);
+        ResultInfo resultInfo = ResultInfo.create(true, new ByteArrayOutputStream());
+        int code = client.post(InputData.create("input", Collections.singletonMap("header-input", "value-input")), resultInfo, "/path/{0}/{1}", "arg1", "arg2");
+        Assert.assertEquals(200, code);
+        Assert.assertEquals("output", resultInfo.getBodyStream().toString());
+        Assert.assertEquals("value-output", resultInfo.getHeaders().get("header-output"));
+    }
+
+    @Test
+    public void testPut() throws IOException {
+        handler.addRequest("POST", "/qcbin/authentication-point/alm-authenticate", 200)
+                .expectBody("<alm-authentication><user>user</user><password>password</password></alm-authentication>");
+        handler.addRequest("PUT", "/qcbin/rest/domains/domain/projects/project/path/arg1/arg2", 200)
+                .expectHeader("header-input", "value-input")
+                .expectBody("input")
+                .responseHeader("header-output", "value-output")
+                .responseBody("output");
+
+        AliRestClient client = AliRestClient.create(getQcUrl(), "domain", "project", "user", "password", AliRestClient.SessionStrategy.AUTO_LOGIN);
+        ResultInfo resultInfo = ResultInfo.create(true, new ByteArrayOutputStream());
+        int code = client.put(InputData.create("input", Collections.singletonMap("header-input", "value-input")), resultInfo, "/path/{0}/{1}", "arg1", "arg2");
+        Assert.assertEquals(200, code);
+        Assert.assertEquals("output", resultInfo.getBodyStream().toString());
+        Assert.assertEquals("value-output", resultInfo.getHeaders().get("header-output"));
     }
 }

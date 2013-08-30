@@ -448,23 +448,6 @@ public class AliRestClient {
     }
 
     /**
-     * Perform PUT HTTP request for given location.
-     *
-     * @param template to be expanded and appended to ALM rest base
-     * @param params   position based expansion of template
-     * @param data     request body
-     * @throws com.hp.alm.ali.rest.client.exception.HttpClientErrorException
-     *          for http statuses 400-499
-     * @throws com.hp.alm.ali.rest.client.exception.HttpServerErrorException
-     *          for http statuses 500-599
-     */
-    public void put(InputData data, String template, Object... params) {
-        ResultInfo result = ResultInfo.create(false, null);
-        put(data, result, template, params);
-        HttpStatusBasedException.throwForError(result);
-    }
-
-    /**
      * Perform DELETE HTTP request for given location.
      *
      * @param template to be expanded and appended to ALM rest base
@@ -476,22 +459,6 @@ public class AliRestClient {
         DeleteMethod deleteMethod = createMethod(domain, project, DELETE_BUILDER, null, template, params);
         executeHttpMethod(deleteMethod, result);
         return result.getHttpStatus();
-    }
-
-    /**
-     * Perform DELETE HTTP request for given location.
-     *
-     * @param template to be expanded and appended to ALM rest base
-     * @param params   position based expansion of template
-     * @throws com.hp.alm.ali.rest.client.exception.HttpClientErrorException
-     *          for http statuses 400-499
-     * @throws com.hp.alm.ali.rest.client.exception.HttpServerErrorException
-     *          for http statuses 500-599
-     */
-    public void delete(String template, Object... params) {
-        ResultInfo result = ResultInfo.create(false, null);
-        delete(result, template, params);
-        HttpStatusBasedException.throwForError(result);
     }
 
     /**
