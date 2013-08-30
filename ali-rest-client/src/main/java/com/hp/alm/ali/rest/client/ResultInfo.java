@@ -21,7 +21,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-
 /**
  * Provides information extracted from HTTP response.
  */
@@ -38,7 +37,6 @@ public class ResultInfo {
         this.bodyStream = bodyStream;
     }
 
-
     /**
      * Creates result info to be used as container for HTTP response related information.
      *
@@ -49,7 +47,6 @@ public class ResultInfo {
     public static ResultInfo create(boolean fetchHeaders, OutputStream responseBody) {
         return new ResultInfo(fetchHeaders ? new HashMap<String, String>() : null, responseBody);
     }
-
 
     /**
      * Returns status code of performed http operation.
@@ -63,7 +60,6 @@ public class ResultInfo {
     void setHttpStatus(int httpStatus) {
         this.httpStatus = httpStatus;
     }
-
 
     /**
      * Map of response haeders.

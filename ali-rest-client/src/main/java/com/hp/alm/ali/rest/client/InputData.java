@@ -59,10 +59,6 @@ public class InputData {
         return new InputData(null, InputStreamRequestEntity.CONTENT_LENGTH_AUTO, data, Collections.<String, String>emptyMap());
     }
 
-    public static InputData empty() {
-        return new InputData(null, InputStreamRequestEntity.CONTENT_LENGTH_AUTO, null, Collections.<String, String>emptyMap());
-    }
-
     InputStream getDataStream() {
         return dataStream;
     }

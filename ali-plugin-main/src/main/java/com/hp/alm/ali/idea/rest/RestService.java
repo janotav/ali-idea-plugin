@@ -235,9 +235,7 @@ public class RestService implements ConfigurationListener {
     public static void logout(final AliRestClient client) {
         ApplicationManager.getApplication().executeOnPooledThread(new Runnable() {
             public void run() {
-                if(client.getSessionContext() != null) {
-                    client.logout();
-                }
+                client.logout();
             }
         });
     }

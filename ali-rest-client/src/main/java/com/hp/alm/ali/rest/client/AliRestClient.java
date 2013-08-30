@@ -68,6 +68,7 @@ import com.hp.alm.ali.rest.client.exception.HttpStatusBasedException;
 import com.hp.alm.ali.rest.client.exception.ResourceAccessException;
 import com.hp.alm.ali.utils.XmlUtils;
 import org.apache.commons.httpclient.params.HttpMethodParams;
+import org.apache.commons.io.IOUtils;
 import org.jdom.Element;
 import org.jdom.output.XMLOutputter;
 
@@ -93,25 +94,25 @@ import org.jdom.output.XMLOutputter;
  */
 public class AliRestClient {
 
-    public static final LocationBasedBuilder<PostMethod> POST_BUILDER = new LocationBasedBuilder<PostMethod>() {
+    private static final LocationBasedBuilder<PostMethod> POST_BUILDER = new LocationBasedBuilder<PostMethod>() {
         @Override
         public PostMethod build(String location) {
             return new PostMethod(location);
         }
     };
-    public static final LocationBasedBuilder<PutMethod> PUT_BUILDER = new LocationBasedBuilder<PutMethod>() {
+    private static final LocationBasedBuilder<PutMethod> PUT_BUILDER = new LocationBasedBuilder<PutMethod>() {
         @Override
         public PutMethod build(String location) {
             return new PutMethod(location);
         }
     };
-    public static final LocationBasedBuilder<GetMethod> GET_BUILDER = new LocationBasedBuilder<GetMethod>() {
+    private static final LocationBasedBuilder<GetMethod> GET_BUILDER = new LocationBasedBuilder<GetMethod>() {
         @Override
         public GetMethod build(String location) {
             return new GetMethod(location);
         }
     };
-    public static final LocationBasedBuilder<DeleteMethod> DELETE_BUILDER = new LocationBasedBuilder<DeleteMethod>() {
+    private static final LocationBasedBuilder<DeleteMethod> DELETE_BUILDER = new LocationBasedBuilder<DeleteMethod>() {
         @Override
         public DeleteMethod build(String location) {
             return new DeleteMethod(location);
@@ -132,38 +133,18 @@ public class AliRestClient {
         return new AliRestClient(location, domain, project, userName, password, sessionStrategy);
     }
 
-
-    /**
-     * Allows use already already established session.
-     * Allows do login fallback after failed subsequent rest operation with given session.
-     * When  subsequent rest operation fail with given session then is session dropped. Login creates new session and operation is repeated.
-     * Fallback mechanism is driven by {@code loginOnFailure} parameter
-     * When new session is created then is accessible via {@link #getSessionContext()}  and can be stored for further reuse.
-     *
-     * @param sessionContext
-     * @see SessionContext
-     */
-    public static AliRestClient use(SessionContext sessionContext, String domain, String project, String userName, String password) {
-        return new AliRestClient(sessionContext, domain, project, userName, password);
-    }
-
-
     public static enum SessionStrategy {
         /**
-         * Each REST operation is wrapped by implicit login and logout.
-         */
-        AUTO_LOGIN_LOGOUT,
-        /**
-         * Perform automatic login when no session is established or is expired .
-         * Logout must be handled by caller..
+         * Perform automatic login when no session is established or is expired.
+         * Logout must be called explicitly.
          */
         AUTO_LOGIN,
+
         /**
-         * Handling of login and logout must be explicitly handled by caller.
+         * Both login and logout must be called explicitly.
          */
         NONE
     }
-
 
     static final String COOKIE_SSO_NAME = "LWSSO_COOKIE_KEY";
     static final String COOKIE_SESSION_NAME = "QCSession";
@@ -173,50 +154,35 @@ public class AliRestClient {
     private final String location;
     private final String userName;
     private final String password;
-
-    private DomainProjectSynchronizedHolder domainProject = new DomainProjectSynchronizedHolder();
+    private volatile String domain;
+    private volatile String project;
 
     private final SessionStrategy sessionStrategy;
     private final HttpClient httpClient = new HttpClient(new MultiThreadedHttpConnectionManager());
     private volatile SessionContext sessionContext = null;
     private volatile String encoding = "UTF-8";
 
-
     private AliRestClient(String location, String domain, String project,
                           String userName, String password,
                           SessionStrategy sessionStrategy) {
-        if (location == null) throw new IllegalArgumentException("location==null");
+        if (location == null) {
+            throw new IllegalArgumentException("location==null");
+        }
         validateProjectAndDomain(domain, project);
         this.location = location;
         this.userName = userName;
         this.password = password;
-        domainProject.setDomain(domain);
-        domainProject.setProject(project);
+        this.domain = domain;
+        this.project = project;
         this.sessionStrategy = sessionStrategy;
         setTimeout(DEFAULT_CLIENT_TIMEOUT);
         httpClient.getParams().setParameter(HttpMethodParams.RETRY_HANDLER, new DefaultHttpMethodRetryHandler(0, false));
     }
 
-    private static void validateProjectAndDomain(String domain, String project) {
-        if (domain == null && project != null)
-            throw new IllegalArgumentException("When project is specified than domain must specified also.");
-    }
-
-
-    private AliRestClient(SessionContext sessionContext, String domain, String project, String userName, String password) {
-        validateProjectAndDomain(domain, project);
-        this.sessionContext = sessionContext;
-        httpClient.getState().addCookie(sessionContext.getSsoCookie());
-        httpClient.getState().addCookie(sessionContext.getQcCookie());
-        addTenantCookie(sessionContext.getSsoCookie());
-        location = sessionContext.getAlmLocation();
-        domainProject.setDomain(domain);
-        domainProject.setProject(project);
-        this.userName = userName;
-        this.password = password;
-        this.sessionStrategy = SessionStrategy.AUTO_LOGIN;
-        setTimeout(DEFAULT_CLIENT_TIMEOUT);
-        httpClient.getParams().setParameter(HttpMethodParams.RETRY_HANDLER, new DefaultHttpMethodRetryHandler(0, false));
+    private void validateProjectAndDomain(String domain, String project) {
+        if (domain == null && project != null) {
+            throw new IllegalArgumentException("When project is specified domain must be specified too.");
+        }
     }
 
     /**
@@ -252,6 +218,64 @@ public class AliRestClient {
     }
 
     /**
+     * Encoding to be used for URL fragments encoding.
+     * {@code null} means no encoding
+     * @return encoding
+     */
+    public String getEncoding() {
+        return encoding;
+    }
+
+    /**
+     * Encoding to be used for URL fragments encoding.
+     * Default is utf8.
+     * {@code null} means no encoding
+     *
+     * @param encoding charset encoding
+     * @see #getEncoding()
+     */
+    public void setEncoding(String encoding) {
+        if(encoding != null) {
+            Charset.forName(encoding);
+        }
+        this.encoding = encoding;
+    }
+
+    /**
+     * Sets current domain.
+     * @param domain domain
+     */
+    public void setDomain(String domain) {
+        validateProjectAndDomain(domain, project);
+        this.domain = domain;
+    }
+
+    /**
+     * Sets current project.
+     * @param project project
+     */
+    public void setProject(String project) {
+        validateProjectAndDomain(domain, project);
+        this.project = project;
+    }
+
+    /**
+     * Get current domain.
+     * @return domain
+     */
+    public String getDomain() {
+        return domain;
+    }
+
+    /**
+     * Get current project.
+     * @return project
+     */
+    public String getProject() {
+        return project;
+    }
+
+    /**
      * Do login into ALM server rest.
      * Make new session into ALM rest.
      *
@@ -262,51 +286,46 @@ public class AliRestClient {
      * @throws com.hp.alm.ali.rest.client.exception.HttpServerErrorException
      *          for http statuses 500-599
      */
-    public void login() {
-        handleConcurrency(new Runnable() {
-            @Override
-            public void run() {
-                // first try Apollo style login
-                String authPoint = pathJoin("/", location, "/authentication-point/alm-authenticate");
-                PostMethod post = new PostMethod(authPoint);
-                String xml = createAuthXml();
-                post.setRequestEntity(createRequestEntity(InputData.create(xml)));
-                post.addRequestHeader("Content-type", "application/xml");
+    public synchronized void login() {
+        // first try Apollo style login
+        String authPoint = pathJoin("/", location, "/authentication-point/alm-authenticate");
+        PostMethod post = new PostMethod(authPoint);
+        String xml = createAuthXml();
+        post.setRequestEntity(createRequestEntity(InputData.create(xml)));
+        post.addRequestHeader("Content-type", "application/xml");
 
-                ResultInfo resultInfo = ResultInfo.create(false, null);
-                executeAndWriteResponse(post, resultInfo, Collections.<Integer>emptySet());
+        ResultInfo resultInfo = ResultInfo.create(false, null);
+        executeAndWriteResponse(post, resultInfo, Collections.<Integer>emptySet());
 
-                if(resultInfo.getHttpStatus() == HttpStatus.SC_NOT_FOUND) {
-                    // try Maya style login
-                    Credentials cred = new UsernamePasswordCredentials(userName, password);
-                    AuthScope scope = new AuthScope(AuthScope.ANY_HOST, AuthScope.ANY_PORT);
-                    httpClient.getParams().setParameter(HttpMethodParams.CREDENTIAL_CHARSET, "UTF-8");
-                    httpClient.getState().setCredentials(scope, cred);
+        if(resultInfo.getHttpStatus() == HttpStatus.SC_NOT_FOUND) {
+            // try Maya style login
+            Credentials cred = new UsernamePasswordCredentials(userName, password);
+            AuthScope scope = new AuthScope(AuthScope.ANY_HOST, AuthScope.ANY_PORT);
+            httpClient.getParams().setParameter(HttpMethodParams.CREDENTIAL_CHARSET, "UTF-8");
+            httpClient.getState().setCredentials(scope, cred);
 
-                    // exclude the NTLM authentication scheme (requires NTCredentials we don't supply)
-                    List<String> authPrefs = new ArrayList<String>(2);
-                    authPrefs.add(AuthPolicy.DIGEST);
-                    authPrefs.add(AuthPolicy.BASIC);
-                    httpClient.getParams().setParameter(AuthPolicy.AUTH_SCHEME_PRIORITY, authPrefs);
+            // exclude the NTLM authentication scheme (requires NTCredentials we don't supply)
+            List<String> authPrefs = new ArrayList<String>(2);
+            authPrefs.add(AuthPolicy.DIGEST);
+            authPrefs.add(AuthPolicy.BASIC);
+            httpClient.getParams().setParameter(AuthPolicy.AUTH_SCHEME_PRIORITY, authPrefs);
 
-                    authPoint = pathJoin("/", location, "/authentication-point/authenticate");
-                    GetMethod get = new GetMethod(authPoint);
-                    resultInfo = ResultInfo.create(false, null);
-                    executeAndWriteResponse(get, resultInfo, Collections.<Integer>emptySet());
-                }
-                HttpStatusBasedException.throwForError(resultInfo.getHttpStatus(), resultInfo.getLocation());
-                if(resultInfo.getHttpStatus() != 200) {
-                    // during login we only accept 200 status (to avoid redirects and such as seemingly correct login)
-                    throw new AuthenticationFailureException(resultInfo.getHttpStatus(), location);
-                }
+            authPoint = pathJoin("/", location, "/authentication-point/authenticate");
+            GetMethod get = new GetMethod(authPoint);
+            resultInfo = ResultInfo.create(false, null);
+            executeAndWriteResponse(get, resultInfo, Collections.<Integer>emptySet());
+        }
+        HttpStatusBasedException.throwForError(resultInfo.getHttpStatus(), resultInfo.getLocation());
+        if(resultInfo.getHttpStatus() != 200) {
+            // during login we only accept 200 status (to avoid redirects and such as seemingly correct login)
+            throw new AuthenticationFailureException(resultInfo.getHttpStatus(), location);
+        }
 
-                Cookie[] cookies = httpClient.getState().getCookies();
-                Cookie ssoCookie = getSessionCookieByName(cookies, COOKIE_SSO_NAME);
-                Cookie qcCookie = getSessionCookieByName(cookies, COOKIE_SESSION_NAME);
-                addTenantCookie(ssoCookie);
-                sessionContext = new SessionContext(location, ssoCookie, qcCookie);
-            }
-        });
+        Cookie[] cookies = httpClient.getState().getCookies();
+        Cookie ssoCookie = getSessionCookieByName(cookies, COOKIE_SSO_NAME);
+        Cookie qcCookie = getSessionCookieByName(cookies, COOKIE_SESSION_NAME);
+        addTenantCookie(ssoCookie);
+        sessionContext = new SessionContext(location, ssoCookie, qcCookie);
     }
 
     private String createAuthXml() {
@@ -347,28 +366,14 @@ public class AliRestClient {
      * @throws com.hp.alm.ali.rest.client.exception.HttpServerErrorException
      *          for http statuses 500-599
      */
-    public void logout() {
-        handleConcurrency(new Runnable() {
-            @Override
-            public void run() {
-                GetMethod get = new GetMethod(pathJoin("/", location, "/authentication-point/logout"));
-                ResultInfo resultInfo = ResultInfo.create(false, null);
-                executeAndWriteResponse(get, resultInfo, Collections.<Integer>emptySet());
-                HttpStatusBasedException.throwForError(resultInfo.getHttpStatus(), resultInfo.getLocation());
-                sessionContext = null;
-            }
-        });
-    }
-
-    private void handleConcurrency(Runnable loginOrLogout) {
-        if (sessionStrategy == SessionStrategy.AUTO_LOGIN_LOGOUT) {
-            loginOrLogout.run();
-        } else {
-            synchronized (this) {
-                loginOrLogout.run();
-            }
+    public synchronized void logout() {
+        if(sessionContext != null) {
+            GetMethod get = new GetMethod(pathJoin("/", location, "/authentication-point/logout"));
+            ResultInfo resultInfo = ResultInfo.create(false, null);
+            executeAndWriteResponse(get, resultInfo, Collections.<Integer>emptySet());
+            HttpStatusBasedException.throwForError(resultInfo.getHttpStatus(), resultInfo.getLocation());
+            sessionContext = null;
         }
-
     }
 
     /**
@@ -411,7 +416,6 @@ public class AliRestClient {
         return new ByteArrayInputStream(responseBody.toByteArray());
     }
 
-
     /**
      * Perform GET HTTP request for given location.
      * Does not throw exception for error status codes.
@@ -423,8 +427,7 @@ public class AliRestClient {
      * @see MessageFormat#format(String, Object...)
      */
     public int get(ResultInfo result, String template, Object... params) {
-        DomainProjectPair domainProjectPair = domainProject.getSnapshot();
-        GetMethod method = createMethod(domainProjectPair, GET_BUILDER, null, template, params);
+        GetMethod method = createMethod(domain, project, GET_BUILDER, null, template, params);
         executeHttpMethod(method, result);
         return result.getHttpStatus();
     }
@@ -439,7 +442,7 @@ public class AliRestClient {
      * @return HTTP status code
      */
     public int put(InputData inputData, ResultInfo result, String template, Object... params) {
-        PutMethod putMethod = createMethod(domainProject.getSnapshot(), PUT_BUILDER, createRequestEntity(inputData), template, params);
+        PutMethod putMethod = createMethod(domain, project, PUT_BUILDER, createRequestEntity(inputData), template, params);
         setHeaders(putMethod, inputData.getHeaders());
         executeHttpMethod(putMethod, result);
         return result.getHttpStatus();
@@ -472,7 +475,7 @@ public class AliRestClient {
      * @return HTTP status code
      */
     public int delete(ResultInfo result, String template, Object... params) {
-        DeleteMethod deleteMethod = createMethod(domainProject.getSnapshot(), DELETE_BUILDER, null, template, params);
+        DeleteMethod deleteMethod = createMethod(domain, project, DELETE_BUILDER, null, template, params);
         executeHttpMethod(deleteMethod, result);
         return result.getHttpStatus();
     }
@@ -493,14 +496,6 @@ public class AliRestClient {
         HttpStatusBasedException.throwForError(result.getHttpStatus(), result.getLocation());
     }
 
-
-    private static interface LocationBasedBuilder<T extends HttpMethod> {
-
-        T build(String location);
-
-    }
-
-
     /**
      * Perform POST HTTP request for given location.
      *
@@ -511,82 +506,25 @@ public class AliRestClient {
      * @return HTTP status code
      */
     public int post(InputData data, ResultInfo result, String template, Object... params) {
-        PostMethod postMethod = createMethod(domainProject.getSnapshot(), POST_BUILDER, createRequestEntity(data), template, params);
+        PostMethod postMethod = createMethod(domain, project, POST_BUILDER, createRequestEntity(data), template, params);
         setHeaders(postMethod, data.getHeaders());
         executeHttpMethod(postMethod, result);
         return result.getHttpStatus();
     }
     
-    public void postAndThrowException(InputData data, ResultInfo result, String template, Object... params) {
-        post(data, result, template, params);
-        HttpStatusBasedException.throwForError(result.getHttpStatus(), result.getLocation());
-    }
-
     private void setHeaders(HttpMethod method, Map<String, String> headers) {
         for (Map.Entry<String, String> entry : headers.entrySet()) {
             method.setRequestHeader(entry.getKey(), entry.getValue());
         }
     }
 
-
-    /**
-     * Perform POST HTTP request for given location.
-     *
-     * @param template to be expanded and appended to ALM rest base
-     * @param params   position based expansion of template
-     * @param data     request body
-     * @throws com.hp.alm.ali.rest.client.exception.HttpClientErrorException
-     *          for http statuses 400-499
-     * @throws com.hp.alm.ali.rest.client.exception.HttpServerErrorException
-     *          for http statuses 500-599
-     */
-    public void post(InputData data, String template, Object... params) {
-        ResultInfo result = ResultInfo.create(false, null);
-        post(data, result, template, params);
-        HttpStatusBasedException.throwForError(result.getHttpStatus(), result.getLocation());
-    }
-
-
-    private <T extends HttpMethod> T createMethod(DomainProjectPair domainProjectPair, LocationBasedBuilder<T> builder, RequestEntity requestEntity, String template, Object... params) {
-        String location = composeLocation(domainProjectPair.domain, domainProjectPair.project, template, params);
+    private <T extends HttpMethod> T createMethod(String domain, String project, LocationBasedBuilder<T> builder, RequestEntity requestEntity, String template, Object... params) {
+        String location = composeLocation(domain, project, template, params);
         T method = builder.build(location);
         if (requestEntity != null) {
             ((EntityEnclosingMethod) method).setRequestEntity(requestEntity);
         }
         return method;
-    }
-
-    private static final class DomainProjectSynchronizedHolder {
-        private String domain;
-        private String project;
-
-
-        public synchronized void setDomain(String domain) {
-            validateProjectAndDomain(domain, project);
-            this.domain = domain;
-        }
-
-        public synchronized void setProject(String project) {
-            validateProjectAndDomain(domain, project);
-            this.project = project;
-        }
-
-        public synchronized DomainProjectPair getSnapshot() {
-            return new DomainProjectPair(domain, project);
-        }
-
-
-    }
-
-
-    private static class DomainProjectPair {
-        private final String domain;
-        private final String project;
-
-        private DomainProjectPair(String domain, String project) {
-            this.domain = domain;
-            this.project = project;
-        }
     }
 
     private RequestEntity createRequestEntity(InputData inputData) {
@@ -617,7 +555,7 @@ public class AliRestClient {
             try {
                 InputStream responseBody = method.getResponseBodyAsStream();
                 if (responseBody != null) {
-                    copyStream(method.getResponseBodyAsStream(), bodyStream);
+                    IOUtils.copy(method.getResponseBodyAsStream(), bodyStream);
                     bodyStream.flush();
                     bodyStream.close();
                 }
@@ -677,46 +615,10 @@ public class AliRestClient {
         return result;
     }
 
-
-    /**
-     * Encoding to be used for URL fragments encoding.
-     * Default is utf8.
-     * {@code null} means no encoding
-     *
-     * @return
-     */
-    public String getEncoding() {
-        return encoding;
-    }
-
-    /**
-     * Encoding to be used for URL fragments encoding.
-     * Default is utf8.
-     * {@code null} means no encoding
-     *
-     * @param encoding
-     * @throws UnsupportedEncodingException
-     * @see #getEncoding()
-     */
-    public void setEncoding(String encoding) {
-        if(encoding != null) {
-            Charset.forName(encoding);
-        }
-        this.encoding = encoding;
-    }
-
     private void executeHttpMethod(HttpMethod method, ResultInfo resultInfo) {
         switch (sessionStrategy) {
             case NONE:
                 executeAndWriteResponse(method, resultInfo, Collections.<Integer>emptySet());
-                return;
-            case AUTO_LOGIN_LOGOUT:
-                login();
-                try {
-                    executeAndWriteResponse(method, resultInfo, Collections.<Integer>emptySet());
-                } finally {
-                    logout();
-                }
                 return;
             case AUTO_LOGIN:
                 SessionContext myContext = null;
@@ -740,17 +642,6 @@ public class AliRestClient {
                 }
         }
     }
-
-
-    public static void copyStream(InputStream input, OutputStream output)
-            throws IOException {
-        byte[] buffer = new byte[8192];
-        int n;
-        while (-1 != (n = input.read(buffer))) {
-            output.write(buffer, 0, n);
-        }
-    }
-
 
     private int executeAndWriteResponse(HttpMethod method, ResultInfo resultInfo, Set<Integer> doNotWriteForStatuses) {
         try {
@@ -785,72 +676,27 @@ public class AliRestClient {
         return false;
     }
 
-    /**
-     * Session context created during {@link #login()}  or supplied with {@link #use(SessionContext, String, String, String, String)}.
-     * Allows retrieve session context for future reuse.
-     * Session context can be created by explicit {@link #login()} call
-     * or when {@link SessionStrategy#AUTO_LOGIN} or {@link SessionStrategy#AUTO_LOGIN_LOGOUT)
-     * strategy is used and login is invoked implicitely.
-     * <p/>
-     * NOTE: when instance of session context was changed (== identity comparison) from supplied by {@link #use(SessionContext, String, String, String, String)}
-     * than spupplied session expired and automatic login was performed.
-     *
-     * @return session context
-     */
-    public SessionContext getSessionContext() {
-        return sessionContext;
-    }
-
-
-    /**
-     * Sets current domain.
-     *
-     * @param domain
-     */
-    public void setDomain(String domain) {
-        domainProject.setDomain(domain);
-    }
-
-    /**
-     * Sets current project
-     *
-     * @param project
-     */
-    public void setProject(String project) {
-        domainProject.setProject(project);
-    }
-
-    public String getDomain() {
-        return domainProject.getSnapshot().domain;
-    }
-
-    public String getProject() {
-        return domainProject.getSnapshot().project;
-    }
-
     public List<String> listDomains() {
         ByteArrayOutputStream responseBody = new ByteArrayOutputStream();
         ResultInfo resultInfo = ResultInfo.create(false, responseBody);
-        GetMethod method = createMethod(new DomainProjectPair(null, null), GET_BUILDER, null, "domains");
+        GetMethod method = createMethod(null, null, GET_BUILDER, null, "domains");
         executeHttpMethod(method, resultInfo);
         return getAttributeValues(new ByteArrayInputStream(responseBody.toByteArray()), "Domain", "Name");
     }
 
     public List<String> listCurrentProjects() {
-        return listProjects(domainProject.getSnapshot().domain);
+        return listProjects(domain);
     }
-
 
     public List<String> listProjects(String domain) {
         if (domain == null) throw new IllegalArgumentException("domain==null");
         ByteArrayOutputStream responseBody = new ByteArrayOutputStream();
         ResultInfo resultInfo = ResultInfo.create(false, responseBody);
 
-        GetMethod method = createMethod(new DomainProjectPair(domain, null), GET_BUILDER, null, "projects");
+        GetMethod method = createMethod(domain, null, GET_BUILDER, null, "projects");
         executeHttpMethod(method, resultInfo);
         return getAttributeValues(new ByteArrayInputStream(responseBody.toByteArray()), "Project", "Name");
     }
-
 
     private List<String> getAttributeValues(InputStream xml, String elemName, String attrName) {
         try {
@@ -884,8 +730,12 @@ public class AliRestClient {
             } catch (IOException e) {
                 // ignore
             }
-
         }
+    }
+
+    private static interface LocationBasedBuilder<T extends HttpMethod> {
+
+        T build(String location);
 
     }
 }
