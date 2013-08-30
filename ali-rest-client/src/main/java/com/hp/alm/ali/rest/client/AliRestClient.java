@@ -72,24 +72,29 @@ import org.jdom.Element;
 import org.jdom.output.XMLOutputter;
 
 /**
- * Allows interaction with ALM rest.
- * Facilitates getting and posting resources into ALM rest.
- * <p/><p/><b>Rest URL composition</b><br/>
- * Resulting  rest location is composition example:
+ * Thin wrapper around commons-http client that provides basic support for communication with the HP ALM REST.
+ * <p>
+ *
+ * No higher level abstractions are currently provided, this library only simplifies following tasks:
+ *
  * <ul>
- * <li>{@link #} : http://localost:8080/qcbin</li>
- * <li>{@link #setDomain(String)} : default</li>
- * <li>{@link #setProject(String)} : test_project</li> <p/>
- * </ul>
- * URL:<i>http://localost:8080/qcbin/domains/default/projects/test_project</i>
- * <p/><p/><b>Template parameter</b><br/>
- * <ul>
- * <li>most of  methods for rest interaction have parameter  <i>template<i/></li>
- * <li><i>template<i/> is expanded with position parameters {@link MessageFormat#format(String, Object...)}</li> <p/>
- * <li><i>template<i/> is appended to above composed url</li>
+ *     <li>authentication; {@link #login()}, {@link #logout()}, {@link SessionStrategy}</li>
+ *     <li>domain/project listing: {@link #listDomains()}, {@link #listCurrentProjects()}</li>
  * </ul>
  *
- * @see MessageFormat#format(String, Object...)
+ * <h3>URL composition</h3>
+ *
+ * Position based expansion is used in methods that accept template with parameters:
+
+ * <pre>
+ *     client.getForString("defects/{0}/attachments/{1}", 1001, "readme.txt")
+ * </pre>
+ *
+ * In the DOMAIN/PROJECT of http://localhost:8080/qcbin expands to:
+ *
+ * <pre>
+ *     http://localost:8080/qcbin/domains/DOMAIN/projects/PROJECT/defects/1001/attachments/readme.txt
+ * </pre>
  */
 public class AliRestClient {
 
@@ -385,7 +390,6 @@ public class AliRestClient {
      *          for http statuses 400-499
      * @throws com.hp.alm.ali.rest.client.exception.HttpServerErrorException
      *          for http statuses 500-599
-     * @see MessageFormat#format(String, Object...)
      */
     public String getForString(String template, Object... params) {
         ByteArrayOutputStream responseBody = new ByteArrayOutputStream();
@@ -405,7 +409,6 @@ public class AliRestClient {
      *          for http statuses 400-499
      * @throws com.hp.alm.ali.rest.client.exception.HttpServerErrorException
      *          for http statuses 500-599
-     * @see MessageFormat#format(String, Object...)
      */
     public InputStream getForStream(String template, Object... params) {
         ByteArrayOutputStream responseBody = new ByteArrayOutputStream();
@@ -423,7 +426,6 @@ public class AliRestClient {
      * @param params   position based expansion of template
      * @param result   container for response related information
      * @return HTTP status code
-     * @see MessageFormat#format(String, Object...)
      */
     public int get(ResultInfo result, String template, Object... params) {
         GetMethod method = createMethod(domain, project, GET_BUILDER, null, template, params);
@@ -545,8 +547,8 @@ public class AliRestClient {
     }
 
     private String composeLocation(String domain, String project, String template, Object... params) {
-        params = encodeParams(params);
-        String substituted = MessageFormat.format(template, params);
+        String[] strParams = encodeParams(params);
+        String substituted = MessageFormat.format(template, strParams);
         Object encDomain = encodeParams(new Object[]{domain})[0];
         Object encProject = encodeParams(new Object[]{project})[0];
         if (encDomain == null) {
@@ -557,9 +559,9 @@ public class AliRestClient {
         return pathJoin("/", location, "/rest/domains", encDomain.toString(), "projects", encProject.toString(), substituted);
     }
 
-    private Object[] encodeParams(Object params[]) {
+    private String[] encodeParams(Object params[]) {
         String enc = encoding;
-        Object result[] = new Object[params.length];
+        String result[] = new String[params.length];
         for (int i = 0; i < params.length; i++) {
             if (params[i] == null) {
                 result[i] = null;
@@ -661,25 +663,21 @@ public class AliRestClient {
     }
 
     public List<String> listDomains() {
-        ByteArrayOutputStream responseBody = new ByteArrayOutputStream();
-        ResultInfo resultInfo = ResultInfo.create(false, responseBody);
-        GetMethod method = createMethod(null, null, GET_BUILDER, null, "domains");
-        executeHttpMethod(method, resultInfo);
-        return getAttributeValues(new ByteArrayInputStream(responseBody.toByteArray()), "Domain", "Name");
+        return listValues(createMethod(null, null, GET_BUILDER, null, "domains"), "Domain");
     }
 
     public List<String> listCurrentProjects() {
-        return listProjects(domain);
+        if (domain == null) {
+            throw new IllegalStateException("domain==null");
+        }
+        return listValues(createMethod(domain, null, GET_BUILDER, null, "projects"), "Project");
     }
 
-    public List<String> listProjects(String domain) {
-        if (domain == null) throw new IllegalArgumentException("domain==null");
+    private List<String> listValues(GetMethod method, String entity) {
         ByteArrayOutputStream responseBody = new ByteArrayOutputStream();
         ResultInfo resultInfo = ResultInfo.create(false, responseBody);
-
-        GetMethod method = createMethod(domain, null, GET_BUILDER, null, "projects");
         executeHttpMethod(method, resultInfo);
-        return getAttributeValues(new ByteArrayInputStream(responseBody.toByteArray()), "Project", "Name");
+        return getAttributeValues(new ByteArrayInputStream(responseBody.toByteArray()), entity, "Name");
     }
 
     private List<String> getAttributeValues(InputStream xml, String elemName, String attrName) {

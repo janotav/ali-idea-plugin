@@ -31,7 +31,9 @@ import org.junit.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 public class AliRestClientTest {
 
@@ -67,6 +69,11 @@ public class AliRestClientTest {
 
     public static String getServerUrl(String path) {
         return "http://localhost:"+((ServerConnector)server.getConnectors()[0]).getLocalPort() + path;
+    }
+
+    public static void authenticate() {
+        handler.addRequest("POST", "/qcbin/authentication-point/alm-authenticate", 200)
+                .expectBody("<alm-authentication><user>user</user><password>password</password></alm-authentication>");
     }
 
     @Test
@@ -138,8 +145,7 @@ public class AliRestClientTest {
 
     @Test
     public void testSessionStrategy_AUTO_LOGIN() throws Exception {
-        handler.addRequest("POST", "/qcbin/authentication-point/alm-authenticate", 200)
-                .expectBody("<alm-authentication><user>user</user><password>password</password></alm-authentication>");
+        authenticate();
         handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/test", 200);
 
         AliRestClient client = AliRestClient.create(getQcUrl(), "domain", "project", "user", "password", AliRestClient.SessionStrategy.AUTO_LOGIN);
@@ -148,8 +154,7 @@ public class AliRestClientTest {
 
     @Test
     public void testSessionStrategy_AUTO_LOGIN_timeout() throws Exception {
-        handler.addRequest("POST", "/qcbin/authentication-point/alm-authenticate", 200)
-                .expectBody("<alm-authentication><user>user</user><password>password</password></alm-authentication>");
+        authenticate();
         handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/test", 403)
                 .responseBody("Session expired.");
         handler.addRequest("POST", "/qcbin/authentication-point/alm-authenticate", 200)
@@ -215,8 +220,7 @@ public class AliRestClientTest {
 
     @Test
     public void testGetForString() {
-        handler.addRequest("POST", "/qcbin/authentication-point/alm-authenticate", 200)
-                .expectBody("<alm-authentication><user>user</user><password>password</password></alm-authentication>");
+        authenticate();
         handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/path/arg1/arg2", 200)
                 .responseBody("result");
 
@@ -227,8 +231,7 @@ public class AliRestClientTest {
 
     @Test
     public void testGetForString_error() {
-        handler.addRequest("POST", "/qcbin/authentication-point/alm-authenticate", 200)
-                .expectBody("<alm-authentication><user>user</user><password>password</password></alm-authentication>");
+        authenticate();
         handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/path/arg1/arg2", 400)
                 .reasonPhrase("bad request");
 
@@ -245,8 +248,7 @@ public class AliRestClientTest {
 
     @Test
     public void testGetForStream() throws IOException {
-        handler.addRequest("POST", "/qcbin/authentication-point/alm-authenticate", 200)
-                .expectBody("<alm-authentication><user>user</user><password>password</password></alm-authentication>");
+        authenticate();
         handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/path/arg1/arg2", 200)
                 .responseBody("result");
 
@@ -256,9 +258,8 @@ public class AliRestClientTest {
     }
 
     @Test
-    public void testGetForStream_error() throws IOException {
-        handler.addRequest("POST", "/qcbin/authentication-point/alm-authenticate", 200)
-                .expectBody("<alm-authentication><user>user</user><password>password</password></alm-authentication>");
+    public void testGetForStream_error() {
+        authenticate();
         handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/path/arg1/arg2", 500)
                 .reasonPhrase("server failure");
 
@@ -274,9 +275,8 @@ public class AliRestClientTest {
     }
 
     @Test
-    public void testGet() throws IOException {
-        handler.addRequest("POST", "/qcbin/authentication-point/alm-authenticate", 200)
-                .expectBody("<alm-authentication><user>user</user><password>password</password></alm-authentication>");
+    public void testGet() {
+        authenticate();
         handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/path/arg1/arg2", 200)
                 .responseHeader("custom", "value")
                 .responseBody("result");
@@ -290,7 +290,7 @@ public class AliRestClientTest {
     }
 
     @Test
-    public void testGet_loginError() throws IOException {
+    public void testGet_loginError() {
         handler.addRequest("POST", "/qcbin/authentication-point/alm-authenticate", 500)
                 .reasonPhrase("fatal error");
 
@@ -304,7 +304,7 @@ public class AliRestClientTest {
     }
 
     @Test
-    public void testGetForStream_loginError() throws IOException {
+    public void testGetForStream_loginError() {
         handler.addRequest("POST", "/qcbin/authentication-point/alm-authenticate", 400)
                 .reasonPhrase("bad request");
 
@@ -321,9 +321,8 @@ public class AliRestClientTest {
     }
 
     @Test
-    public void testPost() throws IOException {
-        handler.addRequest("POST", "/qcbin/authentication-point/alm-authenticate", 200)
-                .expectBody("<alm-authentication><user>user</user><password>password</password></alm-authentication>");
+    public void testPost() {
+        authenticate();
         handler.addRequest("POST", "/qcbin/rest/domains/domain/projects/project/path/arg1/arg2", 200)
                 .expectHeader("header-input", "value-input")
                 .expectBody("input")
@@ -339,9 +338,8 @@ public class AliRestClientTest {
     }
 
     @Test
-    public void testPut() throws IOException {
-        handler.addRequest("POST", "/qcbin/authentication-point/alm-authenticate", 200)
-                .expectBody("<alm-authentication><user>user</user><password>password</password></alm-authentication>");
+    public void testPut() {
+        authenticate();
         handler.addRequest("PUT", "/qcbin/rest/domains/domain/projects/project/path/arg1/arg2", 200)
                 .expectHeader("header-input", "value-input")
                 .expectBody("input")
@@ -354,5 +352,46 @@ public class AliRestClientTest {
         Assert.assertEquals(200, code);
         Assert.assertEquals("output", resultInfo.getBodyStream().toString());
         Assert.assertEquals("value-output", resultInfo.getHeaders().get("header-output"));
+    }
+
+    @Test
+    public void testListDomains() {
+        authenticate();
+        handler.addRequest("GET", "/qcbin/rest/domains", 200)
+                .responseBody("<Domains>" +
+                        " <Domain Name='emea'/>" +
+                        " <Domain Name='asia'/>" +
+                        " <Domain Name='pacific'/>" +
+                        "</Domains>");
+
+        AliRestClient client = AliRestClient.create(getQcUrl(), null, null, "user", "password", AliRestClient.SessionStrategy.AUTO_LOGIN);
+        List<String> domains = client.listDomains();
+        Assert.assertEquals(Arrays.asList("emea", "asia", "pacific"), domains);
+    }
+
+    @Test
+    public void testListCurrentProjects() {
+        authenticate();
+        handler.addRequest("GET", "/qcbin/rest/domains/emea/projects", 200)
+                .responseBody("<Projects>" +
+                        " <Project Name='first'/>" +
+                        " <Project Name='second'/>" +
+                        " <Project Name='third'/>" +
+                        "</Projects>");
+
+        AliRestClient client = AliRestClient.create(getQcUrl(), "emea", null, "user", "password", AliRestClient.SessionStrategy.AUTO_LOGIN);
+        List<String> projects = client.listCurrentProjects();
+        Assert.assertEquals(Arrays.asList("first", "second", "third"), projects);
+    }
+
+    @Test
+    public void testListCurrentProjects_noDomain() {
+        AliRestClient client = AliRestClient.create(getQcUrl(), null, null, "user", "password", AliRestClient.SessionStrategy.AUTO_LOGIN);
+        try {
+            client.listCurrentProjects();
+            Assert.fail("IllegalStateException expected");
+        } catch (IllegalStateException e) {
+            // domain not selected
+        }
     }
 }
