@@ -394,4 +394,22 @@ public class AliRestClientTest {
             // domain not selected
         }
     }
+
+    @Test
+    public void testSetEncoding_utf8() {
+        handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/abc_%C5%BElu%C5%A5ou%C4%8Dk%C3%BD%20k%C5%AF%C5%88%20def", 200);
+
+        AliRestClient client = AliRestClient.create(getQcUrl(), "domain", "project", "user", "password", AliRestClient.SessionStrategy.NONE);
+        client.setEncoding("UTF-8");
+        client.getForString("abc_{0}{1}def", "\u017Elu\u0165ou\u010Dk\u00FD k\u016F\u0148", " ");
+    }
+
+    @Test
+    public void testSetEncoding_none() {
+        handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/abc_%C5%BElu%C5%A5ou%C4%8Dk%C3%BD%20k%C5%AF%C5%88+def", 200);
+
+        AliRestClient client = AliRestClient.create(getQcUrl(), "domain", "project", "user", "password", AliRestClient.SessionStrategy.NONE);
+        client.setEncoding(null);
+        client.getForString("abc_{0}{1}def", "%C5%BElu%C5%A5ou%C4%8Dk%C3%BD%20k%C5%AF%C5%88", "+");
+    }
 }

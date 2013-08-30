@@ -55,7 +55,7 @@ public class Handler extends AbstractHandler {
             baseRequest.setHandled(true);
             try {
                 Assert.assertEquals(myRequest.method, baseRequest.getMethod());
-                Assert.assertEquals(myRequest.url, url);
+                Assert.assertEquals(myRequest.url, baseRequest.getUri().getPath());
                 myRequest.evaluateAssertions(baseRequest, request, response);
                 myRequest.evaluateActions(response);
             } catch (Throwable t) {
