@@ -287,6 +287,12 @@ public class AliRestClient {
      *          for http statuses 500-599
      */
     public synchronized void login() {
+        // exclude the NTLM authentication scheme (requires NTCredentials we don't supply)
+        List<String> authPrefs = new ArrayList<String>(2);
+        authPrefs.add(AuthPolicy.DIGEST);
+        authPrefs.add(AuthPolicy.BASIC);
+        httpClient.getParams().setParameter(AuthPolicy.AUTH_SCHEME_PRIORITY, authPrefs);
+
         // first try Apollo style login
         String authPoint = pathJoin("/", location, "/authentication-point/alm-authenticate");
         PostMethod post = new PostMethod(authPoint);
@@ -303,12 +309,6 @@ public class AliRestClient {
             AuthScope scope = new AuthScope(AuthScope.ANY_HOST, AuthScope.ANY_PORT);
             httpClient.getParams().setParameter(HttpMethodParams.CREDENTIAL_CHARSET, "UTF-8");
             httpClient.getState().setCredentials(scope, cred);
-
-            // exclude the NTLM authentication scheme (requires NTCredentials we don't supply)
-            List<String> authPrefs = new ArrayList<String>(2);
-            authPrefs.add(AuthPolicy.DIGEST);
-            authPrefs.add(AuthPolicy.BASIC);
-            httpClient.getParams().setParameter(AuthPolicy.AUTH_SCHEME_PRIORITY, authPrefs);
 
             authPoint = pathJoin("/", location, "/authentication-point/authenticate");
             GetMethod get = new GetMethod(authPoint);

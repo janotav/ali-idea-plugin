@@ -187,4 +187,21 @@ public class AliRestClientTest {
         client.setHttpProxyCredentials("username", "password");
         client.getForStream("/test");
     }
+
+    @Test
+    public void testNTLMEnabledProxy() throws Exception {
+        handler.addRequest("POST", "/qcbin/authentication-point/alm-authenticate", 407)
+                .responseHeader("Proxy-Authenticate", "Basic realm=\"proxy realm\"")
+                .responseHeader("Proxy-Authenticate", "NTLM")
+                .responseBody("Proxy Authentication Required");
+        handler.addRequest("POST", "/qcbin/authentication-point/alm-authenticate", 200)
+                .expectHeader("Proxy-Authorization", "Basic dXNlcm5hbWU6cGFzc3dvcmQ=")
+                .expectBody("<alm-authentication><user>qc_user</user><password>qc_password</password></alm-authentication>");
+        handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/test", 200);
+
+        AliRestClient client = AliRestClient.create("http://foo/qcbin", "domain", "project", "qc_user", "qc_password", AliRestClient.SessionStrategy.AUTO_LOGIN);
+        client.setHttpProxy("localhost", ((ServerConnector)server.getConnectors()[0]).getLocalPort());
+        client.setHttpProxyCredentials("username", "password");
+        client.getForStream("/test");
+    }
 }
