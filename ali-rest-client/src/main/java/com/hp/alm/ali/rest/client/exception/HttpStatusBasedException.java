@@ -16,33 +16,34 @@
 
 package com.hp.alm.ali.rest.client.exception;
 
-abstract public class HttpStatusBasedException extends AliRestException {
+import com.hp.alm.ali.rest.client.ResultInfo;
+
+abstract public class HttpStatusBasedException extends RuntimeException {
     private final int httpStatus;
+    private final String reasonPhrase;
     private final String location;
 
-
-    protected HttpStatusBasedException(int status, String location) {
-        super("status : " + status + " location : " + location);
+    protected HttpStatusBasedException(int status, String reasonPhrase, String location) {
+        super(status + " " + reasonPhrase + " [location: " + location + "]");
         httpStatus = status;
+        this.reasonPhrase = reasonPhrase;
         this.location = location;
     }
 
-    public static HttpStatusBasedException of(int statusCode, String location) {
+    public static void throwForError(ResultInfo resultInfo) {
+        int statusCode = resultInfo.getHttpStatus();
         switch (statusCode) {
             case 401:
-                return new AuthenticationFailureException(location);
+                throw new AuthenticationFailureException(401, resultInfo.getReasonPhrase(), resultInfo.getLocation());
             default:
-                if (statusCode >= 500 && statusCode <= 599) return new HttpServerErrorException(statusCode, location);
-                if (statusCode >= 400 && statusCode <= 499) return new HttpClientErrorException(statusCode, location);
-                return null;
+                if (statusCode >= 500 && statusCode <= 599) {
+                    throw new HttpServerErrorException(statusCode, resultInfo.getReasonPhrase(), resultInfo.getLocation());
+                }
+                if (statusCode >= 400 && statusCode <= 499) {
+                    throw new HttpClientErrorException(statusCode, resultInfo.getReasonPhrase(), resultInfo.getLocation());
+                }
         }
     }
-
-    public static void throwForError(int statusCode, String location) {
-        HttpStatusBasedException exception = of(statusCode, location);
-        if (exception != null) throw exception;
-    }
-
 
     public int getHttpStatus() {
         return httpStatus;
@@ -50,5 +51,9 @@ abstract public class HttpStatusBasedException extends AliRestException {
 
     public String getLocation() {
         return location;
+    }
+
+    public String getReasonPhrase() {
+        return reasonPhrase;
     }
 }

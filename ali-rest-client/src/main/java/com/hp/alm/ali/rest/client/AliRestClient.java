@@ -65,7 +65,6 @@ import org.apache.commons.httpclient.methods.StringRequestEntity;
 
 import com.hp.alm.ali.rest.client.exception.AuthenticationFailureException;
 import com.hp.alm.ali.rest.client.exception.HttpStatusBasedException;
-import com.hp.alm.ali.rest.client.exception.ResourceAccessException;
 import com.hp.alm.ali.utils.XmlUtils;
 import org.apache.commons.httpclient.params.HttpMethodParams;
 import org.apache.commons.io.IOUtils;
@@ -315,10 +314,10 @@ public class AliRestClient {
             resultInfo = ResultInfo.create(false, null);
             executeAndWriteResponse(get, resultInfo, Collections.<Integer>emptySet());
         }
-        HttpStatusBasedException.throwForError(resultInfo.getHttpStatus(), resultInfo.getLocation());
+        HttpStatusBasedException.throwForError(resultInfo);
         if(resultInfo.getHttpStatus() != 200) {
             // during login we only accept 200 status (to avoid redirects and such as seemingly correct login)
-            throw new AuthenticationFailureException(resultInfo.getHttpStatus(), location);
+            throw new AuthenticationFailureException(resultInfo.getHttpStatus(), resultInfo.getReasonPhrase(), resultInfo.getLocation());
         }
 
         Cookie[] cookies = httpClient.getState().getCookies();
@@ -371,7 +370,7 @@ public class AliRestClient {
             GetMethod get = new GetMethod(pathJoin("/", location, "/authentication-point/logout"));
             ResultInfo resultInfo = ResultInfo.create(false, null);
             executeAndWriteResponse(get, resultInfo, Collections.<Integer>emptySet());
-            HttpStatusBasedException.throwForError(resultInfo.getHttpStatus(), resultInfo.getLocation());
+            HttpStatusBasedException.throwForError(resultInfo);
             sessionContext = null;
         }
     }
@@ -392,7 +391,7 @@ public class AliRestClient {
         ByteArrayOutputStream responseBody = new ByteArrayOutputStream();
         ResultInfo result = ResultInfo.create(false, responseBody);
         get(result, template, params);
-        HttpStatusBasedException.throwForError(result.getHttpStatus(), result.getLocation());
+        HttpStatusBasedException.throwForError(result);
         return responseBody.toString();
     }
 
@@ -412,7 +411,7 @@ public class AliRestClient {
         ByteArrayOutputStream responseBody = new ByteArrayOutputStream();
         ResultInfo result = ResultInfo.create(false, responseBody);
         get(result, template, params);
-        HttpStatusBasedException.throwForError(result.getHttpStatus(), result.getLocation());
+        HttpStatusBasedException.throwForError(result);
         return new ByteArrayInputStream(responseBody.toByteArray());
     }
 
@@ -462,8 +461,7 @@ public class AliRestClient {
     public void put(InputData data, String template, Object... params) {
         ResultInfo result = ResultInfo.create(false, null);
         put(data, result, template, params);
-        HttpStatusBasedException.throwForError(result.getHttpStatus(), result.getLocation());
-
+        HttpStatusBasedException.throwForError(result);
     }
 
     /**
@@ -493,7 +491,7 @@ public class AliRestClient {
     public void delete(String template, Object... params) {
         ResultInfo result = ResultInfo.create(false, null);
         delete(result, template, params);
-        HttpStatusBasedException.throwForError(result.getHttpStatus(), result.getLocation());
+        HttpStatusBasedException.throwForError(result);
     }
 
     /**
@@ -548,7 +546,6 @@ public class AliRestClient {
 
         StatusLine statusLine = method.getStatusLine();
         if (statusLine != null) {
-            result.setHttpVersion(statusLine.getHttpVersion());
             result.setReasonPhrase(statusLine.getReasonPhrase());
         }
         if (writeBodyAndHeaders && bodyStream != null && method.getStatusCode() != 204) {
@@ -560,7 +557,7 @@ public class AliRestClient {
                     bodyStream.close();
                 }
             } catch (IOException e) {
-                throw new ResourceAccessException(e);
+                throw new RuntimeException(e);
             }
         }
         try {
@@ -615,6 +612,22 @@ public class AliRestClient {
         return result;
     }
 
+    private boolean tryLogin(ResultInfo resultInfo, HttpMethod method) {
+        try {
+            login();
+            return true;
+        } catch (HttpStatusBasedException e) {
+            resultInfo.setHttpStatus(e.getHttpStatus());
+            resultInfo.setReasonPhrase(e.getReasonPhrase());
+            try {
+                resultInfo.setLocation(e.getLocation() + " [on-behalf-of: " + method.getURI().toString() + "]");
+            } catch (URIException e2) {
+                resultInfo.setLocation(e.getLocation() + " [on-behalf-of: " + method.getPath() + "]");
+            }
+            return false;
+        }
+    }
+
     private void executeHttpMethod(HttpMethod method, ResultInfo resultInfo) {
         switch (sessionStrategy) {
             case NONE:
@@ -624,7 +637,9 @@ public class AliRestClient {
                 SessionContext myContext = null;
                 synchronized (this) {
                     if (sessionContext == null) {
-                        login();
+                        if(!tryLogin(resultInfo, method)) {
+                            return;
+                        }
                     } else {
                         myContext = sessionContext;
                     }
@@ -634,7 +649,9 @@ public class AliRestClient {
                     synchronized (this) {
                         if(myContext == sessionContext) {
                             // login (unless someone else just did it)
-                            login();
+                            if(!tryLogin(resultInfo, method)) {
+                                return;
+                            }
                         }
                     }
                     // and try again
@@ -661,7 +678,7 @@ public class AliRestClient {
             writeResponse(resultInfo, method, !doNotWriteForStatuses.contains(status));
             return status;
         } catch (IOException e) {
-            throw new ResourceAccessException(e);
+            throw new RuntimeException(e);
         } finally {
             method.releaseConnection();
         }

@@ -47,7 +47,11 @@ public class Handler extends AbstractHandler {
     public void handle(String url, Request baseRequest, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         MyRequest myRequest = requests.removeFirst();
         if(firstError == null) {
-            response.setStatus(myRequest.responseCode);
+            if(myRequest.reasonPhrase != null) {
+                response.setStatus(myRequest.responseCode, myRequest.reasonPhrase);
+            } else {
+                response.setStatus(myRequest.responseCode);
+            }
             baseRequest.setHandled(true);
             try {
                 Assert.assertEquals(myRequest.method, baseRequest.getMethod());
@@ -92,6 +96,7 @@ public class Handler extends AbstractHandler {
         private String method;
         private String url;
         private int responseCode;
+        private String reasonPhrase;
 
         private MyRequest(String method, String url, int responseCode) {
             this.method = method;
@@ -150,6 +155,11 @@ public class Handler extends AbstractHandler {
                     response.getWriter().write(value);
                 }
             });
+            return this;
+        }
+
+        public MyRequest reasonPhrase(String reasonPhrase) {
+            this.reasonPhrase = reasonPhrase;
             return this;
         }
     }

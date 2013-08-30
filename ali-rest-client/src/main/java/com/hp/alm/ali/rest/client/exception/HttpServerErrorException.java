@@ -17,7 +17,7 @@
 package com.hp.alm.ali.rest.client.exception;
 
 public class HttpServerErrorException extends HttpStatusBasedException {
-    HttpServerErrorException(int status, String location) {
-        super(status, location);
+    HttpServerErrorException(int status, String reasonPhrase, String location) {
+        super(status, reasonPhrase, location);
     }
 }

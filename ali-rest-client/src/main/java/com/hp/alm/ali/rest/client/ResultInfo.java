@@ -29,7 +29,6 @@ public class ResultInfo {
     private final Map<String, String> headers;
     private final OutputStream bodyStream;
     private String location;
-    private String httpVersion;
     private String reasonPhrase;
 
     private ResultInfo(Map<String, String> headers, OutputStream bodyStream) {
@@ -87,14 +86,6 @@ public class ResultInfo {
 
     void setLocation(String location) {
         this.location = location;
-    }
-
-    public String getHttpVersion() {
-        return httpVersion;
-    }
-
-    void setHttpVersion(String httpVersion) {
-        this.httpVersion = httpVersion;
     }
 
     public String getReasonPhrase() {
