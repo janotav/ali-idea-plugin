@@ -11,6 +11,10 @@
     <packaging>pom</packaging>
     <version>3.6</version>
 
+    <properties>
+        <spring.version>3.2.4.RELEASE</spring.version>
+    </properties>
+
     <build>
         <pluginManagement>
             <plugins>
@@ -71,6 +75,12 @@
                     <groupId>com.google.guava</groupId>
                     <artifactId>guava</artifactId>
                     <version>r09</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-test</artifactId>
+                    <version>${spring.version}</version>
+                    <scope>test</scope>
                 </dependency>
             </dependencies>
         </dependencyManagement>

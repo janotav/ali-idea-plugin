@@ -14,6 +14,7 @@
         <module>ali-lang</module>
         <module>ali-rest-client</module>
         <module>ali-plugin-main</module>
+        <module>integration-tests</module>
     </modules>
 
 </project>
