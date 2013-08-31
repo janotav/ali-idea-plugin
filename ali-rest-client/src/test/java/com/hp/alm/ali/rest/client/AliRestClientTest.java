@@ -107,8 +107,7 @@ public class AliRestClientTest {
 
     @Test
     public void testLogin() throws Exception {
-        handler.addRequest("POST", "/qcbin/authentication-point/alm-authenticate", 200)
-                .expectBody("<alm-authentication><user>user</user><password>password</password></alm-authentication>");
+        authenticate();
 
         AliRestClient client = AliRestClient.create(getQcUrl(), "domain", "project", "user", "password", AliRestClient.SessionStrategy.NONE);
         client.login();
@@ -157,8 +156,7 @@ public class AliRestClientTest {
         authenticate();
         handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/test", 403)
                 .responseBody("Session expired.");
-        handler.addRequest("POST", "/qcbin/authentication-point/alm-authenticate", 200)
-                .expectBody("<alm-authentication><user>user</user><password>password</password></alm-authentication>");
+        authenticate();
         handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/test", 200);
 
         AliRestClient client = AliRestClient.create(getQcUrl(), "domain", "project", "user", "password", AliRestClient.SessionStrategy.AUTO_LOGIN);
@@ -176,8 +174,7 @@ public class AliRestClientTest {
 
     @Test
     public void testSetHttpProxy() throws Exception {
-        handler.addRequest("POST", "/qcbin/authentication-point/alm-authenticate", 200)
-                .expectBody("<alm-authentication><user>user</user><password>password</password></alm-authentication>");
+        authenticate();
         handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/test", 200);
 
         AliRestClient client = AliRestClient.create("http://foo/qcbin", "domain", "project", "user", "password", AliRestClient.SessionStrategy.AUTO_LOGIN);
