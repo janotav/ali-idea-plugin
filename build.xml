@@ -43,54 +43,7 @@
     </target>
 
     <target name="install-libs" depends="check-args">
-        <exec executable="mvn">
-            <arg value="install:install-file"/>
-            <arg value="-Dfile=${IDEA_HOME}/lib/util.jar"/>
-            <arg value="-DgroupId=com.intellij"/>
-            <arg value="-DartifactId=util"/>
-            <arg value="-Dversion=${IDEA_VERSION}"/>
-            <arg value="-Dpackaging=jar"/>
-        </exec>
-        <exec executable="mvn">
-            <arg value="install:install-file"/>
-            <arg value="-Dfile=${IDEA_HOME}/lib/annotations.jar"/>
-            <arg value="-DgroupId=com.intellij"/>
-            <arg value="-DartifactId=annotations"/>
-            <arg value="-Dversion=${IDEA_VERSION}"/>
-            <arg value="-Dpackaging=jar"/>
-        </exec>
-        <exec executable="mvn">
-            <arg value="install:install-file"/>
-            <arg value="-Dfile=${IDEA_HOME}/lib/extensions.jar"/>
-            <arg value="-DgroupId=com.intellij"/>
-            <arg value="-DartifactId=extensions"/>
-            <arg value="-Dversion=${IDEA_VERSION}"/>
-            <arg value="-Dpackaging=jar"/>
-        </exec>
-        <exec executable="mvn">
-            <arg value="install:install-file"/>
-            <arg value="-Dfile=${IDEA_HOME}/lib/idea.jar"/>
-            <arg value="-DgroupId=com.intellij"/>
-            <arg value="-DartifactId=idea"/>
-            <arg value="-Dversion=${IDEA_VERSION}"/>
-            <arg value="-Dpackaging=jar"/>
-        </exec>
-        <exec executable="mvn">
-            <arg value="install:install-file"/>
-            <arg value="-Dfile=${IDEA_HOME}/lib/openapi.jar"/>
-            <arg value="-DgroupId=com.intellij"/>
-            <arg value="-DartifactId=openapi"/>
-            <arg value="-Dversion=${IDEA_VERSION}"/>
-            <arg value="-Dpackaging=jar"/>
-        </exec>
-        <exec executable="mvn">
-            <arg value="install:install-file"/>
-            <arg value="-Dfile=${IDEA_HOME}/plugins/tasks/lib/tasks-api.jar"/>
-            <arg value="-DgroupId=com.intellij.plugins"/>
-            <arg value="-DartifactId=tasks-api"/>
-            <arg value="-Dversion=${IDEA_VERSION}"/>
-            <arg value="-Dpackaging=jar"/>
-        </exec>
+        <ant antfile="install-libs.xml" target="install-libs"/>
     </target>
 
     <target name="build" depends="install-libs">

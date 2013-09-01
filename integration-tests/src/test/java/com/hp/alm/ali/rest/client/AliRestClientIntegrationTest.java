@@ -16,15 +16,13 @@
 
 package com.hp.alm.ali.rest.client;
 
-import com.hp.alm.ali.IntegrationTestRunner;
 import com.hp.alm.ali.TestSettings;
 import junit.framework.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.TestExecutionListeners;
 
-@RunWith(IntegrationTestRunner.class)
-@TestExecutionListeners({})
+/**
+ * This test doesn't extend IntegrationTest because it doesn't depend on the Intellij runtime.
+ */
 public class AliRestClientIntegrationTest {
 
     @Test

@@ -18,6 +18,11 @@
     <dependencies>
         <dependency>
             <groupId>com.hp.alm.ali</groupId>
+            <artifactId>idea-sdk</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.hp.alm.ali</groupId>
             <artifactId>ali-plugin-main</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -40,6 +45,11 @@
                 <version>2.16</version>
                 <configuration>
                     <skip>true</skip>
+                    <useManifestOnlyJar>false</useManifestOnlyJar>
+                    <useSystemClassLoader>true</useSystemClassLoader>
+                    <additionalClasspathElements>
+                        <additionalClasspathElement>${java.home}/../lib/tools.jar</additionalClasspathElement>
+                    </additionalClasspathElements>
                 </configuration>
                 <executions>
                     <execution>

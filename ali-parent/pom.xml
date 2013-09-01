@@ -13,6 +13,8 @@
 
     <properties>
         <spring.version>3.2.4.RELEASE</spring.version>
+        <idea.build>129.239</idea.build>
+        <idea.version>IC-${idea.build}</idea.version>
     </properties>
 
     <build>

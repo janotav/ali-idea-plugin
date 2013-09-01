@@ -12,11 +12,6 @@
     <artifactId>ali-plugin-main</artifactId>
     <name>${artifactId}:${version}</name>
 
-    <properties>
-        <idea.build>129.239</idea.build>
-        <idea.version>IC-${idea.build}</idea.version>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
