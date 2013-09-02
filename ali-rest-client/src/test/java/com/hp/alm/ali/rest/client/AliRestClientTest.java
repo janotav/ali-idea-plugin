@@ -16,14 +16,15 @@
 
 package com.hp.alm.ali.rest.client;
 
+import com.hp.alm.ali.Handler;
+import com.hp.alm.ali.ServerVersion;
 import com.hp.alm.ali.rest.client.exception.HttpClientErrorException;
 import com.hp.alm.ali.rest.client.exception.HttpServerErrorException;
-import junit.framework.Assert;
 import org.apache.commons.io.IOUtils;
-import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
 import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -37,20 +38,17 @@ import java.util.List;
 
 public class AliRestClientTest {
 
-    private static Server server;
     private static Handler handler;
 
     @BeforeClass
     public static void startJetty() throws Exception {
-        server = new Server(0);
-        handler = new Handler();
-        server.setHandler(handler);
-        server.start();
+        handler = new Handler(ServerVersion.AGM);
+        handler.getServer().start();
     }
 
     @AfterClass
     public static void stopJetty() throws Exception {
-        server.stop();
+        handler.getServer().stop();
     }
 
     @Before
@@ -59,27 +57,14 @@ public class AliRestClientTest {
     }
 
     @After
-    public void done() {
-        handler.done();
-    }
-
-    public static String getQcUrl() {
-        return getServerUrl("/qcbin");
-    }
-
-    public static String getServerUrl(String path) {
-        return "http://localhost:"+((ServerConnector)server.getConnectors()[0]).getLocalPort() + path;
-    }
-
-    public static void authenticate() {
-        handler.addRequest("POST", "/qcbin/authentication-point/alm-authenticate", 200)
-                .expectBody("<alm-authentication><user>user</user><password>password</password></alm-authentication>");
+    public void done() throws Throwable {
+        handler.finish();
     }
 
     @Test
     public void testRequireDomainWhenProjectSpecified_create() {
         try {
-            AliRestClient.create("http://location", null, "project", "user", "password", AliRestClient.SessionStrategy.AUTO_LOGIN);
+            AliRestClient.create("http://location", null, "project", "user", "password", RestClient.SessionStrategy.AUTO_LOGIN);
             Assert.fail("Domain is mandatory when project is specified.");
         } catch (IllegalArgumentException e) {
         }
@@ -87,7 +72,7 @@ public class AliRestClientTest {
 
     @Test
     public void testRequireDomainWhenProjectSpecified_setDomain() {
-        AliRestClient client = AliRestClient.create("http://location", "domain", "project", "user", "password", AliRestClient.SessionStrategy.AUTO_LOGIN);
+        AliRestClient client = AliRestClient.create("http://location", "domain", "project", "user", "password", RestClient.SessionStrategy.AUTO_LOGIN);
         try {
             client.setDomain(null);
             Assert.fail("Domain is mandatory when project is specified.");
@@ -97,7 +82,7 @@ public class AliRestClientTest {
 
     @Test
     public void testRequireDomainWhenProjectSpecified_setProject() {
-        AliRestClient client = AliRestClient.create("http://location", null, null, "user", "password", AliRestClient.SessionStrategy.AUTO_LOGIN);
+        AliRestClient client = AliRestClient.create("http://location", null, null, "user", "password", RestClient.SessionStrategy.AUTO_LOGIN);
         try {
             client.setProject("foo");
             Assert.fail("Domain is mandatory when project is specified.");
@@ -107,9 +92,9 @@ public class AliRestClientTest {
 
     @Test
     public void testLogin() throws Exception {
-        authenticate();
+        handler.authenticate();
 
-        AliRestClient client = AliRestClient.create(getQcUrl(), "domain", "project", "user", "password", AliRestClient.SessionStrategy.NONE);
+        AliRestClient client = AliRestClient.create(handler.getQcUrl(), "domain", "project", "user", "password", RestClient.SessionStrategy.NONE);
         client.login();
     }
 
@@ -123,7 +108,7 @@ public class AliRestClientTest {
         handler.addRequest("GET", "/qcbin/authentication-point/authenticate", 200)
                 .expectHeader("Authorization", "Basic dXNlcjpwYXNzd29yZA==");
 
-        AliRestClient client = AliRestClient.create(getQcUrl(), "domain", "project", "user", "password", AliRestClient.SessionStrategy.NONE);
+        AliRestClient client = AliRestClient.create(handler.getQcUrl(), "domain", "project", "user", "password", RestClient.SessionStrategy.NONE);
         client.login();
     }
 
@@ -138,28 +123,28 @@ public class AliRestClientTest {
         handler.addRequest("GET", "/qcbin/authentication-point/authenticate", 200)
                 .expectHeader("Authorization", "Basic dXNlcjpwYXNzd29yZA==");
 
-        AliRestClient client = AliRestClient.create(getQcUrl(), "domain", "project", "user", "password", AliRestClient.SessionStrategy.NONE);
+        AliRestClient client = AliRestClient.create(handler.getQcUrl(), "domain", "project", "user", "password", RestClient.SessionStrategy.NONE);
         client.login();
     }
 
     @Test
     public void testSessionStrategy_AUTO_LOGIN() throws Exception {
-        authenticate();
+        handler.authenticate();
         handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/test", 200);
 
-        AliRestClient client = AliRestClient.create(getQcUrl(), "domain", "project", "user", "password", AliRestClient.SessionStrategy.AUTO_LOGIN);
+        AliRestClient client = AliRestClient.create(handler.getQcUrl(), "domain", "project", "user", "password", RestClient.SessionStrategy.AUTO_LOGIN);
         client.getForStream("/test");
     }
 
     @Test
     public void testSessionStrategy_AUTO_LOGIN_timeout() throws Exception {
-        authenticate();
+        handler.authenticate();
         handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/test", 403)
                 .responseBody("Session expired.");
-        authenticate();
+        handler.authenticate();
         handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/test", 200);
 
-        AliRestClient client = AliRestClient.create(getQcUrl(), "domain", "project", "user", "password", AliRestClient.SessionStrategy.AUTO_LOGIN);
+        AliRestClient client = AliRestClient.create(handler.getQcUrl(), "domain", "project", "user", "password", RestClient.SessionStrategy.AUTO_LOGIN);
         client.login();
         client.getForStream("/test");
     }
@@ -168,17 +153,17 @@ public class AliRestClientTest {
     public void testSessionStrategy_NONE() throws Exception {
         handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/test", 200);
 
-        AliRestClient client = AliRestClient.create(getQcUrl(), "domain", "project", "user", "password", AliRestClient.SessionStrategy.NONE);
+        AliRestClient client = AliRestClient.create(handler.getQcUrl(), "domain", "project", "user", "password", RestClient.SessionStrategy.NONE);
         client.getForStream("/test");
     }
 
     @Test
     public void testSetHttpProxy() throws Exception {
-        authenticate();
+        handler.authenticate();
         handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/test", 200);
 
-        AliRestClient client = AliRestClient.create("http://foo/qcbin", "domain", "project", "user", "password", AliRestClient.SessionStrategy.AUTO_LOGIN);
-        client.setHttpProxy("localhost", ((ServerConnector)server.getConnectors()[0]).getLocalPort());
+        AliRestClient client = AliRestClient.create("http://foo/qcbin", "domain", "project", "user", "password", RestClient.SessionStrategy.AUTO_LOGIN);
+        client.setHttpProxy("localhost", ((ServerConnector)handler.getServer().getConnectors()[0]).getLocalPort());
         client.getForStream("/test");
     }
 
@@ -192,8 +177,8 @@ public class AliRestClientTest {
                 .expectBody("<alm-authentication><user>qc_user</user><password>qc_password</password></alm-authentication>");
         handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/test", 200);
 
-        AliRestClient client = AliRestClient.create("http://foo/qcbin", "domain", "project", "qc_user", "qc_password", AliRestClient.SessionStrategy.AUTO_LOGIN);
-        client.setHttpProxy("localhost", ((ServerConnector)server.getConnectors()[0]).getLocalPort());
+        AliRestClient client = AliRestClient.create("http://foo/qcbin", "domain", "project", "qc_user", "qc_password", RestClient.SessionStrategy.AUTO_LOGIN);
+        client.setHttpProxy("localhost", ((ServerConnector)handler.getServer().getConnectors()[0]).getLocalPort());
         client.setHttpProxyCredentials("username", "password");
         client.getForStream("/test");
     }
@@ -209,77 +194,77 @@ public class AliRestClientTest {
                 .expectBody("<alm-authentication><user>qc_user</user><password>qc_password</password></alm-authentication>");
         handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/test", 200);
 
-        AliRestClient client = AliRestClient.create("http://foo/qcbin", "domain", "project", "qc_user", "qc_password", AliRestClient.SessionStrategy.AUTO_LOGIN);
-        client.setHttpProxy("localhost", ((ServerConnector)server.getConnectors()[0]).getLocalPort());
+        AliRestClient client = AliRestClient.create("http://foo/qcbin", "domain", "project", "qc_user", "qc_password", RestClient.SessionStrategy.AUTO_LOGIN);
+        client.setHttpProxy("localhost", ((ServerConnector)handler.getServer().getConnectors()[0]).getLocalPort());
         client.setHttpProxyCredentials("username", "password");
         client.getForStream("/test");
     }
 
     @Test
     public void testGetForString() {
-        authenticate();
+        handler.authenticate();
         handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/path/arg1/arg2", 200)
                 .responseBody("result");
 
-        AliRestClient client = AliRestClient.create(getQcUrl(), "domain", "project", "user", "password", AliRestClient.SessionStrategy.AUTO_LOGIN);
+        AliRestClient client = AliRestClient.create(handler.getQcUrl(), "domain", "project", "user", "password", RestClient.SessionStrategy.AUTO_LOGIN);
         String result = client.getForString("/path/{0}/{1}", "arg1", "arg2");
         Assert.assertEquals("result", result);
     }
 
     @Test
     public void testGetForString_error() {
-        authenticate();
+        handler.authenticate();
         handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/path/arg1/arg2", 400)
                 .reasonPhrase("bad request");
 
-        AliRestClient client = AliRestClient.create(getQcUrl(), "domain", "project", "user", "password", AliRestClient.SessionStrategy.AUTO_LOGIN);
+        AliRestClient client = AliRestClient.create(handler.getQcUrl(), "domain", "project", "user", "password", RestClient.SessionStrategy.AUTO_LOGIN);
         try {
             client.getForString("/path/{0}/{1}", "arg1", "arg2");
             Assert.fail("HttpClientErrorException expected");
         } catch (HttpClientErrorException e) {
             Assert.assertEquals(400, e.getHttpStatus());
-            Assert.assertEquals(getServerUrl("/qcbin/rest/domains/domain/projects/project/path/arg1/arg2"), e.getLocation());
+            Assert.assertEquals(handler.getServerUrl("/qcbin/rest/domains/domain/projects/project/path/arg1/arg2"), e.getLocation());
             Assert.assertEquals("bad request", e.getReasonPhrase());
         }
     }
 
     @Test
     public void testGetForStream() throws IOException {
-        authenticate();
+        handler.authenticate();
         handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/path/arg1/arg2", 200)
                 .responseBody("result");
 
-        AliRestClient client = AliRestClient.create(getQcUrl(), "domain", "project", "user", "password", AliRestClient.SessionStrategy.AUTO_LOGIN);
+        AliRestClient client = AliRestClient.create(handler.getQcUrl(), "domain", "project", "user", "password", RestClient.SessionStrategy.AUTO_LOGIN);
         InputStream result = client.getForStream("/path/{0}/{1}", "arg1", "arg2");
         Assert.assertEquals("result", IOUtils.toString(result));
     }
 
     @Test
     public void testGetForStream_error() {
-        authenticate();
+        handler.authenticate();
         handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/path/arg1/arg2", 500)
                 .reasonPhrase("server failure");
 
-        AliRestClient client = AliRestClient.create(getQcUrl(), "domain", "project", "user", "password", AliRestClient.SessionStrategy.AUTO_LOGIN);
+        AliRestClient client = AliRestClient.create(handler.getQcUrl(), "domain", "project", "user", "password", RestClient.SessionStrategy.AUTO_LOGIN);
         try {
             client.getForStream("/path/{0}/{1}", "arg1", "arg2");
             Assert.fail("HttpServerErrorException expected");
         } catch (HttpServerErrorException e) {
             Assert.assertEquals(500, e.getHttpStatus());
-            Assert.assertEquals(getServerUrl("/qcbin/rest/domains/domain/projects/project/path/arg1/arg2"), e.getLocation());
+            Assert.assertEquals(handler.getServerUrl("/qcbin/rest/domains/domain/projects/project/path/arg1/arg2"), e.getLocation());
             Assert.assertEquals("server failure", e.getReasonPhrase());
         }
     }
 
     @Test
     public void testGet() {
-        authenticate();
+        handler.authenticate();
         handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/path/arg1/arg2", 200)
                 .responseHeader("custom", "value")
                 .responseBody("result");
 
-        AliRestClient client = AliRestClient.create(getQcUrl(), "domain", "project", "user", "password", AliRestClient.SessionStrategy.AUTO_LOGIN);
-        ResultInfo resultInfo = ResultInfo.create(true, new ByteArrayOutputStream());
+        AliRestClient client = AliRestClient.create(handler.getQcUrl(), "domain", "project", "user", "password", RestClient.SessionStrategy.AUTO_LOGIN);
+        ResultInfo resultInfo = ResultInfo.create(new ByteArrayOutputStream());
         int code = client.get(resultInfo, "/path/{0}/{1}", "arg1", "arg2");
         Assert.assertEquals(200, code);
         Assert.assertEquals("result", resultInfo.getBodyStream().toString());
@@ -291,13 +276,13 @@ public class AliRestClientTest {
         handler.addRequest("POST", "/qcbin/authentication-point/alm-authenticate", 500)
                 .reasonPhrase("fatal error");
 
-        AliRestClient client = AliRestClient.create(getQcUrl(), "domain", "project", "user", "password", AliRestClient.SessionStrategy.AUTO_LOGIN);
-        ResultInfo resultInfo = ResultInfo.create(true, new ByteArrayOutputStream());
+        AliRestClient client = AliRestClient.create(handler.getQcUrl(), "domain", "project", "user", "password", RestClient.SessionStrategy.AUTO_LOGIN);
+        ResultInfo resultInfo = ResultInfo.create(new ByteArrayOutputStream());
         int code = client.get(resultInfo, "/path/{0}/{1}", "arg1", "arg2");
         Assert.assertEquals(500, code);
         Assert.assertEquals("fatal error", resultInfo.getReasonPhrase());
-        Assert.assertEquals(getServerUrl("/qcbin/authentication-point/alm-authenticate [on-behalf-of: " +
-                getServerUrl("/qcbin/rest/domains/domain/projects/project/path/arg1/arg2") + "]"), resultInfo.getLocation());
+        Assert.assertEquals(handler.getServerUrl("/qcbin/authentication-point/alm-authenticate [on-behalf-of: " +
+                handler.getServerUrl("/qcbin/rest/domains/domain/projects/project/path/arg1/arg2") + "]"), resultInfo.getLocation());
     }
 
     @Test
@@ -305,29 +290,29 @@ public class AliRestClientTest {
         handler.addRequest("POST", "/qcbin/authentication-point/alm-authenticate", 400)
                 .reasonPhrase("bad request");
 
-        AliRestClient client = AliRestClient.create(getQcUrl(), "domain", "project", "user", "password", AliRestClient.SessionStrategy.AUTO_LOGIN);
+        AliRestClient client = AliRestClient.create(handler.getQcUrl(), "domain", "project", "user", "password", RestClient.SessionStrategy.AUTO_LOGIN);
         try {
             client.getForStream("/path/{0}/{1}", "arg1", "arg2");
             Assert.fail("HttpClientErrorException expected");
         } catch (HttpClientErrorException e) {
             Assert.assertEquals(400, e.getHttpStatus());
-            Assert.assertEquals(getServerUrl("/qcbin/authentication-point/alm-authenticate [on-behalf-of: " +
-                    getServerUrl("/qcbin/rest/domains/domain/projects/project/path/arg1/arg2") + "]"), e.getLocation());
+            Assert.assertEquals(handler.getServerUrl("/qcbin/authentication-point/alm-authenticate [on-behalf-of: " +
+                    handler.getServerUrl("/qcbin/rest/domains/domain/projects/project/path/arg1/arg2") + "]"), e.getLocation());
             Assert.assertEquals("bad request", e.getReasonPhrase());
         }
     }
 
     @Test
     public void testPost() {
-        authenticate();
+        handler.authenticate();
         handler.addRequest("POST", "/qcbin/rest/domains/domain/projects/project/path/arg1/arg2", 200)
                 .expectHeader("header-input", "value-input")
                 .expectBody("input")
                 .responseHeader("header-output", "value-output")
                 .responseBody("output");
 
-        AliRestClient client = AliRestClient.create(getQcUrl(), "domain", "project", "user", "password", AliRestClient.SessionStrategy.AUTO_LOGIN);
-        ResultInfo resultInfo = ResultInfo.create(true, new ByteArrayOutputStream());
+        AliRestClient client = AliRestClient.create(handler.getQcUrl(), "domain", "project", "user", "password", RestClient.SessionStrategy.AUTO_LOGIN);
+        ResultInfo resultInfo = ResultInfo.create(new ByteArrayOutputStream());
         int code = client.post(InputData.create("input", Collections.singletonMap("header-input", "value-input")), resultInfo, "/path/{0}/{1}", "arg1", "arg2");
         Assert.assertEquals(200, code);
         Assert.assertEquals("output", resultInfo.getBodyStream().toString());
@@ -336,15 +321,15 @@ public class AliRestClientTest {
 
     @Test
     public void testPut() {
-        authenticate();
+        handler.authenticate();
         handler.addRequest("PUT", "/qcbin/rest/domains/domain/projects/project/path/arg1/arg2", 200)
                 .expectHeader("header-input", "value-input")
                 .expectBody("input")
                 .responseHeader("header-output", "value-output")
                 .responseBody("output");
 
-        AliRestClient client = AliRestClient.create(getQcUrl(), "domain", "project", "user", "password", AliRestClient.SessionStrategy.AUTO_LOGIN);
-        ResultInfo resultInfo = ResultInfo.create(true, new ByteArrayOutputStream());
+        AliRestClient client = AliRestClient.create(handler.getQcUrl(), "domain", "project", "user", "password", RestClient.SessionStrategy.AUTO_LOGIN);
+        ResultInfo resultInfo = ResultInfo.create(new ByteArrayOutputStream());
         int code = client.put(InputData.create("input", Collections.singletonMap("header-input", "value-input")), resultInfo, "/path/{0}/{1}", "arg1", "arg2");
         Assert.assertEquals(200, code);
         Assert.assertEquals("output", resultInfo.getBodyStream().toString());
@@ -353,7 +338,7 @@ public class AliRestClientTest {
 
     @Test
     public void testListDomains() {
-        authenticate();
+        handler.authenticate();
         handler.addRequest("GET", "/qcbin/rest/domains", 200)
                 .responseBody("<Domains>" +
                         " <Domain Name='emea'/>" +
@@ -361,14 +346,14 @@ public class AliRestClientTest {
                         " <Domain Name='pacific'/>" +
                         "</Domains>");
 
-        AliRestClient client = AliRestClient.create(getQcUrl(), null, null, "user", "password", AliRestClient.SessionStrategy.AUTO_LOGIN);
+        AliRestClient client = AliRestClient.create(handler.getQcUrl(), null, null, "user", "password", RestClient.SessionStrategy.AUTO_LOGIN);
         List<String> domains = client.listDomains();
         Assert.assertEquals(Arrays.asList("emea", "asia", "pacific"), domains);
     }
 
     @Test
     public void testListCurrentProjects() {
-        authenticate();
+        handler.authenticate();
         handler.addRequest("GET", "/qcbin/rest/domains/emea/projects", 200)
                 .responseBody("<Projects>" +
                         " <Project Name='first'/>" +
@@ -376,14 +361,14 @@ public class AliRestClientTest {
                         " <Project Name='third'/>" +
                         "</Projects>");
 
-        AliRestClient client = AliRestClient.create(getQcUrl(), "emea", null, "user", "password", AliRestClient.SessionStrategy.AUTO_LOGIN);
+        AliRestClient client = AliRestClient.create(handler.getQcUrl(), "emea", null, "user", "password", RestClient.SessionStrategy.AUTO_LOGIN);
         List<String> projects = client.listCurrentProjects();
         Assert.assertEquals(Arrays.asList("first", "second", "third"), projects);
     }
 
     @Test
     public void testListCurrentProjects_noDomain() {
-        AliRestClient client = AliRestClient.create(getQcUrl(), null, null, "user", "password", AliRestClient.SessionStrategy.AUTO_LOGIN);
+        AliRestClient client = AliRestClient.create(handler.getQcUrl(), null, null, "user", "password", RestClient.SessionStrategy.AUTO_LOGIN);
         try {
             client.listCurrentProjects();
             Assert.fail("IllegalStateException expected");
@@ -396,7 +381,7 @@ public class AliRestClientTest {
     public void testSetEncoding_utf8() {
         handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/abc_%C5%BElu%C5%A5ou%C4%8Dk%C3%BD%20k%C5%AF%C5%88%20def", 200);
 
-        AliRestClient client = AliRestClient.create(getQcUrl(), "domain", "project", "user", "password", AliRestClient.SessionStrategy.NONE);
+        AliRestClient client = AliRestClient.create(handler.getQcUrl(), "domain", "project", "user", "password", RestClient.SessionStrategy.NONE);
         client.setEncoding("UTF-8");
         client.getForString("abc_{0}{1}def", "\u017Elu\u0165ou\u010Dk\u00FD k\u016F\u0148", " ");
     }
@@ -405,8 +390,22 @@ public class AliRestClientTest {
     public void testSetEncoding_none() {
         handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/abc_%C5%BElu%C5%A5ou%C4%8Dk%C3%BD%20k%C5%AF%C5%88+def", 200);
 
-        AliRestClient client = AliRestClient.create(getQcUrl(), "domain", "project", "user", "password", AliRestClient.SessionStrategy.NONE);
+        AliRestClient client = AliRestClient.create(handler.getQcUrl(), "domain", "project", "user", "password", RestClient.SessionStrategy.NONE);
         client.setEncoding(null);
         client.getForString("abc_{0}{1}def", "%C5%BElu%C5%A5ou%C4%8Dk%C3%BD%20k%C5%AF%C5%88", "+");
+    }
+
+    @Test
+    public void testTicketParsing() {
+        handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/abc", 500)
+                .responseHeader("Content-type", "text/html;charset=ISO-8859-1")
+                .content("error_ticket.html");
+
+        AliRestClient client = AliRestClient.create(handler.getQcUrl(), "domain", "project", "user", "password", RestClient.SessionStrategy.NONE);
+        try {
+            client.getForString("abc");
+        } catch (HttpServerErrorException e) {
+            Assert.assertEquals("85449334-9650-4b67-96f6-b491e18a74c0", e.getErrorCode());
+        }
     }
 }

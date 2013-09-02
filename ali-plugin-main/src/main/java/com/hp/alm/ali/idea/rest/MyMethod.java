@@ -16,14 +16,14 @@
 
 package com.hp.alm.ali.idea.rest;
 
-import com.hp.alm.ali.rest.client.AliRestClient;
 import com.hp.alm.ali.rest.client.InputData;
+import com.hp.alm.ali.rest.client.RestClient;
 import com.hp.alm.ali.rest.client.ResultInfo;
 
 public interface MyMethod {
 
     String getName();
 
-    int execute(AliRestClient client, InputData input, ResultInfo info, String template, Object... params);
+    int execute(RestClient client, InputData input, ResultInfo info, String template, Object... params);
 
 }

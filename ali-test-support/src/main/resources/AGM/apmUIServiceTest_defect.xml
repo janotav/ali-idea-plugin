@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Entities TotalResults="2">
+    <Entity Type="release-backlog-item">
+        <Fields>
+            <Field Name="no-of-sons">
+                <Value>1</Value>
+            </Field>
+            <Field Name="release-id"/>
+            <Field Name="entity-type">
+                <Value>defect</Value>
+            </Field>
+            <Field Name="kanban-status-id"/>
+            <Field Name="id">
+                <Value>4289</Value>
+            </Field>
+            <Field Name="ver-stamp">
+                <Value>14</Value>
+            </Field>
+            <Field Name="entity-id">
+                <Value>86</Value>
+            </Field>
+            <Field Name="rank">
+                <Value>1923000</Value>
+            </Field>
+            <Field Name="remaining"/>
+            <Field Name="aggr-assignee">
+                <Value>,null@localhost,</Value>
+            </Field>
+            <Field Name="estimated"/>
+            <Field Name="blocked">
+                <Value></Value>
+            </Field>
+            <Field Name="kan-status-duration">
+                <Value>0</Value>
+            </Field>
+            <Field Name="product-id">
+                <Value>2</Value>
+            </Field>
+            <Field Name="entity-name">
+                <Value>somewhat</Value>
+            </Field>
+            <Field Name="kanban-parent-status-id"/>
+            <Field Name="status">
+                <Value>In Testing</Value>
+            </Field>
+            <Field Name="story-points"/>
+            <Field Name="sprint-id"/>
+            <Field Name="watch-id"/>
+            <Field Name="is-leaf">
+                <Value>Y</Value>
+            </Field>
+            <Field Name="kan-parent-duration">
+                <Value>0</Value>
+            </Field>
+            <Field Name="vts">
+                <Value>2013-05-27 06:13:29</Value>
+            </Field>
+            <Field Name="theme-id">
+                <Value>4188</Value>
+            </Field>
+            <Field Name="team-id"/>
+            <Field Name="invested"/>
+            <Field Name="owner">
+                <Value>null@localhost</Value>
+            </Field>
+            <Field Name="linked-entities-info">
+                <Value>1</Value>
+            </Field>
+            <Field Name="bi-req-type">
+                <Value></Value>
+            </Field>
+            <Field Name="feature-id">
+                <Value>1439</Value>
+            </Field>
+        </Fields>
+        <RelatedEntities/>
+    </Entity>
+    <Entity Type="defect">
+        <Fields>
+            <Field Name="planned-closing-ver">
+                <Value></Value>
+            </Field>
+            <Field Name="has-change">
+                <Value></Value>
+            </Field>
+            <Field Name="reproducible">
+                <Value></Value>
+            </Field>
+            <Field Name="changeset">
+                <Value></Value>
+            </Field>
+            <Field Name="has-others-linkage">
+                <Value>Y</Value>
+            </Field>
+            <Field Name="priority">
+                <Value></Value>
+            </Field>
+            <Field Name="description">
+                <Value>something</Value>
+            </Field>
+            <Field Name="run-reference"/>
+            <Field Name="dev-comments">
+                <Value></Value>
+            </Field>
+            <Field Name="to-mail">
+                <Value></Value>
+            </Field>
+            <Field Name="cycle-id"/>
+            <Field Name="status">
+                <Value>Fixed</Value>
+            </Field>
+            <Field Name="closing-date"/>
+            <Field Name="detected-in-rel">
+                <Value></Value>
+            </Field>
+            <Field Name="bug-ver-stamp">
+                <Value>17</Value>
+            </Field>
+            <Field Name="estimated-fix-time"/>
+            <Field Name="project">
+                <Value></Value>
+            </Field>
+            <Field Name="target-rel">
+                <Value></Value>
+            </Field>
+            <Field Name="step-reference"/>
+            <Field Name="owner">
+                <Value>null@localhost</Value>
+            </Field>
+            <Field Name="actual-fix-time"/>
+            <Field Name="request-type">
+                <Value></Value>
+            </Field>
+            <Field Name="user-04"/>
+            <Field Name="user-03">
+                <Value></Value>
+            </Field>
+            <Field Name="user-02"/>
+            <Field Name="user-01">
+                <Value></Value>
+            </Field>
+            <Field Name="test-reference"/>
+            <Field Name="subject"/>
+            <Field Name="build-closed">
+                <Value></Value>
+            </Field>
+            <Field Name="in-bucket">
+                <Value></Value>
+            </Field>
+            <Field Name="request-id"/>
+            <Field Name="request-server">
+                <Value></Value>
+            </Field>
+            <Field Name="id">
+                <Value>86</Value>
+            </Field>
+            <Field Name="has-linkage">
+                <Value>N</Value>
+            </Field>
+            <Field Name="name">
+                <Value>somewhat</Value>
+            </Field>
+            <Field Name="cycle-reference">
+                <Value></Value>
+            </Field>
+            <Field Name="creation-time">
+                <Value>2012-09-03</Value>
+            </Field>
+            <Field Name="request-note">
+                <Value></Value>
+            </Field>
+            <Field Name="closing-version">
+                <Value></Value>
+            </Field>
+            <Field Name="build-detected">
+                <Value></Value>
+            </Field>
+            <Field Name="detection-version">
+                <Value></Value>
+            </Field>
+            <Field Name="last-modified">
+                <Value>2013-05-27 06:13:29</Value>
+            </Field>
+            <Field Name="watch-id"/>
+            <Field Name="detected-in-rcyc">
+                <Value></Value>
+            </Field>
+            <Field Name="severity">
+                <Value>1-High</Value>
+            </Field>
+            <Field Name="attachment">
+                <Value></Value>
+            </Field>
+            <Field Name="extended-reference">
+                <Value></Value>
+            </Field>
+            <Field Name="detected-by">
+                <Value>me</Value>
+            </Field>
+            <Field Name="target-rcyc">
+                <Value></Value>
+            </Field>
+            <Field Name="fixed-on-date"/>
+        </Fields>
+        <RelatedEntities/>
+    </Entity>
+</Entities>

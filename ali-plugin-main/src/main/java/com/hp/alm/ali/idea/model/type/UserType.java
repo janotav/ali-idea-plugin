@@ -16,6 +16,7 @@
 
 package com.hp.alm.ali.idea.model.type;
 
+import com.hp.alm.ali.idea.filter.MultipleItemsChooserFactory;
 import com.hp.alm.ali.idea.model.ItemsProvider;
 import com.hp.alm.ali.idea.model.User;
 import com.hp.alm.ali.idea.translate.filter.MultipleItemsTranslatedResolver;
@@ -25,7 +26,6 @@ import com.hp.alm.ali.idea.services.AbstractCachingService;
 import com.hp.alm.ali.idea.services.ProjectUserService;
 import com.hp.alm.ali.idea.filter.FilterFactory;
 import com.hp.alm.ali.idea.translate.filter.FilterResolver;
-import com.hp.alm.ali.idea.filter.MultipleItemsFactory;
 import com.hp.alm.ali.idea.ui.ComboItem;
 import com.intellij.openapi.project.Project;
 
@@ -44,7 +44,7 @@ public class UserType implements Type, Translator, FilterResolver {
 
     @Override
     public FilterFactory getFilterFactory(final boolean multiple) {
-        return new MultipleItemsFactory(project, "User", multiple, new ItemsProvider.Loader<ComboItem>() {
+        return new MultipleItemsChooserFactory(project, "User", multiple, new ItemsProvider.Loader<ComboItem>() {
             @Override
             public List<ComboItem> load() {
                 return asItemsUsers(projectUserService.getUserList(), multiple, false);

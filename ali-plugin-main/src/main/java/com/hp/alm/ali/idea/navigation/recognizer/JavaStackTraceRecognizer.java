@@ -35,12 +35,17 @@ public class JavaStackTraceRecognizer extends ClassRecognizer {
         while(matcher.find()) {
             String className;
             String signature = matcher.group(2);
+            if(signature.contains(".access$")) {
+                // avoid accessor to be interpreted as anonymous class in subsequent
+                signature = signature.replaceFirst("\\.access\\$\\d+", ".access");
+            }
             if(signature.contains("$")) {
                 className = signature.substring(0, signature.indexOf("$"));
             } else {
                 className = signature.substring(0, signature.lastIndexOf("."));
             }
             String line = matcher.group(6);
+            // NOTE: currently we do not extract method (parameter overloading makes it ambiguous anyhow)
             candidates.add(new ClassCandidate(matcher.start(), matcher.end(), matcher.start(3), matcher.end(3), className, matcher.group(4), line == null? 0: Integer.valueOf(line), null));
         }
     }

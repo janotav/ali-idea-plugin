@@ -1,0 +1,1514 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<EntityResourceDescriptors>
+    <EntityResourceDescriptor collectionName="tasks"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>TASKS</Table>
+        <Name>task</Name>
+        <Label>Task</Label>
+        <SupportsHistory url="tasks/{entity_id : [0-9]+}/audits">false</SupportsHistory>
+        <SupportsAttachment url="tasks/{parent_entity_id: [0-9]+}/attachments">false</SupportsAttachment>
+        <SupportsLock url="tasks/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="tasks/groups/{groupsFields}">false</SupportsGrouping>
+        <SupportsMailing url="tasks/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="tasks/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/task/types">false</SupportsSubtypes>
+        <SupportsCopying url="tasks/copy">false</SupportsCopying>
+        <SupportsStorage url="tasks/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="tasks/exportedData">false</SupportsExport>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+        <IsFirstLevelResource supportsDELETE="true" supportsPUT="true" supportsGET="true" supportsPOST="true"
+                              url="tasks">true
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="task-logs"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>TASKS_LOG</Table>
+        <Name>task-log</Name>
+        <Label>Task Log</Label>
+        <SupportsHistory url="task-logs/{entity_id : [0-9]+}/audits">false</SupportsHistory>
+        <SupportsAttachment url="task-logs/{parent_entity_id: [0-9]+}/attachments">false</SupportsAttachment>
+        <SupportsLock url="task-logs/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="task-logs/groups/{groupsFields}">false</SupportsGrouping>
+        <SupportsMailing url="task-logs/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="task-logs/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/task-log/types">false</SupportsSubtypes>
+        <SupportsCopying url="task-logs/copy">false</SupportsCopying>
+        <SupportsStorage url="task-logs/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="task-logs/exportedData">false</SupportsExport>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+        <IsFirstLevelResource supportsDELETE="true" supportsPUT="true" supportsGET="true" supportsPOST="true"
+                              url="task-logs">true
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="event-logs"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>EVENT_LOG</Table>
+        <Name>event-log</Name>
+        <Label>Event Log</Label>
+        <SupportsHistory url="event-logs/{entity_id : [0-9]+}/audits">false</SupportsHistory>
+        <SupportsAttachment url="event-logs/{parent_entity_id: [0-9]+}/attachments">false</SupportsAttachment>
+        <SupportsLock url="event-logs/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="event-logs/groups/{groupsFields}">false</SupportsGrouping>
+        <SupportsMailing url="event-logs/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="event-logs/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/event-log/types">false</SupportsSubtypes>
+        <SupportsCopying url="event-logs/copy">false</SupportsCopying>
+        <SupportsStorage url="event-logs/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="event-logs/exportedData">false</SupportsExport>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+        <IsFirstLevelResource supportsDELETE="true" supportsPUT="true" supportsGET="true" supportsPOST="true"
+                              url="event-logs">false
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="attachments"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>CROS_REF</Table>
+        <Name>attachment</Name>
+        <Label>Attachment</Label>
+        <SupportsHistory url="attachments/{entity_id : [0-9]+}/audits">false</SupportsHistory>
+        <SupportsAttachment url="attachments/{parent_entity_id: [0-9]+}/attachments">false</SupportsAttachment>
+        <SupportsLock url="attachments/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="attachments/groups/{groupsFields}">false</SupportsGrouping>
+        <SupportsMailing url="attachments/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>true</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="attachments/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/attachment/types">false</SupportsSubtypes>
+        <SupportsCopying url="attachments/copy">false</SupportsCopying>
+        <SupportsStorage url="attachments/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="attachments/exportedData">false</SupportsExport>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="supportBaseline">true</Attribute>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">true</Attribute>
+        </Attributes>
+        <IsFirstLevelResource supportsDELETE="true" supportsPUT="true" supportsGET="true" supportsPOST="true"
+                              url="attachments">false
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="favorite-folders"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>FAVORITE_FOLDERS</Table>
+        <Name>favorite-folder</Name>
+        <Label>Favorite Folder</Label>
+        <SupportsHistory url="favorite-folders/{entity_id : [0-9]+}/audits">false</SupportsHistory>
+        <SupportsAttachment url="favorite-folders/{parent_entity_id: [0-9]+}/attachments">false</SupportsAttachment>
+        <SupportsLock url="favorite-folders/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="favorite-folders/groups/{groupsFields}">false</SupportsGrouping>
+        <SupportsMailing url="favorite-folders/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="favorite-folders/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/favorite-folder/types">false</SupportsSubtypes>
+        <SupportsCopying url="favorite-folders/copy">false</SupportsCopying>
+        <SupportsStorage url="favorite-folders/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="favorite-folders/exportedData">false</SupportsExport>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+        <IsFirstLevelResource supportsDELETE="true" supportsPUT="true" supportsGET="true" supportsPOST="true"
+                              url="favorite-folders">true
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="favorites"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>FAVORITES</Table>
+        <Name>favorite</Name>
+        <Label>Favorite</Label>
+        <SupportsHistory url="favorites/{entity_id : [0-9]+}/audits">false</SupportsHistory>
+        <SupportsAttachment url="favorites/{parent_entity_id: [0-9]+}/attachments">false</SupportsAttachment>
+        <SupportsLock url="favorites/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="favorites/groups/{groupsFields}">false</SupportsGrouping>
+        <SupportsMailing url="favorites/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="favorites/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/favorite/types">false</SupportsSubtypes>
+        <SupportsCopying url="favorites/copy">false</SupportsCopying>
+        <SupportsStorage url="favorites/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="favorites/exportedData">false</SupportsExport>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+        <IsFirstLevelResource supportsDELETE="true" supportsPUT="true" supportsGET="true" supportsPOST="true"
+                              url="favorites">true
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="user-settings"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>USER_SETTINGS</Table>
+        <Name>user-setting</Name>
+        <Label>User Setting</Label>
+        <SupportsHistory url="user-settings/{entity_id : [0-9]+}/audits">false</SupportsHistory>
+        <SupportsAttachment url="user-settings/{parent_entity_id: [0-9]+}/attachments">false</SupportsAttachment>
+        <SupportsLock url="user-settings/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="user-settings/groups/{groupsFields}">false</SupportsGrouping>
+        <SupportsMailing url="user-settings/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="user-settings/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/user-setting/types">false</SupportsSubtypes>
+        <SupportsCopying url="user-settings/copy">false</SupportsCopying>
+        <SupportsStorage url="user-settings/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="user-settings/exportedData">false</SupportsExport>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes/>
+        <IsFirstLevelResource supportsDELETE="true" supportsPUT="true" supportsGET="true" supportsPOST="true"
+                              url="user-settings">true
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="build-code-refs"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>BUILD_CODEREF</Table>
+        <Name>build-code-ref</Name>
+        <Label>Build Code Reference</Label>
+        <SupportsHistory url="build-code-refs/{entity_id : [0-9]+}/audits">true</SupportsHistory>
+        <SupportsAttachment url="build-code-refs/{parent_entity_id: [0-9]+}/attachments">false</SupportsAttachment>
+        <SupportsLock url="build-code-refs/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="build-code-refs/groups/{groupsFields}">false</SupportsGrouping>
+        <SupportsMailing url="build-code-refs/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="build-code-refs/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/build-code-ref/types">false</SupportsSubtypes>
+        <SupportsCopying url="build-code-refs/copy">false</SupportsCopying>
+        <SupportsStorage url="build-code-refs/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="build-code-refs/exportedData">false</SupportsExport>
+        <ExtensionName>ali_extension</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes/>
+        <IsFirstLevelResource supportsDELETE="true" supportsPUT="true" supportsGET="true" supportsPOST="true"
+                              url="build-code-refs">true
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="build-artifacts"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>BUILD_ARTIFACT</Table>
+        <Name>build-artifact</Name>
+        <Label>Build Artifact</Label>
+        <SupportsHistory url="build-artifacts/{entity_id : [0-9]+}/audits">true</SupportsHistory>
+        <SupportsAttachment url="build-artifacts/{parent_entity_id: [0-9]+}/attachments">false</SupportsAttachment>
+        <SupportsLock url="build-artifacts/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="build-artifacts/groups/{groupsFields}">false</SupportsGrouping>
+        <SupportsMailing url="build-artifacts/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="build-artifacts/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/build-artifact/types">false</SupportsSubtypes>
+        <SupportsCopying url="build-artifacts/copy">false</SupportsCopying>
+        <SupportsStorage url="build-artifacts/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="build-artifacts/exportedData">false</SupportsExport>
+        <ExtensionName>ali_extension</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes/>
+        <IsFirstLevelResource supportsDELETE="true" supportsPUT="true" supportsGET="true" supportsPOST="true"
+                              url="build-artifacts">true
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="build-servers"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>BUILD_SERVER</Table>
+        <Name>build-server</Name>
+        <Label>Build Server</Label>
+        <SupportsHistory url="build-servers/{entity_id : [0-9]+}/audits">true</SupportsHistory>
+        <SupportsAttachment url="build-servers/{parent_entity_id: [0-9]+}/attachments">false</SupportsAttachment>
+        <SupportsLock url="build-servers/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="build-servers/groups/{groupsFields}">false</SupportsGrouping>
+        <SupportsMailing url="build-servers/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="build-servers/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/build-server/types">false</SupportsSubtypes>
+        <SupportsCopying url="build-servers/copy">false</SupportsCopying>
+        <SupportsStorage url="build-servers/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="build-servers/exportedData">false</SupportsExport>
+        <ExtensionName>ali_extension</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes/>
+        <IsFirstLevelResource supportsDELETE="true" supportsPUT="true" supportsGET="true" supportsPOST="true"
+                              url="build-servers">true
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="build-types"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>BUILD_TYPE</Table>
+        <Name>build-type</Name>
+        <Label>Build Type</Label>
+        <SupportsHistory url="build-types/{entity_id : [0-9]+}/audits">true</SupportsHistory>
+        <SupportsAttachment url="build-types/{parent_entity_id: [0-9]+}/attachments">false</SupportsAttachment>
+        <SupportsLock url="build-types/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="build-types/groups/{groupsFields}">false</SupportsGrouping>
+        <SupportsMailing url="build-types/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="build-types/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/build-type/types">false</SupportsSubtypes>
+        <SupportsCopying url="build-types/copy">false</SupportsCopying>
+        <SupportsStorage url="build-types/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="build-types/exportedData">false</SupportsExport>
+        <ExtensionName>ali_extension</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes/>
+        <IsFirstLevelResource supportsDELETE="true" supportsPUT="true" supportsGET="true" supportsPOST="true"
+                              url="build-types">true
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="build-instances"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>BUILD</Table>
+        <Name>build-instance</Name>
+        <Label>Build</Label>
+        <SupportsHistory url="build-instances/{entity_id : [0-9]+}/audits">true</SupportsHistory>
+        <SupportsAttachment url="build-instances/{parent_entity_id: [0-9]+}/attachments">false</SupportsAttachment>
+        <SupportsLock url="build-instances/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="build-instances/groups/{groupsFields}">true</SupportsGrouping>
+        <SupportsMailing url="build-instances/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="build-instances/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/build-instance/types">false</SupportsSubtypes>
+        <SupportsCopying url="build-instances/copy">false</SupportsCopying>
+        <SupportsStorage url="build-instances/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="build-instances/exportedData">false</SupportsExport>
+        <ExtensionName>ali_extension</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">true</Attribute>
+            <Attribute name="reportable">true</Attribute>
+        </Attributes>
+        <IsFirstLevelResource supportsDELETE="true" supportsPUT="true" supportsGET="true" supportsPOST="true"
+                              url="build-instances">true
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="changesets"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>CHANGESET</Table>
+        <Name>changeset</Name>
+        <Label>Changeset</Label>
+        <SupportsHistory url="changesets/{entity_id : [0-9]+}/audits">true</SupportsHistory>
+        <SupportsAttachment url="changesets/{parent_entity_id: [0-9]+}/attachments">false</SupportsAttachment>
+        <SupportsLock url="changesets/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="changesets/groups/{groupsFields}">true</SupportsGrouping>
+        <SupportsMailing url="changesets/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="changesets/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/changeset/types">false</SupportsSubtypes>
+        <SupportsCopying url="changesets/copy">false</SupportsCopying>
+        <SupportsStorage url="changesets/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="changesets/exportedData">false</SupportsExport>
+        <ExtensionName>ali_extension</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">true</Attribute>
+            <Attribute name="reportable">true</Attribute>
+        </Attributes>
+        <IsFirstLevelResource supportsDELETE="true" supportsPUT="true" supportsGET="true" supportsPOST="true"
+                              url="changesets">true
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="changeset-files"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>CHANGESET_FILE</Table>
+        <Name>changeset-file</Name>
+        <Label>Changeset File</Label>
+        <SupportsHistory url="changeset-files/{entity_id : [0-9]+}/audits">true</SupportsHistory>
+        <SupportsAttachment url="changeset-files/{parent_entity_id: [0-9]+}/attachments">false</SupportsAttachment>
+        <SupportsLock url="changeset-files/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="changeset-files/groups/{groupsFields}">false</SupportsGrouping>
+        <SupportsMailing url="changeset-files/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="changeset-files/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/changeset-file/types">false</SupportsSubtypes>
+        <SupportsCopying url="changeset-files/copy">false</SupportsCopying>
+        <SupportsStorage url="changeset-files/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="changeset-files/exportedData">false</SupportsExport>
+        <ExtensionName>ali_extension</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes/>
+        <IsFirstLevelResource supportsDELETE="true" supportsPUT="true" supportsGET="true" supportsPOST="true"
+                              url="changeset-files">true
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="changeset-links"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>CHANGESET_LINKS</Table>
+        <Name>changeset-link</Name>
+        <Label>Changeset Link</Label>
+        <SupportsHistory url="changeset-links/{entity_id : [0-9]+}/audits">false</SupportsHistory>
+        <SupportsAttachment url="changeset-links/{parent_entity_id: [0-9]+}/attachments">false</SupportsAttachment>
+        <SupportsLock url="changeset-links/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="changeset-links/groups/{groupsFields}">false</SupportsGrouping>
+        <SupportsMailing url="changeset-links/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="changeset-links/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/changeset-link/types">false</SupportsSubtypes>
+        <SupportsCopying url="changeset-links/copy">false</SupportsCopying>
+        <SupportsStorage url="changeset-links/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="changeset-links/exportedData">false</SupportsExport>
+        <ExtensionName>ali_extension</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes/>
+        <IsFirstLevelResource supportsDELETE="true" supportsPUT="true" supportsGET="true" supportsPOST="true"
+                              url="changeset-links">true
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="scm-repositorys"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>SCMREPOSITORY</Table>
+        <Name>scm-repository</Name>
+        <Label>SCM Repository</Label>
+        <SupportsHistory url="scm-repositorys/{entity_id : [0-9]+}/audits">true</SupportsHistory>
+        <SupportsAttachment url="scm-repositorys/{parent_entity_id: [0-9]+}/attachments">false</SupportsAttachment>
+        <SupportsLock url="scm-repositorys/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="scm-repositorys/groups/{groupsFields}">false</SupportsGrouping>
+        <SupportsMailing url="scm-repositorys/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="scm-repositorys/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/scm-repository/types">false</SupportsSubtypes>
+        <SupportsCopying url="scm-repositorys/copy">false</SupportsCopying>
+        <SupportsStorage url="scm-repositorys/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="scm-repositorys/exportedData">false</SupportsExport>
+        <ExtensionName>ali_extension</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes/>
+        <IsFirstLevelResource supportsDELETE="true" supportsPUT="true" supportsGET="true" supportsPOST="true"
+                              url="scm-repositorys">true
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="build-contexts"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>BUILD_CONTEXT</Table>
+        <Name>build-context</Name>
+        <Label>Build Context</Label>
+        <SupportsHistory url="build-contexts/{entity_id : [0-9]+}/audits">false</SupportsHistory>
+        <SupportsAttachment url="build-contexts/{parent_entity_id: [0-9]+}/attachments">false</SupportsAttachment>
+        <SupportsLock url="build-contexts/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="build-contexts/groups/{groupsFields}">false</SupportsGrouping>
+        <SupportsMailing url="build-contexts/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="build-contexts/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/build-context/types">false</SupportsSubtypes>
+        <SupportsCopying url="build-contexts/copy">false</SupportsCopying>
+        <SupportsStorage url="build-contexts/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="build-contexts/exportedData">false</SupportsExport>
+        <ExtensionName>ali_extension</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes/>
+        <IsFirstLevelResource supportsDELETE="true" supportsPUT="true" supportsGET="true" supportsPOST="true"
+                              url="build-contexts">true
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="scm-branchs"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>SCMBRANCH</Table>
+        <Name>scm-branch</Name>
+        <Label>SCM Branch</Label>
+        <SupportsHistory url="scm-branchs/{entity_id : [0-9]+}/audits">true</SupportsHistory>
+        <SupportsAttachment url="scm-branchs/{parent_entity_id: [0-9]+}/attachments">false</SupportsAttachment>
+        <SupportsLock url="scm-branchs/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="scm-branchs/groups/{groupsFields}">false</SupportsGrouping>
+        <SupportsMailing url="scm-branchs/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="scm-branchs/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/scm-branch/types">false</SupportsSubtypes>
+        <SupportsCopying url="scm-branchs/copy">false</SupportsCopying>
+        <SupportsStorage url="scm-branchs/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="scm-branchs/exportedData">false</SupportsExport>
+        <ExtensionName>ali_extension</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes/>
+        <IsFirstLevelResource supportsDELETE="true" supportsPUT="true" supportsGET="true" supportsPOST="true"
+                              url="scm-branchs">true
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="policy-items"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>SCMPOLICY_ITEM</Table>
+        <Name>policy-item</Name>
+        <Label>SCM Policy Item</Label>
+        <SupportsHistory url="policy-items/{entity_id : [0-9]+}/audits">false</SupportsHistory>
+        <SupportsAttachment url="policy-items/{parent_entity_id: [0-9]+}/attachments">false</SupportsAttachment>
+        <SupportsLock url="policy-items/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="policy-items/groups/{groupsFields}">false</SupportsGrouping>
+        <SupportsMailing url="policy-items/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="policy-items/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/policy-item/types">false</SupportsSubtypes>
+        <SupportsCopying url="policy-items/copy">false</SupportsCopying>
+        <SupportsStorage url="policy-items/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="policy-items/exportedData">false</SupportsExport>
+        <ExtensionName>ali_extension</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes/>
+        <IsFirstLevelResource supportsDELETE="true" supportsPUT="true" supportsGET="true" supportsPOST="true"
+                              url="policy-items">true
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="branch-policy-links"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>SCMBRANCH_POLICY_LINK</Table>
+        <Name>branch-policy-link</Name>
+        <Label>SCM Branch Policy Link</Label>
+        <SupportsHistory url="branch-policy-links/{entity_id : [0-9]+}/audits">false</SupportsHistory>
+        <SupportsAttachment url="branch-policy-links/{parent_entity_id: [0-9]+}/attachments">false</SupportsAttachment>
+        <SupportsLock url="branch-policy-links/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="branch-policy-links/groups/{groupsFields}">false</SupportsGrouping>
+        <SupportsMailing url="branch-policy-links/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="branch-policy-links/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/branch-policy-link/types">false</SupportsSubtypes>
+        <SupportsCopying url="branch-policy-links/copy">false</SupportsCopying>
+        <SupportsStorage url="branch-policy-links/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="branch-policy-links/exportedData">false</SupportsExport>
+        <ExtensionName>ali_extension</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes/>
+        <IsFirstLevelResource supportsDELETE="true" supportsPUT="true" supportsGET="true" supportsPOST="true"
+                              url="branch-policy-links">true
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="scm-branch-releases"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>SCMBRANCH_RELEASE</Table>
+        <Name>scm-branch-release</Name>
+        <Label>SCM Branch Release</Label>
+        <SupportsHistory url="scm-branch-releases/{entity_id : [0-9]+}/audits">false</SupportsHistory>
+        <SupportsAttachment url="scm-branch-releases/{parent_entity_id: [0-9]+}/attachments">false</SupportsAttachment>
+        <SupportsLock url="scm-branch-releases/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="scm-branch-releases/groups/{groupsFields}">false</SupportsGrouping>
+        <SupportsMailing url="scm-branch-releases/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="scm-branch-releases/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/scm-branch-release/types">false</SupportsSubtypes>
+        <SupportsCopying url="scm-branch-releases/copy">false</SupportsCopying>
+        <SupportsStorage url="scm-branch-releases/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="scm-branch-releases/exportedData">false</SupportsExport>
+        <ExtensionName>ali_extension</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes/>
+        <IsFirstLevelResource supportsDELETE="true" supportsPUT="true" supportsGET="true" supportsPOST="true"
+                              url="scm-branch-releases">true
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="analysis-items"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>ANALYSIS_ITEMS</Table>
+        <Name>analysis-item</Name>
+        <Label>Analysis Item</Label>
+        <SupportsHistory url="analysis-items/{entity_id : [0-9]+}/audits">false</SupportsHistory>
+        <SupportsAttachment url="analysis-items/{parent_entity_id: [0-9]+}/attachments">false</SupportsAttachment>
+        <SupportsLock url="analysis-items/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="analysis-items/groups/{groupsFields}">false</SupportsGrouping>
+        <SupportsMailing url="analysis-items/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>true</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="analysis-items/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/analysis-item/types">false</SupportsSubtypes>
+        <SupportsCopying url="analysis-items/copy">false</SupportsCopying>
+        <SupportsStorage url="analysis-items/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="analysis-items/exportedData">false</SupportsExport>
+        <ExtensionName>analysis</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+            <Attribute name="closureUseLinkedEntitiesMode">true</Attribute>
+        </Attributes>
+        <IsFirstLevelResource supportsDELETE="true" supportsPUT="true" supportsGET="true" supportsPOST="true"
+                              url="analysis-items">true
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="analysis-item-folders"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>ANALYSIS_ITEM_FOLDERS</Table>
+        <Name>analysis-item-folder</Name>
+        <Label>Analysis Item Folder</Label>
+        <SupportsHistory url="analysis-item-folders/{entity_id : [0-9]+}/audits">false</SupportsHistory>
+        <SupportsAttachment url="analysis-item-folders/{parent_entity_id: [0-9]+}/attachments">false
+        </SupportsAttachment>
+        <SupportsLock url="analysis-item-folders/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="analysis-item-folders/groups/{groupsFields}">false</SupportsGrouping>
+        <SupportsMailing url="analysis-item-folders/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>true</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="analysis-item-folders/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/analysis-item-folder/types">false</SupportsSubtypes>
+        <SupportsCopying url="analysis-item-folders/copy">false</SupportsCopying>
+        <SupportsStorage url="analysis-item-folders/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="analysis-item-folders/exportedData">false</SupportsExport>
+        <ExtensionName>analysis</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+        <IsFirstLevelResource supportsDELETE="false" supportsPUT="false" supportsGET="true" supportsPOST="false"
+                              url="analysis-item-folders">true
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="dashboard-folders"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>DASHBOARD_FOLDERS</Table>
+        <Name>dashboard-folder</Name>
+        <Label>Dashboard Folder</Label>
+        <SupportsHistory url="dashboard-folders/{entity_id : [0-9]+}/audits">false</SupportsHistory>
+        <SupportsAttachment url="dashboard-folders/{parent_entity_id: [0-9]+}/attachments">false</SupportsAttachment>
+        <SupportsLock url="dashboard-folders/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="dashboard-folders/groups/{groupsFields}">false</SupportsGrouping>
+        <SupportsMailing url="dashboard-folders/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>true</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="dashboard-folders/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/dashboard-folder/types">false</SupportsSubtypes>
+        <SupportsCopying url="dashboard-folders/copy">false</SupportsCopying>
+        <SupportsStorage url="dashboard-folders/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="dashboard-folders/exportedData">false</SupportsExport>
+        <ExtensionName>analysis</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+        <IsFirstLevelResource supportsDELETE="true" supportsPUT="true" supportsGET="true" supportsPOST="true"
+                              url="dashboard-folders">true
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="dashboard-pages"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>DASHBOARD_PAGES</Table>
+        <Name>dashboard-page</Name>
+        <Label>Dashboard Page</Label>
+        <SupportsHistory url="dashboard-pages/{entity_id : [0-9]+}/audits">false</SupportsHistory>
+        <SupportsAttachment url="dashboard-pages/{parent_entity_id: [0-9]+}/attachments">false</SupportsAttachment>
+        <SupportsLock url="dashboard-pages/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="dashboard-pages/groups/{groupsFields}">false</SupportsGrouping>
+        <SupportsMailing url="dashboard-pages/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>true</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="dashboard-pages/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/dashboard-page/types">false</SupportsSubtypes>
+        <SupportsCopying url="dashboard-pages/copy">false</SupportsCopying>
+        <SupportsStorage url="dashboard-pages/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="dashboard-pages/exportedData">false</SupportsExport>
+        <ExtensionName>analysis</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+            <Attribute name="closureUseLinkedEntitiesMode">true</Attribute>
+        </Attributes>
+        <IsFirstLevelResource supportsDELETE="true" supportsPUT="true" supportsGET="true" supportsPOST="true"
+                              url="dashboard-pages">true
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="dashboard-page-items"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>DASHBOARD_PAGE_ITEMS</Table>
+        <Name>dashboard-page-item</Name>
+        <Label>Dashboard Page Item</Label>
+        <SupportsHistory url="dashboard-page-items/{entity_id : [0-9]+}/audits">false</SupportsHistory>
+        <SupportsAttachment url="dashboard-page-items/{parent_entity_id: [0-9]+}/attachments">false</SupportsAttachment>
+        <SupportsLock url="dashboard-page-items/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="dashboard-page-items/groups/{groupsFields}">false</SupportsGrouping>
+        <SupportsMailing url="dashboard-page-items/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>true</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="dashboard-page-items/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/dashboard-page-item/types">false</SupportsSubtypes>
+        <SupportsCopying url="dashboard-page-items/copy">false</SupportsCopying>
+        <SupportsStorage url="dashboard-page-items/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="dashboard-page-items/exportedData">false</SupportsExport>
+        <ExtensionName>analysis</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+        <IsFirstLevelResource supportsDELETE="true" supportsPUT="true" supportsGET="true" supportsPOST="true"
+                              url="dashboard-page-items">false
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="analysis-segments"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>ANALYSIS_SEGMENTS</Table>
+        <Name>analysis-segment</Name>
+        <Label>Analysis Segment</Label>
+        <SupportsHistory url="analysis-segments/{entity_id : [0-9]+}/audits">false</SupportsHistory>
+        <SupportsAttachment url="analysis-segments/{parent_entity_id: [0-9]+}/attachments">false</SupportsAttachment>
+        <SupportsLock url="analysis-segments/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="analysis-segments/groups/{groupsFields}">false</SupportsGrouping>
+        <SupportsMailing url="analysis-segments/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="analysis-segments/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/analysis-segment/types">false</SupportsSubtypes>
+        <SupportsCopying url="analysis-segments/copy">false</SupportsCopying>
+        <SupportsStorage url="analysis-segments/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="analysis-segments/exportedData">false</SupportsExport>
+        <ExtensionName>analysis</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+        <IsFirstLevelResource supportsDELETE="false" supportsPUT="false" supportsGET="true" supportsPOST="false"
+                              url="analysis-segments">true
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="project-tasks"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>PM_TASKS</Table>
+        <Name>project-task</Name>
+        <Label>Backlog Item</Label>
+        <SupportsHistory url="project-tasks/{entity_id : [0-9]+}/audits">true</SupportsHistory>
+        <SupportsAttachment url="project-tasks/{parent_entity_id: [0-9]+}/attachments">false</SupportsAttachment>
+        <SupportsLock url="project-tasks/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="project-tasks/groups/{groupsFields}">false</SupportsGrouping>
+        <SupportsMailing url="project-tasks/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="project-tasks/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/project-task/types">false</SupportsSubtypes>
+        <SupportsCopying url="project-tasks/copy">false</SupportsCopying>
+        <SupportsStorage url="project-tasks/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="project-tasks/exportedData">false</SupportsExport>
+        <ExtensionName>apm_extension</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes/>
+        <IsFirstLevelResource supportsDELETE="true" supportsPUT="true" supportsGET="true" supportsPOST="true"
+                              url="project-tasks">true
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="release-backlog-items"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>PM_RELEASE_BACKLOG_ITEMS</Table>
+        <Name>release-backlog-item</Name>
+        <Label>Backlog Item</Label>
+        <SupportsHistory url="release-backlog-items/{entity_id : [0-9]+}/audits">true</SupportsHistory>
+        <SupportsAttachment url="release-backlog-items/{parent_entity_id: [0-9]+}/attachments">false
+        </SupportsAttachment>
+        <SupportsLock url="release-backlog-items/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="release-backlog-items/groups/{groupsFields}">true</SupportsGrouping>
+        <SupportsMailing url="release-backlog-items/{parent_entity_id: [0-9]+}/mail">true</SupportsMailing>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="release-backlog-items/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/release-backlog-item/types">false</SupportsSubtypes>
+        <SupportsCopying url="release-backlog-items/copy">false</SupportsCopying>
+        <SupportsStorage url="release-backlog-items/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="release-backlog-items/exportedData">true</SupportsExport>
+        <ExtensionName>apm_extension</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="supportBaseline">true</Attribute>
+            <Attribute name="reportableRoot">true</Attribute>
+            <Attribute name="reportable">true</Attribute>
+        </Attributes>
+        <IsFirstLevelResource supportsDELETE="false" supportsPUT="true" supportsGET="true" supportsPOST="true"
+                              url="release-backlog-items">true
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="team-sprints"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>PM_TEAM_SPRINT</Table>
+        <Name>team-sprint</Name>
+        <Label>Team Sprint</Label>
+        <SupportsHistory url="team-sprints/{entity_id : [0-9]+}/audits">true</SupportsHistory>
+        <SupportsAttachment url="team-sprints/{parent_entity_id: [0-9]+}/attachments">false</SupportsAttachment>
+        <SupportsLock url="team-sprints/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="team-sprints/groups/{groupsFields}">false</SupportsGrouping>
+        <SupportsMailing url="team-sprints/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="team-sprints/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/team-sprint/types">false</SupportsSubtypes>
+        <SupportsCopying url="team-sprints/copy">false</SupportsCopying>
+        <SupportsStorage url="team-sprints/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="team-sprints/exportedData">false</SupportsExport>
+        <ExtensionName>apm_extension</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes/>
+        <IsFirstLevelResource supportsDELETE="true" supportsPUT="true" supportsGET="true" supportsPOST="true"
+                              url="team-sprints">true
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="products"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>PM_PRODUCTS</Table>
+        <Name>product</Name>
+        <Label>Product</Label>
+        <SupportsHistory url="products/{entity_id : [0-9]+}/audits">true</SupportsHistory>
+        <SupportsAttachment url="products/{parent_entity_id: [0-9]+}/attachments">false</SupportsAttachment>
+        <SupportsLock url="products/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="products/groups/{groupsFields}">false</SupportsGrouping>
+        <SupportsMailing url="products/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="products/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/product/types">false</SupportsSubtypes>
+        <SupportsCopying url="products/copy">false</SupportsCopying>
+        <SupportsStorage url="products/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="products/exportedData">false</SupportsExport>
+        <ExtensionName>apm_extension</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes/>
+        <IsFirstLevelResource supportsDELETE="true" supportsPUT="true" supportsGET="true" supportsPOST="true"
+                              url="products">true
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="team-member-team-sprints"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>PM_TEAM_MEMBER_TEAM_SPRINTS</Table>
+        <Name>team-member-team-sprint</Name>
+        <Label>Team member team sprint</Label>
+        <SupportsHistory url="team-member-team-sprints/{entity_id : [0-9]+}/audits">true</SupportsHistory>
+        <SupportsAttachment url="team-member-team-sprints/{parent_entity_id: [0-9]+}/attachments">false
+        </SupportsAttachment>
+        <SupportsLock url="team-member-team-sprints/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="team-member-team-sprints/groups/{groupsFields}">false</SupportsGrouping>
+        <SupportsMailing url="team-member-team-sprints/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="team-member-team-sprints/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/team-member-team-sprint/types">false</SupportsSubtypes>
+        <SupportsCopying url="team-member-team-sprints/copy">false</SupportsCopying>
+        <SupportsStorage url="team-member-team-sprints/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="team-member-team-sprints/exportedData">false</SupportsExport>
+        <ExtensionName>apm_extension</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes/>
+        <IsFirstLevelResource supportsDELETE="true" supportsPUT="true" supportsGET="true" supportsPOST="true"
+                              url="team-member-team-sprints">true
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="release-summarys"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>PM_RELEASE_SUMMARY</Table>
+        <Name>release-summary</Name>
+        <Label>Release Summary</Label>
+        <SupportsHistory url="release-summarys/{entity_id : [0-9]+}/audits">false</SupportsHistory>
+        <SupportsAttachment url="release-summarys/{parent_entity_id: [0-9]+}/attachments">false</SupportsAttachment>
+        <SupportsLock url="release-summarys/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="release-summarys/groups/{groupsFields}">false</SupportsGrouping>
+        <SupportsMailing url="release-summarys/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="release-summarys/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/release-summary/types">false</SupportsSubtypes>
+        <SupportsCopying url="release-summarys/copy">false</SupportsCopying>
+        <SupportsStorage url="release-summarys/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="release-summarys/exportedData">false</SupportsExport>
+        <ExtensionName>apm_extension</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes/>
+        <IsFirstLevelResource supportsDELETE="true" supportsPUT="true" supportsGET="true" supportsPOST="true"
+                              url="release-summarys">true
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="retrospectives"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>PM_RETROSPECTIVE</Table>
+        <Name>retrospective</Name>
+        <Label>Retrospective</Label>
+        <SupportsHistory url="retrospectives/{entity_id : [0-9]+}/audits">true</SupportsHistory>
+        <SupportsAttachment url="retrospectives/{parent_entity_id: [0-9]+}/attachments">false</SupportsAttachment>
+        <SupportsLock url="retrospectives/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="retrospectives/groups/{groupsFields}">false</SupportsGrouping>
+        <SupportsMailing url="retrospectives/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="retrospectives/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/retrospective/types">false</SupportsSubtypes>
+        <SupportsCopying url="retrospectives/copy">false</SupportsCopying>
+        <SupportsStorage url="retrospectives/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="retrospectives/exportedData">false</SupportsExport>
+        <ExtensionName>apm_extension</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes/>
+        <IsFirstLevelResource supportsDELETE="true" supportsPUT="true" supportsGET="true" supportsPOST="true"
+                              url="retrospectives">true
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="team-actions"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>PM_TEAM_ACTIONS</Table>
+        <Name>team-action</Name>
+        <Label>Team Action</Label>
+        <SupportsHistory url="team-actions/{entity_id : [0-9]+}/audits">true</SupportsHistory>
+        <SupportsAttachment url="team-actions/{parent_entity_id: [0-9]+}/attachments">false</SupportsAttachment>
+        <SupportsLock url="team-actions/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="team-actions/groups/{groupsFields}">false</SupportsGrouping>
+        <SupportsMailing url="team-actions/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="team-actions/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/team-action/types">false</SupportsSubtypes>
+        <SupportsCopying url="team-actions/copy">false</SupportsCopying>
+        <SupportsStorage url="team-actions/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="team-actions/exportedData">false</SupportsExport>
+        <ExtensionName>apm_extension</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes/>
+        <IsFirstLevelResource supportsDELETE="true" supportsPUT="true" supportsGET="true" supportsPOST="true"
+                              url="team-actions">true
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="aggregation-map-datas"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>PM_AGGREGATION_MAP_DATA</Table>
+        <Name>aggregation-map-data</Name>
+        <Label>Reporting Aggr map data</Label>
+        <SupportsHistory url="aggregation-map-datas/{entity_id : [0-9]+}/audits">false</SupportsHistory>
+        <SupportsAttachment url="aggregation-map-datas/{parent_entity_id: [0-9]+}/attachments">false
+        </SupportsAttachment>
+        <SupportsLock url="aggregation-map-datas/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="aggregation-map-datas/groups/{groupsFields}">false</SupportsGrouping>
+        <SupportsMailing url="aggregation-map-datas/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="aggregation-map-datas/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/aggregation-map-data/types">false</SupportsSubtypes>
+        <SupportsCopying url="aggregation-map-datas/copy">false</SupportsCopying>
+        <SupportsStorage url="aggregation-map-datas/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="aggregation-map-datas/exportedData">false</SupportsExport>
+        <ExtensionName>apm_extension</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes/>
+        <IsFirstLevelResource supportsDELETE="false" supportsPUT="false" supportsGET="true" supportsPOST="false"
+                              url="aggregation-map-datas">true
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="private-buckets"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>PM_PRIVATE_BUCKETS</Table>
+        <Name>private-bucket</Name>
+        <Label>Private Bucket</Label>
+        <SupportsHistory url="private-buckets/{entity_id : [0-9]+}/audits">false</SupportsHistory>
+        <SupportsAttachment url="private-buckets/{parent_entity_id: [0-9]+}/attachments">false</SupportsAttachment>
+        <SupportsLock url="private-buckets/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="private-buckets/groups/{groupsFields}">false</SupportsGrouping>
+        <SupportsMailing url="private-buckets/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="private-buckets/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/private-bucket/types">false</SupportsSubtypes>
+        <SupportsCopying url="private-buckets/copy">false</SupportsCopying>
+        <SupportsStorage url="private-buckets/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="private-buckets/exportedData">false</SupportsExport>
+        <ExtensionName>apm_extension</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes/>
+        <IsFirstLevelResource supportsDELETE="true" supportsPUT="true" supportsGET="true" supportsPOST="true"
+                              url="private-buckets">true
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="private-bucket-items"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>PM_PRIVATE_BUCKET_ITEMS</Table>
+        <Name>private-bucket-item</Name>
+        <Label>Private Bucket item</Label>
+        <SupportsHistory url="private-bucket-items/{entity_id : [0-9]+}/audits">false</SupportsHistory>
+        <SupportsAttachment url="private-bucket-items/{parent_entity_id: [0-9]+}/attachments">false</SupportsAttachment>
+        <SupportsLock url="private-bucket-items/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="private-bucket-items/groups/{groupsFields}">false</SupportsGrouping>
+        <SupportsMailing url="private-bucket-items/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="private-bucket-items/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/private-bucket-item/types">false</SupportsSubtypes>
+        <SupportsCopying url="private-bucket-items/copy">false</SupportsCopying>
+        <SupportsStorage url="private-bucket-items/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="private-bucket-items/exportedData">false</SupportsExport>
+        <ExtensionName>apm_extension</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes/>
+        <IsFirstLevelResource supportsDELETE="true" supportsPUT="true" supportsGET="true" supportsPOST="true"
+                              url="private-bucket-items">true
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="teams"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>PM_TEAMS</Table>
+        <Name>team</Name>
+        <Label>Team</Label>
+        <SupportsHistory url="teams/{entity_id : [0-9]+}/audits">true</SupportsHistory>
+        <SupportsAttachment url="teams/{parent_entity_id: [0-9]+}/attachments">false</SupportsAttachment>
+        <SupportsLock url="teams/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="teams/groups/{groupsFields}">false</SupportsGrouping>
+        <SupportsMailing url="teams/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="teams/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/team/types">false</SupportsSubtypes>
+        <SupportsCopying url="teams/copy">false</SupportsCopying>
+        <SupportsStorage url="teams/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="teams/exportedData">false</SupportsExport>
+        <ExtensionName>apm_extension</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes/>
+        <IsFirstLevelResource supportsDELETE="true" supportsPUT="true" supportsGET="true" supportsPOST="true"
+                              url="teams">true
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="team-members"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>PM_TEAM_MEMBERS</Table>
+        <Name>team-member</Name>
+        <Label>Team Member</Label>
+        <SupportsHistory url="team-members/{entity_id : [0-9]+}/audits">true</SupportsHistory>
+        <SupportsAttachment url="team-members/{parent_entity_id: [0-9]+}/attachments">false</SupportsAttachment>
+        <SupportsLock url="team-members/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="team-members/groups/{groupsFields}">false</SupportsGrouping>
+        <SupportsMailing url="team-members/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="team-members/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/team-member/types">false</SupportsSubtypes>
+        <SupportsCopying url="team-members/copy">false</SupportsCopying>
+        <SupportsStorage url="team-members/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="team-members/exportedData">false</SupportsExport>
+        <ExtensionName>apm_extension</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes/>
+        <IsFirstLevelResource supportsDELETE="true" supportsPUT="true" supportsGET="true" supportsPOST="true"
+                              url="team-members">true
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="watchs"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>ACME_WATCH</Table>
+        <Name>watch</Name>
+        <Label>Watch</Label>
+        <SupportsHistory url="watchs/{entity_id : [0-9]+}/audits">false</SupportsHistory>
+        <SupportsAttachment url="watchs/{parent_entity_id: [0-9]+}/attachments">false</SupportsAttachment>
+        <SupportsLock url="watchs/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="watchs/groups/{groupsFields}">false</SupportsGrouping>
+        <SupportsMailing url="watchs/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="watchs/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/watch/types">false</SupportsSubtypes>
+        <SupportsCopying url="watchs/copy">false</SupportsCopying>
+        <SupportsStorage url="watchs/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="watchs/exportedData">false</SupportsExport>
+        <ExtensionName>apm_extension</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes/>
+        <IsFirstLevelResource supportsDELETE="true" supportsPUT="true" supportsGET="true" supportsPOST="true"
+                              url="watchs">true
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="report-templates"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>ACME_REPORT_TEMPLATE</Table>
+        <Name>report-template</Name>
+        <Label>Report Template</Label>
+        <SupportsHistory url="report-templates/{entity_id : [0-9]+}/audits">false</SupportsHistory>
+        <SupportsAttachment url="report-templates/{parent_entity_id: [0-9]+}/attachments">true</SupportsAttachment>
+        <SupportsLock url="report-templates/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="report-templates/groups/{groupsFields}">false</SupportsGrouping>
+        <SupportsMailing url="report-templates/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="report-templates/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/report-template/types">false</SupportsSubtypes>
+        <SupportsCopying url="report-templates/copy">false</SupportsCopying>
+        <SupportsStorage url="report-templates/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="report-templates/exportedData">false</SupportsExport>
+        <ExtensionName>apm_extension</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes/>
+        <IsFirstLevelResource supportsDELETE="true" supportsPUT="true" supportsGET="true" supportsPOST="true"
+                              url="report-templates">true
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="scenes"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>ACME_SCENE</Table>
+        <Name>scene</Name>
+        <Label>Favorite</Label>
+        <SupportsHistory url="scenes/{entity_id : [0-9]+}/audits">false</SupportsHistory>
+        <SupportsAttachment url="scenes/{parent_entity_id: [0-9]+}/attachments">false</SupportsAttachment>
+        <SupportsLock url="scenes/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="scenes/groups/{groupsFields}">false</SupportsGrouping>
+        <SupportsMailing url="scenes/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="scenes/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/scene/types">false</SupportsSubtypes>
+        <SupportsCopying url="scenes/copy">false</SupportsCopying>
+        <SupportsStorage url="scenes/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="scenes/exportedData">false</SupportsExport>
+        <ExtensionName>apm_extension</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes/>
+        <IsFirstLevelResource supportsDELETE="true" supportsPUT="true" supportsGET="true" supportsPOST="true"
+                              url="scenes">true
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="label-colors"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>ACME_LABEL_COLOR</Table>
+        <Name>label-color</Name>
+        <Label>Label color</Label>
+        <SupportsHistory url="label-colors/{entity_id : [0-9]+}/audits">false</SupportsHistory>
+        <SupportsAttachment url="label-colors/{parent_entity_id: [0-9]+}/attachments">false</SupportsAttachment>
+        <SupportsLock url="label-colors/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="label-colors/groups/{groupsFields}">false</SupportsGrouping>
+        <SupportsMailing url="label-colors/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="label-colors/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/label-color/types">false</SupportsSubtypes>
+        <SupportsCopying url="label-colors/copy">false</SupportsCopying>
+        <SupportsStorage url="label-colors/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="label-colors/exportedData">false</SupportsExport>
+        <ExtensionName>apm_extension</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes/>
+        <IsFirstLevelResource supportsDELETE="false" supportsPUT="false" supportsGET="true" supportsPOST="false"
+                              url="label-colors">true
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="acceptance-tests"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>PM_ACCEPTANCE_TEST</Table>
+        <Name>acceptance-test</Name>
+        <Label>Acceptance Test</Label>
+        <SupportsHistory url="acceptance-tests/{entity_id : [0-9]+}/audits">false</SupportsHistory>
+        <SupportsAttachment url="acceptance-tests/{parent_entity_id: [0-9]+}/attachments">false</SupportsAttachment>
+        <SupportsLock url="acceptance-tests/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="acceptance-tests/groups/{groupsFields}">false</SupportsGrouping>
+        <SupportsMailing url="acceptance-tests/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="acceptance-tests/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/acceptance-test/types">false</SupportsSubtypes>
+        <SupportsCopying url="acceptance-tests/copy">false</SupportsCopying>
+        <SupportsStorage url="acceptance-tests/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="acceptance-tests/exportedData">false</SupportsExport>
+        <ExtensionName>apm_extension</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes/>
+        <IsFirstLevelResource supportsDELETE="true" supportsPUT="true" supportsGET="true" supportsPOST="true"
+                              url="acceptance-tests">true
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="requirement-target-releases"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>REQ_RELEASES</Table>
+        <Name>requirement-target-release</Name>
+        <Label>Requirement Target Release</Label>
+        <SupportsHistory url="requirement-target-releases/{entity_id : [0-9]+}/audits">false</SupportsHistory>
+        <SupportsAttachment url="requirement-target-releases/{parent_entity_id: [0-9]+}/attachments">false
+        </SupportsAttachment>
+        <SupportsLock url="requirement-target-releases/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="requirement-target-releases/groups/{groupsFields}">false</SupportsGrouping>
+        <SupportsMailing url="requirement-target-releases/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="requirement-target-releases/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/requirement-target-release/types">false</SupportsSubtypes>
+        <SupportsCopying url="requirement-target-releases/copy">false</SupportsCopying>
+        <SupportsStorage url="requirement-target-releases/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="requirement-target-releases/exportedData">false</SupportsExport>
+        <ExtensionName>quality_center</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="autonumber">true</Attribute>
+        </Attributes>
+        <IsFirstLevelResource supportsDELETE="true" supportsPUT="false" supportsGET="true" supportsPOST="true"
+                              url="requirement-target-releases">true
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="assets-relations"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>ASSET_RELATIONS</Table>
+        <Name>assets-relation</Name>
+        <Label>Asset Relation</Label>
+        <SupportsHistory url="assets-relations/{entity_id : [0-9]+}/audits">false</SupportsHistory>
+        <SupportsAttachment url="assets-relations/{parent_entity_id: [0-9]+}/attachments">false</SupportsAttachment>
+        <SupportsLock url="assets-relations/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="assets-relations/groups/{groupsFields}">false</SupportsGrouping>
+        <SupportsMailing url="assets-relations/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="assets-relations/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/assets-relation/types">false</SupportsSubtypes>
+        <SupportsCopying url="assets-relations/copy">false</SupportsCopying>
+        <SupportsStorage url="assets-relations/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="assets-relations/exportedData">false</SupportsExport>
+        <ExtensionName>quality_center</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="supportBaseline">true</Attribute>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+        <IsFirstLevelResource supportsDELETE="true" supportsPUT="true" supportsGET="true" supportsPOST="true"
+                              url="assets-relations">false
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="release-cycles"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>RELEASE_CYCLES</Table>
+        <Name>release-cycle</Name>
+        <Label>Release Cycle</Label>
+        <SupportsHistory url="release-cycles/{entity_id : [0-9]+}/audits">false</SupportsHistory>
+        <SupportsAttachment url="release-cycles/{parent_entity_id: [0-9]+}/attachments">false</SupportsAttachment>
+        <SupportsLock url="release-cycles/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="release-cycles/groups/{groupsFields}">false</SupportsGrouping>
+        <SupportsMailing url="release-cycles/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>true</SupportsMultiValue>
+        <SupportsWorkflow>true</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="release-cycles/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/release-cycle/types">false</SupportsSubtypes>
+        <SupportsCopying url="release-cycles/copy">false</SupportsCopying>
+        <SupportsStorage url="release-cycles/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="release-cycles/exportedData">false</SupportsExport>
+        <ExtensionName>quality_center</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+        <IsFirstLevelResource supportsDELETE="true" supportsPUT="true" supportsGET="true" supportsPOST="true"
+                              url="release-cycles">true
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="req-traces"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>REQ_TRACE</Table>
+        <Name>req-trace</Name>
+        <Label>Requirement Trace</Label>
+        <SupportsHistory url="req-traces/{entity_id : [0-9]+}/audits">false</SupportsHistory>
+        <SupportsAttachment url="req-traces/{parent_entity_id: [0-9]+}/attachments">false</SupportsAttachment>
+        <SupportsLock url="req-traces/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="req-traces/groups/{groupsFields}">false</SupportsGrouping>
+        <SupportsMailing url="req-traces/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="req-traces/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/req-trace/types">false</SupportsSubtypes>
+        <SupportsCopying url="req-traces/copy">false</SupportsCopying>
+        <SupportsStorage url="req-traces/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="req-traces/exportedData">false</SupportsExport>
+        <ExtensionName>quality_center</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="jointEntities">requirement;</Attribute>
+        </Attributes>
+        <IsFirstLevelResource supportsDELETE="true" supportsPUT="true" supportsGET="true" supportsPOST="true"
+                              url="req-traces">true
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="release-folders"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>RELEASE_FOLDERS</Table>
+        <Name>release-folder</Name>
+        <Label>Release Folder</Label>
+        <SupportsHistory url="release-folders/{entity_id : [0-9]+}/audits">false</SupportsHistory>
+        <SupportsAttachment url="release-folders/{parent_entity_id: [0-9]+}/attachments">false</SupportsAttachment>
+        <SupportsLock url="release-folders/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="release-folders/groups/{groupsFields}">false</SupportsGrouping>
+        <SupportsMailing url="release-folders/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>true</SupportsMultiValue>
+        <SupportsWorkflow>true</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="release-folders/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/release-folder/types">false</SupportsSubtypes>
+        <SupportsCopying url="release-folders/copy">false</SupportsCopying>
+        <SupportsStorage url="release-folders/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="release-folders/exportedData">false</SupportsExport>
+        <ExtensionName>quality_center</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+        <IsFirstLevelResource supportsDELETE="true" supportsPUT="true" supportsGET="true" supportsPOST="true"
+                              url="release-folders">true
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="requirement-target-cycles"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>REQ_CYCLES</Table>
+        <Name>requirement-target-cycle</Name>
+        <Label>Requirement Target Cycle</Label>
+        <SupportsHistory url="requirement-target-cycles/{entity_id : [0-9]+}/audits">false</SupportsHistory>
+        <SupportsAttachment url="requirement-target-cycles/{parent_entity_id: [0-9]+}/attachments">false
+        </SupportsAttachment>
+        <SupportsLock url="requirement-target-cycles/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="requirement-target-cycles/groups/{groupsFields}">false</SupportsGrouping>
+        <SupportsMailing url="requirement-target-cycles/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="requirement-target-cycles/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/requirement-target-cycle/types">false</SupportsSubtypes>
+        <SupportsCopying url="requirement-target-cycles/copy">false</SupportsCopying>
+        <SupportsStorage url="requirement-target-cycles/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="requirement-target-cycles/exportedData">false</SupportsExport>
+        <ExtensionName>quality_center</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="autonumber">true</Attribute>
+        </Attributes>
+        <IsFirstLevelResource supportsDELETE="true" supportsPUT="false" supportsGET="true" supportsPOST="true"
+                              url="requirement-target-cycles">true
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="defects"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>BUG</Table>
+        <Name>defect</Name>
+        <Label>Defect</Label>
+        <SupportsHistory url="defects/{entity_id : [0-9]+}/audits">true</SupportsHistory>
+        <SupportsAttachment url="defects/{parent_entity_id: [0-9]+}/attachments">true</SupportsAttachment>
+        <SupportsLock url="defects/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="defects/groups/{groupsFields}">true</SupportsGrouping>
+        <SupportsMailing url="defects/{parent_entity_id: [0-9]+}/mail">true</SupportsMailing>
+        <SupportsMultiValue>true</SupportsMultiValue>
+        <SupportsWorkflow>true</SupportsWorkflow>
+        <SupportsDataHidingFilter>true</SupportsDataHidingFilter>
+        <SupportsVC url="defects/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/defect/types">false</SupportsSubtypes>
+        <SupportsCopying url="defects/copy">true</SupportsCopying>
+        <SupportsStorage url="defects/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="defects/exportedData">true</SupportsExport>
+        <ExtensionName>quality_center</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="supportUDF">true</Attribute>
+            <Attribute name="reportableRoot">true</Attribute>
+            <Attribute name="reportable">true</Attribute>
+        </Attributes>
+        <IsFirstLevelResource supportsDELETE="true" supportsPUT="true" supportsGET="true" supportsPOST="true"
+                              url="defects">true
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="defect-links"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>LINK</Table>
+        <Name>defect-link</Name>
+        <Label>Defect Link</Label>
+        <SupportsHistory url="defect-links/{entity_id : [0-9]+}/audits">false</SupportsHistory>
+        <SupportsAttachment url="defect-links/{parent_entity_id: [0-9]+}/attachments">false</SupportsAttachment>
+        <SupportsLock url="defect-links/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="defect-links/groups/{groupsFields}">false</SupportsGrouping>
+        <SupportsMailing url="defect-links/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC url="defect-links/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/defect-link/types">false</SupportsSubtypes>
+        <SupportsCopying url="defect-links/copy">false</SupportsCopying>
+        <SupportsStorage url="defect-links/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="defect-links/exportedData">false</SupportsExport>
+        <ExtensionName>quality_center</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+        <IsFirstLevelResource supportsDELETE="true" supportsPUT="true" supportsGET="true" supportsPOST="true"
+                              url="defect-links">true
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="requirements"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>REQ</Table>
+        <Name>requirement</Name>
+        <Label>Requirement</Label>
+        <SupportsHistory url="requirements/{entity_id : [0-9]+}/audits">true</SupportsHistory>
+        <SupportsAttachment url="requirements/{parent_entity_id: [0-9]+}/attachments">true</SupportsAttachment>
+        <SupportsLock url="requirements/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="requirements/groups/{groupsFields}">true</SupportsGrouping>
+        <SupportsMailing url="requirements/{parent_entity_id: [0-9]+}/mail">true</SupportsMailing>
+        <SupportsMultiValue>true</SupportsMultiValue>
+        <SupportsWorkflow>true</SupportsWorkflow>
+        <SupportsDataHidingFilter>true</SupportsDataHidingFilter>
+        <SupportsVC url="requirements/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes subTypeFieldName="type-id" url="customization/entities/requirement/types">true
+        </SupportsSubtypes>
+        <SupportsCopying url="requirements/copy">true</SupportsCopying>
+        <SupportsStorage url="requirements/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="requirements/exportedData">true</SupportsExport>
+        <ExtensionName>quality_center</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="supportBaseline">true</Attribute>
+            <Attribute name="supportUDF">false</Attribute>
+            <Attribute name="subtypesSupportUDF">&quot;User Story,Feature,Theme&quot;</Attribute>
+            <Attribute name="reportableRoot">true</Attribute>
+            <Attribute name="reportable">true</Attribute>
+        </Attributes>
+        <IsFirstLevelResource supportsDELETE="true" supportsPUT="true" supportsGET="true" supportsPOST="true"
+                              url="requirements">true
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+    <EntityResourceDescriptor collectionName="releases"
+                              baseUrl="http://localhost:8080/qcbin/rest/domains/domain/projects/project/">
+        <Table>RELEASES</Table>
+        <Name>release</Name>
+        <Label>Release</Label>
+        <SupportsHistory url="releases/{entity_id : [0-9]+}/audits">false</SupportsHistory>
+        <SupportsAttachment url="releases/{parent_entity_id: [0-9]+}/attachments">true</SupportsAttachment>
+        <SupportsLock url="releases/{parent_entity_id: [0-9]+}/lock">false</SupportsLock>
+        <SupportsGrouping url="releases/groups/{groupsFields}">false</SupportsGrouping>
+        <SupportsMailing url="releases/{parent_entity_id: [0-9]+}/mail">false</SupportsMailing>
+        <SupportsMultiValue>true</SupportsMultiValue>
+        <SupportsWorkflow>true</SupportsWorkflow>
+        <SupportsDataHidingFilter>true</SupportsDataHidingFilter>
+        <SupportsVC url="releases/{entity_id : [0-9]+}/versions">false</SupportsVC>
+        <SupportsSubtypes url="customization/entities/release/types">false</SupportsSubtypes>
+        <SupportsCopying url="releases/copy">false</SupportsCopying>
+        <SupportsStorage url="releases/{parent_entity_id: [0-9]+}/storage">false</SupportsStorage>
+        <SupportsExport url="releases/exportedData">false</SupportsExport>
+        <ExtensionName>quality_center</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+        <IsFirstLevelResource supportsDELETE="true" supportsPUT="true" supportsGET="true" supportsPOST="true"
+                              url="releases">true
+        </IsFirstLevelResource>
+        <SecondLevelResources/>
+    </EntityResourceDescriptor>
+</EntityResourceDescriptors>

@@ -16,25 +16,34 @@
 
 package com.hp.alm.ali.idea.translate.filter;
 
-import com.hp.alm.ali.idea.entity.table.EntityTableModel;
 import com.hp.alm.ali.idea.translate.ValueCallback;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.LinkedList;
 
 public class MultipleItemsResolver implements FilterResolver {
 
+    public static final String NO_VALUE = "\"\"";
+    public static final String NO_VALUE_DESC = "(no value)";
+
     @Override
     public String resolveDisplayValue(String value, final ValueCallback onValue) {
-        value = value.replace(MultipleItemsTranslatedResolver.NO_VALUE, MultipleItemsTranslatedResolver.NO_VALUE_DESC);
+        value = value.replace(NO_VALUE, NO_VALUE_DESC);
         onValue.value(value);
         return value;
     }
 
     @Override
     public String toRESTQuery(String value) {
-        List<String> values = Arrays.asList(value.split(";"));
-        return StringUtils.join(EntityTableModel.quote(values), " OR ");
+        LinkedList<String> list = new LinkedList<String>();
+        for(String item: Arrays.asList(value.split(";"))) {
+            if(NO_VALUE.equals(item)) {
+                list.add("''");
+            } else {
+                list.add("'" + item + "'");
+            }
+        }
+        return StringUtils.join(list, " OR ");
     }
 }

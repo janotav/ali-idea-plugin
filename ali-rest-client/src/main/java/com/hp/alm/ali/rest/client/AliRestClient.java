@@ -41,6 +41,10 @@ import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
+import com.hp.alm.ali.rest.client.filter.Filter;
+import com.hp.alm.ali.rest.client.filter.IdentityFilter;
+import com.hp.alm.ali.rest.client.filter.IssueTicketFilter;
+import com.hp.alm.ali.rest.client.filter.ResponseFilter;
 import org.apache.commons.httpclient.Cookie;
 import org.apache.commons.httpclient.Credentials;
 import org.apache.commons.httpclient.DefaultHttpMethodRetryHandler;
@@ -57,11 +61,9 @@ import org.apache.commons.httpclient.auth.AuthScope;
 import org.apache.commons.httpclient.methods.DeleteMethod;
 import org.apache.commons.httpclient.methods.EntityEnclosingMethod;
 import org.apache.commons.httpclient.methods.GetMethod;
-import org.apache.commons.httpclient.methods.InputStreamRequestEntity;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.PutMethod;
 import org.apache.commons.httpclient.methods.RequestEntity;
-import org.apache.commons.httpclient.methods.StringRequestEntity;
 
 import com.hp.alm.ali.rest.client.exception.AuthenticationFailureException;
 import com.hp.alm.ali.rest.client.exception.HttpStatusBasedException;
@@ -96,7 +98,7 @@ import org.jdom.output.XMLOutputter;
  *     http://localost:8080/qcbin/domains/DOMAIN/projects/PROJECT/defects/1001/attachments/readme.txt
  * </pre>
  */
-public class AliRestClient {
+public class AliRestClient implements RestClient {
 
     private static final LocationBasedBuilder<PostMethod> POST_BUILDER = new LocationBasedBuilder<PostMethod>() {
         @Override
@@ -124,6 +126,8 @@ public class AliRestClient {
     };
     public static final Set<Integer> AUTH_FAIL_STATUSES = Collections.unmodifiableSet(new HashSet<Integer>(Arrays.asList(401, 403)));
 
+    private LinkedList<ResponseFilter> responseFilters;
+
     /**
      * Creates ALM ALI rest client
      *
@@ -135,19 +139,6 @@ public class AliRestClient {
      */
     public static AliRestClient create(String location, String domain, String project, String userName, String password, SessionStrategy sessionStrategy) {
         return new AliRestClient(location, domain, project, userName, password, sessionStrategy);
-    }
-
-    public static enum SessionStrategy {
-        /**
-         * Perform automatic login when no session is established or is expired.
-         * Logout must be called explicitly.
-         */
-        AUTO_LOGIN,
-
-        /**
-         * Both login and logout must be called explicitly.
-         */
-        NONE
     }
 
     static final String COOKIE_SSO_NAME = "LWSSO_COOKIE_KEY";
@@ -181,6 +172,9 @@ public class AliRestClient {
         this.sessionStrategy = sessionStrategy;
         setTimeout(DEFAULT_CLIENT_TIMEOUT);
         httpClient.getParams().setParameter(HttpMethodParams.RETRY_HANDLER, new DefaultHttpMethodRetryHandler(0, false));
+
+        responseFilters = new LinkedList<ResponseFilter>();
+        responseFilters.add(new IssueTicketFilter());
     }
 
     private void validateProjectAndDomain(String domain, String project) {
@@ -189,55 +183,35 @@ public class AliRestClient {
         }
     }
 
-    /**
-     * Sets the default socket timeout (SO_TIMEOUT) which is the timeout for waiting for data and  the timeout until a connection is etablished.
-     * Both timeouts are set to the same value.
-     *
-     * @param timeout in milliseconds
-     */
+    @Override
     public void setTimeout(int timeout) {
         httpClient.getParams().setSoTimeout(timeout);
         httpClient.getHttpConnectionManager().getParams().setConnectionTimeout(timeout);
     }
 
-    /**
-     * Sets HTTP connection proxy.
-     *
-     * @param proxyHost proxy host
-     * @param proxyPort proxy port
-     */
+    @Override
     public void setHttpProxy(String proxyHost, int proxyPort) {
         httpClient.getHostConfiguration().setProxy(proxyHost, proxyPort);
     }
 
-    /**
-     * Sets HTTP proxy credentials
-     * @param username proxy username
-     * @param password proxy password
-     */
+    @Override
     public void setHttpProxyCredentials(String username, String password) {
         Credentials cred = new UsernamePasswordCredentials(username, password);
         AuthScope scope = new AuthScope(AuthScope.ANY_HOST, AuthScope.ANY_PORT);
         httpClient.getState().setProxyCredentials(scope, cred);
     }
 
-    /**
-     * Encoding to be used for URL fragments encoding.
-     * {@code null} means no encoding
-     * @return encoding
-     */
+    @Override
     public String getEncoding() {
         return encoding;
     }
 
-    /**
-     * Encoding to be used for URL fragments encoding.
-     * Default is utf8.
-     * {@code null} means no encoding
-     *
-     * @param encoding charset encoding
-     * @see #getEncoding()
-     */
+    @Override
+    public SessionStrategy getSessionStrategy() {
+        return sessionStrategy;
+    }
+
+    @Override
     public void setEncoding(String encoding) {
         if(encoding != null) {
             Charset.forName(encoding);
@@ -245,51 +219,29 @@ public class AliRestClient {
         this.encoding = encoding;
     }
 
-    /**
-     * Sets current domain.
-     * @param domain domain
-     */
+    @Override
     public void setDomain(String domain) {
         validateProjectAndDomain(domain, project);
         this.domain = domain;
     }
 
-    /**
-     * Sets current project.
-     * @param project project
-     */
+    @Override
     public void setProject(String project) {
         validateProjectAndDomain(domain, project);
         this.project = project;
     }
 
-    /**
-     * Get current domain.
-     * @return domain
-     */
+    @Override
     public String getDomain() {
         return domain;
     }
 
-    /**
-     * Get current project.
-     * @return project
-     */
+    @Override
     public String getProject() {
         return project;
     }
 
-    /**
-     * Do login into ALM server rest.
-     * Make new session into ALM rest.
-     *
-     * @throws com.hp.alm.ali.rest.client.exception.AuthenticationFailureException
-     *          for 401 status code
-     * @throws com.hp.alm.ali.rest.client.exception.HttpClientErrorException
-     *          for http statuses 400-499
-     * @throws com.hp.alm.ali.rest.client.exception.HttpServerErrorException
-     *          for http statuses 500-599
-     */
+    @Override
     public synchronized void login() {
         // exclude the NTLM authentication scheme (requires NTCredentials we don't supply)
         List<String> authPrefs = new ArrayList<String>(2);
@@ -304,7 +256,7 @@ public class AliRestClient {
         post.setRequestEntity(createRequestEntity(InputData.create(xml)));
         post.addRequestHeader("Content-type", "application/xml");
 
-        ResultInfo resultInfo = ResultInfo.create(false, null);
+        ResultInfo resultInfo = ResultInfo.create(null);
         executeAndWriteResponse(post, resultInfo, Collections.<Integer>emptySet());
 
         if(resultInfo.getHttpStatus() == HttpStatus.SC_NOT_FOUND) {
@@ -316,13 +268,13 @@ public class AliRestClient {
 
             authPoint = pathJoin("/", location, "/authentication-point/authenticate");
             GetMethod get = new GetMethod(authPoint);
-            resultInfo = ResultInfo.create(false, null);
+            resultInfo = ResultInfo.create(null);
             executeAndWriteResponse(get, resultInfo, Collections.<Integer>emptySet());
         }
         HttpStatusBasedException.throwForError(resultInfo);
         if(resultInfo.getHttpStatus() != 200) {
             // during login we only accept 200 status (to avoid redirects and such as seemingly correct login)
-            throw new AuthenticationFailureException(resultInfo.getHttpStatus(), resultInfo.getReasonPhrase(), resultInfo.getLocation());
+            throw new AuthenticationFailureException(resultInfo);
         }
 
         Cookie[] cookies = httpClient.getState().getCookies();
@@ -362,86 +314,43 @@ public class AliRestClient {
         return null;
     }
 
-    /**
-     * Do logout from ALM server.
-     *
-     * @throws com.hp.alm.ali.rest.client.exception.HttpClientErrorException
-     *          for http statuses 400-499
-     * @throws com.hp.alm.ali.rest.client.exception.HttpServerErrorException
-     *          for http statuses 500-599
-     */
+    @Override
     public synchronized void logout() {
         if(sessionContext != null) {
             GetMethod get = new GetMethod(pathJoin("/", location, "/authentication-point/logout"));
-            ResultInfo resultInfo = ResultInfo.create(false, null);
+            ResultInfo resultInfo = ResultInfo.create(null);
             executeAndWriteResponse(get, resultInfo, Collections.<Integer>emptySet());
             HttpStatusBasedException.throwForError(resultInfo);
             sessionContext = null;
         }
     }
 
-    /**
-     * Perform GET HTTP request for given location.
-     *
-     * @param template to be expanded and appended to ALM rest base
-     * @param params   position based expansion of template
-     * @return response body as string
-     * @throws com.hp.alm.ali.rest.client.exception.HttpClientErrorException
-     *          for http statuses 400-499
-     * @throws com.hp.alm.ali.rest.client.exception.HttpServerErrorException
-     *          for http statuses 500-599
-     */
+    @Override
     public String getForString(String template, Object... params) {
         ByteArrayOutputStream responseBody = new ByteArrayOutputStream();
-        ResultInfo result = ResultInfo.create(false, responseBody);
+        ResultInfo result = ResultInfo.create(responseBody);
         get(result, template, params);
         HttpStatusBasedException.throwForError(result);
         return responseBody.toString();
     }
 
-    /**
-     * Perform GET HTTP request for given location.
-     *
-     * @param template to be expanded and appended to ALM rest base
-     * @param params   position based expansion of template
-     * @return response body as byte stream
-     * @throws com.hp.alm.ali.rest.client.exception.HttpClientErrorException
-     *          for http statuses 400-499
-     * @throws com.hp.alm.ali.rest.client.exception.HttpServerErrorException
-     *          for http statuses 500-599
-     */
+    @Override
     public InputStream getForStream(String template, Object... params) {
         ByteArrayOutputStream responseBody = new ByteArrayOutputStream();
-        ResultInfo result = ResultInfo.create(false, responseBody);
+        ResultInfo result = ResultInfo.create(responseBody);
         get(result, template, params);
         HttpStatusBasedException.throwForError(result);
         return new ByteArrayInputStream(responseBody.toByteArray());
     }
 
-    /**
-     * Perform GET HTTP request for given location.
-     * Does not throw exception for error status codes.
-     *
-     * @param template to be expanded and appended to ALM rest base
-     * @param params   position based expansion of template
-     * @param result   container for response related information
-     * @return HTTP status code
-     */
+    @Override
     public int get(ResultInfo result, String template, Object... params) {
         GetMethod method = createMethod(domain, project, GET_BUILDER, null, template, params);
         executeHttpMethod(method, result);
         return result.getHttpStatus();
     }
 
-    /**
-     * Perform PUT HTTP request for given location.
-     *
-     * @param template to be expanded and appended to ALM rest base
-     * @param params   position based expansion of template
-     * @param result   container for response related information
-     * @param inputData input data
-     * @return HTTP status code
-     */
+    @Override
     public int put(InputData inputData, ResultInfo result, String template, Object... params) {
         PutMethod putMethod = createMethod(domain, project, PUT_BUILDER, createRequestEntity(inputData), template, params);
         setHeaders(putMethod, inputData.getHeaders());
@@ -449,29 +358,14 @@ public class AliRestClient {
         return result.getHttpStatus();
     }
 
-    /**
-     * Perform DELETE HTTP request for given location.
-     *
-     * @param template to be expanded and appended to ALM rest base
-     * @param params   position based expansion of template
-     * @param result   container for response related information
-     * @return HTTP status code
-     */
+    @Override
     public int delete(ResultInfo result, String template, Object... params) {
         DeleteMethod deleteMethod = createMethod(domain, project, DELETE_BUILDER, null, template, params);
         executeHttpMethod(deleteMethod, result);
         return result.getHttpStatus();
     }
 
-    /**
-     * Perform POST HTTP request for given location.
-     *
-     * @param template to be expanded and appended to ALM rest base
-     * @param params   position based expansion of template
-     * @param result   container for response related information
-     * @param data     request body
-     * @return HTTP status code
-     */
+    @Override
     public int post(InputData data, ResultInfo result, String template, Object... params) {
         PostMethod postMethod = createMethod(domain, project, POST_BUILDER, createRequestEntity(data), template, params);
         setHeaders(postMethod, data.getHeaders());
@@ -495,19 +389,7 @@ public class AliRestClient {
     }
 
     private RequestEntity createRequestEntity(InputData inputData) {
-        if (inputData.getData() != null) {
-            RequestEntity requestEntity;
-            try {
-                requestEntity = new StringRequestEntity(inputData.getData(), "application/xml", encoding);
-            } catch (UnsupportedEncodingException e) {
-                throw new RuntimeException(e);
-            }
-            return requestEntity;
-        } else if (inputData.getDataStream() != null) {
-            return new InputStreamRequestEntity(inputData.getDataStream(), inputData.getSize(), "application/xml");
-        } else {
-            return null;
-        }
+        return inputData.getRequestEntity(encoding);
     }
 
     private void writeResponse(ResultInfo result, HttpMethod method, boolean writeBodyAndHeaders) {
@@ -517,11 +399,28 @@ public class AliRestClient {
         if (statusLine != null) {
             result.setReasonPhrase(statusLine.getReasonPhrase());
         }
+        try {
+            result.setLocation(method.getURI().toString());
+        } catch (URIException e) {
+            throw new RuntimeException(e);
+        }
+        if (writeBodyAndHeaders) {
+            Map<String, String> headersMap = result.getHeaders();
+            Header[] headers = method.getResponseHeaders();
+            for (Header header : headers) {
+                headersMap.put(header.getName(), header.getValue());
+            }
+        }
+        result.setHttpStatus(method.getStatusCode());
+        Filter filter = new IdentityFilter(result);
+        for(ResponseFilter responseFilter: responseFilters) {
+            filter = responseFilter.applyFilter(filter, method, result);
+        }
         if (writeBodyAndHeaders && bodyStream != null && method.getStatusCode() != 204) {
             try {
                 InputStream responseBody = method.getResponseBodyAsStream();
                 if (responseBody != null) {
-                    IOUtils.copy(method.getResponseBodyAsStream(), bodyStream);
+                    IOUtils.copy(responseBody, filter.getOutputStream());
                     bodyStream.flush();
                     bodyStream.close();
                 }
@@ -529,21 +428,6 @@ public class AliRestClient {
                 throw new RuntimeException(e);
             }
         }
-        try {
-            result.setLocation(method.getURI().toString());
-        } catch (URIException e) {
-            throw new RuntimeException(e);
-        }
-        if (writeBodyAndHeaders) {
-            Map<String, String> headersMap = result.getHeadersInternal();
-            if (headersMap != null) {
-                Header[] headers = method.getResponseHeaders();
-                for (Header header : headers) {
-                    headersMap.put(header.getName(), header.getValue());
-                }
-            }
-        }
-        result.setHttpStatus(method.getStatusCode());
     }
 
     private String composeLocation(String domain, String project, String template, Object... params) {
@@ -662,10 +546,12 @@ public class AliRestClient {
         return false;
     }
 
+    @Override
     public List<String> listDomains() {
         return listValues(createMethod(null, null, GET_BUILDER, null, "domains"), "Domain");
     }
 
+    @Override
     public List<String> listCurrentProjects() {
         if (domain == null) {
             throw new IllegalStateException("domain==null");
@@ -675,7 +561,7 @@ public class AliRestClient {
 
     private List<String> listValues(GetMethod method, String entity) {
         ByteArrayOutputStream responseBody = new ByteArrayOutputStream();
-        ResultInfo resultInfo = ResultInfo.create(false, responseBody);
+        ResultInfo resultInfo = ResultInfo.create(responseBody);
         executeHttpMethod(method, resultInfo);
         return getAttributeValues(new ByteArrayInputStream(responseBody.toByteArray()), entity, "Name");
     }

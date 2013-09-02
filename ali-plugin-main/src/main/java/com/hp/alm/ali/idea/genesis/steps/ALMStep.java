@@ -18,7 +18,7 @@ package com.hp.alm.ali.idea.genesis.steps;
 
 import com.hp.alm.ali.idea.genesis.WizardContext;
 import com.hp.alm.ali.idea.rest.RestService;
-import com.hp.alm.ali.rest.client.AliRestClient;
+import com.hp.alm.ali.rest.client.RestClient;
 import com.intellij.ide.wizard.CommitStepException;
 
 import java.util.Arrays;
@@ -30,7 +30,7 @@ public class ALMStep extends GenesisStep {
                 ctx.username, ctx.passwordLbl, ctx.password));
     }
     public void _commit(boolean finishChosen) throws CommitStepException {
-        ctx.client = RestService.createRestClient(ctx.location.getText(), null, null, ctx.username.getText(), ctx.password.getText(), AliRestClient.SessionStrategy.AUTO_LOGIN);
+        ctx.client = RestService.createRestClient(ctx.location.getText(), null, null, ctx.username.getText(), ctx.password.getText(), RestClient.SessionStrategy.AUTO_LOGIN);
         try {
             ctx.client.login();
         } catch (Exception e) {

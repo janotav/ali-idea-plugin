@@ -47,7 +47,7 @@ public class ActiveItemService implements PersistentStateComponent<Element>, Tas
         this.taskManagerIntegration = project.getComponent(TaskManagerIntegration.class);
 
         if(taskManagerIntegration != null) {
-            taskManagerIntegration.setListener(this);
+            taskManagerIntegration.addListener(this);
         }
     }
 
@@ -90,6 +90,10 @@ public class ActiveItemService implements PersistentStateComponent<Element>, Tas
 
     public void addListener(Listener listener) {
         listeners.add(listener);
+    }
+
+    public void removeListener(Listener listener) {
+        listeners.remove(listener);
     }
 
     public Element getState() {

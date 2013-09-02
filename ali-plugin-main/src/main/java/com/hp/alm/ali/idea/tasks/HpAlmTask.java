@@ -111,20 +111,20 @@ public class HpAlmTask extends Task {
     private Comment[] parseComments(String commentBlob) {
         List<Comment> list = new LinkedList<Comment>();
         int last = 0;
-        Pattern separator = Pattern.compile("<b>________________________________________</b>");
+        Pattern separator = Pattern.compile("<(b|strong)>________________________________________</(b|strong)>");
         Matcher matcher = separator.matcher(commentBlob);
         while(matcher.find(last)) {
-            list.add(new HpAlmComment(commentBlob.substring(last, matcher.start())));
+            list.add(HpAlmComment.parse(commentBlob.substring(last, matcher.start())));
             last = matcher.end();
         }
         if(last < commentBlob.length()) {
-            list.add(new HpAlmComment(commentBlob.substring(last)));
+            list.add(HpAlmComment.parse(commentBlob.substring(last)));
         }
         return list.toArray(new Comment[list.size()]);
     }
 
     public Icon getIcon() {
-        return null; // TODO: assign icon
+        return null;
     }
 
     public TaskType getType() {
@@ -182,23 +182,27 @@ public class HpAlmTask extends Task {
 
     public String getIssueUrl() {
         if(openInBrowserAvailable) {
-            AliProjectConfiguration conf = project.getComponent(AliProjectConfiguration.class);
-            StringBuffer url = new StringBuffer();
-            url.append("td://");
-            url.append(conf.getProject());
-            url.append(".");
-            url.append(conf.getDomain());
-            url.append(".");
-            url.append(conf.getLocation().replaceFirst("^[Hh][Tt][Tt][Pp][Ss]?://", ""));
-            url.append("/[AnyModule]?EntityType=");
-            url.append(interfaceMap.get(entity.getType()));
-            url.append("&EntityID=");
-            url.append(entity.getId());
-            url.append("&ShowDetails=Y");
-            return url.toString();
+            return _getIssueUrl();
         } else {
             return null;
         }
+    }
+
+    String _getIssueUrl() {
+        AliProjectConfiguration conf = project.getComponent(AliProjectConfiguration.class);
+        StringBuffer url = new StringBuffer();
+        url.append("td://");
+        url.append(conf.getProject());
+        url.append(".");
+        url.append(conf.getDomain());
+        url.append(".");
+        url.append(conf.getLocation().replaceFirst("^[Hh][Tt][Tt][Pp][Ss]?://", ""));
+        url.append("/[AnyModule]?EntityType=");
+        url.append(interfaceMap.get(entity.getType()));
+        url.append("&EntityID=");
+        url.append(entity.getId());
+        url.append("&ShowDetails=Y");
+        return url.toString();
     }
 
     public static Date parseDate(String dateStr) {

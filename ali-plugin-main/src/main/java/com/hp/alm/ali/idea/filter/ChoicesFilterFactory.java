@@ -18,7 +18,7 @@ package com.hp.alm.ali.idea.filter;
 
 import java.util.List;
 
-public class ChoicesFilterFactory implements FilterFactory {
+public class ChoicesFilterFactory extends MultipleItemsFactory {
 
     private List<String> values;
 

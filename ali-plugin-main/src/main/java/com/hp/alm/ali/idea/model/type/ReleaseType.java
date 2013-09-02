@@ -19,13 +19,14 @@ package com.hp.alm.ali.idea.model.type;
 import com.hp.alm.ali.idea.entity.EntityQuery;
 import com.hp.alm.ali.idea.entity.EntityRef;
 import com.hp.alm.ali.idea.entity.EntityListener;
+import com.hp.alm.ali.idea.filter.MultipleItemsChooserFactory;
+import com.hp.alm.ali.idea.filter.MultipleItemsFactory;
 import com.hp.alm.ali.idea.model.ItemsProvider;
 import com.hp.alm.ali.idea.filter.FilterManager;
 import com.hp.alm.ali.idea.services.EntityService;
 import com.hp.alm.ali.idea.services.TeamService;
 import com.hp.alm.ali.idea.filter.FilterChooser;
 import com.hp.alm.ali.idea.filter.FilterFactory;
-import com.hp.alm.ali.idea.filter.MultipleItemsFactory;
 import com.hp.alm.ali.idea.ui.ComboItem;
 import com.hp.alm.ali.idea.ui.editor.EntityEditor;
 import com.hp.alm.ali.idea.ui.editor.field.EditableField;
@@ -55,7 +56,7 @@ public class ReleaseType extends ReferenceType {
         return new ReleaseFilterFactory(multiple);
     }
 
-    private class ReleaseFilterFactory implements FilterFactory, ContextAware {
+    private class ReleaseFilterFactory extends MultipleItemsFactory implements ContextAware {
 
         private Context context;
         private boolean multiple;
@@ -79,7 +80,7 @@ public class ReleaseType extends ReferenceType {
                     return FilterManager.asItems(releases, "id", multiple, false);
                 }
             };
-            FilterChooser releaseChooser = new MultipleItemsFactory(project, "Release", multiple, provider).createChooser(value);
+            FilterChooser releaseChooser = new MultipleItemsChooserFactory(project, "Release", multiple, provider).createChooser(value);
             if(context != null) {
                 EntityEditor editor = context.getEntityEditor();
                 if(editor != null) {
@@ -87,11 +88,6 @@ public class ReleaseType extends ReferenceType {
                 }
             }
             return releaseChooser;
-        }
-
-        @Override
-        public List<String> getCustomChoices() {
-            return null;
         }
 
         private class FilterChooserWrapper implements FilterChooser {

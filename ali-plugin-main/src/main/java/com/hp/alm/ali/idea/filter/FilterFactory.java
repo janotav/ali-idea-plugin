@@ -24,4 +24,6 @@ public interface FilterFactory {
 
     List<String> getCustomChoices();
 
+    String multipleValues(List<String> values);
+
 }

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Entities TotalResults="2">
+    <Entity Type="team">
+        <Fields>
+            <Field Name="id">
+                <Value>101</Value>
+            </Field>
+            <Field Name="name">
+                <Value>The Team</Value>
+            </Field>
+        </Fields>
+        <RelatedEntities/>
+    </Entity>
+    <Entity Type="team">
+        <Fields>
+            <Field Name="id">
+                <Value>102</Value>
+            </Field>
+            <Field Name="name">
+                <Value>The Others</Value>
+            </Field>
+        </Fields>
+        <RelatedEntities/>
+    </Entity>
+</Entities>

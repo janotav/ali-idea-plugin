@@ -46,15 +46,22 @@
         <ant antfile="install-libs.xml" target="install-libs"/>
     </target>
 
-    <target name="build" depends="install-libs">
-        <exec executable="mvn">
+    <target name="build" depends="install-libs,build-nolibs">
+    </target>
+
+    <target name="build-nolibs" depends="check-args">
+        <exec executable="mvn" failonerror="true">
             <arg value="package"/>
             <arg value="-Didea.build=${IDEA_BUILD}"/>
             <arg value="-Didea.version=${IDEA_VERSION}"/>
             <!-- in regular build following values are provided by CI -->
             <arg value="-DsourceRevision=latest"/>
             <arg value="-DbuildNumber=999999"/>
+            <!-- needed for test execution -->
+            <arg value="-Didea.home.path=${IDEA_HOME}"/>
+            <arg value="-Didea.platform.prefix=Idea"/>
         </exec>
+        <echo>built: ali-plugin-main/target/ali-idea-plugin.zip</echo>
     </target>
 
 </project>

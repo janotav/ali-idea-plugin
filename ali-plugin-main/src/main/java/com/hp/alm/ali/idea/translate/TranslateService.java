@@ -114,17 +114,24 @@ public class TranslateService implements ServerTypeListener {
             }
             return value;
         }
-        Proxy proxy = new Proxy(onValue);
-        synchronized (proxy) {
-            String result = translator.translate(value, proxy);
-            if(result != null) {
-                if(syncCall) {
-                    onValue.value(result);
-                }
-                return result;
+        String result = translator.translate(value, new ValueCallback() {
+            @Override
+            public void value(final String value) {
+                UIUtil.invokeLaterIfNeeded(new Runnable() {
+                    @Override
+                    public void run() {
+                        onValue.value(value);
+                    }
+                });
             }
-            return LOADING_MESSAGE;
+        });
+        if(result != null) {
+            if(syncCall) {
+                onValue.value(result);
+            }
+            return result;
         }
+        return LOADING_MESSAGE;
     }
 
     @Override
@@ -133,24 +140,4 @@ public class TranslateService implements ServerTypeListener {
             cache.clear();
         }
     }
-
-    private static class Proxy implements ValueCallback {
-
-        private ValueCallback callback;
-
-        public Proxy(ValueCallback callback) {
-            this.callback = callback;
-        }
-
-        @Override
-        public synchronized void value(final String value) {
-            UIUtil.invokeLaterIfNeeded(new Runnable() {
-                @Override
-                public void run() {
-                    callback.value(value);
-                }
-            });
-        }
-    }
-
 }

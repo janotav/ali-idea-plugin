@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Entity Type="build-instance">
+    <Fields>
+        <Field Name="test-success">
+            <Value>100</Value>
+        </Field>
+        <Field Name="status-message">
+            <Value></Value>
+        </Field>
+        <Field Name="test-coverage"/>
+        <Field Name="type">
+            <Value>110</Value>
+        </Field>
+        <Field Name="running">
+            <Value>N</Value>
+        </Field>
+        <Field Name="version">
+            <Value>1</Value>
+        </Field>
+        <Field Name="timestamp">
+            <Value>2013-09-09 01:51:00</Value>
+        </Field>
+        <Field Name="id">
+            <Value>4546</Value>
+        </Field>
+        <Field Name="revision">
+            <Value>426074</Value>
+        </Field>
+        <Field Name="test-skip">
+            <Value>29</Value>
+        </Field>
+        <Field Name="description">
+            <Value></Value>
+        </Field>
+        <Field Name="name">
+            <Value>#1563</Value>
+        </Field>
+        <Field Name="test-fail">
+            <Value>0</Value>
+        </Field>
+        <Field Name="qa-status">
+            <Value></Value>
+        </Field>
+        <Field Name="test-ok">
+            <Value>5090</Value>
+        </Field>
+        <Field Name="sid">
+            <Value>1563</Value>
+        </Field>
+        <Field Name="status">
+            <Value>Success</Value>
+        </Field>
+        <Field Name="number">
+            <Value>1563</Value>
+        </Field>
+        <Field Name="label">
+            <Value></Value>
+        </Field>
+        <Field Name="vts">
+            <Value>2013-09-09 01:50:59</Value>
+        </Field>
+        <Field Name="product">
+            <Value></Value>
+        </Field>
+        <Field Name="category">
+            <Value>Fast</Value>
+        </Field>
+        <Field Name="duration">
+            <Value>1765912</Value>
+        </Field>
+        <Field Name="start-date">
+            <Value>2013-08-18 12:36:56</Value>
+        </Field>
+        <Field Name="build-system-url">
+            <Value>http://localhost:8080/ali/redirect?job=myApp&amp;number=1563</Value>
+        </Field>
+        <Field Name="notes">
+            <Value></Value>
+        </Field>
+        <Field Name="release">
+            <Value ReferenceValue="Release One">1029</Value>
+        </Field>
+    </Fields>
+    <RelatedEntities/>
+</Entity>

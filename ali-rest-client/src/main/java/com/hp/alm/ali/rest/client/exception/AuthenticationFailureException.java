@@ -16,8 +16,10 @@
 
 package com.hp.alm.ali.rest.client.exception;
 
+import com.hp.alm.ali.rest.client.ResultInfo;
+
 public class AuthenticationFailureException extends HttpClientErrorException {
-    public AuthenticationFailureException(int code, String reasonPhrase, String location) {
-        super(code, reasonPhrase, location);
+    public AuthenticationFailureException(ResultInfo resultInfo) {
+        super(resultInfo);
     }
 }

@@ -18,72 +18,42 @@ package com.hp.alm.ali.idea.services;
 
 import com.hp.alm.ali.idea.model.parser.JAXBSupport;
 import com.hp.alm.ali.idea.cfg.APMCommonSettings;
-import com.hp.alm.ali.idea.rest.RestListener;
 import com.hp.alm.ali.idea.rest.RestService;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.util.ui.UIUtil;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.Transform;
 import org.apache.commons.io.input.BOMInputStream;
 
 import java.io.InputStream;
 import java.util.List;
 
-public class CustomizationService implements RestListener {
+public class CustomizationService extends AbstractCachingService<Integer, APMCommonSettings, AbstractCachingService.Callback<APMCommonSettings>> {
+
+    final private static int IDE_PREFERENCES = 1;
 
     private RestService restService;
-    private APMCommonSettings settings;
 
-    public CustomizationService(RestService restService) {
-        this.restService = restService;
+    public CustomizationService(Project project) {
+        super(project);
 
-        restService.addListener(this);
+        restService = project.getComponent(RestService.class);
     }
 
-    public synchronized String getNewDefectStatus(final boolean dispatch, final AbstractCachingService.Callback<String> whenLoaded) {
+    public String getNewDefectStatus(final AbstractCachingService.Callback<String> whenLoaded) {
+        APMCommonSettings settings = getCachedValue(IDE_PREFERENCES);
         if(settings == null) {
-            ApplicationManager.getApplication().executeOnPooledThread(new Runnable() {
+            getValueAsync(IDE_PREFERENCES, translate(whenLoaded, new Transform<APMCommonSettings, String>() {
                 @Override
-                public void run() {
-                    InputStream is = null;
-                    try {
-                        is = restService.getForStream("customization/extensions/dev/preferences");
-                    } catch(Exception e) {
-                        // IDE Customization extension may not be installed
-                    }
-                    final String value;
-                    synchronized (CustomizationService.this) {
-                        if(is != null) {
-                            try {
-                                settings = JAXBSupport.unmarshall(new BOMInputStream(is), APMCommonSettings.class);
-                            } catch(Exception e) {
-                                // go with defaults if anything goes wrong
-                                settings = new APMCommonSettings();
-                            }
-                        } else {
-                            settings = new APMCommonSettings();
-                        }
-                        value = getNewDefectStatus();
-                    }
-                    if(whenLoaded != null) {
-                        if(dispatch) {
-                            UIUtil.invokeLaterIfNeeded(new Runnable() {
-                                @Override
-                                public void run() {
-                                    whenLoaded.loaded(value);
-                                }
-                            });
-                        } else {
-                            whenLoaded.loaded(value);
-                        }
-                    }
+                public String transform(APMCommonSettings settings) {
+                    return getNewDefectStatus(settings);
                 }
-            });
+            }));
             return null;
         } else {
-            return getNewDefectStatus();
+            return getNewDefectStatus(settings);
         }
     }
 
-    private String getNewDefectStatus() {
+    private String getNewDefectStatus(APMCommonSettings settings) {
         List<String> list = settings.getValues("defectDefaultStatusValueForCreate");
         if(list != null && !list.isEmpty()) {
             return list.get(0);
@@ -93,9 +63,20 @@ public class CustomizationService implements RestListener {
     }
 
     @Override
-    public void restConfigurationChanged() {
-        synchronized (this) {
-            settings = null;
+    protected APMCommonSettings doGetValue(Integer key) {
+        InputStream is = null;
+        try {
+            is = restService.getForStream("customization/extensions/dev/preferences");
+        } catch(Exception e) {
+            // IDE Customization extension may not be installed
         }
+        if(is != null) {
+            try {
+                return JAXBSupport.unmarshall(new BOMInputStream(is), APMCommonSettings.class);
+            } catch(Exception e) {
+                // go with defaults if anything goes wrong
+            }
+        }
+        return new APMCommonSettings();
     }
 }

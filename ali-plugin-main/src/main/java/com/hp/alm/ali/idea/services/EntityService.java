@@ -32,7 +32,6 @@ import com.hp.alm.ali.idea.model.Entity;
 import com.hp.alm.ali.idea.model.parser.EntityList;
 import com.hp.alm.ali.idea.rest.RestException;
 import com.hp.alm.ali.idea.rest.RestService;
-import com.hp.alm.ali.idea.ui.dialog.RestErrorDetailDialog;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
@@ -54,13 +53,15 @@ public class EntityService {
     private Project project;
     private RestService restService;
     private MetadataService metadataService;
+    private ErrorService errorService;
     private WeakListeners<EntityListener> listeners;
     final private Map<EntityRef, List<EntityListener>> asyncRequests;
 
-    public EntityService(Project project, RestService restService, MetadataService metadataService) {
+    public EntityService(Project project, RestService restService, MetadataService metadataService, ErrorService errorService) {
         this.project = project;
         this.restService = restService;
         this.metadataService = metadataService;
+        this.errorService = errorService;
 
         listeners = new WeakListeners<EntityListener>();
         asyncRequests = new HashMap<EntityRef, List<EntityListener>>();
@@ -142,7 +143,7 @@ public class EntityService {
     }
 
 
-    public EntityList parse(InputStream is, boolean complete) {
+    private EntityList parse(InputStream is, boolean complete) {
         return EntityList.create(is, complete);
     }
 
@@ -172,6 +173,7 @@ public class EntityService {
         if(restService.serverTypeIsApollo()) {
             EntityQuery linkQuery = new EntityQuery("defect-link");
             linkQuery.setValue("id", String.valueOf(linkId));
+            linkQuery.setPropertyResolved("id", true);
             return doQuery(linkQuery, true).get(0);
         } else {
             // in ALM 11 the two level query doesn't work correctly on the second level and ID must be specified in the path
@@ -180,7 +182,7 @@ public class EntityService {
     }
 
     private String queryToString(EntityQuery query) {
-        ServerStrategy cust = restService.getModelCustomization();
+        ServerStrategy cust = restService.getServerStrategy();
         EntityQuery clone = cust.preProcess(query.clone());
         StringBuffer buf = new StringBuffer();
         buf.append("fields=");
@@ -267,7 +269,7 @@ public class EntityService {
         MyResultInfo result = new MyResultInfo();
         if(restService.put(xml, result, "defects/{0}/defect-links/{1}", entity.getPropertyValue("first-endpoint-id"), entity.getId()) != HttpStatus.SC_OK) {
             if(!silent) {
-                new RestErrorDetailDialog(project, new RestException(result)).setVisible(true);
+                errorService.showException(new RestException(result));
             }
             return null;
         } else {
@@ -295,7 +297,7 @@ public class EntityService {
         MyResultInfo result = new MyResultInfo();
         if(restService.put(xml, result, "{0}s/{1}", entity.getType(), entity.getId()) != HttpStatus.SC_OK) {
             if(!silent) {
-                new RestErrorDetailDialog(project, new RestException(result)).setVisible(true);
+                errorService.showException(new RestException(result));
             }
             if(reloadOnFailure) {
                 try {
@@ -319,7 +321,7 @@ public class EntityService {
         MyResultInfo result = new MyResultInfo();
         if(restService.post(xml, result, "defects/{0}/defect-links", entity.getPropertyValue("first-endpoint-id")) != HttpStatus.SC_CREATED) {
             if(!silent) {
-                new RestErrorDetailDialog(project, new RestException(result)).setVisible(true);
+                errorService.showException(new RestException(result));
             }
             return null;
         } else {
@@ -337,7 +339,7 @@ public class EntityService {
         MyResultInfo result = new MyResultInfo();
         if(restService.post(xml, result, "{0}s", entity.getType()) != HttpStatus.SC_CREATED) {
             if(!silent) {
-                new RestErrorDetailDialog(project, new RestException(result)).setVisible(true);
+                errorService.showException(new RestException(result));
             }
             return null;
         } else {
@@ -349,10 +351,6 @@ public class EntityService {
         Entity resultEntity = parse(is, true).get(0);
         fireEntityLoaded(resultEntity, event);
         return resultEntity;
-    }
-
-    public Entity lockEntity(EntityRef ref, boolean silent) {
-        return doLock(ref, silent);
     }
 
     public Entity lockEntity(Entity entity, boolean silent) {
@@ -368,10 +366,10 @@ public class EntityService {
         return locked;
     }
 
-    public boolean deleteOldDefectLink(Entity entity) {
+    private boolean deleteOldDefectLink(Entity entity) {
         MyResultInfo result = new MyResultInfo();
         if(restService.delete(result, "defects/{0}/defect-links/{1}", entity.getPropertyValue("first-endpoint-id"), entity.getId()) != HttpStatus.SC_OK) {
-            new RestErrorDetailDialog(project, new RestException(result)).setVisible(true);
+            errorService.showException(new RestException(result));
             return false;
         } else {
             fireEntityNotFound(new EntityRef(entity), true);
@@ -385,7 +383,7 @@ public class EntityService {
         }
         MyResultInfo result = new MyResultInfo();
         if(restService.delete(result, "{0}s/{1}", entity.getType(), entity.getId()) != HttpStatus.SC_OK) {
-            new RestErrorDetailDialog(project, new RestException(result)).setVisible(true);
+            errorService.showException(new RestException(result));
             return false;
         } else {
             fireEntityNotFound(new EntityRef(entity), true);
@@ -394,11 +392,10 @@ public class EntityService {
     }
 
     private Entity doLock(EntityRef ref, boolean silent) {
-        // TODO: do checkout when versioning is enabled
         MyResultInfo result = new MyResultInfo();
         if(restService.post("", result, "{0}s/{1}/lock", ref.type, ref.id) != HttpStatus.SC_OK) {
             if(!silent) {
-                new RestErrorDetailDialog(project, new RestException(result)).setVisible(true);
+                errorService.showException(new RestException(result));
             }
             return null;
         }
@@ -406,7 +403,6 @@ public class EntityService {
     }
 
     public void unlockEntity(Entity entity) {
-        // TODO: do checkin
         restService.delete("{0}s/{1}/lock", entity.getType(), String.valueOf(entity.getId()));
     }
 

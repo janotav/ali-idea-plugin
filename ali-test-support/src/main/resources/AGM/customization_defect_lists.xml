@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Lists>
+    <List>
+        <Name>Versions</Name>
+        <Id>35</Id>
+        <Items/>
+    </List>
+    <List>
+        <Name>Defect Priority</Name>
+        <Id>378</Id>
+        <Items>
+            <Item logicalName="hp.defect.priority.show-stopper" value="1-Show Stopper" Id="380"/>
+            <Item logicalName="hp.defect.priority.high" value="2-High" Id="379"/>
+            <Item logicalName="hp.defect.priority.medium" value="3-Medium" Id="382"/>
+            <Item logicalName="hp.defect.priority.low" value="4-Low" Id="381"/>
+        </Items>
+    </List>
+    <List>
+        <Name>All Projects</Name>
+        <Id>278</Id>
+        <Items/>
+    </List>
+    <List>
+        <Name>YesNo</Name>
+        <Id>1</Id>
+        <Items>
+            <Item logicalName="hp.platform.yes-no.yes" value="Y" Id="24"/>
+            <Item logicalName="hp.platform.yes-no.no" value="N" Id="23"/>
+        </Items>
+    </List>
+    <List>
+        <Name>Severity</Name>
+        <Id>299</Id>
+        <Items>
+            <Item logicalName="hp.qc.severity.critical" value="1-Critical" Id="387"/>
+            <Item logicalName="hp.qc.severity.high" value="2-High" Id="300"/>
+            <Item logicalName="hp.qc.severity.medium" value="3-Medium" Id="304"/>
+            <Item logicalName="hp.qc.severity.low" value="4-Low" Id="302"/>
+        </Items>
+    </List>
+    <List>
+        <Name>Bug Status</Name>
+        <Id>226</Id>
+        <Items>
+            <Item logicalName="hp.qc.bug-status.new" value="New" Id="228"/>
+            <Item logicalName="hp.qc.bug-status.open" value="Open" Id="227"/>
+            <Item logicalName="hp.qc.bug-status.fixed" value="Fixed" Id="231"/>
+            <Item logicalName="hp.qc.bug-status.proposed-close" value="Propose Close" Id="377"/>
+            <Item logicalName="hp.qc.bug-status.closed" value="Closed" Id="230"/>
+        </Items>
+    </List>
+    <List>
+        <Name>Defect-Tag-1368016784646</Name>
+        <Id>1014</Id>
+        <Items>
+            <Item logicalName="user.1016" value="Release Criteria" Id="1016"/>
+        </Items>
+    </List>
+    <List>
+        <Name>Defect-Regression-1368016811828</Name>
+        <Id>1021</Id>
+        <Items>
+            <Item logicalName="user.1022" value="Yes" Id="1022"/>
+            <Item logicalName="user.1023" value="No" Id="1023"/>
+            <Item logicalName="user.1024" value="New Feature" Id="1024"/>
+        </Items>
+    </List>
+</Lists>

@@ -22,26 +22,36 @@ abstract public class HttpStatusBasedException extends RuntimeException {
     private final int httpStatus;
     private final String reasonPhrase;
     private final String location;
+    private final String errorCode;
 
-    protected HttpStatusBasedException(int status, String reasonPhrase, String location) {
-        super(status + " " + reasonPhrase + " [location: " + location + "]");
-        httpStatus = status;
-        this.reasonPhrase = reasonPhrase;
-        this.location = location;
+    protected HttpStatusBasedException(ResultInfo resultInfo) {
+        super(message(resultInfo));
+        httpStatus = resultInfo.getHttpStatus();
+        reasonPhrase = resultInfo.getReasonPhrase();
+        location = resultInfo.getLocation();
+        errorCode = resultInfo.getErrorCode();
     }
 
     public static void throwForError(ResultInfo resultInfo) {
         int statusCode = resultInfo.getHttpStatus();
         switch (statusCode) {
             case 401:
-                throw new AuthenticationFailureException(401, resultInfo.getReasonPhrase(), resultInfo.getLocation());
+                throw new AuthenticationFailureException(resultInfo);
             default:
                 if (statusCode >= 500 && statusCode <= 599) {
-                    throw new HttpServerErrorException(statusCode, resultInfo.getReasonPhrase(), resultInfo.getLocation());
+                    throw new HttpServerErrorException(resultInfo);
                 }
                 if (statusCode >= 400 && statusCode <= 499) {
-                    throw new HttpClientErrorException(statusCode, resultInfo.getReasonPhrase(), resultInfo.getLocation());
+                    throw new HttpClientErrorException(resultInfo);
                 }
+        }
+    }
+
+    private static String message(ResultInfo resultInfo) {
+        if(resultInfo.getErrorCode() != null) {
+            return resultInfo.getHttpStatus() + " " + resultInfo.getReasonPhrase() + " [location: " + resultInfo.getLocation() + "; error_code: " + resultInfo.getErrorCode() + "]";
+        } else {
+            return resultInfo.getHttpStatus() + " " + resultInfo.getReasonPhrase() + " [location: " + resultInfo.getLocation() + "]";
         }
     }
 
@@ -55,5 +65,9 @@ abstract public class HttpStatusBasedException extends RuntimeException {
 
     public String getReasonPhrase() {
         return reasonPhrase;
+    }
+
+    public String getErrorCode() {
+        return errorCode;
     }
 }

@@ -17,10 +17,10 @@
 package com.hp.alm.ali.idea.model.type;
 
 import com.hp.alm.ali.idea.filter.FilterManager;
+import com.hp.alm.ali.idea.filter.MultipleItemsChooserFactory;
 import com.hp.alm.ali.idea.model.ItemsProvider;
 import com.hp.alm.ali.idea.services.ThemeFeatureService;
 import com.hp.alm.ali.idea.filter.FilterFactory;
-import com.hp.alm.ali.idea.filter.MultipleItemsFactory;
 import com.hp.alm.ali.idea.ui.ComboItem;
 import com.hp.alm.ali.idea.model.parser.EntityList;
 import com.intellij.openapi.project.Project;
@@ -38,7 +38,7 @@ public class FeatureType extends ReferenceType {
 
     @Override
     public FilterFactory getFilterFactory(final boolean multiple) {
-        return new MultipleItemsFactory(project, "Feature", multiple, new ItemsProvider<ComboItem>() {
+        return new MultipleItemsChooserFactory(project, "Feature", multiple, new ItemsProvider<ComboItem>() {
             @Override
             public boolean load(String filter, List<ComboItem> items) {
                 EntityList features = themeFeatureService.getFeatures(filter);

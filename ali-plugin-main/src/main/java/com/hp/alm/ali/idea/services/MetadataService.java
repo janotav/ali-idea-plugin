@@ -47,7 +47,7 @@ public class MetadataService extends AbstractCachingService<String, Metadata, Ab
     protected Metadata doGetValue(String entityName) {
         LinkedList<String> list = new LinkedList<String>();
         list.add(entityName);
-        list.addAll(restService.getModelCustomization().getCompoundEntityTypes(entityName));
+        list.addAll(restService.getServerStrategy().getCompoundEntityTypes(entityName));
 
         Metadata result = new Metadata(project, entityName, false);
 
@@ -59,13 +59,17 @@ public class MetadataService extends AbstractCachingService<String, Metadata, Ab
             result.add(metadata);
         }
 
-        restService.getModelCustomization().fixMetadata(result);
+        restService.getServerStrategy().fixMetadata(result);
 
         return result;
     }
 
     public Metadata getCachedEntityMetadata(String entityType) {
         return getCachedValue(entityType);
+    }
+
+    public Exception getCachedFailure(String entityType) {
+        return super.getCachedFailure(entityType);
     }
 
     public static class Proxy implements Callback<Metadata>, FailureCallback {

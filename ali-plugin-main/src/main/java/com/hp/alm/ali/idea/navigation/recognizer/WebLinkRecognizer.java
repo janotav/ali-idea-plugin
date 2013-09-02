@@ -19,7 +19,7 @@ package com.hp.alm.ali.idea.navigation.recognizer;
 import com.hp.alm.ali.idea.entity.EntityQuery;
 import com.hp.alm.ali.idea.navigation.Candidate;
 import com.hp.alm.ali.idea.navigation.Recognizer;
-import com.intellij.ide.BrowserUtil;
+import com.hp.alm.ali.idea.util.BrowserUtil;
 import com.intellij.openapi.project.Project;
 
 import java.util.List;
@@ -41,7 +41,7 @@ public class WebLinkRecognizer implements Recognizer {
     @Override
     public boolean navigate(Project project, String hyperlink) {
         if(hyperlink.startsWith("web:")) {
-            BrowserUtil.launchBrowser(EntityQuery.decode(hyperlink.substring(4)));
+            project.getComponent(BrowserUtil.class).launchBrowser(EntityQuery.decode(hyperlink.substring(4)));
             return true;
         } else {
             return false;

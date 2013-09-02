@@ -18,7 +18,6 @@ package com.hp.alm.ali.idea.action.attachment;
 
 import com.hp.alm.ali.idea.action.EntityAction;
 import com.hp.alm.ali.idea.entity.EntityRef;
-import com.hp.alm.ali.idea.progress.task.DownloadTask;
 import com.hp.alm.ali.idea.model.Entity;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.fileEditor.FileEditor;
@@ -84,7 +83,7 @@ public class AttachmentOpenAction extends EntityAction {
     public static void openAttachment(final Project project, String name, EntityRef parent, int size) {
         try {
             final File file = File.createTempFile("tmp", "_" + name);
-            ProgressManager.getInstance().run(new DownloadTask(project, file, name, size, parent) {
+            ProgressManager.getInstance().run(new AttachmentDownloadTask(project, file, name, size, parent) {
                 @Override
                 public void run(ProgressIndicator indicator) {
                     super.run(indicator);

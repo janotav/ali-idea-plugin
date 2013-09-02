@@ -50,6 +50,10 @@ public class ExpressionResolver implements FilterResolver {
         return value;
     }
 
+    public Translator getTranslator() {
+        return translator;
+    }
+
     private boolean isResolved(Node node) {
         if(TranslateService.LOADING_MESSAGE.equals(node.value)) {
             return false;
@@ -60,16 +64,26 @@ public class ExpressionResolver implements FilterResolver {
 
     private boolean resolve(final Node node, Translator translator, final ValueCallback onValue, final Node root) {
         if(node.value != null) {
-            node.value = translator.translate(node.value, new ValueCallback() {
-                @Override
-                public void value(String value) {
-                    node.value = value;
-                    if (isResolved(root)) {
-                        onValue.value(ExpressionBuilder.build(root));
+            final Object lock = new Object();
+            synchronized (lock) {
+                node.value = translator.translate(node.value, new ValueCallback() {
+                    @Override
+                    public void value(String value) {
+                        synchronized (lock)  {
+                            node.value = value;
+                            if (isResolved(root)) {
+                                onValue.value(ExpressionBuilder.build(root));
+                            }
+                        }
                     }
+                });
+                if(node.value == null) {
+                    node.value = TranslateService.LOADING_MESSAGE;
+                    return false;
+                } else {
+                    return true;
                 }
-            });
-            return !TranslateService.LOADING_MESSAGE.equals(node.value);
+            }
         }
         boolean resolved = true;
         if(node.left != null) {

@@ -19,7 +19,6 @@ package com.hp.alm.ali.idea.action.attachment;
 import com.hp.alm.ali.idea.action.EntityAction;
 import com.hp.alm.ali.idea.entity.EntityRef;
 import com.hp.alm.ali.idea.ui.editor.AttachmentEditor;
-import com.hp.alm.ali.idea.progress.task.UploadTask;
 import com.hp.alm.ali.idea.ui.editor.BaseEditor;
 import com.hp.alm.ali.idea.model.Entity;
 import com.intellij.openapi.actionSystem.AnActionEvent;
@@ -67,6 +66,6 @@ public class AttachmentNewAction extends EntityAction {
         if(filename.isEmpty()) {
             filename = file.getName();
         }
-        ProgressManager.getInstance().run(new UploadTask(project, file, filename, att.getPropertyValue(AttachmentEditor.FIELD_DESCRIPTION), new EntityRef(parent)));
+        ProgressManager.getInstance().run(new AttachmentUploadTask(project, file, filename, att.getPropertyValue(AttachmentEditor.FIELD_DESCRIPTION), new EntityRef(parent)));
     }
 }

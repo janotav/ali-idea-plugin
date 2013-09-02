@@ -31,20 +31,19 @@ public class ResultInfo {
     private String location;
     private String reasonPhrase;
 
-    private ResultInfo(Map<String, String> headers, OutputStream bodyStream) {
-        this.headers = headers;
+    private ResultInfo(OutputStream bodyStream) {
+        this.headers = new HashMap<String, String>();
         this.bodyStream = bodyStream;
     }
 
     /**
      * Creates result info to be used as container for HTTP response related information.
      *
-     * @param fetchHeaders determines whether fetch headers from http response.
      * @param responseBody target stream to write http response body , stream is closed after response is written, {@code null} means that response body is dropped
      * @return result info
      */
-    public static ResultInfo create(boolean fetchHeaders, OutputStream responseBody) {
-        return new ResultInfo(fetchHeaders ? new HashMap<String, String>() : null, responseBody);
+    public static ResultInfo create(OutputStream responseBody) {
+        return new ResultInfo(responseBody);
     }
 
     /**
@@ -56,27 +55,20 @@ public class ResultInfo {
         return httpStatus;
     }
 
-    void setHttpStatus(int httpStatus) {
+    public void setHttpStatus(int httpStatus) {
         this.httpStatus = httpStatus;
     }
 
     /**
-     * Map of response haeders.
+     * Map of response headers.
      *
-     * @return
-     * @throws UnsupportedOperationException when created with created with fetch headers disabled
-     * @see #create(boolean, java.io.OutputStream)
+     * @return response headers
      */
     public Map<String, String> getHeaders() {
-        if (headers == null) throw new UnsupportedOperationException();
-        return Collections.unmodifiableMap(headers);
-    }
-
-    Map<String, String> getHeadersInternal() {
         return headers;
     }
 
-    OutputStream getBodyStream() {
+    public OutputStream getBodyStream() {
         return bodyStream;
     }
 
@@ -84,7 +76,15 @@ public class ResultInfo {
         return location;
     }
 
-    void setLocation(String location) {
+    public String getErrorCode() {
+        return headers.get("error_code");
+    }
+
+    public void setErrorCode(String errorCode) {
+        headers.put("error_code", errorCode);
+    }
+
+    public void setLocation(String location) {
         this.location = location;
     }
 
@@ -92,7 +92,7 @@ public class ResultInfo {
         return reasonPhrase;
     }
 
-    void setReasonPhrase(String reasonPhrase) {
+    public void setReasonPhrase(String reasonPhrase) {
         this.reasonPhrase = reasonPhrase;
     }
 }

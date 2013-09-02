@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relations TotalResults="5">
+    <Relation Name="buildToChangesetLinkConnection">
+        <SourceEntity>build-instance</SourceEntity>
+        <TargetEntity>changeset-link</TargetEntity>
+        <TargetAliases>
+            <Alias Unique="true" Name="changeset-link"/>
+            <Alias Unique="true" Name="connected-to-changeset-link"/>
+        </TargetAliases>
+        <Features>
+            <Feature Propagated="false" Name="UI_LINKED_ENTITIES"/>
+            <Feature Propagated="false" Name="UI_HIERARCHY"/>
+        </Features>
+        <StorageDescriptor>
+            <ReferenceStorage>
+                <ReferenceIdColumn>to-endpoint-id</ReferenceIdColumn>
+                <ReferenceLocation>IN_TARGET_ENTITY</ReferenceLocation>
+                <ReferenceTypeColumn>to-endpoint-type</ReferenceTypeColumn>
+            </ReferenceStorage>
+        </StorageDescriptor>
+    </Relation>
+    <Relation Name="buildTypeToBuildInstanceContainment_mirrored">
+        <SourceEntity>build-instance</SourceEntity>
+        <TargetEntity>build-type</TargetEntity>
+        <TargetAliases>
+            <Alias Unique="true" Name="contains-build-type"/>
+            <Alias Unique="true" Name="build-type"/>
+        </TargetAliases>
+        <Features>
+            <Feature Propagated="false" Name="UI_LINKED_ENTITIES"/>
+            <Feature Propagated="false" Name="UI_HIERARCHY"/>
+        </Features>
+        <StorageDescriptor>
+            <ReferenceStorage>
+                <ReferenceIdColumn>type</ReferenceIdColumn>
+                <ReferenceLocation>IN_SOURCE_ENTITY</ReferenceLocation>
+            </ReferenceStorage>
+        </StorageDescriptor>
+    </Relation>
+    <Relation Name="changesetToBuildConnection_mirrored">
+        <Label>Code Changes</Label>
+        <SourceEntity>build-instance</SourceEntity>
+        <TargetEntity>changeset</TargetEntity>
+        <TargetAliases>
+            <Alias Unique="true" Name="connected-to-changeset"/>
+            <Alias Unique="true" Name="changeset"/>
+        </TargetAliases>
+        <Features>
+            <Feature Propagated="false" Name="UI_LINKED_ENTITIES"/>
+            <Feature Propagated="false" Name="UI_HIERARCHY"/>
+        </Features>
+        <AggregatedRelations>
+            <AggregatedRelation>buildToChangesetLinkConnection</AggregatedRelation>
+            <AggregatedRelation>changesetToChangesetLinkConnection</AggregatedRelation>
+        </AggregatedRelations>
+        <StorageDescriptor>
+            <AssociationStorage>
+                <AssociationEntity>changeset-link</AssociationEntity>
+                <AssociationSourceIdColumn>to-endpoint-id</AssociationSourceIdColumn>
+                <AssociationSourceTypeColumn>to-endpoint-type</AssociationSourceTypeColumn>
+                <AssociationTargetIdColumn>from-endpoint-id</AssociationTargetIdColumn>
+                <AssociationTargetTypeColumn>from-endpoint-type</AssociationTargetTypeColumn>
+            </AssociationStorage>
+        </StorageDescriptor>
+    </Relation>
+    <Relation Name="defectClosedInBuildConnection_mirrored">
+        <SourceEntity>build-instance</SourceEntity>
+        <TargetEntity>defect</TargetEntity>
+        <TargetAliases>
+            <Alias Unique="false" Name="defect"/>
+            <Alias Unique="true" Name="closing-defect"/>
+            <Alias Unique="false" Name="connected-to-defect"/>
+        </TargetAliases>
+        <Features>
+            <Feature Propagated="false" Name="UI_HIERARCHY"/>
+            <Feature Propagated="false" Name="UI_LINKED_ENTITIES"/>
+        </Features>
+        <StorageDescriptor>
+            <ReferenceStorage>
+                <ReferenceIdColumn>build-closed</ReferenceIdColumn>
+                <ReferenceLocation>IN_TARGET_ENTITY</ReferenceLocation>
+            </ReferenceStorage>
+        </StorageDescriptor>
+    </Relation>
+    <Relation Name="defectDetectedInBuildConnection_mirrored">
+        <SourceEntity>build-instance</SourceEntity>
+        <TargetEntity>defect</TargetEntity>
+        <TargetAliases>
+            <Alias Unique="true" Name="detecting-defect"/>
+            <Alias Unique="false" Name="connected-to-defect"/>
+            <Alias Unique="false" Name="defect"/>
+        </TargetAliases>
+        <Features>
+            <Feature Propagated="false" Name="UI_LINKED_ENTITIES"/>
+            <Feature Propagated="false" Name="UI_HIERARCHY"/>
+        </Features>
+        <StorageDescriptor>
+            <ReferenceStorage>
+                <ReferenceIdColumn>build-detected</ReferenceIdColumn>
+                <ReferenceLocation>IN_TARGET_ENTITY</ReferenceLocation>
+            </ReferenceStorage>
+        </StorageDescriptor>
+    </Relation>
+</Relations>

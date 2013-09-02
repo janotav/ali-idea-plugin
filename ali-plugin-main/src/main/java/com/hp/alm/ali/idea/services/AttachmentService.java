@@ -24,10 +24,8 @@ import com.hp.alm.ali.idea.rest.MyInputData;
 import com.hp.alm.ali.idea.rest.MyResultInfo;
 import com.hp.alm.ali.idea.rest.RestException;
 import com.hp.alm.ali.idea.rest.RestService;
-import com.hp.alm.ali.idea.ui.dialog.RestErrorDetailDialog;
 import com.hp.alm.ali.idea.model.Entity;
 import com.hp.alm.ali.idea.model.parser.EntityList;
-import com.intellij.openapi.project.Project;
 import org.apache.commons.httpclient.HttpStatus;
 import org.jdom.output.XMLOutputter;
 
@@ -37,14 +35,14 @@ import java.util.Map;
 
 public class AttachmentService {
 
-    private Project project;
     private RestService restService;
     private EntityService entityService;
+    private ErrorService errorService;
 
-    public AttachmentService(Project project, RestService restService, EntityService entityService) {
-        this.project = project;
+    public AttachmentService(RestService restService, EntityService entityService, ErrorService errorService) {
         this.restService = restService;
         this.entityService = entityService;
+        this.errorService = errorService;
     }
 
     public Entity getAttachmentEntity(Entity entity) {
@@ -58,7 +56,7 @@ public class AttachmentService {
         MyResultInfo result = new MyResultInfo();
         int ret = restService.get(result, "{0}s/{1}/attachments/{2}?alt={3}", parent.type, parent.id, EntityQuery.encode(name), EntityQuery.encode("application/xml"));
         if(ret != HttpStatus.SC_OK) {
-            new RestErrorDetailDialog(project, new RestException(result)).setVisible(true);
+            errorService.showException(new RestException(result));
             return null;
         }
         EntityList list = EntityList.create(result.getBodyAsStream(), true);
@@ -71,7 +69,7 @@ public class AttachmentService {
         headers.put("Slug", filename);
         MyResultInfo result = new MyResultInfo();
         if(restService.post(new MyInputData(is, length, headers), result, "{0}s/{1}/attachments", parent.type, parent.id) != HttpStatus.SC_CREATED) {
-            new RestErrorDetailDialog(project, new RestException(result.getBodyAsString(), result.getLocation())).setVisible(true);
+            errorService.showException(new RestException(result.getBodyAsString(), result.getLocation()));
             return null;
         } else {
             EntityList list = EntityList.create(result.getBodyAsStream(), true);
@@ -90,7 +88,7 @@ public class AttachmentService {
         MyResultInfo result = new MyResultInfo();
         if(restService.put(new MyInputData(is, length, headers), result, "{0}s/{1}/attachments/{2}", parent.type, parent.id, EntityQuery.encode(name)) != HttpStatus.SC_OK) {
             if(!silent) {
-                new RestErrorDetailDialog(project, new RestException(result)).setVisible(true);
+                errorService.showException(new RestException(result));
             }
             return false;
         } else {
@@ -107,9 +105,9 @@ public class AttachmentService {
         attachment.setProperty(propertyName, propertyValue);
         String xml = new XMLOutputter().outputString(attachment.toElement(Collections.singleton(propertyName)));
         MyResultInfo result = new MyResultInfo();
-        if(project.getComponent(RestService.class).put(xml, result, "{0}s/{1}/attachments/{2}", parent.type, parent.id, EntityQuery.encode(name)) != HttpStatus.SC_OK) {
+        if(restService.put(xml, result, "{0}s/{1}/attachments/{2}", parent.type, parent.id, EntityQuery.encode(name)) != HttpStatus.SC_OK) {
             if(!silent) {
-                new RestErrorDetailDialog(project, new RestException(result)).setVisible(true);
+                errorService.showException(new RestException(result));
             }
             return null;
         }
@@ -126,7 +124,7 @@ public class AttachmentService {
     public void deleteAttachment(String name, EntityRef parent) {
         MyResultInfo result = new MyResultInfo();
         if(restService.delete(result, "{0}s/{1}/attachments/{2}", parent.type, parent.id, EntityQuery.encode(name)) != HttpStatus.SC_OK) {
-            new RestErrorDetailDialog(project, new RestException(result)).setVisible(true);
+            errorService.showException(new RestException(result));
         } else {
             EntityList list = EntityList.create(result.getBodyAsStream());
             if(!list.isEmpty()) {

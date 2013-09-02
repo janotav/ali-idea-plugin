@@ -26,7 +26,7 @@ public class ExpressionParser {
     private static Node matchExpr(Lexer lexer) {
         Node result = matchE(lexer);
         if(lexer.next().type != Type.END) {
-            throw new IllegalArgumentException("Trailing characters at position "+lexer.getPosition()+": "+lexer.getRemaining());
+            throw new ParserException("Trailing characters", lexer.next().start);
         }
         return result;
     }
@@ -35,7 +35,12 @@ public class ExpressionParser {
         Node result = matchT(lexer);
         if(lexer.next().type == Type.AND || lexer.next().type == Type.OR) {
             Lexeme lexeme = lexer.consume();
-            return new Node(lexeme.type, result, matchE(lexer));
+            Node right = matchE(lexer);
+            if(!right.bound && (right.type == Type.AND || right.type == Type.OR)) {
+                return new Node(right.type, new Node(lexeme.type, result, right.left), right.right);
+            } else {
+                return new Node(lexeme.type, result, right);
+            }
         }
         return result;
     }
@@ -58,20 +63,27 @@ public class ExpressionParser {
             case GTE:
             case DIFFERS:
                 lexer.consume();
-                return new Node(next.type, matchF(lexer));
+                return new Node(next.type, matchV(lexer));
         }
         return matchF(lexer);
     }
 
     private static Node matchF(Lexer lexer) {
-        Lexeme lexeme = lexer.consume();
-        if(lexeme.type == Type.VALUE) {
-            return new Node(lexeme.value);
-        } else if(lexeme.type == Type.LEFT_P) {
+        if(lexer.next().type == Type.LEFT_P) {
+            lexer.consume();
             Node result = matchE(lexer);
+            result.bound = true;
             lexer.expect(Type.RIGHT_P);
             return result;
         }
-        throw new IllegalArgumentException("Expected VALUE or '(' at position "+lexeme.start+": "+lexeme.value);
+        return matchV(lexer);
+    }
+
+    private static Node matchV(Lexer lexer) {
+        Lexeme lexeme = lexer.consume();
+        if(lexeme.type == Type.VALUE) {
+            return new Node(lexeme.value);
+        }
+        throw new ParserException("Expected VALUE", lexeme.start);
     }
 }

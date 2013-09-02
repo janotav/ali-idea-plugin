@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Lists>
+    <List>
+        <Name>Versions</Name>
+        <Id>35</Id>
+        <Items/>
+    </List>
+    <List>
+        <Name>Priority</Name>
+        <Id>251</Id>
+        <Items>
+            <Item value="P1" logicalName="user.1068"/>
+            <Item value="P2" logicalName="user.1069"/>
+            <Item value="P3" logicalName="user.1070"/>
+            <Item value="P4" logicalName="user.1071"/>
+            <Item value="P5" logicalName="user.1072"/>
+        </Items>
+    </List>
+    <List>
+        <Name>All Projects</Name>
+        <Id>260</Id>
+        <Items>
+            <Item value="ALI" logicalName="user.1034"/>
+            <Item value="Web Framework" logicalName="user.1035"/>
+        </Items>
+    </List>
+    <List>
+        <Name>YesNo</Name>
+        <Id>1</Id>
+        <Items>
+            <Item value="N" logicalName="hp.platform.yes-no.no"/>
+            <Item value="Y" logicalName="hp.platform.yes-no.yes"/>
+        </Items>
+    </List>
+    <List>
+        <Name>Severity</Name>
+        <Id>278</Id>
+        <Items>
+            <Item value="1-Low" logicalName="hp.qc.severity.low"/>
+            <Item value="2-Medium" logicalName="hp.qc.severity.medium"/>
+            <Item value="3-High" logicalName="hp.qc.severity.high"/>
+            <Item value="4-Very High" logicalName="hp.qc.severity.very-high"/>
+            <Item value="5-Urgent" logicalName="hp.qc.severity.urgent"/>
+        </Items>
+    </List>
+    <List>
+        <Name>Bug Status</Name>
+        <Id>217</Id>
+        <Items>
+            <Item value="Closed" logicalName="hp.qc.bug-status.closed"/>
+            <Item value="Fixed" logicalName="hp.qc.bug-status.fixed"/>
+            <Item value="New" logicalName="hp.qc.bug-status.new"/>
+            <Item value="Open" logicalName="hp.qc.bug-status.open"/>
+            <Item value="Rejected" logicalName="hp.qc.bug-status.rejected"/>
+            <Item value="Reopen" logicalName="hp.qc.bug-status.reopen"/>
+        </Items>
+    </List>
+    <List>
+        <Name>Activity Status</Name>
+        <Id>284</Id>
+        <Items>
+            <Item value="Requirement Authoring" logicalName="hp.qc.activity-status.requirement-authoring"/>
+            <Item value="Requirement Review" logicalName="hp.qc.activity-status.requirement-review"/>
+            <Item value="Test Authoring" logicalName="hp.qc.activity-status.test-authoring"/>
+        </Items>
+    </List>
+    <List>
+        <Name>Rejection Reason</Name>
+        <Id>1003</Id>
+        <Items>
+            <Item value="Duplicate" logicalName="user.1004"/>
+            <Item value="Not Enough Information" logicalName="user.1006"/>
+            <Item value="Not a Bug" logicalName="user.1005"/>
+            <Item value="Obsolete" logicalName="user.1007"/>
+            <Item value="Out of Spec" logicalName="user.1008"/>
+        </Items>
+    </List>
+    <List>
+        <Name>Reopen Reason</Name>
+        <Id>1009</Id>
+        <Items>
+            <Item value="Improper Fix" logicalName="user.1010"/>
+            <Item value="Lower Severity" logicalName="user.1011"/>
+            <Item value="QA Error" logicalName="user.1012"/>
+            <Item value="Reproducible" logicalName="user.1013"/>
+        </Items>
+    </List>
+    <List>
+        <Name>Regression</Name>
+        <Id>1014</Id>
+        <Items>
+            <Item value="Build regression" logicalName="user.1015"/>
+            <Item value="N/A" logicalName="user.1016"/>
+            <Item value="New feature" logicalName="user.1017"/>
+            <Item value="Not a regression" logicalName="user.1018"/>
+            <Item value="Version regression" logicalName="user.1019"/>
+        </Items>
+    </List>
+    <List>
+        <Name>Types of Defects</Name>
+        <Id>1020</Id>
+        <Items>
+            <Item value="APM" logicalName="user.1089"/>
+            <Item value="Bug" logicalName="user.1021"/>
+            <Item value="Doc Internal" logicalName="user.1022"/>
+            <Item value="Enhancement Request" logicalName="user.1023"/>
+            <Item value="R&amp;D Internal" logicalName="user.1024"/>
+        </Items>
+    </List>
+    <List>
+        <Name>Boolean</Name>
+        <Id>1025</Id>
+        <Items>
+            <Item value="No" logicalName="user.1026"/>
+            <Item value="Yes" logicalName="user.1027"/>
+        </Items>
+    </List>
+    <List>
+        <Name>Keywords</Name>
+        <Id>1028</Id>
+        <Items>
+            <Item value="AGM sync" logicalName="user.1132"/>
+            <Item value="Known-issue" logicalName="user.1032"/>
+            <Item value="cloned" logicalName="user.1029"/>
+            <Item value="codereview" logicalName="user.1030"/>
+            <Item value="customer" logicalName="user.1031"/>
+            <Item value="documentation" logicalName="user.1085"/>
+            <Item value="security" logicalName="user.1084"/>
+            <Item value="server" logicalName="user.1091"/>
+        </Items>
+    </List>
+    <List>
+        <Name>Components_Web Framework</Name>
+        <Id>1055</Id>
+        <Items>
+            <Item value="Web Framework" logicalName="user.1063">
+                <Item value="WebFwk-CRUD" logicalName="user.1064"/>
+                <Item value="WebFwk-General" logicalName="user.1066"/>
+                <Item value="WebFwk-Datasources" logicalName="user.1065"/>
+                <Item value="WebFwk-Ginjector" logicalName="user.1083"/>
+                <Item value="WebFwk-Login" logicalName="user.1077"/>
+                <Item value="WebFwk-Tree" logicalName="user.1081"/>
+                <Item value="WebFwk-Filters" logicalName="user.1090"/>
+                <Item value="WebFwk-Trid" logicalName="user.1082"/>
+                <Item value="WebFwk-Layout" logicalName="user.1067"/>
+                <Item value="WebFwk-MVP" logicalName="user.1078"/>
+                <Item value="WebFwk-Table" logicalName="user.1080"/>
+                <Item value="WebFwk-SampleApplication" logicalName="user.1079"/>
+            </Item>
+        </Items>
+    </List>
+    <List>
+        <Name>Operating System</Name>
+        <Id>1046</Id>
+        <Items>
+            <Item value="Linux" logicalName="user.1047"/>
+            <Item value="MS Windows" logicalName="user.1048">
+                <Item value="MS Windows 7" logicalName="user.1051"/>
+                <Item value="MS Windows Server 2008" logicalName="user.1050"/>
+                <Item value="MS Windows XP" logicalName="user.1053"/>
+                <Item value="MS Windows Server 2003" logicalName="user.1049"/>
+                <Item value="MS Windows Vista" logicalName="user.1052"/>
+            </Item>
+            <Item value="Unix" logicalName="user.1073"/>
+        </Items>
+    </List>
+    <List>
+        <Name>Languages</Name>
+        <Id>1092</Id>
+        <Items>
+            <Item value="Chinese Simple" logicalName="user.1093"/>
+            <Item value="English" logicalName="user.1094"/>
+            <Item value="Japanese" logicalName="user.1095"/>
+            <Item value="Korean" logicalName="user.1096"/>
+        </Items>
+    </List>
+    <List>
+        <Name>I18NType</Name>
+        <Id>1097</Id>
+        <Items>
+            <Item value="Cutting_L10N" logicalName="user.1098"/>
+            <Item value="Functional_I18N" logicalName="user.1099"/>
+            <Item value="Functional_L10N" logicalName="user.1100"/>
+            <Item value="I18N" logicalName="user.1102"/>
+            <Item value="I18N_Hardcoded" logicalName="user.1101"/>
+            <Item value="I18N_UI" logicalName="user.1103"/>
+            <Item value="L10N" logicalName="user.1104"/>
+            <Item value="Not_i18N" logicalName="user.1105"/>
+            <Item value="UI" logicalName="user.1106"/>
+            <Item value="UNICODE" logicalName="user.1112"/>
+            <Item value="Untranslated" logicalName="user.1111"/>
+        </Items>
+    </List>
+</Lists>

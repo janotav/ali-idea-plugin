@@ -18,14 +18,14 @@ package com.hp.alm.ali.idea.navigation.recognizer;
 
 import com.hp.alm.ali.idea.entity.EntityQuery;
 import com.hp.alm.ali.idea.navigation.Recognizer;
-import com.intellij.ide.util.EditSourceUtil;
+import com.hp.alm.ali.idea.util.EditSourceUtil;
+import com.hp.alm.ali.idea.util.FileEditorManager;
 import com.intellij.navigation.ChooseByNameContributor;
 import com.intellij.navigation.ChooseByNameRegistry;
 import com.intellij.navigation.NavigationItem;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.LogicalPosition;
 import com.intellij.openapi.editor.ScrollType;
-import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiBundle;
 import com.intellij.psi.PsiClass;
@@ -45,7 +45,7 @@ public abstract class ClassRecognizer implements Recognizer {
         }
     }
 
-    public static Editor openEditor(Project project, String link) {
+    private static Editor openEditor(Project project, String link) {
         return evaluate(project, link, true);
     }
 
@@ -65,13 +65,13 @@ public abstract class ClassRecognizer implements Recognizer {
                 if(item instanceof PsiClass && methodName != null) {
                     for(PsiMethod method: ((PsiClass)item).getMethods()) {
                         if(method.getName().equals(methodName)) {
-                            EditSourceUtil.navigate(method, true, true);
-                            return FileEditorManager.getInstance(project).getSelectedTextEditor();
+                            project.getComponent(EditSourceUtil.class).navigate(method, true, true);
+                            return project.getComponent(FileEditorManager.class).getSelectedTextEditor();
                         }
                     }
                 }
-                EditSourceUtil.navigate(item, true, true);
-                Editor editor = FileEditorManager.getInstance(project).getSelectedTextEditor();
+                project.getComponent(EditSourceUtil.class).navigate(item, true, true);
+                Editor editor = project.getComponent(FileEditorManager.class).getSelectedTextEditor();
                 if(line > 0) {
                     if(editor != null && !editor.getDocument().getText().startsWith(PsiBundle.message("psi.decompiled.text.header"))) {
                         editor.getCaretModel().moveToLogicalPosition(new LogicalPosition(line - 1, 0));

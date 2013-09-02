@@ -17,7 +17,7 @@
 package com.hp.alm.ali.idea.genesis;
 
 import com.hp.alm.ali.idea.genesis.checkout.Checkout;
-import com.hp.alm.ali.rest.client.AliRestClient;
+import com.hp.alm.ali.rest.client.RestClient;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
 
 import javax.swing.*;
@@ -45,7 +45,7 @@ public class WizardContext {
     public JLabel targetFullLbl;
     public JComboBox targetFull;
     public Checkout checkout;
-    public AliRestClient client;
+    public RestClient client;
     public JComponent panel;
 
 }

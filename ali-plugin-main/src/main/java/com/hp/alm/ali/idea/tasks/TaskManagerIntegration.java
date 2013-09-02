@@ -20,10 +20,11 @@ import com.hp.alm.ali.idea.entity.EntityAdapter;
 import com.hp.alm.ali.idea.model.Entity;
 import com.hp.alm.ali.idea.entity.EntityRef;
 import com.hp.alm.ali.idea.services.EntityService;
+import com.hp.alm.ali.idea.services.WeakListeners;
 import com.intellij.openapi.project.Project;
 import com.intellij.tasks.LocalTask;
 import com.intellij.tasks.Task;
-import com.intellij.tasks.TaskListener;
+import com.intellij.tasks.TaskListenerAdapter;
 import com.intellij.tasks.TaskManager;
 import com.intellij.util.ui.UIUtil;
 
@@ -31,39 +32,36 @@ public class TaskManagerIntegration {
     private Project project;
     private TaskManager taskManager;
     private EntityService entityService;
-    private Listener listener;
+    private WeakListeners<Listener> listeners;
     volatile private boolean fireEvent;
 
     public TaskManagerIntegration(Project project, EntityService entityService) {
         this.project = project;
         this.entityService = entityService;
+        listeners = new WeakListeners<Listener>();
         fireEvent = true;
 
         this.taskManager = project.getComponent(TaskManager.class);
         if(taskManager != null) {
             // no task manager in default project (genesis action)
-            taskManager.addTaskListener(new TaskListener() {
+            taskManager.addTaskListener(new TaskListenerAdapter() {
                 @Override
                 public void taskActivated(LocalTask task) {
-                    if (listener != null && fireEvent) {
+                    if(fireEvent) {
+                        final Entity entity;
                         if ((task.getRepository() instanceof HpAlmRepository || (task.getRepository() == null && EntityRef.isEntityRef(task.getId())))) {
                             EntityRef ref = new EntityRef(task.getId());
-                            listener.taskEntityActivated(new Entity(ref.type, ref.id));
+                            entity = new Entity(ref.type, ref.id);
                         } else {
-                            listener.taskEntityActivated(null);
+                            entity = null;
                         }
+                        listeners.fire(new WeakListeners.Action<Listener>() {
+                            @Override
+                            public void fire(Listener listener) {
+                                listener.taskEntityActivated(entity);
+                            }
+                        });
                     }
-                }
-
-                // following methods are needed for binary compatibility with Idea12
-
-                public void taskDeactivated(final LocalTask task) {
-                }
-
-                public void taskAdded(final LocalTask task) {
-                }
-
-                public void taskRemoved(final LocalTask task) {
                 }
             });
         }
@@ -92,7 +90,7 @@ public class TaskManagerIntegration {
         }
     }
 
-    private Task getDefaultTask() {
+    Task _getDefaultTask() {
         for(LocalTask task: taskManager.getLocalTasks()) {
             if("Default".equals(task.getId())) {
                 return task;
@@ -102,7 +100,7 @@ public class TaskManagerIntegration {
     }
 
     private void activateDefaultTask() {
-        Task defaultTask = getDefaultTask();
+        Task defaultTask = _getDefaultTask();
         if(defaultTask != null) {
             activateTask(defaultTask);
         }
@@ -117,8 +115,12 @@ public class TaskManagerIntegration {
         }
     }
 
-    public void setListener(Listener listener) {
-        this.listener = listener;
+    public void addListener(Listener listener) {
+        listeners.add(listener);
+    }
+
+    public void removeListener(Listener listener) {
+        listeners.remove(listener);
     }
 
     public static interface Listener {

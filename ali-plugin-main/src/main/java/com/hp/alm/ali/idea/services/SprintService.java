@@ -80,10 +80,9 @@ public class SprintService implements PersistentStateComponent<Element>, ServerT
     }
 
     public void loadState(Element state) {
-        releaseSelector.selected = loadEntity(state, "release");
-        sprintSelector.selected = loadEntity(state, "release-cycle");
-        teamSelector.selected = loadEntity(state, "team");
-        connectedTo(restService.getServerTypeIfAvailable());
+        selectSprint(loadEntity(state, "release-cycle"));
+        selectTeam(loadEntity(state, "team"));
+        selectRelease(loadEntity(state, "release"));
     }
 
     private Entity loadEntity(Element element, String type) {
@@ -98,13 +97,18 @@ public class SprintService implements PersistentStateComponent<Element>, ServerT
         }
     }
 
+    // method should be considered private except for usage in tests
+    synchronized void resetValues() {
+        teamSelector.values = null;
+        sprintSelector.values = null;
+        releaseSelector.values = null;
+    }
+
     @Override
     public void connectedTo(ServerType serverType) {
         if(ServerType.AGM.equals(restService.getServerTypeIfAvailable())) {
             synchronized (this) {
-                teamSelector.values = null;
-                sprintSelector.values = null;
-                releaseSelector.values = null;
+                resetValues();
                 final Entity release = this.releaseSelector.selected;
                 if(release != null) {
                     teamSelector.requestRunning = true;
@@ -170,6 +174,8 @@ public class SprintService implements PersistentStateComponent<Element>, ServerT
         query.addColumn("id", 1);
         query.addColumn("name", 1);
         query.addColumn("tense", 1);
+        query.addColumn("start-date", 1);
+        query.addColumn("end-date", 1);
         query.setValue("parent-id", String.valueOf(release.getId()));
         query.addOrder("start-date", SortOrder.ASCENDING);
         EntityList list = EntityList.empty();
@@ -255,33 +261,39 @@ public class SprintService implements PersistentStateComponent<Element>, ServerT
         listeners.add(listener);
     }
 
+    public void removeListener(Listener listener) {
+        listeners.remove(listener);
+    }
+
     public synchronized void selectRelease(final Entity release) {
-        if(release != null && release.equals(this.releaseSelector.selected)) {
+        if((release != null && release.equals(this.releaseSelector.selected)) ||
+                (release == null && this.releaseSelector.selected == null)) {
             return;
         }
 
         this.releaseSelector.selected = release;
         if(release != null) {
-            sprintSelector.requestRunning = true;
-            teamSelector.requestRunning = true;
-            ApplicationManager.getApplication().executeOnPooledThread(new Runnable() {
-                @Override
-                public void run() {
-                    loadSprints(release);
-                    loadTeams(release);
-                }
-            });
+            if(ServerType.AGM.equals(restService.getServerTypeIfAvailable())) {
+                sprintSelector.requestRunning = true;
+                teamSelector.requestRunning = true;
+                ApplicationManager.getApplication().executeOnPooledThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        loadSprints(release);
+                        loadTeams(release);
+                    }
+                });
+            }
         } else {
-            this.sprintSelector.selected = null;
-            this.teamSelector.selected = null;
-            fireSprintSelected();
-            fireTeamSelected();
+            selectSprint(null);
+            selectTeam(null);
         }
         fireReleaseSelected();
     }
 
     public synchronized void selectSprint(Entity sprint) {
-        if(sprint != null && sprint.equals(this.sprintSelector.selected)) {
+        if((sprint != null && sprint.equals(this.sprintSelector.selected)) ||
+                (sprint == null && this.sprintSelector.selected == null)) {
             return;
         }
 
@@ -290,7 +302,8 @@ public class SprintService implements PersistentStateComponent<Element>, ServerT
     }
 
     public synchronized void selectTeam(Entity team) {
-        if(team != null && team.equals(this.teamSelector.selected)) {
+        if((team != null && team.equals(this.teamSelector.selected)) ||
+                (team == null && this.teamSelector.selected == null)) {
             return;
         }
 

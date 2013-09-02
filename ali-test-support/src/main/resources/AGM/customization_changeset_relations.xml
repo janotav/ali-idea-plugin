@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relations TotalResults="8">
+    <Relation Name="changesetToBuildConnection">
+        <SourceEntity>changeset</SourceEntity>
+        <TargetEntity>build-instance</TargetEntity>
+        <TargetAliases>
+            <Alias Unique="true" Name="build-instance"/>
+            <Alias Unique="true" Name="connected-to-build-instance"/>
+        </TargetAliases>
+        <Features>
+            <Feature Propagated="false" Name="UI_LINKED_ENTITIES"/>
+            <Feature Propagated="false" Name="UI_HIERARCHY"/>
+        </Features>
+        <AggregatedRelations>
+            <AggregatedRelation>changesetToChangesetLinkConnection</AggregatedRelation>
+            <AggregatedRelation>buildToChangesetLinkConnection</AggregatedRelation>
+        </AggregatedRelations>
+        <StorageDescriptor>
+            <AssociationStorage>
+                <AssociationEntity>changeset-link</AssociationEntity>
+                <AssociationSourceIdColumn>from-endpoint-id</AssociationSourceIdColumn>
+                <AssociationSourceTypeColumn>from-endpoint-type</AssociationSourceTypeColumn>
+                <AssociationTargetIdColumn>to-endpoint-id</AssociationTargetIdColumn>
+                <AssociationTargetTypeColumn>to-endpoint-type</AssociationTargetTypeColumn>
+            </AssociationStorage>
+        </StorageDescriptor>
+    </Relation>
+    <Relation Name="changesetToChangesetFileContainment">
+        <SourceEntity>changeset</SourceEntity>
+        <TargetEntity>changeset-file</TargetEntity>
+        <TargetAliases>
+            <Alias Unique="true" Name="contained-in-changeset-file"/>
+            <Alias Unique="true" Name="changeset-file"/>
+        </TargetAliases>
+        <Features>
+            <Feature Propagated="false" Name="UI_HIERARCHY"/>
+            <Feature Propagated="false" Name="UI_LINKED_ENTITIES"/>
+        </Features>
+        <StorageDescriptor>
+            <ReferenceStorage>
+                <ReferenceIdColumn>parent-id</ReferenceIdColumn>
+                <ReferenceLocation>IN_TARGET_ENTITY</ReferenceLocation>
+            </ReferenceStorage>
+        </StorageDescriptor>
+    </Relation>
+    <Relation Name="changesetToChangesetLinkConnection">
+        <SourceEntity>changeset</SourceEntity>
+        <TargetEntity>changeset-link</TargetEntity>
+        <TargetAliases>
+            <Alias Unique="true" Name="changeset-link"/>
+            <Alias Unique="true" Name="connected-to-changeset-link"/>
+        </TargetAliases>
+        <Features>
+            <Feature Propagated="false" Name="UI_LINKED_ENTITIES"/>
+            <Feature Propagated="false" Name="UI_HIERARCHY"/>
+        </Features>
+        <StorageDescriptor>
+            <ReferenceStorage>
+                <ReferenceIdColumn>from-endpoint-id</ReferenceIdColumn>
+                <ReferenceLocation>IN_TARGET_ENTITY</ReferenceLocation>
+                <ReferenceTypeColumn>from-endpoint-type</ReferenceTypeColumn>
+            </ReferenceStorage>
+        </StorageDescriptor>
+    </Relation>
+    <Relation Name="changesetToDefectConnection">
+        <SourceEntity>changeset</SourceEntity>
+        <TargetEntity>defect</TargetEntity>
+        <TargetAliases>
+            <Alias Unique="false" Name="defect"/>
+            <Alias Unique="true" Name="working-on-defect"/>
+            <Alias Unique="false" Name="connected-to-defect"/>
+        </TargetAliases>
+        <Features>
+            <Feature Propagated="false" Name="UI_LINKED_ENTITIES"/>
+            <Feature Propagated="false" Name="UI_HIERARCHY"/>
+        </Features>
+        <AggregatedRelations>
+            <AggregatedRelation>changesetToChangesetLinkConnection</AggregatedRelation>
+            <AggregatedRelation>defectToChangesetLinkConnection</AggregatedRelation>
+        </AggregatedRelations>
+        <StorageDescriptor>
+            <AssociationStorage>
+                <AssociationEntity>changeset-link</AssociationEntity>
+                <AssociationSourceIdColumn>from-endpoint-id</AssociationSourceIdColumn>
+                <AssociationSourceTypeColumn>from-endpoint-type</AssociationSourceTypeColumn>
+                <AssociationTargetIdColumn>to-endpoint-id</AssociationTargetIdColumn>
+                <AssociationTargetTypeColumn>to-endpoint-type</AssociationTargetTypeColumn>
+            </AssociationStorage>
+        </StorageDescriptor>
+    </Relation>
+    <Relation Name="changesetToReleaseConnection">
+        <SourceEntity>changeset</SourceEntity>
+        <TargetEntity>release</TargetEntity>
+        <TargetAliases>
+            <Alias Unique="true" Name="connected-to-release"/>
+            <Alias Unique="true" Name="release"/>
+        </TargetAliases>
+        <Features>
+            <Feature Propagated="false" Name="UI_HIERARCHY"/>
+            <Feature Propagated="false" Name="UI_LINKED_ENTITIES"/>
+        </Features>
+        <AggregatedRelations>
+            <AggregatedRelation>changesetToChangesetLinkConnection</AggregatedRelation>
+            <AggregatedRelation>releaseToChangesetLinkConnection</AggregatedRelation>
+        </AggregatedRelations>
+        <StorageDescriptor>
+            <AssociationStorage>
+                <AssociationEntity>changeset-link</AssociationEntity>
+                <AssociationSourceIdColumn>from-endpoint-id</AssociationSourceIdColumn>
+                <AssociationSourceTypeColumn>from-endpoint-type</AssociationSourceTypeColumn>
+                <AssociationTargetIdColumn>to-endpoint-id</AssociationTargetIdColumn>
+                <AssociationTargetTypeColumn>to-endpoint-type</AssociationTargetTypeColumn>
+            </AssociationStorage>
+        </StorageDescriptor>
+    </Relation>
+    <Relation Name="changesetToRequirementConnection">
+        <SourceEntity>changeset</SourceEntity>
+        <TargetEntity>requirement</TargetEntity>
+        <TargetAliases>
+            <Alias Unique="true" Name="requirement"/>
+            <Alias Unique="true" Name="connected-to-requirement"/>
+        </TargetAliases>
+        <Features>
+            <Feature Propagated="false" Name="UI_LINKED_ENTITIES"/>
+            <Feature Propagated="false" Name="UI_HIERARCHY"/>
+        </Features>
+        <AggregatedRelations>
+            <AggregatedRelation>changesetToChangesetLinkConnection</AggregatedRelation>
+            <AggregatedRelation>requirementToChangesetLinkConnection</AggregatedRelation>
+        </AggregatedRelations>
+        <StorageDescriptor>
+            <AssociationStorage>
+                <AssociationEntity>changeset-link</AssociationEntity>
+                <AssociationSourceIdColumn>from-endpoint-id</AssociationSourceIdColumn>
+                <AssociationSourceTypeColumn>from-endpoint-type</AssociationSourceTypeColumn>
+                <AssociationTargetIdColumn>to-endpoint-id</AssociationTargetIdColumn>
+                <AssociationTargetTypeColumn>to-endpoint-type</AssociationTargetTypeColumn>
+            </AssociationStorage>
+        </StorageDescriptor>
+    </Relation>
+    <Relation Name="changesetToScmBranchConnection_mirrored">
+        <SourceEntity>changeset</SourceEntity>
+        <TargetEntity>scm-branch</TargetEntity>
+        <TargetAliases>
+            <Alias Unique="true" Name="scm-branch"/>
+            <Alias Unique="true" Name="connected-to-scm-branch"/>
+        </TargetAliases>
+        <Features>
+            <Feature Propagated="false" Name="UI_HIERARCHY"/>
+            <Feature Propagated="false" Name="UI_LINKED_ENTITIES"/>
+        </Features>
+        <AggregatedRelations>
+            <AggregatedRelation>changesetToChangesetFileContainment</AggregatedRelation>
+            <AggregatedRelation>scmBranchToChangesetFileConnection</AggregatedRelation>
+        </AggregatedRelations>
+        <StorageDescriptor>
+            <AssociationStorage>
+                <AssociationEntity>changeset-file</AssociationEntity>
+                <AssociationSourceIdColumn>parent-id</AssociationSourceIdColumn>
+                <AssociationTargetIdColumn>branch-id</AssociationTargetIdColumn>
+            </AssociationStorage>
+        </StorageDescriptor>
+    </Relation>
+    <Relation Name="defectCausedByChangesetConnection_mirrored">
+        <SourceEntity>changeset</SourceEntity>
+        <TargetEntity>defect</TargetEntity>
+        <TargetAliases>
+            <Alias Unique="true" Name="causing-defect"/>
+            <Alias Unique="false" Name="defect"/>
+            <Alias Unique="false" Name="connected-to-defect"/>
+        </TargetAliases>
+        <Features>
+            <Feature Propagated="false" Name="UI_LINKED_ENTITIES"/>
+            <Feature Propagated="false" Name="UI_HIERARCHY"/>
+        </Features>
+        <StorageDescriptor>
+            <ReferenceStorage>
+                <ReferenceIdColumn>changeset</ReferenceIdColumn>
+                <ReferenceLocation>IN_TARGET_ENTITY</ReferenceLocation>
+            </ReferenceStorage>
+        </StorageDescriptor>
+    </Relation>
+</Relations>

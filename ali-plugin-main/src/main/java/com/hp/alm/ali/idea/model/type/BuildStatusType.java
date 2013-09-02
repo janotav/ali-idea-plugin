@@ -17,12 +17,12 @@
 package com.hp.alm.ali.idea.model.type;
 
 import com.hp.alm.ali.idea.filter.FilterManager;
+import com.hp.alm.ali.idea.filter.MultipleItemsChooserFactory;
 import com.hp.alm.ali.idea.model.ItemsProvider;
 import com.hp.alm.ali.idea.translate.filter.MultipleItemsResolver;
 import com.hp.alm.ali.idea.translate.Translator;
 import com.hp.alm.ali.idea.filter.FilterFactory;
 import com.hp.alm.ali.idea.translate.filter.FilterResolver;
-import com.hp.alm.ali.idea.filter.MultipleItemsFactory;
 import com.hp.alm.ali.idea.ui.ComboItem;
 import com.intellij.openapi.project.Project;
 
@@ -38,7 +38,7 @@ public class BuildStatusType implements Type {
 
     @Override
     public FilterFactory getFilterFactory(final boolean multiple) {
-        return new MultipleItemsFactory(project, "Status", true, new ItemsProvider.Eager<ComboItem>(FilterManager.asItems(Arrays.asList("Success", "Warning", "Failed"), true, multiple)));
+        return new MultipleItemsChooserFactory(project, "Status", true, new ItemsProvider.Eager<ComboItem>(FilterManager.asItems(Arrays.asList("Success", "Warning", "Failed"), true, multiple)));
     }
 
     @Override

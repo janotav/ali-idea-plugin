@@ -204,7 +204,6 @@ java.lang.IndexOutOfBoundsException: Index: 0, Size: 0
             }
         });
 
-        project.getComponent(FavoritesService.class).getFavorites(entityType);
         table.addMouseListener(new PopupAdapter() {
             public void onPopup(MouseEvent e) {
                 int row = table.rowAtPoint(e.getPoint());

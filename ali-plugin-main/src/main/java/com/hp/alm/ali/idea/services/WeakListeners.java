@@ -67,6 +67,20 @@ public class WeakListeners<E> {
         }
     }
 
+    public boolean isRegistered(E listener) {
+        synchronized (listeners) {
+            for(Iterator<MyReference<E>> it = listeners.iterator(); it.hasNext(); ) {
+                E theListener = it.next().get();
+                if(theListener == null) {
+                    it.remove();
+                } else if(theListener.equals(listener)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+
     public static interface Action<E> {
 
         void fire(E listener);

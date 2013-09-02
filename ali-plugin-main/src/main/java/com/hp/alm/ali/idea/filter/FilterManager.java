@@ -53,7 +53,7 @@ public class FilterManager {
             return filterFactory;
         }
         if(field.getListId() != null && multiple) {
-            return new MultipleItemsFactory(project, field.getLabel(), true, new ItemsProvider.Loader<ComboItem>() {
+            return new MultipleItemsChooserFactory(project, field.getLabel(), true, new ItemsProvider.Loader<ComboItem>() {
                 @Override
                 public List<ComboItem> load() {
                     List<String> list = projectListService.getProjectList(entityType, field);

@@ -1,0 +1,73 @@
+<Favorite>
+    <id>1014</id>
+    <module-id>0</module-id>
+    <parent-id>1004</parent-id>
+    <name>blockers</name>
+    <owner>dev@null</owner>
+    <is-public>true</is-public>
+    <Filter Entity="defect" KeepHierarchical="false">
+        <Where>
+            <Field Name="status" Value="New OR Open OR Reopen"/>
+            <Field Name="severity" Value="3-High OR '4-Very High' OR 5-Urgent"/>
+        </Where>
+        <Grouping/>
+        <Sort>
+            <Field Order="1" Direction="Ascending" Name="id"/>
+        </Sort>
+    </Filter>
+    <Layout>
+        <ViewLogicalName></ViewLogicalName>
+        <VisibleColumns>
+            <Column>
+                <Entity>defect</Entity>
+                <Name>in-bucket</Name>
+                <Width>50</Width>
+            </Column>
+            <Column>
+                <Entity>defect</Entity>
+                <Name>watch-id</Name>
+                <Width>60</Width>
+            </Column>
+            <Column>
+                <Entity>defect</Entity>
+                <Name>id</Name>
+                <Width>60</Width>
+            </Column>
+            <Column>
+                <Entity>defect</Entity>
+                <Name>name</Name>
+                <Width>597</Width>
+            </Column>
+            <Column>
+                <Entity>defect</Entity>
+                <Name>status</Name>
+                <Width>100</Width>
+            </Column>
+            <Column>
+                <Entity>defect</Entity>
+                <Name>owner</Name>
+                <Width>100</Width>
+            </Column>
+            <Column>
+                <Entity>defect</Entity>
+                <Name>severity</Name>
+                <Width>100</Width>
+            </Column>
+            <Column>
+                <Entity>defect</Entity>
+                <Name>priority</Name>
+                <Width>100</Width>
+            </Column>
+            <Column>
+                <Entity>defect</Entity>
+                <Name>detected-by</Name>
+                <Width>100</Width>
+            </Column>
+            <Column>
+                <Entity>defect</Entity>
+                <Name>creation-time</Name>
+                <Width>100</Width>
+            </Column>
+        </VisibleColumns>
+    </Layout>
+</Favorite>

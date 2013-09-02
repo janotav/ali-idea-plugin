@@ -232,7 +232,7 @@ public class HTMLAreaField extends TextField {
                 // because QC editor uses <div> for line breaking
                 .replaceFirst("<body>\\s*<div align=\"left\">", "") // avoid extra new line at the beginning
                 .replaceAll("(<div align=\"left\">)", "\n$1")
-                .replaceAll(" *</?[^>]+/?> *", "")
+                .replaceAll("</?[^>]+/?>", "")
                 .replaceAll(" {2,}", " ")
                 .replaceAll("&gt;", ">").replaceAll("&lt;", "<").replaceAll("&nbsp;", " ").replaceAll("&amp;", "&").replaceAll("&#160;", " ");
         if(compact) {

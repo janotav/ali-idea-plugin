@@ -73,13 +73,15 @@ public class IndicatingOutputStream extends FileOutputStream {
     }
 
     private void cancel() throws IOException {
-        if(indicator.isCanceled()) {
+        if(indicator != null && indicator.isCanceled()) {
             throw new CanceledException();
         }
     }
 
     private void report(int len) {
         pos += len;
-        indicator.setFraction((double)pos / size);
+        if(indicator != null) {
+            indicator.setFraction((double)pos / size);
+        }
     }
 }

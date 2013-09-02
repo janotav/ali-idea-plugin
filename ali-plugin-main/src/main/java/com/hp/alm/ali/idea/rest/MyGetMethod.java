@@ -16,8 +16,8 @@
 
 package com.hp.alm.ali.idea.rest;
 
-import com.hp.alm.ali.rest.client.AliRestClient;
 import com.hp.alm.ali.rest.client.InputData;
+import com.hp.alm.ali.rest.client.RestClient;
 import com.hp.alm.ali.rest.client.ResultInfo;
 
 public class MyGetMethod implements MyMethod {
@@ -28,7 +28,7 @@ public class MyGetMethod implements MyMethod {
     }
 
     @Override
-    public int execute(AliRestClient client, InputData input, ResultInfo info, String template, Object... params) {
+    public int execute(RestClient client, InputData input, ResultInfo info, String template, Object... params) {
         return client.get(info, template, params);
     }
 }

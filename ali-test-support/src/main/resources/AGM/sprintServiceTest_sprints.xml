@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Entities TotalResults="17">
+    <Entity Type="release-cycle">
+        <Fields>
+            <Field Name="id">
+                <Value>1001</Value>
+            </Field>
+            <Field Name="name">
+                <Value>Sprint 1</Value>
+            </Field>
+            <Field Name="tense">
+                <Value>PAST</Value>
+            </Field>
+            <Field Name="end-date">
+                <Value>2012-12-14</Value>
+            </Field>
+            <Field Name="start-date">
+                <Value>2012-12-01</Value>
+            </Field>
+        </Fields>
+        <RelatedEntities/>
+    </Entity>
+    <Entity Type="release-cycle">
+        <Fields>
+            <Field Name="id">
+                <Value>1002</Value>
+            </Field>
+            <Field Name="name">
+                <Value>Sprint 2</Value>
+            </Field>
+            <Field Name="tense">
+                <Value>CURRENT</Value>
+            </Field>
+            <Field Name="end-date">
+                <Value>2012-12-28</Value>
+            </Field>
+            <Field Name="start-date">
+                <Value>2012-12-15</Value>
+            </Field>
+        </Fields>
+        <RelatedEntities/>
+    </Entity>
+</Entities>

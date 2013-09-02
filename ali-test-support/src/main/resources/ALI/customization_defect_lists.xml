@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Lists>
+    <List>
+        <Name>Versions</Name>
+        <Id>35</Id>
+        <Items/>
+    </List>
+    <List>
+        <Name>Priority</Name>
+        <Id>251</Id>
+        <Items>
+            <Item value="1-Low"/>
+            <Item value="2-Medium"/>
+            <Item value="3-High"/>
+            <Item value="4-Very High"/>
+            <Item value="5-Urgent"/>
+        </Items>
+    </List>
+    <List>
+        <Name>All Projects</Name>
+        <Id>260</Id>
+        <Items/>
+    </List>
+    <List>
+        <Name>YesNo</Name>
+        <Id>1</Id>
+        <Items>
+            <Item value="N"/>
+            <Item value="Y"/>
+        </Items>
+    </List>
+    <List>
+        <Name>Severity</Name>
+        <Id>278</Id>
+        <Items>
+            <Item value="1-Low"/>
+            <Item value="2-Medium"/>
+            <Item value="3-High"/>
+            <Item value="4-Very High"/>
+            <Item value="5-Urgent"/>
+        </Items>
+    </List>
+    <List>
+        <Name>Bug Status</Name>
+        <Id>217</Id>
+        <Items>
+            <Item value="Closed"/>
+            <Item value="Fixed"/>
+            <Item value="New"/>
+            <Item value="Open"/>
+            <Item value="Rejected"/>
+            <Item value="Reopen"/>
+        </Items>
+    </List>
+</Lists>

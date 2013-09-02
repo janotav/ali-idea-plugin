@@ -34,7 +34,7 @@ public class ModifyAction extends EntityAction {
     @Override
     protected boolean visiblePredicate(Project project, String entityType) {
         RestService restService = project.getComponent(RestService.class);
-        EntityEditStrategy entityEditStrategy = restService.getModelCustomization().getEntityEditStrategy();
+        EntityEditStrategy entityEditStrategy = restService.getServerStrategy().getEntityEditStrategy();
         return entityEditStrategy.isEditable(entityType);
     }
 
@@ -47,6 +47,6 @@ public class ModifyAction extends EntityAction {
     @Override
     protected void actionPerformed(AnActionEvent event, Project project, Entity entity) {
         RestService restService = project.getComponent(RestService.class);
-        restService.getModelCustomization().getEntityEditStrategy().executeEditor(new EntityRef(entity));
+        restService.getServerStrategy().getEntityEditStrategy().executeEditor(new EntityRef(entity));
     }
 }

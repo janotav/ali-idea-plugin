@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relations TotalResults="18">
+    <Relation Name="acceptanceTestToAcceptanceTestItemCompositionRelation_mirrored">
+        <SourceEntity>requirement</SourceEntity>
+        <TargetEntity>acceptance-test</TargetEntity>
+        <TargetAliases>
+            <Alias Unique="true" Name="has-parts-acceptance-test"/>
+            <Alias Unique="true" Name="acceptance-test"/>
+        </TargetAliases>
+        <Features>
+            <Feature Propagated="false" Name="UI_LINKED_ENTITIES"/>
+            <Feature Propagated="false" Name="UI_HIERARCHY"/>
+        </Features>
+        <StorageDescriptor>
+            <ReferenceStorage>
+                <ReferenceIdColumn>entity-id</ReferenceIdColumn>
+                <ReferenceLocation>IN_TARGET_ENTITY</ReferenceLocation>
+            </ReferenceStorage>
+        </StorageDescriptor>
+    </Relation>
+    <Relation Name="changesetLinkToRequirementConnection_mirrored">
+        <SourceEntity>requirement</SourceEntity>
+        <TargetEntity>changeset-link</TargetEntity>
+        <TargetAliases>
+            <Alias Unique="false" Name="changeset-link"/>
+            <Alias Unique="false" Name="connected-to-changeset-link"/>
+        </TargetAliases>
+        <Features>
+            <Feature Propagated="false" Name="UI_HIERARCHY"/>
+            <Feature Propagated="false" Name="UI_LINKED_ENTITIES"/>
+        </Features>
+        <StorageDescriptor>
+            <ReferenceStorage>
+                <ReferenceIdColumn>to-endpoint-id</ReferenceIdColumn>
+                <ReferenceLocation>IN_TARGET_ENTITY</ReferenceLocation>
+                <ReferenceTypeColumn>to-endpoint-type</ReferenceTypeColumn>
+            </ReferenceStorage>
+        </StorageDescriptor>
+    </Relation>
+    <Relation Name="changesetToRequirementConnection_mirrored">
+        <Label>Code Changes</Label>
+        <SourceEntity>requirement</SourceEntity>
+        <TargetEntity>changeset</TargetEntity>
+        <TargetAliases>
+            <Alias Unique="true" Name="changeset"/>
+            <Alias Unique="true" Name="connected-to-changeset"/>
+        </TargetAliases>
+        <Features>
+            <Feature Propagated="false" Name="UI_HIERARCHY"/>
+            <Feature Propagated="false" Name="UI_LINKED_ENTITIES"/>
+        </Features>
+        <AggregatedRelations>
+            <AggregatedRelation>requirementToChangesetLinkConnection</AggregatedRelation>
+            <AggregatedRelation>changesetToChangesetLinkConnection</AggregatedRelation>
+        </AggregatedRelations>
+        <StorageDescriptor>
+            <AssociationStorage>
+                <AssociationEntity>changeset-link</AssociationEntity>
+                <AssociationSourceIdColumn>to-endpoint-id</AssociationSourceIdColumn>
+                <AssociationSourceTypeColumn>to-endpoint-type</AssociationSourceTypeColumn>
+                <AssociationTargetIdColumn>from-endpoint-id</AssociationTargetIdColumn>
+                <AssociationTargetTypeColumn>from-endpoint-type</AssociationTargetTypeColumn>
+            </AssociationStorage>
+        </StorageDescriptor>
+    </Relation>
+    <Relation Name="releaseBacklogItemToRequirement_mirrored">
+        <SourceEntity>requirement</SourceEntity>
+        <TargetEntity>release-backlog-item</TargetEntity>
+        <TargetAliases>
+            <Alias Unique="true" Name="depends-on-release-backlog-item"/>
+            <Alias Unique="true" Name="release-backlog-item"/>
+        </TargetAliases>
+        <Features>
+            <Feature Propagated="false" Name="UI_HIERARCHY"/>
+            <Feature Propagated="false" Name="UI_LINKED_ENTITIES"/>
+        </Features>
+        <StorageDescriptor>
+            <ReferenceStorage>
+                <ReferenceIdColumn>entity-id</ReferenceIdColumn>
+                <ReferenceLocation>IN_TARGET_ENTITY</ReferenceLocation>
+                <ReferenceTypeColumn>entity-type</ReferenceTypeColumn>
+            </ReferenceStorage>
+        </StorageDescriptor>
+    </Relation>
+    <Relation Name="requirementToAttachmentAttachment">
+        <Label>Requirement Attachments</Label>
+        <SourceEntity>requirement</SourceEntity>
+        <TargetEntity>attachment</TargetEntity>
+        <TargetAliases>
+            <Alias Unique="true" Name="attachment"/>
+            <Alias Unique="true" Name="attached-to-attachment"/>
+        </TargetAliases>
+        <Features>
+            <Feature Propagated="false" Name="UI_LINKED_ENTITIES"/>
+            <Feature Propagated="false" Name="UI_HIERARCHY"/>
+        </Features>
+        <StorageDescriptor>
+            <ReferenceStorage>
+                <ReferenceIdColumn>parent-id</ReferenceIdColumn>
+                <ReferenceLocation>IN_TARGET_ENTITY</ReferenceLocation>
+                <ReferenceTypeColumn>parent-type</ReferenceTypeColumn>
+            </ReferenceStorage>
+        </StorageDescriptor>
+    </Relation>
+    <Relation Name="requirementToChangesetLinkConnection">
+        <SourceEntity>requirement</SourceEntity>
+        <TargetEntity>changeset-link</TargetEntity>
+        <TargetAliases>
+            <Alias Unique="false" Name="connected-to-changeset-link"/>
+            <Alias Unique="false" Name="changeset-link"/>
+        </TargetAliases>
+        <Features>
+            <Feature Propagated="false" Name="UI_HIERARCHY"/>
+            <Feature Propagated="false" Name="UI_LINKED_ENTITIES"/>
+        </Features>
+        <StorageDescriptor>
+            <ReferenceStorage>
+                <ReferenceIdColumn>to-endpoint-id</ReferenceIdColumn>
+                <ReferenceLocation>IN_TARGET_ENTITY</ReferenceLocation>
+                <ReferenceTypeColumn>to-endpoint-type</ReferenceTypeColumn>
+            </ReferenceStorage>
+        </StorageDescriptor>
+    </Relation>
+    <Relation Name="requirementToDefectConnection">
+        <Label>Linked Defects</Label>
+        <SourceEntity>requirement</SourceEntity>
+        <TargetEntity>defect</TargetEntity>
+        <TargetAliases>
+            <Alias Unique="true" Name="defect"/>
+            <Alias Unique="true" Name="connected-to-defect"/>
+        </TargetAliases>
+        <Features>
+            <Feature Propagated="false" Name="UI_HIERARCHY"/>
+            <Feature Propagated="true" Name="UI_LINKED_ENTITIES"/>
+        </Features>
+        <AggregatedRelations>
+            <AggregatedRelation>requirementToDefectLinkLink</AggregatedRelation>
+            <AggregatedRelation>defectToDefectLinkLink</AggregatedRelation>
+        </AggregatedRelations>
+        <StorageDescriptor>
+            <AssociationStorage>
+                <AssociationEntity>defect-link</AssociationEntity>
+                <AssociationSourceIdColumn>second-endpoint-id</AssociationSourceIdColumn>
+                <AssociationSourceTypeColumn>second-endpoint-type</AssociationSourceTypeColumn>
+                <AssociationTargetIdColumn>first-endpoint-id</AssociationTargetIdColumn>
+            </AssociationStorage>
+        </StorageDescriptor>
+    </Relation>
+    <Relation Name="requirementToDefectLinkLink">
+        <Label>Linked Defects</Label>
+        <SourceEntity>requirement</SourceEntity>
+        <TargetEntity>defect-link</TargetEntity>
+        <TargetAliases>
+            <Alias Unique="true" Name="defect-link"/>
+            <Alias Unique="true" Name="is-linked-by-defect-link"/>
+        </TargetAliases>
+        <Features>
+            <Feature Propagated="false" Name="UI_LINKED_ENTITIES"/>
+            <Feature Propagated="false" Name="UI_HIERARCHY"/>
+        </Features>
+        <StorageDescriptor>
+            <ReferenceStorage>
+                <ReferenceIdColumn>second-endpoint-id</ReferenceIdColumn>
+                <ReferenceLocation>IN_TARGET_ENTITY</ReferenceLocation>
+                <ReferenceTypeColumn>second-endpoint-type</ReferenceTypeColumn>
+            </ReferenceStorage>
+        </StorageDescriptor>
+    </Relation>
+    <Relation Name="requirementToReleaseConnection">
+        <Label>Requirement to Release</Label>
+        <SourceEntity>requirement</SourceEntity>
+        <TargetEntity>release</TargetEntity>
+        <TargetAliases>
+            <Alias Unique="true" Name="connected-to-release"/>
+            <Alias Unique="true" Name="release"/>
+        </TargetAliases>
+        <Features>
+            <Feature Propagated="false" Name="UI_LINKED_ENTITIES"/>
+            <Feature Propagated="false" Name="UI_HIERARCHY"/>
+        </Features>
+        <AggregatedRelations>
+            <AggregatedRelation>requirementToRequirementTargetReleaseLink</AggregatedRelation>
+            <AggregatedRelation>releaseToRequirementTargetReleaseLink</AggregatedRelation>
+        </AggregatedRelations>
+        <StorageDescriptor>
+            <AssociationStorage>
+                <AssociationEntity>requirement-target-release</AssociationEntity>
+                <AssociationSourceIdColumn>first-endpoint-id</AssociationSourceIdColumn>
+                <AssociationTargetIdColumn>second-endpoint-id</AssociationTargetIdColumn>
+            </AssociationStorage>
+        </StorageDescriptor>
+    </Relation>
+    <Relation Name="requirementToReleaseCycleConnection">
+        <Label>Requirement to Cycle</Label>
+        <SourceEntity>requirement</SourceEntity>
+        <TargetEntity>release-cycle</TargetEntity>
+        <TargetAliases>
+            <Alias Unique="true" Name="connected-to-release-cycle"/>
+            <Alias Unique="true" Name="release-cycle"/>
+        </TargetAliases>
+        <Features>
+            <Feature Propagated="false" Name="UI_HIERARCHY"/>
+            <Feature Propagated="false" Name="UI_LINKED_ENTITIES"/>
+        </Features>
+        <AggregatedRelations>
+            <AggregatedRelation>requirementToRequirementTargetCycleLink</AggregatedRelation>
+            <AggregatedRelation>releaseCycleToRequirementTargetCycleLink</AggregatedRelation>
+        </AggregatedRelations>
+        <StorageDescriptor>
+            <AssociationStorage>
+                <AssociationEntity>requirement-target-cycle</AssociationEntity>
+                <AssociationSourceIdColumn>first-endpoint-id</AssociationSourceIdColumn>
+                <AssociationTargetIdColumn>second-endpoint-id</AssociationTargetIdColumn>
+            </AssociationStorage>
+        </StorageDescriptor>
+    </Relation>
+    <Relation Name="requirementToReqTraceLinkLeft">
+        <Label>Traced From Requirements</Label>
+        <SourceEntity>requirement</SourceEntity>
+        <TargetEntity>req-trace</TargetEntity>
+        <TargetAliases>
+            <Alias Unique="true" Name="to-linked-to-req-trace-link-left"/>
+            <Alias Unique="false" Name="req-trace"/>
+            <Alias Unique="false" Name="is-linked-by-req-trace"/>
+        </TargetAliases>
+        <Features>
+            <Feature Propagated="false" Name="UI_HIERARCHY"/>
+            <Feature Propagated="false" Name="UI_LINKED_ENTITIES"/>
+        </Features>
+        <StorageDescriptor>
+            <ReferenceStorage>
+                <ReferenceIdColumn>from-req-id</ReferenceIdColumn>
+                <ReferenceLocation>IN_TARGET_ENTITY</ReferenceLocation>
+            </ReferenceStorage>
+        </StorageDescriptor>
+    </Relation>
+    <Relation Name="requirementToReqTraceLinkRight">
+        <Label>Traced To Requirements</Label>
+        <SourceEntity>requirement</SourceEntity>
+        <TargetEntity>req-trace</TargetEntity>
+        <TargetAliases>
+            <Alias Unique="true" Name="to-linked-to-req-trace-link-right"/>
+            <Alias Unique="false" Name="req-trace"/>
+            <Alias Unique="false" Name="is-linked-by-req-trace"/>
+        </TargetAliases>
+        <Features>
+            <Feature Propagated="false" Name="UI_LINKED_ENTITIES"/>
+            <Feature Propagated="false" Name="UI_HIERARCHY"/>
+        </Features>
+        <StorageDescriptor>
+            <ReferenceStorage>
+                <ReferenceIdColumn>to-req-id</ReferenceIdColumn>
+                <ReferenceLocation>IN_TARGET_ENTITY</ReferenceLocation>
+            </ReferenceStorage>
+        </StorageDescriptor>
+    </Relation>
+    <Relation Name="requirementToRequirementContainment">
+        <Label>Requirement to contained Requirements</Label>
+        <SourceEntity>requirement</SourceEntity>
+        <TargetEntity>requirement</TargetEntity>
+        <TargetAliases>
+            <Alias Unique="false" Name="requirement"/>
+            <Alias Unique="true" Name="contained-in-requirement"/>
+        </TargetAliases>
+        <Features>
+            <Feature Propagated="false" Name="UI_LINKED_ENTITIES"/>
+            <Feature Propagated="true" Name="UI_HIERARCHY"/>
+        </Features>
+        <StorageDescriptor>
+            <ReferenceStorage>
+                <ReferenceIdColumn>parent-id</ReferenceIdColumn>
+                <ReferenceLocation>IN_TARGET_ENTITY</ReferenceLocation>
+            </ReferenceStorage>
+        </StorageDescriptor>
+    </Relation>
+    <Relation Name="requirementToRequirementContainment_mirrored">
+        <Label>Requirement to contained Requirements</Label>
+        <SourceEntity>requirement</SourceEntity>
+        <TargetEntity>requirement</TargetEntity>
+        <TargetAliases>
+            <Alias Unique="false" Name="requirement"/>
+            <Alias Unique="true" Name="contains-requirement"/>
+        </TargetAliases>
+        <Features>
+            <Feature Propagated="false" Name="UI_HIERARCHY"/>
+            <Feature Propagated="false" Name="UI_LINKED_ENTITIES"/>
+        </Features>
+        <StorageDescriptor>
+            <ReferenceStorage>
+                <ReferenceIdColumn>parent-id</ReferenceIdColumn>
+                <ReferenceLocation>IN_SOURCE_ENTITY</ReferenceLocation>
+            </ReferenceStorage>
+        </StorageDescriptor>
+    </Relation>
+    <Relation Name="requirementToRequirementDependency">
+        <Label>Trace To</Label>
+        <SourceEntity>requirement</SourceEntity>
+        <TargetEntity>requirement</TargetEntity>
+        <TargetAliases>
+            <Alias Unique="true" Name="has-dependent-requirement"/>
+            <Alias Unique="false" Name="requirement"/>
+        </TargetAliases>
+        <Features>
+            <Feature Propagated="true" Name="UI_LINKED_ENTITIES"/>
+            <Feature Propagated="false" Name="UI_HIERARCHY"/>
+        </Features>
+        <AggregatedRelations>
+            <AggregatedRelation>requirementToReqTraceLinkLeft</AggregatedRelation>
+            <AggregatedRelation>requirementToReqTraceLinkRight</AggregatedRelation>
+        </AggregatedRelations>
+        <StorageDescriptor>
+            <AssociationStorage>
+                <AssociationEntity>req-trace</AssociationEntity>
+                <AssociationSourceIdColumn>from-req-id</AssociationSourceIdColumn>
+                <AssociationTargetIdColumn>to-req-id</AssociationTargetIdColumn>
+            </AssociationStorage>
+        </StorageDescriptor>
+    </Relation>
+    <Relation Name="requirementToRequirementDependency_mirrored">
+        <Label>Trace From</Label>
+        <SourceEntity>requirement</SourceEntity>
+        <TargetEntity>requirement</TargetEntity>
+        <TargetAliases>
+            <Alias Unique="true" Name="depends-on-requirement"/>
+            <Alias Unique="false" Name="requirement"/>
+        </TargetAliases>
+        <Features>
+            <Feature Propagated="true" Name="UI_LINKED_ENTITIES"/>
+            <Feature Propagated="false" Name="UI_HIERARCHY"/>
+        </Features>
+        <AggregatedRelations>
+            <AggregatedRelation>requirementToReqTraceLinkRight</AggregatedRelation>
+            <AggregatedRelation>requirementToReqTraceLinkLeft</AggregatedRelation>
+        </AggregatedRelations>
+        <StorageDescriptor>
+            <AssociationStorage>
+                <AssociationEntity>req-trace</AssociationEntity>
+                <AssociationSourceIdColumn>to-req-id</AssociationSourceIdColumn>
+                <AssociationTargetIdColumn>from-req-id</AssociationTargetIdColumn>
+            </AssociationStorage>
+        </StorageDescriptor>
+    </Relation>
+    <Relation Name="requirementToRequirementTargetCycleLink">
+        <Label>Requirement to Requirement Target Cycle</Label>
+        <SourceEntity>requirement</SourceEntity>
+        <TargetEntity>requirement-target-cycle</TargetEntity>
+        <TargetAliases>
+            <Alias Unique="true" Name="is-linked-by-requirement-target-cycle"/>
+            <Alias Unique="true" Name="requirement-target-cycle"/>
+        </TargetAliases>
+        <Features>
+            <Feature Propagated="false" Name="UI_HIERARCHY"/>
+            <Feature Propagated="false" Name="UI_LINKED_ENTITIES"/>
+        </Features>
+        <StorageDescriptor>
+            <ReferenceStorage>
+                <ReferenceIdColumn>first-endpoint-id</ReferenceIdColumn>
+                <ReferenceLocation>IN_TARGET_ENTITY</ReferenceLocation>
+            </ReferenceStorage>
+        </StorageDescriptor>
+    </Relation>
+    <Relation Name="requirementToRequirementTargetReleaseLink">
+        <Label>Requirement to Target Release</Label>
+        <SourceEntity>requirement</SourceEntity>
+        <TargetEntity>requirement-target-release</TargetEntity>
+        <TargetAliases>
+            <Alias Unique="true" Name="is-linked-by-requirement-target-release"/>
+            <Alias Unique="true" Name="requirement-target-release"/>
+        </TargetAliases>
+        <Features>
+            <Feature Propagated="false" Name="UI_LINKED_ENTITIES"/>
+            <Feature Propagated="false" Name="UI_HIERARCHY"/>
+        </Features>
+        <StorageDescriptor>
+            <ReferenceStorage>
+                <ReferenceIdColumn>first-endpoint-id</ReferenceIdColumn>
+                <ReferenceLocation>IN_TARGET_ENTITY</ReferenceLocation>
+            </ReferenceStorage>
+        </StorageDescriptor>
+    </Relation>
+</Relations>

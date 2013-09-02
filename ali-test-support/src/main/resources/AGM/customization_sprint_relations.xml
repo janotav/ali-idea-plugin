@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relations TotalResults="10">
+    <Relation Name="defectToDetectedInReleaseCycleConnection_mirrored">
+        <SourceEntity>release-cycle</SourceEntity>
+        <TargetEntity>defect</TargetEntity>
+        <TargetAliases>
+            <Alias Unique="false" Name="connected-to-defect"/>
+            <Alias Unique="true" Name="defect-to-detected-rcycl"/>
+            <Alias Unique="false" Name="defect"/>
+        </TargetAliases>
+        <Features>
+            <Feature Propagated="false" Name="UI_LINKED_ENTITIES"/>
+            <Feature Propagated="false" Name="UI_HIERARCHY"/>
+        </Features>
+        <StorageDescriptor>
+            <ReferenceStorage>
+                <ReferenceIdColumn>detected-in-rcyc</ReferenceIdColumn>
+                <ReferenceLocation>IN_TARGET_ENTITY</ReferenceLocation>
+            </ReferenceStorage>
+        </StorageDescriptor>
+    </Relation>
+    <Relation Name="defectToTargetReleaseCycleConnection_mirrored">
+        <SourceEntity>release-cycle</SourceEntity>
+        <TargetEntity>defect</TargetEntity>
+        <TargetAliases>
+            <Alias Unique="false" Name="defect"/>
+            <Alias Unique="true" Name="defect-to-target-rcycl"/>
+            <Alias Unique="false" Name="connected-to-defect"/>
+        </TargetAliases>
+        <Features>
+            <Feature Propagated="false" Name="UI_LINKED_ENTITIES"/>
+            <Feature Propagated="false" Name="UI_HIERARCHY"/>
+        </Features>
+        <StorageDescriptor>
+            <ReferenceStorage>
+                <ReferenceIdColumn>target-rcyc</ReferenceIdColumn>
+                <ReferenceLocation>IN_TARGET_ENTITY</ReferenceLocation>
+            </ReferenceStorage>
+        </StorageDescriptor>
+    </Relation>
+    <Relation Name="releaseBacklogItemToSprint_mirrored">
+        <SourceEntity>release-cycle</SourceEntity>
+        <TargetEntity>release-backlog-item</TargetEntity>
+        <TargetAliases>
+            <Alias Unique="true" Name="has-parts-release-backlog-item"/>
+            <Alias Unique="true" Name="release-backlog-item"/>
+        </TargetAliases>
+        <Features>
+            <Feature Propagated="false" Name="UI_HIERARCHY"/>
+            <Feature Propagated="false" Name="UI_LINKED_ENTITIES"/>
+        </Features>
+        <StorageDescriptor>
+            <ReferenceStorage>
+                <ReferenceIdColumn>sprint-id</ReferenceIdColumn>
+                <ReferenceLocation>IN_TARGET_ENTITY</ReferenceLocation>
+            </ReferenceStorage>
+        </StorageDescriptor>
+    </Relation>
+    <Relation Name="releaseCycleToAttachmentAttachment">
+        <Label>Release Cycle to Attachments</Label>
+        <SourceEntity>release-cycle</SourceEntity>
+        <TargetEntity>attachment</TargetEntity>
+        <TargetAliases>
+            <Alias Unique="true" Name="attachment"/>
+            <Alias Unique="true" Name="attached-to-attachment"/>
+        </TargetAliases>
+        <Features>
+            <Feature Propagated="false" Name="UI_HIERARCHY"/>
+            <Feature Propagated="false" Name="UI_LINKED_ENTITIES"/>
+        </Features>
+        <StorageDescriptor>
+            <ReferenceStorage>
+                <ReferenceIdColumn>parent-id</ReferenceIdColumn>
+                <ReferenceLocation>IN_TARGET_ENTITY</ReferenceLocation>
+                <ReferenceTypeColumn>parent-type</ReferenceTypeColumn>
+            </ReferenceStorage>
+        </StorageDescriptor>
+    </Relation>
+    <Relation Name="releaseCycleToRequirementTargetCycleLink">
+        <Label>Release Cycle to Requirement Target Cycle</Label>
+        <SourceEntity>release-cycle</SourceEntity>
+        <TargetEntity>requirement-target-cycle</TargetEntity>
+        <TargetAliases>
+            <Alias Unique="true" Name="requirement-target-cycle"/>
+            <Alias Unique="true" Name="is-linked-by-requirement-target-cycle"/>
+        </TargetAliases>
+        <Features>
+            <Feature Propagated="false" Name="UI_LINKED_ENTITIES"/>
+            <Feature Propagated="false" Name="UI_HIERARCHY"/>
+        </Features>
+        <StorageDescriptor>
+            <ReferenceStorage>
+                <ReferenceIdColumn>second-endpoint-id</ReferenceIdColumn>
+                <ReferenceLocation>IN_TARGET_ENTITY</ReferenceLocation>
+            </ReferenceStorage>
+        </StorageDescriptor>
+    </Relation>
+    <Relation Name="releaseToReleaseCycleComposition_mirrored">
+        <Label>Release Cycles to parent Release</Label>
+        <SourceEntity>release-cycle</SourceEntity>
+        <TargetEntity>release</TargetEntity>
+        <TargetAliases>
+            <Alias Unique="true" Name="has-parts-release"/>
+            <Alias Unique="true" Name="release"/>
+        </TargetAliases>
+        <Features>
+            <Feature Propagated="false" Name="UI_LINKED_ENTITIES"/>
+            <Feature Propagated="false" Name="UI_HIERARCHY"/>
+        </Features>
+        <StorageDescriptor>
+            <ReferenceStorage>
+                <ReferenceIdColumn>parent-id</ReferenceIdColumn>
+                <ReferenceLocation>IN_SOURCE_ENTITY</ReferenceLocation>
+            </ReferenceStorage>
+        </StorageDescriptor>
+    </Relation>
+    <Relation Name="requirementToReleaseCycleConnection_mirrored">
+        <Label>Release Cycle to Requirement</Label>
+        <SourceEntity>release-cycle</SourceEntity>
+        <TargetEntity>requirement</TargetEntity>
+        <TargetAliases>
+            <Alias Unique="true" Name="requirement"/>
+            <Alias Unique="true" Name="connected-to-requirement"/>
+        </TargetAliases>
+        <Features>
+            <Feature Propagated="false" Name="UI_LINKED_ENTITIES"/>
+            <Feature Propagated="false" Name="UI_HIERARCHY"/>
+        </Features>
+        <AggregatedRelations>
+            <AggregatedRelation>releaseCycleToRequirementTargetCycleLink</AggregatedRelation>
+            <AggregatedRelation>requirementToRequirementTargetCycleLink</AggregatedRelation>
+        </AggregatedRelations>
+        <StorageDescriptor>
+            <AssociationStorage>
+                <AssociationEntity>requirement-target-cycle</AssociationEntity>
+                <AssociationSourceIdColumn>second-endpoint-id</AssociationSourceIdColumn>
+                <AssociationTargetIdColumn>first-endpoint-id</AssociationTargetIdColumn>
+            </AssociationStorage>
+        </StorageDescriptor>
+    </Relation>
+    <Relation Name="retrospectiveToSprint_mirrored">
+        <SourceEntity>release-cycle</SourceEntity>
+        <TargetEntity>retrospective</TargetEntity>
+        <TargetAliases>
+            <Alias Unique="true" Name="retrospective"/>
+            <Alias Unique="true" Name="depends-on-retrospective"/>
+        </TargetAliases>
+        <Features>
+            <Feature Propagated="false" Name="UI_HIERARCHY"/>
+            <Feature Propagated="false" Name="UI_LINKED_ENTITIES"/>
+        </Features>
+        <StorageDescriptor>
+            <ReferenceStorage>
+                <ReferenceIdColumn>sprint-id</ReferenceIdColumn>
+                <ReferenceLocation>IN_TARGET_ENTITY</ReferenceLocation>
+            </ReferenceStorage>
+        </StorageDescriptor>
+    </Relation>
+    <Relation Name="teamMemberTeamSprintToSprint_mirrored">
+        <SourceEntity>release-cycle</SourceEntity>
+        <TargetEntity>team-member-team-sprint</TargetEntity>
+        <TargetAliases>
+            <Alias Unique="true" Name="team-member-team-sprint"/>
+            <Alias Unique="true" Name="depends-on-team-member-team-sprint"/>
+        </TargetAliases>
+        <Features>
+            <Feature Propagated="false" Name="UI_LINKED_ENTITIES"/>
+            <Feature Propagated="false" Name="UI_HIERARCHY"/>
+        </Features>
+        <StorageDescriptor>
+            <ReferenceStorage>
+                <ReferenceIdColumn>sprint-id</ReferenceIdColumn>
+                <ReferenceLocation>IN_TARGET_ENTITY</ReferenceLocation>
+            </ReferenceStorage>
+        </StorageDescriptor>
+    </Relation>
+    <Relation Name="teamSprintToSprint_mirrored">
+        <SourceEntity>release-cycle</SourceEntity>
+        <TargetEntity>team-sprint</TargetEntity>
+        <TargetAliases>
+            <Alias Unique="true" Name="team-sprint"/>
+            <Alias Unique="true" Name="depends-on-team-sprint"/>
+        </TargetAliases>
+        <Features>
+            <Feature Propagated="false" Name="UI_HIERARCHY"/>
+            <Feature Propagated="false" Name="UI_LINKED_ENTITIES"/>
+        </Features>
+        <StorageDescriptor>
+            <ReferenceStorage>
+                <ReferenceIdColumn>sprint-id</ReferenceIdColumn>
+                <ReferenceLocation>IN_TARGET_ENTITY</ReferenceLocation>
+            </ReferenceStorage>
+        </StorageDescriptor>
+    </Relation>
+</Relations>

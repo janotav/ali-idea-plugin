@@ -16,40 +16,29 @@
 
 package com.hp.alm.ali.idea.filter;
 
-import com.hp.alm.ali.idea.model.ItemsProvider;
-import com.hp.alm.ali.idea.translate.Translator;
-import com.hp.alm.ali.idea.ui.ComboItem;
-import com.intellij.openapi.project.Project;
+import com.hp.alm.ali.idea.translate.filter.MultipleItemsTranslatedResolver;
+import org.apache.commons.lang.StringUtils;
 
+import java.util.LinkedList;
 import java.util.List;
 
-public class MultipleItemsFactory implements FilterFactory {
-
-    private Project project;
-    private final String title;
-    private final boolean multiple;
-    private final ItemsProvider<ComboItem> items;
-    private Translator translator;
-
-    public MultipleItemsFactory(Project project, String title, boolean multiple, ItemsProvider<ComboItem> items) {
-        this(project, title, multiple, items, null);
-    }
-
-    public MultipleItemsFactory(Project project, String title, boolean multiple, ItemsProvider<ComboItem> items, Translator translator) {
-        this.project = project;
-        this.title = title;
-        this.multiple = multiple;
-        this.items = items;
-        this.translator = translator;
-    }
-
-    @Override
-    public FilterChooser createChooser(String value) {
-        return new MultipleItemsChooser(project, title, multiple, items, translator, value);
-    }
+public abstract class MultipleItemsFactory implements FilterFactory {
 
     @Override
     public List<String> getCustomChoices() {
         return null;
+    }
+
+    @Override
+    public String multipleValues(List<String> values) {
+        LinkedList<String> list = new LinkedList<String>();
+        for(String value: values) {
+            if(value.isEmpty()) {
+                list.add(MultipleItemsTranslatedResolver.NO_VALUE);
+            } else {
+                list.add(value);
+            }
+        }
+        return StringUtils.join(list, ";");
     }
 }

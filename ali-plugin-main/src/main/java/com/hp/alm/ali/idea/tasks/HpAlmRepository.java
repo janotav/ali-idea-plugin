@@ -19,6 +19,7 @@ package com.hp.alm.ali.idea.tasks;
 import com.hp.alm.ali.idea.model.Entity;
 import com.hp.alm.ali.idea.entity.EntityQuery;
 import com.hp.alm.ali.idea.entity.EntityRef;
+import com.hp.alm.ali.idea.rest.RestService;
 import com.hp.alm.ali.idea.services.EntityService;
 import com.hp.alm.ali.idea.services.FavoritesService;
 import com.intellij.notification.Notification;
@@ -106,13 +107,13 @@ final public class HpAlmRepository extends TaskRepository implements Comparable<
     }
 
     public Task[] getIssues(String query, int max, long since) throws Exception {
-        if(!assignProject()) {
+        if(!_assignProject()) {
             return new Task[0];
         }
         List<HpAlmTask> list = new LinkedList<HpAlmTask>();
         loadTasks(query, defect, "defect", list);
         loadTasks(query, requirement, "requirement", list);
-        return list.toArray(new Task[0]);
+        return list.toArray(new Task[list.size()]);
     }
 
     private void loadTasks(String query, TaskConfig config, String entityType, List<HpAlmTask> tasks) {
@@ -125,7 +126,7 @@ final public class HpAlmRepository extends TaskRepository implements Comparable<
             if(config.isCustomSelected()) {
                 filter.copyFrom(config.getCustomFilter());
             } else {
-                EntityQuery stored = project.getComponent(FavoritesService.class).getFavorites(entityType).findStoredQuery(config.getStoredQuery());
+                EntityQuery stored = project.getComponent(FavoritesService.class).getStoredQuery(entityType, config.getStoredQuery());
                 if(stored != null) {
                     filter.copyFrom(stored);
                 } else {
@@ -157,11 +158,11 @@ final public class HpAlmRepository extends TaskRepository implements Comparable<
     }
 
     public Task findTask(String taskName) throws Exception {
-        if(!assignProject()) {
+        if(!_assignProject()) {
             return null;
         }
         Entity entity = project.getComponent(EntityService.class).getEntity(new EntityRef(taskName));
-        return entity == null? null: new HpAlmTask(project, entity);
+        return new HpAlmTask(project, entity);
     }
 
     public String extractId(String taskName) {
@@ -193,17 +194,16 @@ final public class HpAlmRepository extends TaskRepository implements Comparable<
         return getUrl() == null? 0: getUrl().hashCode() + 31 * new Long(id).hashCode();
     }
 
-    private synchronized boolean assignProject() {
+    synchronized boolean _assignProject() throws InterruptedException {
         if(project == null) {
             for(Project project: ProjectManager.getInstance().getOpenProjects()) {
                 if(project.getName().equals(getUrl())) {
                     this.project = project;
-                    return true;
+                    break;
                 }
             }
-            return false;
         }
-        return true;
+        return project != null && project.getComponent(RestService.class).getServerType().isConnected();
     }
 
     public int compareTo(HpAlmRepository other) {

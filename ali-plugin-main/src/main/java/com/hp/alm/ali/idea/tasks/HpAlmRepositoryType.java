@@ -16,6 +16,7 @@
 
 package com.hp.alm.ali.idea.tasks;
 
+import com.hp.alm.ali.idea.ui.tasks.HpAlmRepositoryEditor;
 import com.intellij.openapi.project.Project;
 import com.intellij.tasks.TaskRepositoryType;
 import com.intellij.tasks.config.TaskRepositoryEditor;

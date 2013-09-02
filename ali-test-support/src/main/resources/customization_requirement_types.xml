@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<types>
+    <type name="user story" id="101"/>
+    <type name="Undefined" id="0"/>
+    <type name="Folder" id="1"/>
+    <type name="Group" id="2"/>
+    <type name="Functional" id="3"/>
+    <type name="Business" id="4"/>
+    <type name="Testing" id="5"/>
+    <type name="Performance" id="6"/>
+    <type name="Business Model" id="66"/>
+</types>

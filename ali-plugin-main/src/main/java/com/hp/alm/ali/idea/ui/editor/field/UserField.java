@@ -36,7 +36,7 @@ public class UserField extends BaseField {
     public UserField(String label, final String origValue, Project project, boolean required) {
         super(label, required, origValue);
 
-        model = project.getComponent(RestService.class).getModelCustomization().getUserModel();
+        model = project.getComponent(RestService.class).getServerStrategy().getUserModel();
         comboBox = new JComboBox(model);
         comboBox.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent itemEvent) {

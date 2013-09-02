@@ -356,6 +356,11 @@ public class MayaStrategy implements ServerStrategy {
                 SettingsContent.getInstance());
     }
 
+    @Override
+    public String getFieldAlias(String entityType, String property) {
+        return property;
+    }
+
     protected List<Relation> relationList(String ... entityTypes) {
         ArrayList<Relation> relations = new ArrayList<Relation>(entityTypes.length);
         for(String entityType: entityTypes) {

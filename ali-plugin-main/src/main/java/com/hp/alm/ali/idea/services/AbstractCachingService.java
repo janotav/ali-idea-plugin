@@ -16,12 +16,14 @@
 
 package com.hp.alm.ali.idea.services;
 
-import com.hp.alm.ali.idea.rest.RestListener;
 import com.hp.alm.ali.idea.rest.RestService;
 
+import com.hp.alm.ali.idea.rest.ServerType;
+import com.hp.alm.ali.idea.rest.ServerTypeListener;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Pair;
+import com.intellij.openapi.util.Transform;
 import com.intellij.util.ui.UIUtil;
 
 import java.util.Collections;
@@ -34,7 +36,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
-public abstract class AbstractCachingService<S, T, C extends AbstractCachingService.Callback<T>>  implements RestListener {
+public abstract class AbstractCachingService<S, T, C extends AbstractCachingService.Callback<T>>  implements ServerTypeListener {
 
     private Map<S, Pair<List<C>, Future<T>>> active;
     private Map<S, RuntimeException> failures;
@@ -47,14 +49,15 @@ public abstract class AbstractCachingService<S, T, C extends AbstractCachingServ
         cache = new HashMap<S, T>();
         failures = new HashMap<S, RuntimeException>();
 
-        project.getComponent(RestService.class).addListener(this);
+        project.getComponent(RestService.class).addServerTypeListener(this);
     }
 
     protected abstract T doGetValue(S key);
 
     @Override
-    public void restConfigurationChanged() {
+    public void connectedTo(ServerType serverType) {
         synchronized (cache) {
+            active.clear();
             cache.clear();
             failures.clear();
         }
@@ -81,7 +84,7 @@ public abstract class AbstractCachingService<S, T, C extends AbstractCachingServ
             if(ex != null) {
                 throw ex;
             }
-            future = getFuture(key, null, true);
+            future = getFuture(key, null);
         }
         try {
             return future.get();
@@ -104,13 +107,14 @@ public abstract class AbstractCachingService<S, T, C extends AbstractCachingServ
                 failureInvoke(new LinkedList<C>(Collections.singletonList(callback)));
                 return;
             }
-            getFuture(key, callback, false);
+            getFuture(key, callback);
         }
     }
 
-    private Future<T> getFuture(final S key, C callback, final boolean throwException) {
+    private Future<T> getFuture(final S key, C callback) {
         Pair<List<C>, Future<T>> listAndFuture = active.get(key);
         if(listAndFuture == null) {
+            final LinkedList<C> listeners = new LinkedList<C>();
             Future<T> future = ApplicationManager.getApplication().executeOnPooledThread(new Callable<T>() {
                 public T call() {
                     final T value;
@@ -118,28 +122,26 @@ public abstract class AbstractCachingService<S, T, C extends AbstractCachingServ
                         value = doGetValue(key);
                     } catch(RuntimeException e) {
                         synchronized (cache) {
-                            List<C> listeners = active.get(key).getFirst();
-                            failures.put(key, e);
-                            failureInvoke(listeners);
-                            active.remove(key);
-                            if(throwException) {
-                                throw e;
-                            } else {
-                                return null;
+                            if(active.containsKey(key) && listeners.equals(active.get(key).getFirst())) {
+                                failures.put(key, e);
+                                active.remove(key);
                             }
+                            failureInvoke(listeners);
+                            throw e;
                         }
                     }
                     synchronized (cache) {
-                        cache.put(key, value);
+                        if(active.containsKey(key) && listeners.equals(active.get(key).getFirst())) {
+                            cache.put(key, value);
+                            active.remove(key);
+                        }
 
-                        List<C> listeners = active.get(key).getFirst();
                         invoke(listeners, value);
-                        active.remove(key);
                     }
                     return value;
                 }
             });
-            listAndFuture = new Pair<List<C>, Future<T>>(new LinkedList<C>(), future);
+            listAndFuture = new Pair<List<C>, Future<T>>(listeners, future);
             active.put(key, listAndFuture);
 
         }
@@ -188,6 +190,30 @@ public abstract class AbstractCachingService<S, T, C extends AbstractCachingServ
                     }
                 }
             });
+        }
+    }
+
+    public static <E, X> Callback<E> translate(final Callback<X> callback, final Transform<E, X> transform) {
+        if(callback instanceof Dispatch) {
+            return new DispatchCallback<E>() {
+                @Override
+                public void loaded(E data) {
+                    callback.loaded(transform.transform(data));
+                }
+            };
+        } else {
+            return new Callback<E>() {
+                @Override
+                public void loaded(E data) {
+                    callback.loaded(transform.transform(data));
+                }
+            };
+        }
+    }
+
+    protected Exception getCachedFailure(S key) {
+        synchronized (cache) {
+            return failures.get(key);
         }
     }
 

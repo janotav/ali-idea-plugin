@@ -19,9 +19,7 @@ package com.hp.alm.ali.idea.filter;
 import com.hp.alm.ali.idea.ui.chooser.PopupDialog;
 import com.intellij.openapi.project.Project;
 
-import java.util.List;
-
-public class FilterFactoryImpl implements FilterFactory {
+public class FilterFactoryImpl extends MultipleItemsFactory {
 
     private final Project project;
     private boolean multiple;
@@ -47,10 +45,5 @@ public class FilterFactoryImpl implements FilterFactory {
         }
         popup.setValue(value);
         return popup;
-    }
-
-    @Override
-    public List<String> getCustomChoices() {
-        return null;
     }
 }

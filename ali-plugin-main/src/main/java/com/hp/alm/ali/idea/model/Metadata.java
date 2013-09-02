@@ -104,7 +104,7 @@ public class Metadata {
                 allFields.put(field.getName(), field);
             }
 
-            relations.addAll(restService.getModelCustomization().getRelationList(entityName));
+            relations.addAll(restService.getServerStrategy().getRelationList(entityName));
         }
     }
 

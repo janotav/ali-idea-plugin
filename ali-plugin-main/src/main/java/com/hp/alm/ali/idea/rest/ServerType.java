@@ -31,7 +31,7 @@ public enum ServerType {
     ALM11("ALM 11", MayaStrategy.class, false),
     ALI("ALI 1.x", AliStrategy.class, false),
     ALI2("ALI 2.0", Ali2Strategy.class, false),
-    ALM12("ALM", ApolloStrategy.class, true),
+    ALM12("ALM12", ApolloStrategy.class, true),
     AGM("AGM", HorizonStrategy.class, true);
 
     private String name;

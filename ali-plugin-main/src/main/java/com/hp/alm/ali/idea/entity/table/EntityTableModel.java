@@ -323,7 +323,7 @@ public class EntityTableModel extends AbstractTableModel implements Disposable, 
 
         // no columns specified, load defaults based on server type
         if(query.getColumns().isEmpty()) {
-            query.setColumns(restService.getModelCustomization().getDefaultTableFilter(entityName).getColumns());
+            query.setColumns(restService.getServerStrategy().getDefaultTableFilter(entityName).getColumns());
         }
 
         // remove non-existing fields from filter

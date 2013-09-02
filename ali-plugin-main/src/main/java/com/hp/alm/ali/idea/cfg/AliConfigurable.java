@@ -17,12 +17,12 @@
 package com.hp.alm.ali.idea.cfg;
 
 import com.hp.alm.ali.idea.entity.EntityQuery;
+import com.hp.alm.ali.rest.client.RestClient;
 import com.hp.alm.ali.idea.ui.editor.field.HTMLAreaField;
 import com.hp.alm.ali.idea.rest.RestException;
 import com.hp.alm.ali.idea.rest.RestService;
 import com.hp.alm.ali.idea.rest.ServerType;
 import com.hp.alm.ali.idea.rest.TroubleShootService;
-import com.hp.alm.ali.rest.client.AliRestClient;
 import com.hp.alm.ali.rest.client.exception.HttpClientErrorException;
 import com.intellij.ide.ui.search.SearchableOptionsRegistrar;
 import com.intellij.openapi.application.ApplicationManager;
@@ -385,11 +385,11 @@ public class AliConfigurable implements SearchableConfigurable, DocumentListener
     }
 
     public static ServerType getServerType(String location, String domain, String project, String username, String password) throws AuthenticationFailed {
-        AliRestClient restClient = RestService.createRestClient(location, domain, project, username, password, AliRestClient.SessionStrategy.NONE);
+        RestClient restClient = RestService.createRestClient(location, domain, project, username, password, RestClient.SessionStrategy.NONE);
         return getServerType(restClient, true);
     }
 
-    public static ServerType getServerType(AliRestClient restClient, boolean loginLogout) throws AuthenticationFailed {
+    public static ServerType getServerType(RestClient restClient, boolean loginLogout) throws AuthenticationFailed {
         try {
             if(loginLogout) {
                 restClient.login();
@@ -443,7 +443,7 @@ public class AliConfigurable implements SearchableConfigurable, DocumentListener
         }
     }
 
-    private static boolean aliEnabledProject(AliRestClient restClient) {
+    private static boolean aliEnabledProject(RestClient restClient) {
         try {
             RestService.getForString(restClient, "changesets?query={0}", EntityQuery.encode("{id[0]}"));
             return true;
@@ -452,7 +452,7 @@ public class AliConfigurable implements SearchableConfigurable, DocumentListener
         }
     }
 
-    private static String handleGenericException(AliRestClient restClient, String domain, String project) {
+    private static String handleGenericException(RestClient restClient, String domain, String project) {
         try {
             if(!containsInsensitive(restClient.listDomains(), domain)) {
                 return "domain doesn't exist";

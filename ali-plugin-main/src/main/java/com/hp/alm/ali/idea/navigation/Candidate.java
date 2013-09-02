@@ -81,4 +81,12 @@ public class Candidate implements Comparable<Candidate> {
     public int getLinkEnd() {
         return linkEnd;
     }
+
+    /**
+     * @return unresolved hyperlink value
+     * @see #createLink(com.intellij.openapi.project.Project)
+     */
+    public String getHyperLink() {
+        return hyperLink;
+    }
 }

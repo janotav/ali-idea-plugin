@@ -1,0 +1,3948 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:service xmlns="http://www.w3.org/2005/Atom" xmlns:ns2="http://www.w3.org/2007/app"
+             xmlns:ns3="http://a9.com/-/spec/opensearch/1.1/" xmlns:ns4="http://www.w3.org/1999/xhtml">
+    <ns2:workspace>
+        <title>ALI Plugin Information</title>
+        <ns2:collection href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/ali/plugin-info">
+            <title>ALI Plugin Information Service</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Active Users</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/scm/active-users">
+            <title>Active users service</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>AdamServers</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/AdamServers">
+            <title>QC AdamServers</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>AppParamFolders</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/AppParamFolders">
+            <title>QC AppParamFolders</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>AppParamSetFolders</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/AppParamSetFolders">
+            <title>QC AppParamSetFolders</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>AppParamSets</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/AppParamSets">
+            <title>QC AppParamSets</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>AppParamValueSets</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/AppParamValueSets">
+            <title>QC AppParamValueSets</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>AppParamValues</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/AppParamValues">
+            <title>QC AppParamValues</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>AppParams</title>
+        <ns2:collection href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/AppParams">
+            <title>QC AppParams</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>AutHostPools</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/AutHostPools/{entity_id : [0-9]+}/audits">
+            <title>QC AutHostPools</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/AutHostPools">
+            <title>QC AutHostPools</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>AutHosts</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/AutHosts/{entity_id : [0-9]+}/audits">
+            <title>QC AutHosts</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/AutHosts">
+            <title>QC AutHosts</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Build Change Report Service</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/scm/report-build">
+            <title>Build Change Report Service</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Build Configuration Check</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/scm/build-configuration-check">
+            <title>Build Configuration Check</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Build Configuration List Service</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/scm/build-configuration-list">
+            <title>Build Configuration List Service</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Build Configuration Scm Service</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/scm/build-configuration-scm">
+            <title>Build Configuration Scm Service</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Build Providers Service</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/scm/build-providers">
+            <title>Build Providers</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Build Push Service</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/scm/build-push-service">
+            <title>Build Push service</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Build Report Graph</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/scm/report-graph">
+            <title>Build Report Graph</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Build Report Service</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/scm/report-builds">
+            <title>Build Report Service</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Build Server Check</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/scm/build-server-check">
+            <title>Build Server Check</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Build Status</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/scm/build-status">
+            <title>Build Status Service</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Build Summary</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/scm/build-summary">
+            <title>Build Summary Service</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Commit Service</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/scm/commit-service">
+            <title>Commit service</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Customization Entity Lists</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/customization/entities/{entity-name}/lists">
+            <title>Lists</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Customization Modules</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/customization/modules">
+            <title>Modules</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Customization Project Access Data</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/customization/project-access-data">
+            <title>Project Access Data</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Customization Used Lists</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/customization/used-lists">
+            <title>Lists</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>DiagnosticsMediators</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/DiagnosticsMediators/{entity_id : [0-9]+}/audits">
+            <title>QC DiagnosticsMediators</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/DiagnosticsMediators">
+            <title>QC DiagnosticsMediators</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>DiagnosticsServers</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/DiagnosticsServers/{entity_id : [0-9]+}/audits">
+            <title>QC DiagnosticsServers</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/DiagnosticsServers">
+            <title>QC DiagnosticsServers</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Enforcement Service</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/scm/enforcement-service">
+            <title>Enforcement service</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Entities properties</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/customization/entities">
+            <title>Entities</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Entity Permissions</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/customization/entities/{entity-name}/permissions">
+            <title>Permissions</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Entity subtype's fields</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/customization/entities/{entity-name}/types/{type_id}/fields">
+            <title>Subtype's customization fields</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Entity's fields</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/customization/entities/{entity-name}/fields">
+            <title>Fields</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Entity's relations</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/customization/entities/{entity-name}/relations">
+            <title>Relations</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Entity's sub-type icon</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/customization/entities/{entity-name}/types/{type_id}/icon">
+            <title>Sub Type Icon</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Entity's sub-types</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/customization/entities/{entity-name}/types">
+            <title>Sub Types</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Example</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/scm/build-tests">
+            <title>Example service</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>ExecutionItems</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/ExecutionItems">
+            <title>QC ExecutionItems</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>File Diff</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/scm/file-diff">
+            <title>File Diff</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>File View</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/scm/file-view">
+            <title>File View</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>HostCheckResultss</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/HostCheckResultss">
+            <title>QC HostCheckResultss</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>HostPools</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/HostPools/{entity_id : [0-9]+}/audits">
+            <title>QC HostPools</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/HostPools">
+            <title>QC HostPools</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>LabHosts</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/LabHosts/{entity_id : [0-9]+}/audits">
+            <title>QC LabHosts</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/LabHosts">
+            <title>QC LabHosts</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>LabTasks</title>
+        <ns2:collection href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/LabTasks">
+            <title>QC LabTasks</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Labruns</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/Labruns/{entity_id : [0-9]+}/audits">
+            <title>QC Labruns</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/Labruns">
+            <title>QC Labruns</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Licenses</title>
+        <ns2:collection href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/Licenses">
+            <title>QC Licenses</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>LoadTestDemands</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/LoadTestDemands">
+            <title>QC LoadTestDemands</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>LoadTestGroupDatas</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/LoadTestGroupDatas">
+            <title>QC LoadTestGroupDatas</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Locations</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/Locations/{entity_id : [0-9]+}/audits">
+            <title>QC Locations</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/Locations">
+            <title>QC Locations</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock AdamServers</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/AdamServers/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock AdamServers</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock AppParamFolders</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/AppParamFolders/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock AppParamFolders</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock AppParamSetFolders</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/AppParamSetFolders/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock AppParamSetFolders</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock AppParamSets</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/AppParamSets/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock AppParamSets</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock AppParamValueSets</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/AppParamValueSets/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock AppParamValueSets</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock AppParamValues</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/AppParamValues/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock AppParamValues</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock AppParams</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/AppParams/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock AppParams</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock AutHostPools</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/AutHostPools/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock AutHostPools</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock AutHosts</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/AutHosts/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock AutHosts</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock DiagnosticsMediators</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/DiagnosticsMediators/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock DiagnosticsMediators</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock DiagnosticsServers</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/DiagnosticsServers/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock DiagnosticsServers</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock ExecutionItems</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/ExecutionItems/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock ExecutionItems</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock HostCheckResultss</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/HostCheckResultss/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock HostCheckResultss</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock HostPools</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/HostPools/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock HostPools</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock LabHosts</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/LabHosts/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock LabHosts</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock LabTasks</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/LabTasks/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock LabTasks</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock Labruns</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/Labruns/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock Labruns</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock Licenses</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/Licenses/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock Licenses</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock LoadTestDemands</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/LoadTestDemands/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock LoadTestDemands</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock LoadTestGroupDatas</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/LoadTestGroupDatas/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock LoadTestGroupDatas</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock Locations</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/Locations/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock Locations</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock MIListeners</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/MIListeners/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock MIListeners</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock PALReportFolders</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/PALReportFolders/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock PALReportFolders</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock PALReportItems</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/PALReportItems/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock PALReportItems</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock PALReportTabs</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/PALReportTabs/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock PALReportTabs</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock PALReports</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/PALReports/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock PALReports</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock PCSettingss</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/PCSettingss/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock PCSettingss</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock Patchs</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/Patchs/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock Patchs</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock Personalizations</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/Personalizations/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock Personalizations</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock ProcedureDemands</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/ProcedureDemands/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock ProcedureDemands</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock ProcedureFolders</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/ProcedureFolders/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock ProcedureFolders</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock ProcedureTestSetInss</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/ProcedureTestSetInss/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock ProcedureTestSetInss</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock ProcedureTestSets</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/ProcedureTestSets/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock ProcedureTestSets</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock Procedures</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/Procedures/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock Procedures</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock ProjectPropertiess</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/ProjectPropertiess/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock ProjectPropertiess</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock ReservationDemands</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/ReservationDemands/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock ReservationDemands</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock Reservations</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/Reservations/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock Reservations</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock SecuredDatas</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/SecuredDatas/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock SecuredDatas</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock Servers</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/Servers/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock Servers</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock TargetIPs</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/TargetIPs/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock TargetIPs</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock TestSetDemands</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/TestSetDemands/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock TestSetDemands</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock TopologyFolders</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/TopologyFolders/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock TopologyFolders</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock Topologys</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/Topologys/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock Topologys</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock VudsTokens</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/VudsTokens/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock VudsTokens</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock VudsTransactions</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/VudsTransactions/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock VudsTransactions</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock app-param-runtime-values</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/app-param-runtime-values/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock app-param-runtime-values</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock application-model-entity-folders</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/application-model-entity-folders/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock application-model-entity-folders</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock application-model-entitys</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/application-model-entitys/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock application-model-entitys</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock blueprints</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/blueprints/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock blueprints</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock bpm-folders</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/bpm-folders/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock bpm-folders</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock branch-policy-links</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/branch-policy-links/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock branch-policy-links</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock build-artifacts</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/build-artifacts/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock build-artifacts</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock build-code-refs</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/build-code-refs/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock build-code-refs</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock build-contexts</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/build-contexts/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock build-contexts</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock build-instances</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/build-instances/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock build-instances</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock build-servers</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/build-servers/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock build-servers</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock build-types</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/build-types/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock build-types</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock changeset-files</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/changeset-files/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock changeset-files</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock changeset-link-associations</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/changeset-link-associations/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock changeset-link-associations</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock changesets</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/changesets/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock changesets</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock collaborations</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/collaborations/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock collaborations</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock defects</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/defects/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock defects</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock ei-field-mappings</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/ei-field-mappings/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock ei-field-mappings</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock ei-sync-pools</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/ei-sync-pools/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock ei-sync-pools</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock env-spec-builds</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/env-spec-builds/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock env-spec-builds</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock link-to-assets</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/link-to-assets/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock link-to-assets</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock paldatasets</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/paldatasets/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock paldatasets</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock pc-linked-applications</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/pc-linked-applications/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock pc-linked-applications</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock policy-items</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/policy-items/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock policy-items</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock procedure-loadtest-instances</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/procedure-loadtest-instances/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock procedure-loadtest-instances</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock procedure-run-opss</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/procedure-run-opss/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock procedure-run-opss</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock procedure-runs</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/procedure-runs/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock procedure-runs</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock procedure-testset-instance-runs</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/procedure-testset-instance-runs/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock procedure-testset-instance-runs</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock procedure-testset-runs</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/procedure-testset-runs/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock procedure-testset-runs</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock req-traces</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/req-traces/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock req-traces</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock requirements</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/requirements/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock requirements</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock reservation-env-specs</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/reservation-env-specs/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock reservation-env-specs</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock resources</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/resources/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock resources</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock results</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/results/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock results</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock scm-branch-releases</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/scm-branch-releases/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock scm-branch-releases</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock scm-branchs</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/scm-branchs/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock scm-branchs</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock scm-repositorys</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/scm-repositorys/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock scm-repositorys</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock stm-comp-types</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/stm-comp-types/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock stm-comp-types</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock stm-folders</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/stm-folders/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock stm-folders</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock stm-groups</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/stm-groups/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock stm-groups</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock stm-operation-stm-operations</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/stm-operation-stm-operations/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock stm-operation-stm-operations</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock stm-operations</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/stm-operations/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock stm-operations</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock stm-service-requirements</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/stm-service-requirements/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock stm-service-requirements</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock stm-service-stm-groups</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/stm-service-stm-groups/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock stm-service-stm-groups</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock stm-service-stm-services</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/stm-service-stm-services/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock stm-service-stm-services</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock stm-services</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/stm-services/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock stm-services</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock stm-wsdl-changes</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/stm-wsdl-changes/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock stm-wsdl-changes</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock task-for-reservations</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/task-for-reservations/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock task-for-reservations</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock test-config-coverages</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/test-config-coverages/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock test-config-coverages</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock test-criterion-coverages</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/test-criterion-coverages/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock test-criterion-coverages</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock test-criterions</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/test-criterions/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock test-criterions</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock tests</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/tests/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock tests</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>MIListeners</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/MIListeners/{entity_id : [0-9]+}/audits">
+            <title>QC MIListeners</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/MIListeners">
+            <title>QC MIListeners</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail AdamServers</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/AdamServers/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail AdamServers</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail AppParamFolders</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/AppParamFolders/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail AppParamFolders</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail AppParamSetFolders</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/AppParamSetFolders/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail AppParamSetFolders</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail AppParamSets</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/AppParamSets/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail AppParamSets</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail AppParamValueSets</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/AppParamValueSets/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail AppParamValueSets</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail AppParamValues</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/AppParamValues/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail AppParamValues</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail AppParams</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/AppParams/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail AppParams</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail AutHostPools</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/AutHostPools/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail AutHostPools</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail AutHosts</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/AutHosts/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail AutHosts</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail DiagnosticsMediators</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/DiagnosticsMediators/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail DiagnosticsMediators</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail DiagnosticsServers</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/DiagnosticsServers/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail DiagnosticsServers</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail ExecutionItems</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/ExecutionItems/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail ExecutionItems</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail HostCheckResultss</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/HostCheckResultss/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail HostCheckResultss</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail HostPools</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/HostPools/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail HostPools</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail LabHosts</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/LabHosts/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail LabHosts</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail LabTasks</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/LabTasks/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail LabTasks</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail Labruns</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/Labruns/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail Labruns</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail Licenses</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/Licenses/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail Licenses</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail LoadTestDemands</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/LoadTestDemands/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail LoadTestDemands</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail LoadTestGroupDatas</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/LoadTestGroupDatas/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail LoadTestGroupDatas</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail Locations</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/Locations/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail Locations</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail MIListeners</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/MIListeners/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail MIListeners</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail PALReportFolders</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/PALReportFolders/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail PALReportFolders</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail PALReportItems</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/PALReportItems/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail PALReportItems</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail PALReportTabs</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/PALReportTabs/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail PALReportTabs</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail PALReports</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/PALReports/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail PALReports</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail PCSettingss</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/PCSettingss/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail PCSettingss</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail Patchs</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/Patchs/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail Patchs</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail Personalizations</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/Personalizations/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail Personalizations</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail ProcedureDemands</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/ProcedureDemands/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail ProcedureDemands</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail ProcedureFolders</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/ProcedureFolders/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail ProcedureFolders</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail ProcedureTestSetInss</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/ProcedureTestSetInss/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail ProcedureTestSetInss</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail ProcedureTestSets</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/ProcedureTestSets/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail ProcedureTestSets</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail Procedures</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/Procedures/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail Procedures</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail ProjectPropertiess</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/ProjectPropertiess/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail ProjectPropertiess</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail ReservationDemands</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/ReservationDemands/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail ReservationDemands</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail Reservations</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/Reservations/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail Reservations</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail SecuredDatas</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/SecuredDatas/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail SecuredDatas</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail Servers</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/Servers/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail Servers</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail TargetIPs</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/TargetIPs/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail TargetIPs</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail TestSetDemands</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/TestSetDemands/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail TestSetDemands</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail TopologyFolders</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/TopologyFolders/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail TopologyFolders</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail Topologys</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/Topologys/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail Topologys</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail VudsTokens</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/VudsTokens/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail VudsTokens</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail VudsTransactions</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/VudsTransactions/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail VudsTransactions</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail app-param-runtime-values</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/app-param-runtime-values/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail app-param-runtime-values</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail application-model-entity-folders</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/application-model-entity-folders/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail application-model-entity-folders</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail application-model-entitys</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/application-model-entitys/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail application-model-entitys</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail blueprints</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/blueprints/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail blueprints</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail build-instances</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/build-instances/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail build-instances</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail changesets</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/changesets/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail changesets</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail collaborations</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/collaborations/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail collaborations</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail defects</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/defects/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail defects</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail ei-field-mappings</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/ei-field-mappings/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail ei-field-mappings</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail ei-sync-pools</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/ei-sync-pools/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail ei-sync-pools</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail env-spec-builds</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/env-spec-builds/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail env-spec-builds</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail link-to-assets</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/link-to-assets/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail link-to-assets</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail paldatasets</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/paldatasets/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail paldatasets</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail pc-linked-applications</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/pc-linked-applications/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail pc-linked-applications</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail procedure-loadtest-instances</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/procedure-loadtest-instances/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail procedure-loadtest-instances</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail procedure-run-opss</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/procedure-run-opss/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail procedure-run-opss</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail procedure-runs</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/procedure-runs/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail procedure-runs</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail procedure-testset-instance-runs</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/procedure-testset-instance-runs/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail procedure-testset-instance-runs</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail procedure-testset-runs</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/procedure-testset-runs/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail procedure-testset-runs</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail requirements</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/requirements/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail requirements</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail reservation-env-specs</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/reservation-env-specs/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail reservation-env-specs</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail stm-comp-types</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/stm-comp-types/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail stm-comp-types</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail stm-folders</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/stm-folders/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail stm-folders</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail stm-groups</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/stm-groups/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail stm-groups</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail stm-operation-stm-operations</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/stm-operation-stm-operations/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail stm-operation-stm-operations</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail stm-operations</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/stm-operations/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail stm-operations</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail stm-service-requirements</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/stm-service-requirements/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail stm-service-requirements</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail stm-service-stm-groups</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/stm-service-stm-groups/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail stm-service-stm-groups</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail stm-service-stm-services</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/stm-service-stm-services/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail stm-service-stm-services</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail stm-services</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/stm-services/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail stm-services</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail stm-wsdl-changes</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/stm-wsdl-changes/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail stm-wsdl-changes</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail task-for-reservations</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/task-for-reservations/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail task-for-reservations</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail test-config-coverages</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/test-config-coverages/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail test-config-coverages</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail test-criterion-coverages</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/test-criterion-coverages/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail test-criterion-coverages</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail test-criterions</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/test-criterions/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail test-criterions</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail tests</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/tests/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail tests</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Metric Report</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/scm/metric-report">
+            <title>Metric Report Service</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>PALReportFolders</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/PALReportFolders">
+            <title>QC PALReportFolders</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>PALReportItems</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/PALReportItems">
+            <title>QC PALReportItems</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>PALReportTabs</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/PALReportTabs">
+            <title>QC PALReportTabs</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>PALReports</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/PALReports">
+            <title>QC PALReports</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>PCSettingss</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/PCSettingss">
+            <title>QC PCSettingss</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Patchs</title>
+        <ns2:collection href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/Patchs">
+            <title>QC Patchs</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Personalizations</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/Personalizations">
+            <title>QC Personalizations</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>ProcedureDemands</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/ProcedureDemands">
+            <title>QC ProcedureDemands</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>ProcedureFolders</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/ProcedureFolders">
+            <title>QC ProcedureFolders</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>ProcedureTestSetInss</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/ProcedureTestSetInss">
+            <title>QC ProcedureTestSetInss</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>ProcedureTestSets</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/ProcedureTestSets">
+            <title>QC ProcedureTestSets</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Procedures</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/Procedures/{entity_id : [0-9]+}/audits">
+            <title>QC Procedures</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/Procedures">
+            <title>QC Procedures</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Project Extensions</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/customization/extensions">
+            <title>Extensions</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Project Users</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/customization/users">
+            <title>Users</title>
+            <ns2:accept>multipart/form-data</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>ProjectPropertiess</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/ProjectPropertiess/{entity_id : [0-9]+}/audits">
+            <title>QC ProjectPropertiess</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/ProjectPropertiess">
+            <title>QC ProjectPropertiess</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Release Build Status</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/scm/release-build-status">
+            <title>Release Build Status Service</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Report Service</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/scm/report">
+            <title>Report service</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>ReservationDemands</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/ReservationDemands">
+            <title>QC ReservationDemands</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Reservations</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/Reservations/{entity_id : [0-9]+}/audits">
+            <title>QC Reservations</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/Reservations">
+            <title>QC Reservations</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>SCM Branch Check</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/scm/branch-check">
+            <title>Branch check</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>SCM Pattern Converter</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/scm/pattern-converter">
+            <title>Pattren converter</title>
+            <ns2:accept>text/plain</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>SCM Pattern Service</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/scm/pattern-service">
+            <title>Patterns</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>SCM Provider Properties Service</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/scm/build-providers/{provider-type}/properties">
+            <title>Properties of provider</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/scm/providers/{provider-type}/properties">
+            <title>Properties of provider</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>SCM Providers Service</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/scm/providers">
+            <title>Providers</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>SCM Repository Check</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/scm/repository-check">
+            <title>Repository check</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>SecuredDatas</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/SecuredDatas">
+            <title>QC SecuredDatas</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Servers</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/Servers/{entity_id : [0-9]+}/audits">
+            <title>QC Servers</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/Servers">
+            <title>QC Servers</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>TargetIPs</title>
+        <ns2:collection href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/TargetIPs">
+            <title>QC TargetIPs</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Task Executor</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/scm/task-executor">
+            <title>Task executor</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>TestSetDemands</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/TestSetDemands">
+            <title>QC TestSetDemands</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>TopologyFolders</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/TopologyFolders">
+            <title>QC TopologyFolders</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Topologys</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/Topologys/{entity_id : [0-9]+}/audits">
+            <title>QC Topologys</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/Topologys">
+            <title>QC Topologys</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>VudsTokens</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/VudsTokens">
+            <title>QC VudsTokens</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>VudsTransactions</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/VudsTransactions">
+            <title>QC VudsTransactions</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>analysis-item-folders</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/analysis-item-folders">
+            <title>QC analysis-item-folders</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>analysis-items</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/analysis-items">
+            <title>QC analysis-items</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>analysis-segments</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/analysis-segments">
+            <title>QC analysis-segments</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>app-param-runtime-values</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/app-param-runtime-values">
+            <title>QC app-param-runtime-values</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>application-model-entity-folders</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/application-model-entity-folders">
+            <title>QC application-model-entity-folders</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>application-model-entitys</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/application-model-entitys">
+            <title>QC application-model-entitys</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>assets-relations of resources</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/resources/{entity_id : [0-9]+}/assets-relations">
+            <title>QC assets-relations of resources</title>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>assets-relations of tests</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/tests/{entity_id : [0-9]+}/assets-relations">
+            <title>QC assets-relations of tests</title>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>attachments</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/test-set-folders/{parent_entity_id: [0-9]+}/attachments">
+            <title>QC attachments</title>
+            <ns2:accept>multipart/form-data</ns2:accept>
+            <ns2:accept>application/octet-stream</ns2:accept>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/collaborations/{parent_entity_id: [0-9]+}/attachments">
+            <title>QC attachments</title>
+            <ns2:accept>multipart/form-data</ns2:accept>
+            <ns2:accept>application/octet-stream</ns2:accept>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/test-instances/{parent_entity_id: [0-9]+}/attachments">
+            <title>QC attachments</title>
+            <ns2:accept>multipart/form-data</ns2:accept>
+            <ns2:accept>application/octet-stream</ns2:accept>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/requirements/{parent_entity_id: [0-9]+}/attachments">
+            <title>QC attachments</title>
+            <ns2:accept>multipart/form-data</ns2:accept>
+            <ns2:accept>application/octet-stream</ns2:accept>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/test-configs/{parent_entity_id: [0-9]+}/attachments">
+            <title>QC attachments</title>
+            <ns2:accept>multipart/form-data</ns2:accept>
+            <ns2:accept>application/octet-stream</ns2:accept>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/test-folders/{parent_entity_id: [0-9]+}/attachments">
+            <title>QC attachments</title>
+            <ns2:accept>multipart/form-data</ns2:accept>
+            <ns2:accept>application/octet-stream</ns2:accept>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/paldatasets/{parent_entity_id: [0-9]+}/attachments">
+            <title>QC attachments</title>
+            <ns2:accept>multipart/form-data</ns2:accept>
+            <ns2:accept>application/octet-stream</ns2:accept>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/bpm-folders/{parent_entity_id: [0-9]+}/attachments">
+            <title>QC attachments</title>
+            <ns2:accept>multipart/form-data</ns2:accept>
+            <ns2:accept>application/octet-stream</ns2:accept>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/test-sets/{parent_entity_id: [0-9]+}/attachments">
+            <title>QC attachments</title>
+            <ns2:accept>multipart/form-data</ns2:accept>
+            <ns2:accept>application/octet-stream</ns2:accept>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/releases/{parent_entity_id: [0-9]+}/attachments">
+            <title>QC attachments</title>
+            <ns2:accept>multipart/form-data</ns2:accept>
+            <ns2:accept>application/octet-stream</ns2:accept>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/defects/{parent_entity_id: [0-9]+}/attachments">
+            <title>QC attachments</title>
+            <ns2:accept>multipart/form-data</ns2:accept>
+            <ns2:accept>application/octet-stream</ns2:accept>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/tests/{parent_entity_id: [0-9]+}/attachments">
+            <title>QC attachments</title>
+            <ns2:accept>multipart/form-data</ns2:accept>
+            <ns2:accept>application/octet-stream</ns2:accept>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/runs/{parent_entity_id: [0-9]+}/attachments">
+            <title>QC attachments</title>
+            <ns2:accept>multipart/form-data</ns2:accept>
+            <ns2:accept>application/octet-stream</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>aut-hosts</title>
+        <ns2:collection href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/aut-hosts">
+            <title>QC aut-hosts</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>aut-pools</title>
+        <ns2:collection href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/aut-pools">
+            <title>QC aut-pools</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>blueprints</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/blueprints/{entity_id : [0-9]+}/audits">
+            <title>QC blueprints</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/blueprints">
+            <title>QC blueprints</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>bpm-folders</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/bpm-folders">
+            <title>QC bpm-folders</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>branch-policy-links</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/branch-policy-links">
+            <title>QC branch-policy-links</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/branch-policy-links">
+            <title>QC branch-policy-links</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>build-artifacts</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/build-artifacts/{entity_id : [0-9]+}/audits">
+            <title>QC build-artifacts</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/build-artifacts">
+            <title>QC build-artifacts</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/build-artifacts">
+            <title>QC build-artifacts</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>build-code-refs</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/build-code-refs/{entity_id : [0-9]+}/audits">
+            <title>QC build-code-refs</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/build-code-refs">
+            <title>QC build-code-refs</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/build-code-refs">
+            <title>QC build-code-refs</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>build-contexts</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/build-contexts">
+            <title>QC build-contexts</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>build-instances</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/build-instances/{entity_id : [0-9]+}/audits">
+            <title>QC build-instances</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/build-instances">
+            <title>QC build-instances</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/build-instances">
+            <title>QC build-instances</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>build-servers</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/build-servers/{entity_id : [0-9]+}/audits">
+            <title>QC build-servers</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/build-servers">
+            <title>QC build-servers</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/build-servers">
+            <title>QC build-servers</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>build-types</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/build-types/{entity_id : [0-9]+}/audits">
+            <title>QC build-types</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/build-types">
+            <title>QC build-types</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/build-types">
+            <title>QC build-types</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>changeset-files</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/changeset-files/{entity_id : [0-9]+}/audits">
+            <title>QC changeset-files</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/changeset-files">
+            <title>QC changeset-files</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/changeset-files">
+            <title>QC changeset-files</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>changeset-link-associations</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/changeset-link-associations">
+            <title>QC changeset-link-associations</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>changeset-links</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/changeset-links">
+            <title>QC changeset-links</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>changesets</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/changesets/{entity_id : [0-9]+}/audits">
+            <title>QC changesets</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/changesets">
+            <title>QC changesets</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/changesets">
+            <title>QC changesets</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>collaborations</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/collaborations">
+            <title>QC collaborations</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/collaborations">
+            <title>QC collaborations</title>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>dashboard-folders</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/dashboard-folders">
+            <title>QC dashboard-folders</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>dashboard-pages</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/dashboard-pages">
+            <title>QC dashboard-pages</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>defect-links</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/defect-links">
+            <title>QC defect-links</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>defects</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/defects/{entity_id : [0-9]+}/audits">
+            <title>QC defects</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/defects">
+            <title>QC defects</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>design-steps</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/design-steps">
+            <title>QC design-steps</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>diagnostics-mediators</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/diagnostics-mediators">
+            <title>QC diagnostics-mediators</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>diagnostics-servers</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/diagnostics-servers">
+            <title>QC diagnostics-servers</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>ei-field-mappings</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/ei-field-mappings/{entity_id : [0-9]+}/audits">
+            <title>QC ei-field-mappings</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/ei-field-mappings">
+            <title>QC ei-field-mappings</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>ei-sync-pools</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/ei-sync-pools/{entity_id : [0-9]+}/audits">
+            <title>QC ei-sync-pools</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/ei-sync-pools">
+            <title>QC ei-sync-pools</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>env-spec-builds</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/env-spec-builds">
+            <title>QC env-spec-builds</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>event-log-reads</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/event-log-reads">
+            <title>QC event-log-reads</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>event-logs</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/event-logs">
+            <title>QC event-logs</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>execution-items</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/execution-items">
+            <title>QC execution-items</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>favorite-folders</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/favorite-folders">
+            <title>QC favorite-folders</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/favorite-folders">
+            <title>QC favorite-folders</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>favorites</title>
+        <ns2:collection href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/favorites">
+            <title>QC favorites</title>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+        <ns2:collection href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/favorites">
+            <title>QC favorites</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>host-check-results</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/host-check-results">
+            <title>QC host-check-results</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>host-pools</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/host-pools">
+            <title>QC host-pools</title>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>hosts</title>
+        <ns2:collection href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/hosts">
+            <title>QC hosts</title>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>items</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/dashboard-pages/{parent_entity_id: [0-9]+}/items">
+            <title>QC items</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>labruns</title>
+        <ns2:collection href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/labruns">
+            <title>QC labruns</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>labtasks</title>
+        <ns2:collection href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/labtasks">
+            <title>QC labtasks</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>ldap token</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/ldap-token">
+            <title>ldap</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>licenses</title>
+        <ns2:collection href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/licenses">
+            <title>QC licenses</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>link-to-assets</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/link-to-assets">
+            <title>QC link-to-assets</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>load-test-demands</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/tests/{parent_entity_id: [0-9]+}/load-test-demands">
+            <title>QC load-test-demands</title>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>load-test-groups-data</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/tests/{parent_entity_id: [0-9]+}/load-test-groups-data">
+            <title>QC load-test-groups-data</title>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>locations</title>
+        <ns2:collection href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/locations">
+            <title>QC locations</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>milisteners</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/milisteners">
+            <title>QC milisteners</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>paldatasets</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/paldatasets">
+            <title>QC paldatasets</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/paldatasets">
+            <title>QC paldatasets</title>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>palreportfolders</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/palreportfolders">
+            <title>QC palreportfolders</title>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>palreportitems</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/palreportitems">
+            <title>QC palreportitems</title>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>palreports</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/palreports">
+            <title>QC palreports</title>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>palreporttabs</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/palreporttabs">
+            <title>QC palreporttabs</title>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>patches</title>
+        <ns2:collection href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/patches">
+            <title>QC patches</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>pc-linked-applications</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/pc-linked-applications">
+            <title>QC pc-linked-applications</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/pc-linked-applications">
+            <title>QC pc-linked-applications</title>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>pc-settings</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/pc-settings">
+            <title>QC pc-settings</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>personalizations</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/personalizations">
+            <title>QC personalizations</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/personalizations">
+            <title>QC personalizations</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>policy-items</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/policy-items">
+            <title>QC policy-items</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/policy-items">
+            <title>QC policy-items</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>procedure-folders</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/procedure-folders">
+            <title>QC procedure-folders</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>procedure-loadtest-instances</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/procedure-loadtest-instances">
+            <title>QC procedure-loadtest-instances</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>procedure-run-opss</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/procedure-run-opss">
+            <title>QC procedure-run-opss</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>procedure-runs</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/procedure-runs">
+            <title>QC procedure-runs</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/procedure-runs">
+            <title>QC procedure-runs</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>procedure-test-sets</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/procedures/{parent_entity_id: [0-9]+}/procedure-test-sets">
+            <title>QC procedure-test-sets</title>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>procedure-testset-instance-runs</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/procedure-testset-instance-runs">
+            <title>QC procedure-testset-instance-runs</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/procedure-testset-instance-runs">
+            <title>QC procedure-testset-instance-runs</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>procedure-testset-runs</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/procedure-testset-runs">
+            <title>QC procedure-testset-runs</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/procedure-testset-runs">
+            <title>QC procedure-testset-runs</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>procedures</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/procedures">
+            <title>QC procedures</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>project audits</title>
+        <ns2:collection href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/audits">
+            <title>audits</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>project-properties</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/project-properties">
+            <title>QC project-properties</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>release-cycles</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/release-cycles">
+            <title>QC release-cycles</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>release-folders</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/release-folders">
+            <title>QC release-folders</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>releases</title>
+        <ns2:collection href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/releases">
+            <title>QC releases</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>req-traces</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/req-traces">
+            <title>QC req-traces</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>requirement-coverages</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/requirement-coverages">
+            <title>QC requirement-coverages</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>requirement-target-cycles</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/requirement-target-cycles">
+            <title>QC requirement-target-cycles</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>requirement-target-releases</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/requirement-target-releases">
+            <title>QC requirement-target-releases</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>requirements</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/requirements/{entity_id : [0-9]+}/audits">
+            <title>QC requirements</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/requirements">
+            <title>QC requirements</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>reservation-demands</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/reservations/{parent_entity_id: [0-9]+}/reservation-demands">
+            <title>QC reservation-demands</title>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>reservation-env-specs</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/reservation-env-specs">
+            <title>QC reservation-env-specs</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>reservations</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/reservations">
+            <title>QC reservations</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>resource-folders</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/resource-folders/{entity_id : [0-9]+}/audits">
+            <title>QC resource-folders</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/resource-folders">
+            <title>QC resource-folders</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>resources</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/resources/{entity_id : [0-9]+}/audits">
+            <title>QC resources</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/resources">
+            <title>QC resources</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>results</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/results/{entity_id : [0-9]+}/audits">
+            <title>QC results</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/results">
+            <title>QC results</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>run-steps</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/runs/{parent_entity_id: [0-9]+}/run-steps">
+            <title>QC run-steps</title>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>runs</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/runs/{entity_id : [0-9]+}/audits">
+            <title>QC runs</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/runs">
+            <title>QC runs</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>scm-branch-releases</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/scm-branch-releases">
+            <title>QC scm-branch-releases</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/scm-branch-releases">
+            <title>QC scm-branch-releases</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>scm-branches</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/scm-branches">
+            <title>QC scm-branches</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>scm-branchs</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/scm-branchs/{entity_id : [0-9]+}/audits">
+            <title>QC scm-branchs</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/scm-branchs">
+            <title>QC scm-branchs</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>scm-repositories</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/scm-repositories">
+            <title>QC scm-repositories</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>scm-repositorys</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/scm-repositorys/{entity_id : [0-9]+}/audits">
+            <title>QC scm-repositorys</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/scm-repositorys">
+            <title>QC scm-repositorys</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>servers</title>
+        <ns2:collection href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/servers">
+            <title>QC servers</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>stm-comp-types</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/stm-comp-types/{entity_id : [0-9]+}/audits">
+            <title>QC stm-comp-types</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/stm-comp-types">
+            <title>QC stm-comp-types</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>stm-folders</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/stm-folders/{entity_id : [0-9]+}/audits">
+            <title>QC stm-folders</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/stm-folders">
+            <title>QC stm-folders</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>stm-groups</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/stm-groups/{entity_id : [0-9]+}/audits">
+            <title>QC stm-groups</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/stm-groups">
+            <title>QC stm-groups</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>stm-operation-stm-operations</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/stm-operation-stm-operations">
+            <title>QC stm-operation-stm-operations</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>stm-operations</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/stm-operations/{entity_id : [0-9]+}/audits">
+            <title>QC stm-operations</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/stm-operations">
+            <title>QC stm-operations</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>stm-service-requirements</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/stm-service-requirements">
+            <title>QC stm-service-requirements</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>stm-service-stm-groups</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/stm-service-stm-groups">
+            <title>QC stm-service-stm-groups</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>stm-service-stm-services</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/stm-service-stm-services">
+            <title>QC stm-service-stm-services</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>stm-services</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/stm-services/{entity_id : [0-9]+}/audits">
+            <title>QC stm-services</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/stm-services">
+            <title>QC stm-services</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>stm-wsdl-changes</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/stm-wsdl-changes/{entity_id : [0-9]+}/audits">
+            <title>QC stm-wsdl-changes</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/stm-wsdl-changes">
+            <title>QC stm-wsdl-changes</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>target-ips</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/target-ips">
+            <title>QC target-ips</title>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>task-for-reservations</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/task-for-reservations">
+            <title>QC task-for-reservations</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>task-logs</title>
+        <ns2:collection href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/task-logs">
+            <title>QC task-logs</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>tasks</title>
+        <ns2:collection href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/tasks">
+            <title>QC tasks</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>test-config-coverages</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/test-config-coverages">
+            <title>QC test-config-coverages</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>test-configs</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/test-configs/{entity_id : [0-9]+}/audits">
+            <title>QC test-configs</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/test-configs">
+            <title>QC test-configs</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>test-criterion-coverages</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/test-criterion-coverages">
+            <title>QC test-criterion-coverages</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>test-criterions</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/test-criterions">
+            <title>QC test-criterions</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>test-folders</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/test-folders/{entity_id : [0-9]+}/audits">
+            <title>QC test-folders</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/test-folders">
+            <title>QC test-folders</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>test-instances</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/test-instances/{entity_id : [0-9]+}/audits">
+            <title>QC test-instances</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/test-instances">
+            <title>QC test-instances</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>test-set-folders</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/test-set-folders/{entity_id : [0-9]+}/audits">
+            <title>QC test-set-folders</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/test-set-folders">
+            <title>QC test-set-folders</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>test-sets</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/test-sets/{entity_id : [0-9]+}/audits">
+            <title>QC test-sets</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/test-sets">
+            <title>QC test-sets</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>tests</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/tests/{entity_id : [0-9]+}/audits">
+            <title>QC tests</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/tests">
+            <title>QC tests</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>topologies</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/topologies">
+            <title>QC topologies</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>topology-folders</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/topology-folders">
+            <title>QC topology-folders</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>user-settings</title>
+        <ns2:collection
+                href="http://mydtqc01.isr.hp.com:8080/qcbin/rest/domains/{domain}/projects/{project}/user-settings">
+            <title>QC user-settings</title>
+            <ns2:accept>application/json;type=collection</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+            <ns2:accept>application/json</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+</ns2:service>

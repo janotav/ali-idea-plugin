@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Users>
+    <User Name="tester" FullName="Integration Test">
+        <userAvatarCache>-1</userAvatarCache>
+        <description></description>
+        <email>dev@null</email>
+        <phone>1234</phone>
+        <scmUserName></scmUserName>
+        <UserActive>true</UserActive>
+    </User>
+</Users>

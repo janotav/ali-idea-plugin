@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<types>
+    <type name="Theme" id="72"/>
+    <type name="Folder" id="1"/>
+    <type name="User Story" id="70"/>
+    <type name="Group Story" id="0"/>
+    <type name="Feature" id="71"/>
+</types>

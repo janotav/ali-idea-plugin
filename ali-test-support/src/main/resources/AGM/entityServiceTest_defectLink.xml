@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Entities TotalResults="1">
+    <Entity Type="defect-link">
+        <Fields>
+            <Field Name="id">
+                <Value>2763</Value>
+            </Field>
+            <Field Name="link-type">
+                <Value></Value>
+            </Field>
+            <Field Name="first-endpoint-id">
+                <Value>86</Value>
+            </Field>
+            <Field Name="second-endpoint-name">
+                <Value>UI does not work</Value>
+            </Field>
+            <Field Name="second-endpoint-status">
+                <Value>Not Covered</Value>
+            </Field>
+            <Field Name="owner">
+                <Value>null@localhost</Value>
+            </Field>
+            <Field Name="creation-time">
+                <Value>2012-09-06</Value>
+            </Field>
+            <Field Name="second-endpoint-type">
+                <Value>defect</Value>
+            </Field>
+            <Field Name="comment">
+                <Value></Value>
+            </Field>
+            <Field Name="second-endpoint-id">
+                <Value>88</Value>
+            </Field>
+        </Fields>
+        <RelatedEntities/>
+    </Entity>
+</Entities>

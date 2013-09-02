@@ -24,8 +24,6 @@ import com.hp.alm.ali.idea.cfg.AliProjectConfiguration;
 import com.hp.alm.ali.idea.entity.EntityQuery;
 import com.hp.alm.ali.idea.model.Field;
 import com.hp.alm.ali.idea.ui.chooser.PopupDialog;
-import com.hp.alm.ali.idea.model.Favorites;
-import com.hp.alm.ali.idea.services.FavoritesService;
 import com.hp.alm.ali.idea.entity.tree.FavoritesModel;
 import com.hp.alm.ali.idea.ui.MultipleItemsDialog;
 import com.intellij.openapi.application.ApplicationManager;
@@ -46,11 +44,9 @@ import java.util.List;
 public class ColumnHeaderPopup extends JPopupMenu {
 
     private String entityType;
-    private FavoritesService favoritesService;
 
     public ColumnHeaderPopup(final Project project, final JTable table, final EntityTableModel model, boolean useFavorites) {
         this.entityType = model.getFilter().getEntityType();
-        this.favoritesService = project.getComponent(FavoritesService.class);
 
         final AliConfiguration projConf = project.getComponent(AliProjectConfiguration.class);
         final AliConfiguration conf = ApplicationManager.getApplication().getComponent(AliConfiguration.class);
@@ -100,8 +96,6 @@ public class ColumnHeaderPopup extends JPopupMenu {
             JMenu stored = new JMenu("Stored Queries");
             add(stored);
 
-            final Favorites favorites = getFavorites();
-
             JMenuItem alm = new JMenuItem("Server Favorites");
             alm.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent actionEvent) {
@@ -118,11 +112,11 @@ public class ColumnHeaderPopup extends JPopupMenu {
             stored.add(alm);
             stored.add(new JSeparator());
 
-            List<EntityQuery> storedFilters = favorites.getStoredFilters();
+            final List<EntityQuery> storedFilters = projConf.getStoredFilters(entityType);
             for(EntityQuery f: sort(storedFilters)) {
                 stored.add(addItem(f, "project", model));
             }
-            List<EntityQuery> globalFilters = favorites.getGlobalFilters();
+            final List<EntityQuery> globalFilters = conf.getStoredFilters(entityType);
             for(EntityQuery f: sort(globalFilters)) {
                 stored.add(addItem(f, "global", model));
             }
@@ -130,7 +124,7 @@ public class ColumnHeaderPopup extends JPopupMenu {
             JMenuItem savePrj = new JMenuItem("Store Current (in project)");
             savePrj.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent actionEvent) {
-                    storeQuery(projConf, model.getFilter(), getFavorites().getStoredFilters());
+                    storeQuery(projConf, model.getFilter(), storedFilters);
                 }
             });
             add(savePrj);
@@ -138,7 +132,7 @@ public class ColumnHeaderPopup extends JPopupMenu {
             JMenuItem saveGlobal = new JMenuItem("Store Current (global)");
             saveGlobal.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent actionEvent) {
-                    storeQuery(conf, model.getFilter(), getFavorites().getGlobalFilters());
+                    storeQuery(conf, model.getFilter(), globalFilters);
                 }
             });
             add(saveGlobal);
@@ -147,15 +141,11 @@ public class ColumnHeaderPopup extends JPopupMenu {
                 final JMenuItem  manage = new JMenuItem("Manage Queries");
                 manage.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent actionEvent) {
-                        Favorites favorites = getFavorites();
-                        List<EntityQuery> storedFilters = favorites.getStoredFilters();
-                        List<EntityQuery> globalFilters = favorites.getGlobalFilters();
-
                         List<String> list = new LinkedList<String>();
                         for(EntityQuery f: storedFilters) {
                             list.add(f.getName() + " (project)");
                         }
-                        for(EntityQuery f: favorites.getGlobalFilters()) {
+                        for(EntityQuery f: globalFilters) {
                             list.add(f.getName() + " (global)");
                         }
                         String s = (String) JOptionPane.showInputDialog(
@@ -173,7 +163,6 @@ public class ColumnHeaderPopup extends JPopupMenu {
                             } else {
                                 conf.dropFilter(entityType, globalFilters.get(i - storedFilters.size()).getName());
                             }
-                            favoritesService.invalidate(entityType);
                         }
                     }
                 });
@@ -216,12 +205,7 @@ public class ColumnHeaderPopup extends JPopupMenu {
             EntityQuery clone = filter.clone();
             clone.setName(name);
             conf.storeFilter(entityType, clone);
-            favoritesService.invalidate(entityType);
         }
-    }
-
-    private Favorites getFavorites() {
-        return favoritesService.getFavorites(entityType);
     }
 
     private List<EntityQuery> sort(List<EntityQuery> list) {

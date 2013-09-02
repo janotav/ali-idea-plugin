@@ -101,7 +101,7 @@ public class PageBar extends JPanel implements ServerTypeListener {
     public void initialize() {
         removeExistingComponents();
 
-        List<DetailContent> list = restService.getModelCustomization().getDetailContent(entity);
+        List<DetailContent> list = restService.getServerStrategy().getDetailContent(entity);
         for(DetailContent content: list) {
             addContent(content);
         }

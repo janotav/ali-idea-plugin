@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Fields>
+    <Field PhysicalName="LN_CREATED_BY" Name="owner" Label="Created By">
+        <Size>60</Size>
+        <History>false</History>
+        <Required>false</Required>
+        <System>true</System>
+        <Type>UsersList</Type>
+        <Verify>false</Verify>
+        <Virtual>false</Virtual>
+        <Active>true</Active>
+        <Editable>false</Editable>
+        <Filterable>true</Filterable>
+        <Groupable>true</Groupable>
+        <SupportsMultivalue>false</SupportsMultivalue>
+        <Visible>true</Visible>
+        <MemoContainsHtml>false</MemoContainsHtml>
+        <VersionControlled>false</VersionControlled>
+    </Field>
+    <Field PhysicalName="LN_CREATION_DATE" Name="creation-time" Label="Creation Date">
+        <Size>1</Size>
+        <History>false</History>
+        <Required>false</Required>
+        <System>true</System>
+        <Type>Date</Type>
+        <Verify>false</Verify>
+        <Virtual>false</Virtual>
+        <Active>true</Active>
+        <Editable>false</Editable>
+        <Filterable>true</Filterable>
+        <Groupable>false</Groupable>
+        <SupportsMultivalue>false</SupportsMultivalue>
+        <Visible>true</Visible>
+        <MemoContainsHtml>false</MemoContainsHtml>
+        <VersionControlled>false</VersionControlled>
+    </Field>
+    <Field PhysicalName="LN_BUG_ID" Name="first-endpoint-id" Label="Defect ID">
+        <Size>10</Size>
+        <History>false</History>
+        <Required>true</Required>
+        <System>true</System>
+        <Type>Number</Type>
+        <Verify>false</Verify>
+        <Virtual>false</Virtual>
+        <Active>true</Active>
+        <Editable>false</Editable>
+        <Filterable>true</Filterable>
+        <Groupable>false</Groupable>
+        <SupportsMultivalue>false</SupportsMultivalue>
+        <Visible>true</Visible>
+        <MemoContainsHtml>false</MemoContainsHtml>
+        <VersionControlled>false</VersionControlled>
+        <References>
+            <RelationReference RelationName="defectToDefectLinkLink_mirrored" ReferencedEntityType="defect"/>
+        </References>
+    </Field>
+    <Field PhysicalName="LN_LINK_COMMENT" Name="comment" Label="Link Comment">
+        <Size>255</Size>
+        <History>false</History>
+        <Required>false</Required>
+        <System>true</System>
+        <Type>String</Type>
+        <Verify>false</Verify>
+        <Virtual>false</Virtual>
+        <Active>true</Active>
+        <Editable>true</Editable>
+        <Filterable>true</Filterable>
+        <Groupable>false</Groupable>
+        <SupportsMultivalue>false</SupportsMultivalue>
+        <Visible>true</Visible>
+        <MemoContainsHtml>false</MemoContainsHtml>
+        <VersionControlled>false</VersionControlled>
+    </Field>
+    <Field PhysicalName="LN_LINK_ID" Name="id" Label="Link ID">
+        <Size>10</Size>
+        <History>false</History>
+        <Required>false</Required>
+        <System>true</System>
+        <Type>Number</Type>
+        <Verify>false</Verify>
+        <Virtual>false</Virtual>
+        <Active>true</Active>
+        <Editable>false</Editable>
+        <Filterable>true</Filterable>
+        <Groupable>false</Groupable>
+        <SupportsMultivalue>false</SupportsMultivalue>
+        <Visible>true</Visible>
+        <MemoContainsHtml>false</MemoContainsHtml>
+        <VersionControlled>false</VersionControlled>
+    </Field>
+    <Field PhysicalName="LN_LINK_TYPE" Name="link-type" Label="Link Type">
+        <Size>60</Size>
+        <History>false</History>
+        <List-Id>279</List-Id>
+        <Required>false</Required>
+        <System>true</System>
+        <Type>LookupList</Type>
+        <Verify>true</Verify>
+        <Virtual>false</Virtual>
+        <Active>true</Active>
+        <Editable>true</Editable>
+        <Filterable>true</Filterable>
+        <Groupable>true</Groupable>
+        <SupportsMultivalue>false</SupportsMultivalue>
+        <Visible>true</Visible>
+        <MemoContainsHtml>false</MemoContainsHtml>
+        <VersionControlled>false</VersionControlled>
+    </Field>
+    <Field PhysicalName="LN_ENTITY_STATUS" Name="second-endpoint-status" Label="Linked By Status">
+        <Size>70</Size>
+        <History>false</History>
+        <Required>false</Required>
+        <System>true</System>
+        <Type>String</Type>
+        <Verify>false</Verify>
+        <Virtual>true</Virtual>
+        <Active>true</Active>
+        <Editable>false</Editable>
+        <Filterable>false</Filterable>
+        <Groupable>false</Groupable>
+        <SupportsMultivalue>false</SupportsMultivalue>
+        <Visible>true</Visible>
+        <MemoContainsHtml>false</MemoContainsHtml>
+        <VersionControlled>false</VersionControlled>
+    </Field>
+    <Field PhysicalName="LN_ENTITY_ID" Name="second-endpoint-id" Label="Linked Entity ID">
+        <Size>10</Size>
+        <History>false</History>
+        <Required>true</Required>
+        <System>true</System>
+        <Type>Number</Type>
+        <Verify>false</Verify>
+        <Virtual>false</Virtual>
+        <Active>true</Active>
+        <Editable>false</Editable>
+        <Filterable>true</Filterable>
+        <Groupable>false</Groupable>
+        <SupportsMultivalue>false</SupportsMultivalue>
+        <Visible>true</Visible>
+        <MemoContainsHtml>false</MemoContainsHtml>
+        <VersionControlled>false</VersionControlled>
+        <References ReferenceTypeField="second-endpoint-type">
+            <RelationReference RelationName="requirementToDefectLinkLink_mirrored" ReferencedEntityType="requirement"/>
+            <RelationReference RelationName="defectToDefectLinkLinkLeft_mirrored" ReferencedEntityType="defect"/>
+        </References>
+    </Field>
+    <Field PhysicalName="LN_ENTITY_NAME" Name="second-endpoint-name" Label="Linked Entity Name">
+        <Size>255</Size>
+        <History>false</History>
+        <Required>false</Required>
+        <System>true</System>
+        <Type>String</Type>
+        <Verify>false</Verify>
+        <Virtual>true</Virtual>
+        <Active>true</Active>
+        <Editable>false</Editable>
+        <Filterable>false</Filterable>
+        <Groupable>false</Groupable>
+        <SupportsMultivalue>false</SupportsMultivalue>
+        <Visible>true</Visible>
+        <MemoContainsHtml>false</MemoContainsHtml>
+        <VersionControlled>false</VersionControlled>
+    </Field>
+    <Field PhysicalName="LN_ENTITY_TYPE" Name="second-endpoint-type" Label="Linked Entity Type">
+        <Size>40</Size>
+        <History>false</History>
+        <Required>true</Required>
+        <System>true</System>
+        <Type>String</Type>
+        <Verify>false</Verify>
+        <Virtual>false</Virtual>
+        <Active>true</Active>
+        <Editable>false</Editable>
+        <Filterable>true</Filterable>
+        <Groupable>false</Groupable>
+        <SupportsMultivalue>false</SupportsMultivalue>
+        <Visible>true</Visible>
+        <MemoContainsHtml>false</MemoContainsHtml>
+        <VersionControlled>false</VersionControlled>
+    </Field>
+</Fields>

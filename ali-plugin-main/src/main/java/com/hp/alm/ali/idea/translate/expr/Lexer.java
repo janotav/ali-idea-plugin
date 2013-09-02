@@ -47,8 +47,8 @@ class Lexer {
                 do {
                     ++end;
                 } while(end < str.length() && str.charAt(end) != str.charAt(pos));
-                if(pos == end || str.charAt(end) != str.charAt(pos)) {
-                    throw new IllegalArgumentException("Unterminated literal at position "+pos+": "+str.substring(pos));
+                if(end == str.length() || str.charAt(end) != str.charAt(pos)) {
+                    throw new ParserException("Unterminated literal", pos);
                 }
                 pos = end + 1;
                 next = new Lexeme(startPos, end, str.substring(startPos + 1, end), Type.VALUE);
@@ -60,8 +60,13 @@ class Lexer {
                 }
 
                 if(str.substring(pos).toUpperCase().startsWith(type.getRepr())) {
-                    next = new Lexeme(startPos, startPos + type.getRepr().length(), str.substring(startPos, startPos + type.getRepr().length()), type);
-                    pos += type.getRepr().length();
+                    int len = type.getRepr().length();
+                    if(Character.isAlphabetic(type.getRepr().charAt(len - 1)) && str.length() > pos + len && Character.isAlphabetic(str.charAt(pos + len))) {
+                        // don't split words to match lexeme
+                        continue;
+                    }
+                    next = new Lexeme(startPos, startPos + len, str.substring(startPos, startPos + len), type);
+                    pos += len;
                     return next;
                 }
             }
@@ -74,7 +79,7 @@ class Lexer {
     }
 
     private boolean allowedInLiteral(char c) {
-        return !Character.isWhitespace(c) && c != '(' && c != ')' && c != '<' && c != '>' && c != '=';
+        return !Character.isWhitespace(c) && c != '(' && c != ')' && c != '<' && c != '>' && c != '=' && c != '"' && c!= '\'';
     }
 
     Lexeme consume() {
@@ -86,18 +91,9 @@ class Lexer {
     Lexeme expect(Type type) {
         Lexeme lexeme = next();
         if(lexeme.type != type) {
-            throw new IllegalStateException("Expected "+type+" at position "+pos+": "+str.substring(pos));
+            throw new ParserException("Expected "+type.getRepr(), lexeme.start);
         }
         next = null;
         return lexeme;
-    }
-
-
-    int getPosition() {
-        return pos;
-    }
-
-    String getRemaining() {
-        return str.substring(pos);
     }
 }

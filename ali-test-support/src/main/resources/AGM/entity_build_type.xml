@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Entity Type="build-type">
+    <Fields>
+        <Field Name="sid">
+            <Value>myApp</Value>
+        </Field>
+        <Field Name="enabled">
+            <Value>Y</Value>
+        </Field>
+        <Field Name="last">
+            <Value>1823</Value>
+        </Field>
+        <Field Name="defect-filter">
+            <Value></Value>
+        </Field>
+        <Field Name="vts">
+            <Value>2013-10-09 07:11:59</Value>
+        </Field>
+        <Field Name="version">
+            <Value>264</Value>
+        </Field>
+        <Field Name="product">
+            <Value></Value>
+        </Field>
+        <Field Name="id">
+            <Value>110</Value>
+        </Field>
+        <Field Name="category">
+            <Value>Fast</Value>
+        </Field>
+        <Field Name="default">
+            <Value>N</Value>
+        </Field>
+        <Field Name="description">
+            <Value>Nothing interesting</Value>
+        </Field>
+        <Field Name="name">
+            <Value>myApp</Value>
+        </Field>
+        <Field Name="server">
+            <Value>1</Value>
+        </Field>
+        <Field Name="release">
+            <Value ReferenceValue="Release One">1029</Value>
+        </Field>
+    </Fields>
+    <RelatedEntities/>
+</Entity>

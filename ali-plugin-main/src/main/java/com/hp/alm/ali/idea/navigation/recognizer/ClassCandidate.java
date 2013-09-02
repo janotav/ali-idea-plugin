@@ -41,10 +41,6 @@ public class ClassCandidate extends Candidate {
 
     @Override
     public String createLink(Project project) {
-        return createLink(project, className, fileName, line, methodName);
-    }
-
-    public static String createLink(Project project, String className, String fileName, int line, String methodName) {
         for(ChooseByNameContributor contributor: ChooseByNameRegistry.getInstance().getClassModelContributors()) {
             NavigationItem[] byName = contributor.getItemsByName(fileName, fileName, project, true);
             if(byName.length > 0) {
@@ -65,5 +61,21 @@ public class ClassCandidate extends Candidate {
             }
         }
         return null;
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public String getMethodName() {
+        return methodName;
+    }
+
+    public int getLine() {
+        return line;
     }
 }

@@ -83,8 +83,10 @@ public class ThemeFeatureService extends AbstractCachingEntityService<ThemeFeatu
         query.addColumn("id", 1);
         query.addColumn("name", 1);
         query.setValue("type-id", String.valueOf(type.getId()));
+        query.setPropertyResolved("type-id", true);
         if(filter != null && !filter.isEmpty()) {
             query.setValue("name", filter);
+            query.setPropertyResolved("name", true);
         }
         query.addOrder("name", SortOrder.ASCENDING);
         query.setPageSize(1000);

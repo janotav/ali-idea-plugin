@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Entities TotalResults="1">
+    <Entity Type="defect">
+        <Fields>
+            <Field Name="planned-closing-ver">
+                <Value></Value>
+            </Field>
+            <Field Name="has-change">
+                <Value></Value>
+            </Field>
+            <Field Name="reproducible">
+                <Value></Value>
+            </Field>
+            <Field Name="changeset">
+                <Value></Value>
+            </Field>
+            <Field Name="has-others-linkage">
+                <Value>Y</Value>
+            </Field>
+            <Field Name="priority">
+                <Value></Value>
+            </Field>
+            <Field Name="description">
+                <Value>something</Value>
+            </Field>
+            <Field Name="run-reference"/>
+            <Field Name="dev-comments">
+                <Value>&lt;html&gt;&lt;body&gt;&lt;span style="color: rgb(0,0,128);font-family: Arial;"&gt;&lt;span style="font-size: 8.0pt;"&gt;&lt;strong&gt;  Jack Jack , Mon Sep 17 2012:&lt;/strong&gt;&lt;/span&gt;&lt;/span&gt;
+
+
+
+                    &lt;p&gt;Temporarily fixed by removing notNull validation.&lt;/p&gt;
+
+                    &lt;span style="font-size: 8.0pt;"&gt;&lt;strong&gt;________________________________________&lt;/strong&gt;&lt;/span&gt;&lt;br /&gt;&lt;span style="color: rgb(0,0,128);font-family: Arial;"&gt;&lt;span style="font-size: 8.0pt;"&gt;&lt;strong&gt;  Joe Joe , Tue Sep 18 2012:&lt;/strong&gt;&lt;/span&gt;&lt;/span&gt;
+
+
+
+                    &lt;p&gt;Fixed in revision 127279&lt;/p&gt;
+
+                    &lt;/body&gt;&lt;/html&gt;</Value>
+            </Field>
+            <Field Name="to-mail">
+                <Value></Value>
+            </Field>
+            <Field Name="cycle-id"/>
+            <Field Name="status">
+                <Value>Fixed</Value>
+            </Field>
+            <Field Name="closing-date"/>
+            <Field Name="detected-in-rel">
+                <Value></Value>
+            </Field>
+            <Field Name="bug-ver-stamp">
+                <Value>17</Value>
+            </Field>
+            <Field Name="estimated-fix-time"/>
+            <Field Name="project">
+                <Value></Value>
+            </Field>
+            <Field Name="target-rel">
+                <Value></Value>
+            </Field>
+            <Field Name="step-reference"/>
+            <Field Name="owner">
+                <Value>null@localhost</Value>
+            </Field>
+            <Field Name="actual-fix-time"/>
+            <Field Name="request-type">
+                <Value></Value>
+            </Field>
+            <Field Name="user-04"/>
+            <Field Name="user-03">
+                <Value></Value>
+            </Field>
+            <Field Name="user-02"/>
+            <Field Name="user-01">
+                <Value></Value>
+            </Field>
+            <Field Name="test-reference"/>
+            <Field Name="subject"/>
+            <Field Name="build-closed">
+                <Value></Value>
+            </Field>
+            <Field Name="in-bucket">
+                <Value></Value>
+            </Field>
+            <Field Name="request-id"/>
+            <Field Name="request-server">
+                <Value></Value>
+            </Field>
+            <Field Name="id">
+                <Value>86</Value>
+            </Field>
+            <Field Name="has-linkage">
+                <Value>N</Value>
+            </Field>
+            <Field Name="name">
+                <Value>somewhat</Value>
+            </Field>
+            <Field Name="cycle-reference">
+                <Value></Value>
+            </Field>
+            <Field Name="creation-time">
+                <Value>2012-09-03</Value>
+            </Field>
+            <Field Name="request-note">
+                <Value></Value>
+            </Field>
+            <Field Name="closing-version">
+                <Value></Value>
+            </Field>
+            <Field Name="build-detected">
+                <Value></Value>
+            </Field>
+            <Field Name="detection-version">
+                <Value></Value>
+            </Field>
+            <Field Name="last-modified">
+                <Value>2013-05-27 06:13:29</Value>
+            </Field>
+            <Field Name="watch-id"/>
+            <Field Name="detected-in-rcyc">
+                <Value></Value>
+            </Field>
+            <Field Name="severity">
+                <Value>1-High</Value>
+            </Field>
+            <Field Name="attachment">
+                <Value></Value>
+            </Field>
+            <Field Name="extended-reference">
+                <Value></Value>
+            </Field>
+            <Field Name="detected-by">
+                <Value>me</Value>
+            </Field>
+            <Field Name="target-rcyc">
+                <Value></Value>
+            </Field>
+            <Field Name="fixed-on-date"/>
+        </Fields>
+        <RelatedEntities/>
+    </Entity>
+</Entities>

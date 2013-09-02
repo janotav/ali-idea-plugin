@@ -16,6 +16,7 @@
 
 package com.hp.alm.ali.idea.rest;
 
+import com.hp.alm.ali.rest.client.exception.AuthenticationFailureException;
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationListener;
 import com.intellij.notification.NotificationType;
@@ -23,6 +24,7 @@ import com.intellij.notification.Notifications;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.ui.UIUtil;
+import org.jetbrains.annotations.TestOnly;
 
 import javax.swing.event.HyperlinkEvent;
 import java.io.File;
@@ -33,11 +35,12 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.Map;
 
-public class TroubleShootService {
+public class TroubleShootService implements RestServiceLogger {
 
     private PrintStream fos;
     private long requestId;
     private long lastNotification;
+    private long notificationDelay = 60000;
     final Notification serviceNotification;
 
     public TroubleShootService() {
@@ -50,7 +53,6 @@ public class TroubleShootService {
                         stop();
                     }
                 });
-
     }
 
     public synchronized boolean isRunning() {
@@ -105,7 +107,7 @@ public class TroubleShootService {
             fos.flush();
 
             long now = System.currentTimeMillis();
-            if(id % 10 == 0 && now > lastNotification + 60000 && project != null) {
+            if(id % 10 == 0 && now >= lastNotification + notificationDelay && project != null) {
                 lastNotification = now;
                 ApplicationManager.getApplication().invokeLater(new Runnable() {
                     public void run() {
@@ -128,10 +130,21 @@ public class TroubleShootService {
         }
     }
 
-    public synchronized void loginFailure(long id, RuntimeException e) {
+    public synchronized void loginFailure(long id, AuthenticationFailureException e) {
         if(fos != null) {
             fos.println("<<<<< login failure: #" + id + " at " + new Date());
             fos.println("<<<<< "+e.getMessage());
+            fos.flush();
         }
+    }
+
+    @TestOnly
+    void _setNotificationDelay(long delay) {
+        this.notificationDelay = delay;
+    }
+
+    @TestOnly
+    void _reset() {
+        requestId = 0;
     }
 }

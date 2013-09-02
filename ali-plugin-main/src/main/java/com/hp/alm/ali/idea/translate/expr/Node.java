@@ -22,6 +22,7 @@ public class Node {
     public Node left;
     public Node right;
     public String value;
+    public boolean bound;
 
     public Node(String value) {
         type = Type.VALUE;

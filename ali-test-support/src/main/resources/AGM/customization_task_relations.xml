@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relations TotalResults="1">
+    <Relation Name="projectTaskToReleaseBacklogItem">
+        <SourceEntity>project-task</SourceEntity>
+        <TargetEntity>release-backlog-item</TargetEntity>
+        <TargetAliases>
+            <Alias Unique="true" Name="release-backlog-item"/>
+            <Alias Unique="true" Name="has-dependent-release-backlog-item"/>
+        </TargetAliases>
+        <Features>
+            <Feature Propagated="false" Name="UI_HIERARCHY"/>
+            <Feature Propagated="false" Name="UI_LINKED_ENTITIES"/>
+        </Features>
+        <StorageDescriptor>
+            <ReferenceStorage>
+                <ReferenceIdColumn>release-backlog-item-id</ReferenceIdColumn>
+                <ReferenceLocation>IN_SOURCE_ENTITY</ReferenceLocation>
+            </ReferenceStorage>
+        </StorageDescriptor>
+    </Relation>
+</Relations>

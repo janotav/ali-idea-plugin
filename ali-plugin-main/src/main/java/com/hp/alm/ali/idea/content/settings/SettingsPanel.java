@@ -22,11 +22,11 @@ import com.hp.alm.ali.idea.cfg.AliConfiguration;
 import com.hp.alm.ali.idea.cfg.AliProjectConfiguration;
 import com.hp.alm.ali.idea.cfg.AuthenticationFailed;
 import com.hp.alm.ali.idea.cfg.ConfigurationListener;
+import com.hp.alm.ali.rest.client.RestClient;
 import com.hp.alm.ali.idea.ui.NonAdjustingCaret;
 import com.hp.alm.ali.idea.rest.RestService;
 import com.hp.alm.ali.idea.rest.ServerType;
 import com.hp.alm.ali.idea.rest.ServerTypeListener;
-import com.hp.alm.ali.rest.client.AliRestClient;
 import com.hp.alm.ali.rest.client.exception.HttpClientErrorException;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.ApplicationManager;
@@ -173,7 +173,7 @@ public class SettingsPanel extends JPanel implements ConfigurationListener, Disp
     }
 
     private void checkConnection(String location, String domain, String project, String username, String password) throws AuthenticationFailed {
-        AliRestClient restClient = RestService.createRestClient(location, domain, project, username, password, AliRestClient.SessionStrategy.AUTO_LOGIN);
+        RestClient restClient = RestService.createRestClient(location, domain, project, username, password, RestClient.SessionStrategy.AUTO_LOGIN);
         try {
             restClient.getForString("defects?query={0}", EntityQuery.encode("{id[0]}"));
             RestService.logout(restClient);

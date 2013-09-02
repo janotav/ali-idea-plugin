@@ -20,6 +20,7 @@ import com.hp.alm.ali.idea.model.User;
 import com.hp.alm.ali.idea.model.parser.UserList;
 import com.hp.alm.ali.idea.rest.RestService;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.Transform;
 
 import java.io.InputStream;
 
@@ -51,17 +52,17 @@ public class ProjectUserService extends AbstractCachingService<Integer, UserList
     }
 
     public void loadUserAsync(final String username, final Callback<User> callback) {
-        loadUsersAsync(new Callback<UserList>() {
+        loadUsersAsync(translate(callback, new Transform<UserList, User>() {
             @Override
-            public void loaded(UserList data) {
-                User user = data.getUser(username);
+            public User transform(UserList users) {
+                User user = users.getUser(username);
                 if(user == null) {
-                    callback.loaded(new User(username, username));
+                    return new User(username, username);
                 } else {
-                    callback.loaded(user);
+                    return user;
                 }
             }
-        });
+        }));
     }
 
     public UserList getUserList() {

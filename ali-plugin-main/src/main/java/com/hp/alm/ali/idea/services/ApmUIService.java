@@ -22,23 +22,21 @@ import com.hp.alm.ali.idea.rest.MyInputData;
 import com.hp.alm.ali.idea.rest.MyResultInfo;
 import com.hp.alm.ali.idea.rest.RestException;
 import com.hp.alm.ali.idea.rest.RestService;
-import com.hp.alm.ali.idea.ui.dialog.RestErrorDetailDialog;
 import com.hp.alm.ali.idea.model.Entity;
 import com.hp.alm.ali.idea.model.parser.EntityList;
-import com.intellij.openapi.project.Project;
 
 import java.util.Collections;
 
 public class ApmUIService {
 
-    private Project project;
     private RestService restService;
     private EntityService entityService;
+    private ErrorService errorService;
 
-    public ApmUIService(Project project, RestService restService, EntityService entityService) {
-        this.project = project;
+    public ApmUIService(RestService restService, EntityService entityService, ErrorService errorService) {
         this.restService = restService;
         this.entityService = entityService;
+        this.errorService = errorService;
     }
 
     public Entity createDefectInRelease(String description, String summary, String severity, String detectedBy, int releaseId, int sprintId, int teamId, int featureId) {
@@ -95,7 +93,7 @@ public class ApmUIService {
             }
             return entity;
         } else {
-            new RestErrorDetailDialog(project, new RestException(result)).setVisible(true);
+            errorService.showException(new RestException(result));
             return null;
         }
     }

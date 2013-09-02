@@ -134,6 +134,9 @@ public class AliConfiguration implements PersistentStateComponent<Element> {
     }
 
     public synchronized void dropFilter(String entityType, String filterName) {
+        // make sure that filters are initialized for this type
+        getStoredFilters(entityType);
+
         List<EntityQuery> stored = filters.get(entityType);
         for(EntityQuery f: stored) {
             if(f.getName().equals(filterName)) {

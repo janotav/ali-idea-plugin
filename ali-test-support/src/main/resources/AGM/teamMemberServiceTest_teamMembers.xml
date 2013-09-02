@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Entities TotalResults="2">
+    <Entity Type="team-member">
+        <Fields>
+            <Field Name="id">
+                <Value>101</Value>
+            </Field>
+            <Field Name="full-name">
+                <Value>Jack Koder</Value>
+            </Field>
+            <Field Name="name">
+                <Value>jack@localhost</Value>
+            </Field>
+        </Fields>
+        <RelatedEntities/>
+    </Entity>
+    <Entity Type="team-member">
+        <Fields>
+            <Field Name="id">
+                <Value>102</Value>
+            </Field>
+            <Field Name="full-name">
+                <Value>John Stable</Value>
+            </Field>
+            <Field Name="name">
+                <Value>john@localhost</Value>
+            </Field>
+        </Fields>
+        <RelatedEntities/>
+    </Entity>
+</Entities>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Entities TotalResults="1">
+    <Entity Type="project-task">
+        <Fields>
+            <Field Name="id">
+                <Value>107</Value>
+            </Field>
+            <Field Name="no-of-sons">
+                <Value>0</Value>
+            </Field>
+            <Field Name="remaining">
+                <Value>0</Value>
+            </Field>
+            <Field Name="estimated">
+                <Value>6</Value>
+            </Field>
+            <Field Name="status">
+                <Value>New</Value>
+            </Field>
+            <Field Name="description">
+                <Value>Task Description</Value>
+            </Field>
+            <Field Name="invested">
+                <Value>6</Value>
+            </Field>
+            <Field Name="assigned-to">
+                <Value></Value>
+            </Field>
+            <Field Name="background-color">
+                <Value>9ACD32</Value>
+            </Field>
+            <Field Name="blocked">
+                <Value></Value>
+            </Field>
+            <Field Name="release-backlog-item-id">
+                <Value>4289</Value>
+            </Field>
+            <Field Name="status-date">
+                <Value>2011-12-12 10:19:08</Value>
+            </Field>
+        </Fields>
+        <RelatedEntities/>
+    </Entity>
+</Entities>

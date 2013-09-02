@@ -103,7 +103,7 @@ public class EntityEditManager implements ProjectManagerListener, ContentManager
     public List<String> getEditorFields(String entityType) {
         EntityFields fields = configuration.getFields(entityType);
         if(fields.getColumns().isEmpty()) {
-            fields.setColumns(restService.getModelCustomization().getDefaultFields(entityType));
+            fields.setColumns(restService.getServerStrategy().getDefaultFields(entityType));
         }
         return fields.getColumns();
     }
@@ -204,7 +204,7 @@ public class EntityEditManager implements ProjectManagerListener, ContentManager
     @Override
     public void connectedTo(ServerType serverType) {
         if(serverType.isConnected()) {
-            lockingStrategy = restService.getModelCustomization().getLockingStrategy();
+            lockingStrategy = restService.getServerStrategy().getLockingStrategy();
         } else {
             lockingStrategy = null;
         }

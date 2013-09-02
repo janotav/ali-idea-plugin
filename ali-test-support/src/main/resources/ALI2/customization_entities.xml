@@ -1,0 +1,1408 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<EntityDescriptors>
+    <EntityDescriptor>
+        <Table>TEST</Table>
+        <Name>test</Name>
+        <Label>Test</Label>
+        <SupportsHistory>true</SupportsHistory>
+        <SupportsMultiValue>true</SupportsMultiValue>
+        <SupportsWorkflow>true</SupportsWorkflow>
+        <SupportsDataHidingFilter>true</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>true</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="supportBaseline">true</Attribute>
+            <Attribute name="reportableRoot">true</Attribute>
+            <Attribute name="reportable">true</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>RUN</Table>
+        <Name>run</Name>
+        <Label>Run</Label>
+        <SupportsHistory>true</SupportsHistory>
+        <SupportsMultiValue>true</SupportsMultiValue>
+        <SupportsWorkflow>true</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>true</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="jointEntities">test;test-set;test-config;</Attribute>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">true</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>RESULTS</Table>
+        <Name>result</Name>
+        <Label>Result</Label>
+        <SupportsHistory>true</SupportsHistory>
+        <SupportsMultiValue>true</SupportsMultiValue>
+        <SupportsWorkflow>true</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>RUN_ITERATIONS</Table>
+        <Name>run-iteration</Name>
+        <Label>Run Iteration</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="supportBaseline">false</Attribute>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">true</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>ALL_LISTS</Table>
+        <Name>test-folder</Name>
+        <Label>Test Folder</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <HierarchicalRootId>2</HierarchicalRootId>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="supportBaseline">true</Attribute>
+            <Attribute name="reportableRoot">true</Attribute>
+            <Attribute name="reportable">true</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>COMPONENT_FOLDER</Table>
+        <Name>component-folder</Name>
+        <Label>Component Folder</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <HierarchicalRootId>1</HierarchicalRootId>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="supportBaseline">true</Attribute>
+            <Attribute name="reportableRoot">true</Attribute>
+            <Attribute name="reportable">true</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>COMPONENT</Table>
+        <Name>component</Name>
+        <Label>Component</Label>
+        <SupportsHistory>true</SupportsHistory>
+        <SupportsMultiValue>true</SupportsMultiValue>
+        <SupportsWorkflow>true</SupportsWorkflow>
+        <SupportsDataHidingFilter>true</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>true</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="supportBaseline">true</Attribute>
+            <Attribute name="reportableRoot">true</Attribute>
+            <Attribute name="reportable">true</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>COMPONENT_STEP</Table>
+        <Name>component-step</Name>
+        <Label>Component Step</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>true</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="supportBaseline">true</Attribute>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">true</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>FRAMEWORK_PARAM</Table>
+        <Name>component-param</Name>
+        <Label>Component Parameter</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="supportBaseline">true</Attribute>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">true</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>BPTEST_TO_COMPONENTS</Table>
+        <Name>bp-component</Name>
+        <Label>Component Instance</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>true</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="supportBaseline">true</Attribute>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">true</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>BP_PARAM</Table>
+        <Name>bp-param</Name>
+        <Label>Component Instance Parameter</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="supportBaseline">true</Attribute>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">true</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>BP_ITERATION</Table>
+        <Name>bp-iteration</Name>
+        <Label>Component Instance Iteration</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="supportBaseline">true</Attribute>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">true</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>RUNTIME_PARAM</Table>
+        <Name>runtime-param</Name>
+        <Label>Runtime Parameter</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="supportBaseline">true</Attribute>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>BP_ITER_PARAM</Table>
+        <Name>bp-iteration-param</Name>
+        <Label>Component Instance Iteration Parameter</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="supportBaseline">true</Attribute>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">true</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>ASSET_REPOSITORY_ITEMS</Table>
+        <Name>repository-item</Name>
+        <Label>Asset Repository Item</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="supportBaseline">true</Attribute>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>USER_ASSETS</Table>
+        <Name>user-asset</Name>
+        <Label>User Asset</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="supportBaseline">true</Attribute>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>RESOURCES</Table>
+        <Name>resource</Name>
+        <Label>Resource</Label>
+        <SupportsHistory>true</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>true</SupportsWorkflow>
+        <SupportsDataHidingFilter>true</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>true</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="supportBaseline">true</Attribute>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>RESOURCE_FOLDERS</Table>
+        <Name>resource-folder</Name>
+        <Label>Resource Folder</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>true</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <HierarchicalRootId>1</HierarchicalRootId>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="supportBaseline">true</Attribute>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>ASSET_RELATIONS</Table>
+        <Name>assets-relation</Name>
+        <Label>Asset Relation</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="supportBaseline">true</Attribute>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>TASKS</Table>
+        <Name>task</Name>
+        <Label>Task</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>TASKS_LOG</Table>
+        <Name>task-log</Name>
+        <Label>Task Log</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>BUG</Table>
+        <Name>defect</Name>
+        <Label>Defect</Label>
+        <SupportsHistory>true</SupportsHistory>
+        <SupportsMultiValue>true</SupportsMultiValue>
+        <SupportsWorkflow>true</SupportsWorkflow>
+        <SupportsDataHidingFilter>true</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">true</Attribute>
+            <Attribute name="reportable">true</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>RELEASES</Table>
+        <Name>release</Name>
+        <Label>Release</Label>
+        <SupportsHistory>true</SupportsHistory>
+        <SupportsMultiValue>true</SupportsMultiValue>
+        <SupportsWorkflow>true</SupportsWorkflow>
+        <SupportsDataHidingFilter>true</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>RELEASE_FOLDERS</Table>
+        <Name>release-folder</Name>
+        <Label>Release Folder</Label>
+        <SupportsHistory>true</SupportsHistory>
+        <SupportsMultiValue>true</SupportsMultiValue>
+        <SupportsWorkflow>true</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>RELEASE_CYCLES</Table>
+        <Name>release-cycle</Name>
+        <Label>Release Cycle</Label>
+        <SupportsHistory>true</SupportsHistory>
+        <SupportsMultiValue>true</SupportsMultiValue>
+        <SupportsWorkflow>true</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>CYCLE</Table>
+        <Name>test-set</Name>
+        <Label>Test Set</Label>
+        <SupportsHistory>true</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>true</SupportsWorkflow>
+        <SupportsDataHidingFilter>true</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>true</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">true</Attribute>
+            <Attribute name="reportable">true</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>CYCL_FOLD</Table>
+        <Name>test-set-folder</Name>
+        <Label>Test Set Folder</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <HierarchicalRootId>0</HierarchicalRootId>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">true</Attribute>
+            <Attribute name="reportable">true</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>TESTCYCL</Table>
+        <Name>test-instance</Name>
+        <Label>Test Instance</Label>
+        <SupportsHistory>true</SupportsHistory>
+        <SupportsMultiValue>true</SupportsMultiValue>
+        <SupportsWorkflow>true</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>true</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="jointEntities">test;test-set;test-config;</Attribute>
+            <Attribute name="reportableRoot">true</Attribute>
+            <Attribute name="reportable">true</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>EVENT_LOG</Table>
+        <Name>event-log</Name>
+        <Label>Event Log</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>CROS_REF</Table>
+        <Name>attachment</Name>
+        <Label>Attachment</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>true</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="supportBaseline">true</Attribute>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">true</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>DESSTEPS</Table>
+        <Name>design-step</Name>
+        <Label>Design Step</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>true</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="supportBaseline">true</Attribute>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">true</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>TEST_PARAMS</Table>
+        <Name>test-parameter</Name>
+        <Label>Test Parameter</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="supportBaseline">true</Attribute>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">true</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>STEP_PARAMS</Table>
+        <Name>step-parameter</Name>
+        <Label>Test Step Parameter</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>REQ</Table>
+        <Name>requirement</Name>
+        <Label>Requirement</Label>
+        <SupportsHistory>true</SupportsHistory>
+        <SupportsMultiValue>true</SupportsMultiValue>
+        <SupportsWorkflow>true</SupportsWorkflow>
+        <SupportsDataHidingFilter>true</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <HierarchicalRootId>0</HierarchicalRootId>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="supportBaseline">true</Attribute>
+            <Attribute name="reportableRoot">true</Attribute>
+            <Attribute name="reportable">true</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>BPM_MODELS</Table>
+        <Name>bpm-model</Name>
+        <Label>Model</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>true</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="supportBaseline">false</Attribute>
+            <Attribute name="reportableRoot">true</Attribute>
+            <Attribute name="reportable">true</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>BPM_MODEL_FOLDERS</Table>
+        <Name>bpm-folder</Name>
+        <Label>Model Folders</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <HierarchicalRootId>1</HierarchicalRootId>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="supportBaseline">false</Attribute>
+            <Attribute name="reportableRoot">true</Attribute>
+            <Attribute name="reportable">true</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>BPM_PATHS</Table>
+        <Name>bpm-path</Name>
+        <Label>Model Path</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="supportBaseline">false</Attribute>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">true</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>BPM_ELEMENTS</Table>
+        <Name>bpm-element</Name>
+        <Label>Model Activity</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>true</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="supportBaseline">false</Attribute>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">true</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>BPM_LINKS</Table>
+        <Name>bpm-link</Name>
+        <Label>Model Linkage</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>REQ_COVER</Table>
+        <Name>requirement-coverage</Name>
+        <Label>Coverage</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>true</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="supportBaseline">true</Attribute>
+            <Attribute name="jointEntities">test;requirement;</Attribute>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">true</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>ANALYSIS_ITEMS</Table>
+        <Name>analysis-item</Name>
+        <Label>Analysis Item</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>true</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>ANALYSIS_ITEM_FOLDERS</Table>
+        <Name>analysis-item-folder</Name>
+        <Label>Analysis Item Folder</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>true</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>REPORT_USER_TEMPLATES</Table>
+        <Name>report-user-template</Name>
+        <Label>No user label defined for report-user-template</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>REPORT_TO_RPT_LINKS</Table>
+        <Name>report-to-report-project-template-link</Name>
+        <Label>No user label defined for report-to-report-project-template-link</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>ANALYSIS_ITEM_RESULTS</Table>
+        <Name>analysis-item-result</Name>
+        <Label>Analysis Item Result</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>DASHBOARD_FOLDERS</Table>
+        <Name>dashboard-folder</Name>
+        <Label>Dashboard Folder</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>true</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>DASHBOARD_PAGES</Table>
+        <Name>dashboard-page</Name>
+        <Label>Dashboard Page</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>true</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>DASHBOARD_PAGE_ITEMS</Table>
+        <Name>dashboard-page-item</Name>
+        <Label>No user label defined for dashboard-page-item</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>true</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>DELETED_ASSETS_INFO</Table>
+        <Name>deleted-asset-info</Name>
+        <Label>Deleted Asset Info</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="supportBaseline">true</Attribute>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>TEST_CONFIGS</Table>
+        <Name>test-config</Name>
+        <Label>Test Configuration</Label>
+        <SupportsHistory>true</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="supportBaseline">true</Attribute>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">true</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>TEST_CRITERIA</Table>
+        <Name>test-criterion</Name>
+        <Label>Test Criterion</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="supportBaseline">true</Attribute>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">true</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>HOSTS</Table>
+        <Name>host</Name>
+        <Label>Host</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>HOST_GROUP</Table>
+        <Name>host-group</Name>
+        <Label>Host Group</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>REQ_TRACE</Table>
+        <Name>req-trace</Name>
+        <Label>Requirement Trace</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="supportBaseline">true</Attribute>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>BASELINES</Table>
+        <Name>baseline</Name>
+        <Label>Baseline</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>true</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>LIBRARY_PARTS_DEFS</Table>
+        <Name>library-part</Name>
+        <Label>No user label defined for library-part</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>LIBRARIES</Table>
+        <Name>library</Name>
+        <Label>Library</Label>
+        <SupportsHistory>true</SupportsHistory>
+        <SupportsMultiValue>true</SupportsMultiValue>
+        <SupportsWorkflow>true</SupportsWorkflow>
+        <SupportsDataHidingFilter>true</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>LIBRARY_FOLDERS</Table>
+        <Name>library-folder</Name>
+        <Label>Library Folder</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>true</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>STEP</Table>
+        <Name>run-step</Name>
+        <Label>Run Step</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>true</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">true</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>QPM_SCOPE_ITEM</Table>
+        <Name>scope-item</Name>
+        <Label>Scope Item</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes/>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>QPM_MILESTONES</Table>
+        <Name>milestone</Name>
+        <Label>Milestone</Label>
+        <SupportsHistory>true</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes/>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>QPM_KPIS</Table>
+        <Name>kpi</Name>
+        <Label>No user label defined for kpi</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes/>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>QPM_MILESTONE_SCOPEITEM</Table>
+        <Name>msi</Name>
+        <Label>No user label defined for msi</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes/>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>QPM_KPI_MILESTONE_SCOPEITEM</Table>
+        <Name>kpiMsi</Name>
+        <Label>No user label defined for kpiMsi</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes/>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>FAVORITE_FOLDERS</Table>
+        <Name>favorite-folder</Name>
+        <Label>Favorite Folder</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>FAVORITES</Table>
+        <Name>favorite</Name>
+        <Label>Favorite</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>LINK</Table>
+        <Name>defect-link</Name>
+        <Label>Defect Link</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>ALERT</Table>
+        <Name>alert</Name>
+        <Label>Alert</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>AUDIT_LOG</Table>
+        <Name>audit-log</Name>
+        <Label>No user label defined for audit-log</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>AUDIT_PROPERTIES</Table>
+        <Name>audit-property</Name>
+        <Label>No user label defined for audit-property</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>standard</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>BUILD_CODEREF</Table>
+        <Name>build-code-ref</Name>
+        <Label>No user label defined for build-code-ref</Label>
+        <SupportsHistory>true</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>ali_extension</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes/>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>BUILD_ARTIFACT</Table>
+        <Name>build-artifact</Name>
+        <Label>No user label defined for build-artifact</Label>
+        <SupportsHistory>true</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>ali_extension</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes/>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>BUILD_SERVER</Table>
+        <Name>build-server</Name>
+        <Label>No user label defined for build-server</Label>
+        <SupportsHistory>true</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>ali_extension</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes/>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>BUILD_TYPE</Table>
+        <Name>build-type</Name>
+        <Label>No user label defined for build-type</Label>
+        <SupportsHistory>true</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>ali_extension</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes/>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>BUILD</Table>
+        <Name>build-instance</Name>
+        <Label>No user label defined for build-instance</Label>
+        <SupportsHistory>true</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>ali_extension</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">true</Attribute>
+            <Attribute name="reportable">true</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>CHANGESET</Table>
+        <Name>changeset</Name>
+        <Label>No user label defined for changeset</Label>
+        <SupportsHistory>true</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>ali_extension</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">true</Attribute>
+            <Attribute name="reportable">true</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>CHANGESET_FILE</Table>
+        <Name>changeset-file</Name>
+        <Label>No user label defined for changeset-file</Label>
+        <SupportsHistory>true</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>ali_extension</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes/>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>CHANGESET_LINKS</Table>
+        <Name>changeset-link</Name>
+        <Label>No user label defined for changeset-link</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>ali_extension</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes>
+            <Attribute name="reportableRoot">false</Attribute>
+            <Attribute name="reportable">false</Attribute>
+        </Attributes>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>SCMREPOSITORY</Table>
+        <Name>scm-repository</Name>
+        <Label>No user label defined for scm-repository</Label>
+        <SupportsHistory>true</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>ali_extension</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes/>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>SCMBRANCH</Table>
+        <Name>scm-branch</Name>
+        <Label>No user label defined for scm-branch</Label>
+        <SupportsHistory>true</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>ali_extension</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes/>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>SCMPOLICY_ITEM</Table>
+        <Name>policy-item</Name>
+        <Label>No user label defined for policy-item</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>ali_extension</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes/>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>SCMBRANCH_POLICY_LINK</Table>
+        <Name>branch-policy-link</Name>
+        <Label>No user label defined for branch-policy-link</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>ali_extension</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes/>
+    </EntityDescriptor>
+    <EntityDescriptor>
+        <Table>SCMBRANCH_RELEASE</Table>
+        <Name>scm-branch-release</Name>
+        <Label>No user label defined for scm-branch-release</Label>
+        <SupportsHistory>false</SupportsHistory>
+        <SupportsMultiValue>false</SupportsMultiValue>
+        <SupportsWorkflow>false</SupportsWorkflow>
+        <SupportsDataHidingFilter>false</SupportsDataHidingFilter>
+        <SupportsVC>false</SupportsVC>
+        <SupportsSubtypes>false</SupportsSubtypes>
+        <ExtensionName>ali_extension</ExtensionName>
+        <IsSiteEntity>false</IsSiteEntity>
+        <Attributes/>
+    </EntityDescriptor>
+</EntityDescriptors>

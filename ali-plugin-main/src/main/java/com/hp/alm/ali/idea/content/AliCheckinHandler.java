@@ -257,7 +257,7 @@ public class AliCheckinHandler extends CheckinHandler implements ActionListener,
         }
         if(markFixed.isSelected() || (addComment.isSelected() && !comment.getText().isEmpty())) {
             EntityService entityService = project.getComponent(EntityService.class);
-            LockingStrategy lockingStrategy = restService.getModelCustomization().getLockingStrategy();
+            LockingStrategy lockingStrategy = restService.getServerStrategy().getLockingStrategy();
             Entity entity = lockingStrategy.lock(ref.toEntity());
             if(entity != null) {
                 Set<String> modified = new HashSet<String>();

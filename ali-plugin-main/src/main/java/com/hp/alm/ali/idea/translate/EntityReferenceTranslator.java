@@ -72,6 +72,10 @@ public class EntityReferenceTranslator implements Translator {
         return new Execution(callback).perform(value);
     }
 
+    public String getTargetType() {
+        return targetType;
+    }
+
     private class Execution implements EntityListener {
 
         private Entity targetEntity;

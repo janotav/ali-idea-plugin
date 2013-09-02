@@ -23,7 +23,9 @@ import com.hp.alm.ali.idea.cfg.AliConfiguration;
 import com.hp.alm.ali.idea.cfg.AliProjectConfiguration;
 import com.hp.alm.ali.idea.cfg.ConfigurationListener;
 import com.hp.alm.ali.idea.model.ServerStrategy;
-import com.hp.alm.ali.rest.client.AliRestClient;
+import com.hp.alm.ali.rest.client.AliRestClientFactory;
+import com.hp.alm.ali.rest.client.RestClient;
+import com.hp.alm.ali.rest.client.RestClientFactory;
 import com.hp.alm.ali.rest.client.ResultInfo;
 import com.hp.alm.ali.rest.client.exception.AuthenticationFailureException;
 import com.intellij.ide.BrowserUtil;
@@ -38,33 +40,27 @@ import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowManager;
 import com.intellij.util.net.HttpConfigurable;
 import com.intellij.util.ui.UIUtil;
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.HttpStatus;
-import org.apache.commons.httpclient.methods.InputStreamRequestEntity;
-import org.apache.commons.httpclient.methods.PostMethod;
-import org.apache.commons.io.IOUtils;
+import org.jetbrains.annotations.TestOnly;
 
 import javax.swing.event.HyperlinkEvent;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 
 public class RestService implements ConfigurationListener {
 
     private ServerType serverType = ServerType.NONE;
-    volatile private AliRestClient restClient;
+    volatile private RestClient restClient;
     private WeakListeners<RestListener> listeners;
     private WeakListeners<ServerTypeListener> serverTypeListeners;
     private Project project;
     private AliProjectConfiguration projConf;
-    private TroubleShootService troubleShootService;
+    private RestServiceLogger restServiceLogger;
     final Notification errorNotification;
+
+    private static RestClientFactory factory = AliRestClientFactory.getInstance();
 
     public RestService(final Project project, TroubleShootService troubleShootService, AliProjectConfiguration conf) {
         this.project = project;
-        this.troubleShootService = troubleShootService;
+        this.restServiceLogger = troubleShootService;
         this.projConf = conf;
         listeners = new WeakListeners<RestListener>();
         serverTypeListeners = new WeakListeners<ServerTypeListener>();
@@ -86,12 +82,12 @@ public class RestService implements ConfigurationListener {
         BrowserUtil.launchBrowser(projConf.getLocation() + "/rest/domains/" + projConf.getDomain() + "/projects/" + projConf.getProject() + "/" + href + query + "login-form-required=Y");
     }
 
-    private AliRestClient createRestClient(AliProjectConfiguration conf) {
-        return createRestClient(conf.getLocation(), conf.getDomain(), conf.getProject(), conf.getUsername(), conf.getPassword(), AliRestClient.SessionStrategy.AUTO_LOGIN);
+    private RestClient createRestClient(AliProjectConfiguration conf) {
+        return createRestClient(conf.getLocation(), conf.getDomain(), conf.getProject(), conf.getUsername(), conf.getPassword(), RestClient.SessionStrategy.AUTO_LOGIN);
     }
 
-    public static AliRestClient createRestClient(String location, String domain, String project, String username, String password, AliRestClient.SessionStrategy strategy) {
-        AliRestClient restClient = AliRestClient.create(location, domain, project, username, password, strategy);
+    public static RestClient createRestClient(String location, String domain, String project, String username, String password, RestClient.SessionStrategy strategy) {
+        RestClient restClient = factory.create(location, domain, project, username, password, strategy);
         restClient.setEncoding(null);
         restClient.setTimeout(10000);
         HttpConfigurable httpConfigurable = HttpConfigurable.getInstance();
@@ -109,7 +105,7 @@ public class RestService implements ConfigurationListener {
         return restClient;
     }
 
-    public synchronized AliRestClient getRestClient() {
+    public synchronized RestClient getRestClient() {
         if(restClient == null) {
             restClient = createRestClient(projConf);
         }
@@ -117,7 +113,7 @@ public class RestService implements ConfigurationListener {
     }
 
     public int get(MyResultInfo result, String template, Object... params) {
-        return execute(getRestClient(), project, troubleShootService, new MyGetMethod(), null, result, template, params);
+        return execute(getRestClient(), project, restServiceLogger, new MyGetMethod(), null, result, template, params);
     }
 
     public int put(String xml, MyResultInfo result, String template, Object... params) {
@@ -125,11 +121,11 @@ public class RestService implements ConfigurationListener {
     }
 
     public int put(MyInputData inputData, MyResultInfo result, String template, Object... params) {
-        return execute(getRestClient(), project, troubleShootService, new MyPutMethod(), inputData, result, template, params);
+        return execute(getRestClient(), project, restServiceLogger, new MyPutMethod(), inputData, result, template, params);
     }
 
     public int post(MyInputData inputData, MyResultInfo result, String template, Object... params) {
-        return execute(getRestClient(), project, troubleShootService, new MyPostMethod(), inputData, result, template, params);
+        return execute(getRestClient(), project, restServiceLogger, new MyPostMethod(), inputData, result, template, params);
     }
 
     public int post(String xml, MyResultInfo result, String template, Object... params) {
@@ -137,14 +133,14 @@ public class RestService implements ConfigurationListener {
     }
 
     public int delete(MyResultInfo result, String template, Object... params) {
-        return execute(getRestClient(), project, troubleShootService, new MyDeleteMethod(), null, result, template, params);
+        return execute(getRestClient(), project, restServiceLogger, new MyDeleteMethod(), null, result, template, params);
     }
 
     public void delete(String template, Object... params) {
-        execute(getRestClient(), project, troubleShootService, new MyDeleteMethod(), null, new MyResultInfo(), template, params);
+        execute(getRestClient(), project, restServiceLogger, new MyDeleteMethod(), null, new MyResultInfo(), template, params);
     }
 
-    public static String getForString(AliRestClient restClient, String template, Object ... params) {
+    public static String getForString(RestClient restClient, String template, Object ... params) {
         TroubleShootService troubleShootService = ApplicationManager.getApplication().getComponent(TroubleShootService.class);
         MyResultInfo result = new MyResultInfo();
         int status = execute(restClient, null, troubleShootService, new MyGetMethod(), null, result, template, params);
@@ -168,44 +164,18 @@ public class RestService implements ConfigurationListener {
         return result.getBodyAsStream();
     }
 
-    public int getThatCanDelegate(OutputStream output, String template, Object... params) {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        MyResultInfo result = new MyResultInfo();
-        int code = get(result, template, params);
-        ByteArrayInputStream is = new ByteArrayInputStream(baos.toByteArray());
-        try {
-            if(code != HttpStatus.SC_OK) {
-                IOUtils.copy(is, output);
-                return code;
-            }
-            String delegated = result.getHeaders().get("X-Bridge-URL");
-            if(delegated == null) {
-                IOUtils.copy(is, output);
-                return code;
-            } else {
-                PostMethod post = new PostMethod(delegated);
-                post.setRequestEntity(new InputStreamRequestEntity(is, baos.size()));
-                code = new HttpClient().executeMethod(post);
-                IOUtils.copy(post.getResponseBodyAsStream(), output);
-                return code;
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private static int execute(AliRestClient restClient, Project project, TroubleShootService troubleShootService, MyMethod method, MyInputData myInput, MyResultInfo myResult, String template, Object... params) {
-        ResultInfo info = ResultInfo.create(true, myResult.getOutputStream());
-        long id = troubleShootService.request(project, method.getName(), myInput, template, params);
+    private static int execute(RestClient restClient, Project project, RestServiceLogger restServiceLogger, MyMethod method, MyInputData myInput, MyResultInfo myResult, String template, Object... params) {
+        ResultInfo info = ResultInfo.create(myResult.getOutputStream());
+        long id = restServiceLogger.request(project, method.getName(), myInput, template, params);
         int code;
         try {
             code = method.execute(restClient, myInput == null? null: myInput.getInputData(), info, template, params);
         } catch(AuthenticationFailureException e) {
-            troubleShootService.loginFailure(id, e);
+            restServiceLogger.loginFailure(id, e);
             throw e;
         }
         myResult.copyFrom(info);
-        troubleShootService.response(id, code, myResult);
+        restServiceLogger.response(id, code, myResult);
         return code;
     }
 
@@ -232,7 +202,7 @@ public class RestService implements ConfigurationListener {
         }
     }
 
-    public static void logout(final AliRestClient client) {
+    public static void logout(final RestClient client) {
         ApplicationManager.getApplication().executeOnPooledThread(new Runnable() {
             public void run() {
                 client.logout();
@@ -294,7 +264,7 @@ public class RestService implements ConfigurationListener {
         return serverType;
     }
 
-    public synchronized ServerStrategy getModelCustomization() {
+    public synchronized ServerStrategy getServerStrategy() {
         return project.getComponent(serverType.getClazz());
     }
 
@@ -310,7 +280,7 @@ public class RestService implements ConfigurationListener {
         return true;
     }
 
-    private void setServerType(ServerType serverType) {
+    public void setServerType(ServerType serverType) {
         synchronized (this) {
             this.serverType = serverType;
             notifyAll();
@@ -336,5 +306,30 @@ public class RestService implements ConfigurationListener {
 
     public void removeServerTypeListener(ServerTypeListener listener) {
         serverTypeListeners.remove(listener);
+    }
+
+    public boolean _isRegistered(ServerTypeListener listener) {
+        return serverTypeListeners.isRegistered(listener);
+    }
+
+    @TestOnly
+    static void _setFactory(RestClientFactory factory) {
+        RestService.factory = factory;
+    }
+
+    @TestOnly
+    void _setRestClient(RestClient restClient) {
+        this.restClient = restClient;
+    }
+
+    @TestOnly
+    void _setRestServiceLogger(RestServiceLogger logger) {
+        this.restServiceLogger = logger;
+    }
+
+    @TestOnly
+    synchronized void _setServerType(ServerType serverType) {
+        this.serverType = serverType;
+        notifyAll();
     }
 }

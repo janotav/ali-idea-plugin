@@ -105,6 +105,13 @@ public class HorizonStrategy extends ApolloStrategy {
             "defect.bug-ver-stamp",
             "defect.owner"));
 
+    private static Map<String, String> FIELD_ALIAS;
+    static {
+        FIELD_ALIAS = new HashMap<String, String>();
+        FIELD_ALIAS.put("defect.owner", "release-backlog-item.owner");
+        FIELD_ALIAS.put("requirement.owner", "release-backlog-item.owner");
+    }
+
     private static Map<String, EntityQuery> horizonFilter;
     static {
         horizonFilter = new HashMap<String, EntityQuery>();
@@ -275,6 +282,16 @@ public class HorizonStrategy extends ApolloStrategy {
                     continue;
                 }
             }
+        }
+    }
+
+    @Override
+    public String getFieldAlias(String entityType, String property) {
+        String alias = FIELD_ALIAS.get(entityType + "." + property);
+        if(alias != null) {
+            return alias;
+        } else {
+            return property;
         }
     }
 

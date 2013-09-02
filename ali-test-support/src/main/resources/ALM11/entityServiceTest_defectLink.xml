@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<defect-links>
+    <defect-link>
+        <comment></comment>
+        <creation-time>2012-03-07</creation-time>
+        <first-endpoint-id xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                           xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:int">86</first-endpoint-id>
+        <id xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+            xsi:type="xs:int">2763</id>
+        <owner>null@localhost</owner>
+        <second-endpoint-id xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                            xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:int">88</second-endpoint-id>
+        <second-endpoint-name>UI does not work</second-endpoint-name>
+        <second-endpoint-status>Not Covered</second-endpoint-status>
+        <second-endpoint-type>defect</second-endpoint-type>
+    </defect-link>
+</defect-links>

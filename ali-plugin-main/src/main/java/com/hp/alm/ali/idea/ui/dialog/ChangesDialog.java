@@ -141,7 +141,7 @@ public class ChangesDialog extends MyDialog implements ServerTypeListener, Quick
     }
 
     private void filterQuery(String value, Metadata metadata) {
-        String alias = restService.getModelCustomization().getDevelopmentAlias(entity.type);
+        String alias = restService.getServerStrategy().getDevelopmentAlias(entity.type);
         List<EntityQuery> queries = new LinkedList<EntityQuery>();
         if(metadata.getField("description").isCanFilter()) {
             addQuery(queries, alias, "description", value);
@@ -169,7 +169,7 @@ public class ChangesDialog extends MyDialog implements ServerTypeListener, Quick
     }
 
     private void noFilterQuery(Metadata metadata) {
-        String alias = restService.getModelCustomization().getDevelopmentAlias(entity.type);
+        String alias = restService.getServerStrategy().getDevelopmentAlias(entity.type);
         EntityQuery query = new EntityQuery("changeset");
         query.getCrossFilter(entity.type, alias).setValue("id", String.valueOf(entity.id));
         queryChanges(Arrays.asList(query), null, metadata);

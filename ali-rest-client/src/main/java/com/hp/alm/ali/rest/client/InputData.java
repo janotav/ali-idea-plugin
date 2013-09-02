@@ -17,8 +17,11 @@
 package com.hp.alm.ali.rest.client;
 
 import org.apache.commons.httpclient.methods.InputStreamRequestEntity;
+import org.apache.commons.httpclient.methods.RequestEntity;
+import org.apache.commons.httpclient.methods.StringRequestEntity;
 
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.Collections;
 import java.util.Map;
 
@@ -59,19 +62,23 @@ public class InputData {
         return new InputData(null, InputStreamRequestEntity.CONTENT_LENGTH_AUTO, data, Collections.<String, String>emptyMap());
     }
 
-    InputStream getDataStream() {
-        return dataStream;
-    }
-
-    String getData() {
-        return data;
-    }
-
     Map<String, String> getHeaders() {
         return headers;
     }
 
-    long getSize() {
-        return size;
+    public RequestEntity getRequestEntity(String encoding) {
+        if (data != null) {
+            RequestEntity requestEntity;
+            try {
+                requestEntity = new StringRequestEntity(data, "application/xml", encoding);
+            } catch (UnsupportedEncodingException e) {
+                throw new RuntimeException(e);
+            }
+            return requestEntity;
+        } else if (dataStream != null) {
+            return new InputStreamRequestEntity(dataStream, size, "application/xml");
+        } else {
+            return null;
+        }
     }
 }

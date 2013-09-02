@@ -17,11 +17,9 @@
 package com.hp.alm.ali.idea.navigation;
 
 import com.hp.alm.ali.idea.ui.editor.field.HTMLAreaField;
-import com.hp.alm.ali.idea.navigation.recognizer.JUnitTestRecognizer;
 import com.hp.alm.ali.idea.navigation.recognizer.JavaCompileRecognizer;
 import com.hp.alm.ali.idea.navigation.recognizer.JavaStackTraceRecognizer;
 import com.hp.alm.ali.idea.navigation.recognizer.SurefireTestRecognizer;
-import com.hp.alm.ali.idea.navigation.recognizer.TestNGTestRecognizer;
 import com.hp.alm.ali.idea.navigation.recognizer.WebLinkRecognizer;
 import com.intellij.openapi.project.Project;
 
@@ -37,20 +35,6 @@ public class NavigationDecorator {
             new JavaCompileRecognizer(),
             new SurefireTestRecognizer(),
             new WebLinkRecognizer());
-
-    private static List<TestRecognizer> testRecognizers = Arrays.asList(
-            new JUnitTestRecognizer(),
-            new TestNGTestRecognizer());
-
-    public static TestRecognizer.Result evaluateTest(String path, String href) {
-        for(TestRecognizer recognizer: testRecognizers) {
-            TestRecognizer.Result result = recognizer.evaluate(path, href);
-            if(result != null) {
-                return result;
-            }
-        }
-        return null;
-    }
 
     public static String explode(Project project, String plain) {
         return explode(project, plain, false);

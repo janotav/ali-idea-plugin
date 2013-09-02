@@ -19,7 +19,6 @@ package com.hp.alm.ali.idea.action.attachment;
 import com.hp.alm.ali.idea.action.EntityAction;
 import com.hp.alm.ali.idea.entity.EntityEditManager;
 import com.hp.alm.ali.idea.entity.EntityRef;
-import com.hp.alm.ali.idea.progress.task.UpdateAttachmentTask;
 import com.hp.alm.ali.idea.ui.editor.AttachmentEditor;
 import com.hp.alm.ali.idea.ui.editor.BaseEditor;
 import com.hp.alm.ali.idea.rest.RestService;
@@ -77,6 +76,6 @@ public class AttachmentEditAction extends EntityAction {
         } else {
             file = null;
         }
-        ProgressManager.getInstance().run(new UpdateAttachmentTask(project, file, name, (String)modified.getProperty("name"), (String)modified.getProperty("description"), parent));
+        ProgressManager.getInstance().run(new AttachmentUpdateTask(project, file, name, (String)modified.getProperty("name"), (String)modified.getProperty("description"), parent));
     }
 }

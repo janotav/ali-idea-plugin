@@ -18,7 +18,6 @@ package com.hp.alm.ali.idea.action.attachment;
 
 import com.hp.alm.ali.idea.action.EntityAction;
 import com.hp.alm.ali.idea.entity.EntityRef;
-import com.hp.alm.ali.idea.progress.task.DownloadTask;
 import com.hp.alm.ali.idea.model.Entity;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.fileChooser.FileChooserFactory;
@@ -59,7 +58,7 @@ public class AttachmentDownloadAction extends EntityAction {
                 return;
             }
             lastDir = vf.getParent();
-            ProgressManager.getInstance().run(new DownloadTask(project, file.getFile(), name, Integer.valueOf(entity.getPropertyValue("file-size")), new EntityRef(entity.getPropertyValue("parent-type"), Integer.valueOf(entity.getPropertyValue("parent-id")))));
+            ProgressManager.getInstance().run(new AttachmentDownloadTask(project, file.getFile(), name, Integer.valueOf(entity.getPropertyValue("file-size")), new EntityRef(entity.getPropertyValue("parent-type"), Integer.valueOf(entity.getPropertyValue("parent-id")))));
         }
     }
 }

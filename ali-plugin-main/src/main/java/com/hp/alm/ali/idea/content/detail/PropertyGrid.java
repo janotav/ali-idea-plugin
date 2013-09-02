@@ -178,7 +178,7 @@ public class PropertyGrid extends ScrollablePanel implements EntityFields.Column
         boolean needsRefresh = false;
 
         if(columns.isEmpty() && restService.getServerTypeIfAvailable().isConnected()) {
-            List<String> defaultColumns = restService.getModelCustomization().getDefaultFields(entity.getType());
+            List<String> defaultColumns = restService.getServerStrategy().getDefaultFields(entity.getType());
             if(!defaultColumns.isEmpty()) {
                 fields.setColumns(defaultColumns);
                 return; // will process the column changed event

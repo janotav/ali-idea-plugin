@@ -19,7 +19,6 @@ package com.hp.alm.ali.idea.action.attachment;
 import com.hp.alm.ali.idea.action.EntityAction;
 import com.hp.alm.ali.idea.entity.EntityQuery;
 import com.hp.alm.ali.idea.entity.EntityRef;
-import com.hp.alm.ali.idea.progress.task.DownloadTask;
 import com.hp.alm.ali.idea.rest.RestService;
 import com.hp.alm.ali.idea.model.Entity;
 import com.intellij.ide.BrowserUtil;
@@ -63,7 +62,7 @@ public class AttachmentBrowserAction extends EntityAction {
         try {
             final File file = File.createTempFile("tmp", "_" + name);
             file.deleteOnExit();
-            ProgressManager.getInstance().run(new DownloadTask(project, file, name, size, parent) {
+            ProgressManager.getInstance().run(new AttachmentDownloadTask(project, file, name, size, parent) {
                 @Override
                 public void run(ProgressIndicator indicator) {
                     super.run(indicator);

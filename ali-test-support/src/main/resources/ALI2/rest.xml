@@ -1,0 +1,749 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:service xmlns="http://www.w3.org/2005/Atom" xmlns:ns2="http://www.w3.org/2007/app"
+             xmlns:ns3="http://a9.com/-/spec/opensearch/1.1/" xmlns:ns4="http://www.w3.org/1999/xhtml">
+    <ns2:workspace>
+        <title>Active Users</title>
+        <ns2:collection href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/scm/active-users">
+            <title>Active users service</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Build Change Report Service</title>
+        <ns2:collection href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/scm/report-build">
+            <title>Build Change Report Service</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Build Configuration Check</title>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/scm/build-configuration-check">
+            <title>Build Configuration Check</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Build Configuration List Service</title>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/scm/build-configuration-list">
+            <title>Build Configuration List Service</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Build Configuration Scm Service</title>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/scm/build-configuration-scm">
+            <title>Build Configuration Scm Service</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Build Providers Service</title>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/scm/build-providers">
+            <title>Build Providers</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Build Push Service</title>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/scm/build-push-service">
+            <title>Build Push service</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Build Report Graph</title>
+        <ns2:collection href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/scm/report-graph">
+            <title>Build Report Graph</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Build Report Service</title>
+        <ns2:collection href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/scm/report-builds">
+            <title>Build Report Service</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Build Server Check</title>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/scm/build-server-check">
+            <title>Build Server Check</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Build Status</title>
+        <ns2:collection href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/scm/build-status">
+            <title>Build Status Service</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Build Summary</title>
+        <ns2:collection href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/scm/build-summary">
+            <title>Build Summary Service</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Commit Service</title>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/scm/commit-service">
+            <title>Commit service</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Customization Entity Lists</title>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/customization/entities/{entity-name}/lists">
+            <title>Lists</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Customization Lists</title>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/customization/lists">
+            <title>Lists</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Enforcement Service</title>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/scm/enforcement-service">
+            <title>Enforcement service</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Entities properties</title>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/customization/entities">
+            <title>Entities</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Entity Permissions</title>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/customization/entities/{entity-name}/permissions">
+            <title>Permissions</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Entity subtype's fields</title>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/customization/entities/{entity-name}/types/{type_id}/fields">
+            <title>Subtype's customization fields</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Entity's fields</title>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/customization/entities/{entity-name}/fields">
+            <title>Fields</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Entity's sub-types</title>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/customization/entities/{entity-name}/types">
+            <title>Sub Types</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>File Diff</title>
+        <ns2:collection href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/scm/file-diff">
+            <title>File Diff</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>File View</title>
+        <ns2:collection href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/scm/file-view">
+            <title>File View</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock defects</title>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/defects/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock defects</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock requirements</title>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/requirements/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock requirements</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock resources</title>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/resources/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock resources</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Lock tests</title>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/tests/{parent_entity_id: [0-9]+}/lock">
+            <title>Lock tests</title>
+            <ns2:accept>*/*</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail defects</title>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/defects/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail defects</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail requirements</title>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/requirements/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail requirements</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Mail tests</title>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/tests/{parent_entity_id: [0-9]+}/mail">
+            <title>Mail tests</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Metric Report</title>
+        <ns2:collection href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/scm/metric-report">
+            <title>Metric Report Service</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Project Users</title>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/customization/users">
+            <title>Users</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Release Build Status</title>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/scm/release-build-status">
+            <title>Release Build Status Service</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Report Service</title>
+        <ns2:collection href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/scm/report">
+            <title>Report service</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>SCM Branch Check</title>
+        <ns2:collection href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/scm/branch-check">
+            <title>Branch check</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>SCM Pattern Converter</title>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/scm/pattern-converter">
+            <title>Pattren converter</title>
+            <ns2:accept>text/plain</ns2:accept>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>SCM Pattern Service</title>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/scm/pattern-service">
+            <title>Patterns</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>SCM Provider Properties Service</title>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/scm/build-providers/{provider-type}/properties">
+            <title>Properties of provider</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/scm/providers/{provider-type}/properties">
+            <title>Properties of provider</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>SCM Providers Service</title>
+        <ns2:collection href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/scm/providers">
+            <title>Providers</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>SCM Repository Check</title>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/scm/repository-check">
+            <title>Repository check</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>Task Executor</title>
+        <ns2:collection href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/scm/task-executor">
+            <title>Task executor</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>analysis-items</title>
+        <ns2:collection href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/analysis-items">
+            <title>QC analysis-items</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>assets-relations of resources</title>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/resources/{entity_id : [0-9]+}/assets-relations">
+            <title>QC assets-relations of resources</title>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>assets-relations of tests</title>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/tests/{entity_id : [0-9]+}/assets-relations">
+            <title>QC assets-relations of tests</title>
+            <ns2:accept>application/xml</ns2:accept>
+            <ns2:accept>application/xml;type=collection</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>attachments</title>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/test-set-folders/{parent_entity_id: [0-9]+}/attachments">
+            <title>QC attachments</title>
+            <ns2:accept>multipart/form-data</ns2:accept>
+            <ns2:accept>application/octet-stream</ns2:accept>
+        </ns2:collection>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/test-instances/{parent_entity_id: [0-9]+}/attachments">
+            <title>QC attachments</title>
+            <ns2:accept>multipart/form-data</ns2:accept>
+            <ns2:accept>application/octet-stream</ns2:accept>
+        </ns2:collection>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/test-folders/{parent_entity_id: [0-9]+}/attachments">
+            <title>QC attachments</title>
+            <ns2:accept>multipart/form-data</ns2:accept>
+            <ns2:accept>application/octet-stream</ns2:accept>
+        </ns2:collection>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/test-configs/{parent_entity_id: [0-9]+}/attachments">
+            <title>QC attachments</title>
+            <ns2:accept>multipart/form-data</ns2:accept>
+            <ns2:accept>application/octet-stream</ns2:accept>
+        </ns2:collection>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/requirements/{parent_entity_id: [0-9]+}/attachments">
+            <title>QC attachments</title>
+            <ns2:accept>multipart/form-data</ns2:accept>
+            <ns2:accept>application/octet-stream</ns2:accept>
+        </ns2:collection>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/test-sets/{parent_entity_id: [0-9]+}/attachments">
+            <title>QC attachments</title>
+            <ns2:accept>multipart/form-data</ns2:accept>
+            <ns2:accept>application/octet-stream</ns2:accept>
+        </ns2:collection>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/run-steps/{parent_entity_id: [0-9]+}/attachments">
+            <title>QC attachments</title>
+            <ns2:accept>multipart/form-data</ns2:accept>
+            <ns2:accept>application/octet-stream</ns2:accept>
+        </ns2:collection>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/defects/{parent_entity_id: [0-9]+}/attachments">
+            <title>QC attachments</title>
+            <ns2:accept>multipart/form-data</ns2:accept>
+            <ns2:accept>application/octet-stream</ns2:accept>
+        </ns2:collection>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/tests/{parent_entity_id: [0-9]+}/attachments">
+            <title>QC attachments</title>
+            <ns2:accept>multipart/form-data</ns2:accept>
+            <ns2:accept>application/octet-stream</ns2:accept>
+        </ns2:collection>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/runs/{parent_entity_id: [0-9]+}/attachments">
+            <title>QC attachments</title>
+            <ns2:accept>multipart/form-data</ns2:accept>
+            <ns2:accept>application/octet-stream</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>branch-policy-links</title>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/branch-policy-links">
+            <title>QC branch-policy-links</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>build-artifacts</title>
+        <ns2:collection href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/build-artifacts">
+            <title>QC build-artifacts</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>build-code-refs</title>
+        <ns2:collection href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/build-code-refs">
+            <title>QC build-code-refs</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>build-instances</title>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/build-instances/{entity_id : [0-9]+}/audits">
+            <title>QC build-instances</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/build-instances">
+            <title>QC build-instances</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>build-servers</title>
+        <ns2:collection href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/build-servers">
+            <title>QC build-servers</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>build-types</title>
+        <ns2:collection href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/build-types">
+            <title>QC build-types</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>changeset-files</title>
+        <ns2:collection href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/changeset-files">
+            <title>QC changeset-files</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>changeset-links</title>
+        <ns2:collection href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/changeset-links">
+            <title>QC changeset-links</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>changesets</title>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/changesets/{entity_id : [0-9]+}/audits">
+            <title>QC changesets</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/changesets">
+            <title>QC changesets</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>dashboard-folders</title>
+        <ns2:collection href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/dashboard-folders">
+            <title>QC dashboard-folders</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>dashboard-pages</title>
+        <ns2:collection href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/dashboard-pages">
+            <title>QC dashboard-pages</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>defect-links</title>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/defects/{parent_entity_id: [0-9]+}/defect-links">
+            <title>QC defect-links</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>defects</title>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/defects/{entity_id : [0-9]+}/audits">
+            <title>QC defects</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/defects">
+            <title>QC defects</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>event-logs</title>
+        <ns2:collection href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/event-logs">
+            <title>QC event-logs</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>favorite-folders</title>
+        <ns2:collection href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/favorite-folders">
+            <title>QC favorite-folders</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>favorites</title>
+        <ns2:collection href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/favorites">
+            <title>QC favorites</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>items</title>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/dashboard-pages/{parent_entity_id: [0-9]+}/items">
+            <title>QC items</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>policy-items</title>
+        <ns2:collection href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/policy-items">
+            <title>QC policy-items</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>project audits</title>
+        <ns2:collection href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/audits">
+            <title>audits</title>
+            <ns2:accept/>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>release-cycles</title>
+        <ns2:collection href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/release-cycles">
+            <title>QC release-cycles</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>release-folders</title>
+        <ns2:collection href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/release-folders">
+            <title>QC release-folders</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>releases</title>
+        <ns2:collection href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/releases">
+            <title>QC releases</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>requirements</title>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/requirements/{entity_id : [0-9]+}/audits">
+            <title>QC requirements</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/requirements">
+            <title>QC requirements</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>resource-folders</title>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/resource-folders/{entity_id : [0-9]+}/audits">
+            <title>QC resource-folders</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/resource-folders">
+            <title>QC resource-folders</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>resources</title>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/resources/{entity_id : [0-9]+}/audits">
+            <title>QC resources</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/resources">
+            <title>QC resources</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>run-steps</title>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/runs/{parent_entity_id: [0-9]+}/run-steps">
+            <title>QC run-steps</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>runs</title>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/runs/{entity_id : [0-9]+}/audits">
+            <title>QC runs</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/runs">
+            <title>QC runs</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>scm-branch-releases</title>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/scm-branch-releases">
+            <title>QC scm-branch-releases</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>scm-branches</title>
+        <ns2:collection href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/scm-branches">
+            <title>QC scm-branches</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>scm-repositories</title>
+        <ns2:collection href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/scm-repositories">
+            <title>QC scm-repositories</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>task-logs</title>
+        <ns2:collection href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/task-logs">
+            <title>QC task-logs</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>tasks</title>
+        <ns2:collection href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/tasks">
+            <title>QC tasks</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>test-configs</title>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/test-configs/{entity_id : [0-9]+}/audits">
+            <title>QC test-configs</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/test-configs">
+            <title>QC test-configs</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>test-folders</title>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/test-folders/{entity_id : [0-9]+}/audits">
+            <title>QC test-folders</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/test-folders">
+            <title>QC test-folders</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>test-instances</title>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/test-instances/{entity_id : [0-9]+}/audits">
+            <title>QC test-instances</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/test-instances">
+            <title>QC test-instances</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>test-set-folders</title>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/test-set-folders/{entity_id : [0-9]+}/audits">
+            <title>QC test-set-folders</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/test-set-folders">
+            <title>QC test-set-folders</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>test-sets</title>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/test-sets/{entity_id : [0-9]+}/audits">
+            <title>QC test-sets</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/test-sets">
+            <title>QC test-sets</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+    <ns2:workspace>
+        <title>tests</title>
+        <ns2:collection
+                href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/tests/{entity_id : [0-9]+}/audits">
+            <title>QC tests</title>
+            <ns2:accept/>
+        </ns2:collection>
+        <ns2:collection href="http://16.55.190.8:9090/qcbin/rest/domains/{domain}/projects/{project}/tests">
+            <title>QC tests</title>
+            <ns2:accept>application/xml</ns2:accept>
+        </ns2:collection>
+    </ns2:workspace>
+</ns2:service>

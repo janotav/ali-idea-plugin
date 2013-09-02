@@ -59,7 +59,11 @@ public class TeamService extends AbstractCachingEntityService<String> {
     @Override
     protected EntityList doGetValue(String teamName) {
         EntityQuery query = new EntityQuery("team");
+        query.addColumn("id", 1);
+        query.addColumn("release-id", 1);
+        query.addColumn("name", 1);
         query.setValue("name", "'" + teamName + "'");
+        query.setPropertyResolved("name", true);
         return entityService.query(query);
     }
 }

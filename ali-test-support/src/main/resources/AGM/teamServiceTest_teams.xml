@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Entities TotalResults="2">
+    <Entity Type="team">
+        <Fields>
+            <Field Name="id">
+                <Value>101</Value>
+            </Field>
+            <Field Name="name">
+                <Value>The Team</Value>
+            </Field>
+            <Field Name="release-id">
+                <Value>1000</Value>
+            </Field>
+        </Fields>
+        <RelatedEntities/>
+    </Entity>
+    <Entity Type="team">
+        <Fields>
+            <Field Name="id">
+                <Value>101</Value>
+            </Field>
+            <Field Name="name">
+                <Value>The Team</Value>
+            </Field>
+            <Field Name="release-id">
+                <Value>1001</Value>
+            </Field>
+        </Fields>
+        <RelatedEntities/>
+    </Entity>
+</Entities>

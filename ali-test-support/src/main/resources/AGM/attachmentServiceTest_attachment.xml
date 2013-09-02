@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Entities TotalResults="1">
+    <Entity Type="attachment">
+        <Fields>
+            <Field Name="ref-subtype">
+                <Value>0</Value>
+            </Field>
+            <Field Name="vc-user-name">
+                <Value></Value>
+            </Field>
+            <Field Name="id">
+                <Value>653</Value>
+            </Field>
+            <Field Name="parent-id">
+                <Value>1</Value>
+            </Field>
+            <Field Name="last-modified">
+                <Value>2013-03-21 21:32:14</Value>
+            </Field>
+            <Field Name="description">
+                <Value></Value>
+            </Field>
+            <Field Name="vc-cur-ver">
+                <Value></Value>
+            </Field>
+            <Field Name="name">
+                <Value>logfile.txt</Value>
+            </Field>
+            <Field Name="ref-type">
+                <Value>File</Value>
+            </Field>
+            <Field Name="parent-type">
+                <Value>defect</Value>
+            </Field>
+            <Field Name="file-size">
+                <Value>7</Value>
+            </Field>
+        </Fields>
+        <RelatedEntities/>
+    </Entity>
+</Entities>

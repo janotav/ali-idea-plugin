@@ -19,13 +19,14 @@ package com.hp.alm.ali.idea.model.type;
 import com.hp.alm.ali.idea.entity.EntityFilter;
 import com.hp.alm.ali.idea.entity.EntityQuery;
 import com.hp.alm.ali.idea.filter.FilterManager;
+import com.hp.alm.ali.idea.filter.MultipleItemsChooserFactory;
+import com.hp.alm.ali.idea.filter.MultipleItemsFactory;
 import com.hp.alm.ali.idea.model.ItemsProvider;
 import com.hp.alm.ali.idea.translate.filter.MultipleItemsTranslatedResolver;
 import com.hp.alm.ali.idea.services.EntityService;
 import com.hp.alm.ali.idea.services.SprintService;
 import com.hp.alm.ali.idea.filter.FilterChooser;
 import com.hp.alm.ali.idea.filter.FilterFactory;
-import com.hp.alm.ali.idea.filter.MultipleItemsFactory;
 import com.hp.alm.ali.idea.ui.ComboItem;
 import com.hp.alm.ali.idea.model.Entity;
 import com.hp.alm.ali.idea.model.parser.EntityList;
@@ -52,7 +53,7 @@ public class SprintType extends ReferenceType {
         return new SprintFilterFactory(multiple);
     }
 
-    private class SprintFilterFactory implements FilterFactory, ContextAware {
+    private class SprintFilterFactory extends MultipleItemsFactory implements ContextAware {
 
         private Context context;
         private boolean multiple;
@@ -112,12 +113,7 @@ public class SprintType extends ReferenceType {
                     }
                 };
             }
-            return new MultipleItemsFactory(project, "Sprint", multiple, provider, translateService.getReferenceTranslator("release-cycle")).createChooser(value);
-        }
-
-        @Override
-        public List<String> getCustomChoices() {
-            return null;
+            return new MultipleItemsChooserFactory(project, "Sprint", multiple, provider, translateService.getReferenceTranslator("release-cycle")).createChooser(value);
         }
 
         private boolean multipleReleases(List<Entity> sprints) {

@@ -17,6 +17,7 @@
 package com.hp.alm.ali.idea.model.type;
 
 import com.hp.alm.ali.idea.filter.FilterManager;
+import com.hp.alm.ali.idea.filter.MultipleItemsChooserFactory;
 import com.hp.alm.ali.idea.model.ItemsProvider;
 import com.hp.alm.ali.idea.translate.Translator;
 import com.hp.alm.ali.idea.translate.ValueCallback;
@@ -25,7 +26,6 @@ import com.hp.alm.ali.idea.services.AbstractCachingService;
 import com.hp.alm.ali.idea.services.RequirementTypeService;
 import com.hp.alm.ali.idea.filter.FilterFactory;
 import com.hp.alm.ali.idea.translate.filter.FilterResolver;
-import com.hp.alm.ali.idea.filter.MultipleItemsFactory;
 import com.hp.alm.ali.idea.translate.filter.MultipleItemsTranslatedResolver;
 import com.hp.alm.ali.idea.ui.ComboItem;
 import com.hp.alm.ali.idea.model.Entity;
@@ -45,7 +45,7 @@ public class RequirementTypeType implements Type, Translator {
 
     @Override
     public FilterFactory getFilterFactory(boolean multiple) {
-        return new MultipleItemsFactory(project, "Requirement Type", true, new ItemsProvider.Loader<ComboItem>() {
+        return new MultipleItemsChooserFactory(project, "Requirement Type", true, new ItemsProvider.Loader<ComboItem>() {
             @Override
             public List<ComboItem> load() {
                 RequirementTypeList types = project.getComponent(RequirementTypeService.class).getRequirementTypes();

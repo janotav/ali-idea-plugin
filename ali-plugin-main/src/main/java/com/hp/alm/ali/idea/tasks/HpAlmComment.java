@@ -20,6 +20,7 @@ import com.hp.alm.ali.idea.ui.editor.field.CommentField;
 import com.hp.alm.ali.idea.ui.editor.field.HTMLAreaField;
 import com.intellij.tasks.Comment;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -31,40 +32,52 @@ public class HpAlmComment extends Comment {
     private String author;
     private Date date;
 
-    public HpAlmComment(String htmlFragment) {
-        // QCWeb comment example:
-        //   <b>Administrator &lt;admin@company&gt;, 2012-03-13 12:57:26 +0100</b>
-        // QC comment example:
-        //   <b>Administrator &lt;admin@company&gt;, 3/13/2012:</b>
-        // QC comment example:
-        //   <b>admin, 3/13/2012:</b>
+    private HpAlmComment(String author, Date date, String text) {
+        this.author = author;
+        this.date = date;
+        this.text = text;
+    }
 
-        Pattern qcWebAuthor = Pattern.compile(".*?<b>(.*?&lt;.+?&gt;), (\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2} [+-]\\d{4})(.*)", Pattern.DOTALL);
-        Matcher matcher = qcWebAuthor.matcher(htmlFragment);
+    public static HpAlmComment parse(String htmlFragment) {
+        HpAlmComment comment = parseQcWeb(htmlFragment);
+        if(comment == null) {
+            comment = parseQc(htmlFragment);
+        }
+        if(comment == null) {
+            comment = parseAgm(htmlFragment);
+        }
+        if(comment == null) {
+            comment = new HpAlmComment(null, null, HTMLAreaField.toPlainText(htmlFragment, false));
+        }
+        return comment;
+    }
+
+    private static HpAlmComment parseQcWeb(String htmlFragment) {
+        return parse(".*?<b>(.*?&lt;.+?&gt;), (\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2} [+-]\\d{4})(.*)", CommentField.dateTimeFormat, htmlFragment);
+    }
+
+    private static HpAlmComment parseQc(String htmlFragment) {
+        return parse(".*?<b>(.*?), (\\d{1,2}/\\d{1,2}/\\d{4}):(.*)", new SimpleDateFormat("M/d/yyyy"), htmlFragment);
+    }
+
+    private static HpAlmComment parseAgm(String htmlFragment) {
+        return parse(".*?<strong>(.*?), \\w+ (\\w+ \\d+ \\d+):(.*)", new SimpleDateFormat("MMM d yyyy"), htmlFragment);
+    }
+
+    private static HpAlmComment parse(String pattern, DateFormat dateFormat, String htmlFragment) {
+        Pattern p = Pattern.compile(pattern, Pattern.DOTALL);
+        Matcher matcher = p.matcher(htmlFragment);
         if(matcher.matches()) {
-            author = matcher.group(1).replaceAll("&lt;", "<").replaceAll("&gt;", ">");
-            text = HTMLAreaField.toPlainText(matcher.group(3), false);
+            String author = matcher.group(1).replaceAll("&lt;", "<").replaceAll("&gt;", ">").trim();
+            String text = HTMLAreaField.toPlainText(matcher.group(3), false).trim();
             try {
-                date = CommentField.dateTimeFormat.parse(matcher.group(2));
+                Date date = dateFormat.parse(matcher.group(2));
+                return new HpAlmComment(author, date, text);
             } catch (ParseException e) {
-                // this is best effort
-            }
-        } else {
-            Pattern qcAuthor = Pattern.compile(".*?<b>(.*?), (\\d{1,2}/\\d{1,2}/\\d{4}):(.*)", Pattern.DOTALL);
-            matcher = qcAuthor.matcher(htmlFragment);
-            if(matcher.matches()) {
-                author = matcher.group(1).replaceAll("&lt;", "<").replaceAll("&gt;", ">");
-                text = HTMLAreaField.toPlainText(matcher.group(3), false);
-                try {
-                    date = new SimpleDateFormat("M/d/yyyy").parse(matcher.group(2));
-                } catch (ParseException e) {
-                    // this is best effort
-                }
-            } else {
-                // fallback
-                text = HTMLAreaField.toPlainText(htmlFragment, false);
+                return new HpAlmComment(author, null, text);
             }
         }
+        return null;
     }
 
     public String getText() {

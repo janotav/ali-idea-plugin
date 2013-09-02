@@ -1,0 +1,10 @@
+<APMCommonSettings>
+    <Properties>
+        <Property>
+            <Key>defectDefaultStatusValueForCreate</Key>
+            <Values>
+                <Value>New</Value>
+            </Values>
+        </Property>
+    </Properties>
+</APMCommonSettings>

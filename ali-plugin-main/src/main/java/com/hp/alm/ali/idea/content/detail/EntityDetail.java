@@ -141,11 +141,18 @@ public class EntityDetail extends JPanel implements ContentManagerListener, HasE
     public void contentRemoved(ContentManagerEvent contentManagerEvent) {
         if(this.equals(contentManagerEvent.getContent().getComponent())) {
             contentManagerEvent.getContent().getManager().removeContentManagerListener(this);
-            entityGrid.remove();
-            pageBar.remove();
-            entityService.removeEntityListener(this);
-            restService.removeServerTypeListener(this);
+            _unregister();
         }
+    }
+
+    /*
+     * method should be considered private except for usage in tests
+     */
+    public void _unregister() {
+        entityGrid.remove();
+        pageBar.remove();
+        entityService.removeEntityListener(this);
+        restService.removeServerTypeListener(this);
     }
 
     @Override

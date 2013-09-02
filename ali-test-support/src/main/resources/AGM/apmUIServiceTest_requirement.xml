@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Entities TotalResults="2">
+    <Entity Type="release-backlog-item">
+        <Fields>
+            <Field Name="no-of-sons">
+                <Value>1</Value>
+            </Field>
+            <Field Name="release-id"/>
+            <Field Name="entity-type">
+                <Value>defect</Value>
+            </Field>
+            <Field Name="kanban-status-id"/>
+            <Field Name="id">
+                <Value>4289</Value>
+            </Field>
+            <Field Name="ver-stamp">
+                <Value>14</Value>
+            </Field>
+            <Field Name="entity-id">
+                <Value>86</Value>
+            </Field>
+            <Field Name="rank">
+                <Value>1923000</Value>
+            </Field>
+            <Field Name="remaining"/>
+            <Field Name="aggr-assignee">
+                <Value>,null@localhost,</Value>
+            </Field>
+            <Field Name="estimated"/>
+            <Field Name="blocked">
+                <Value></Value>
+            </Field>
+            <Field Name="kan-status-duration">
+                <Value>0</Value>
+            </Field>
+            <Field Name="product-id">
+                <Value>2</Value>
+            </Field>
+            <Field Name="entity-name">
+                <Value>somewhat</Value>
+            </Field>
+            <Field Name="kanban-parent-status-id"/>
+            <Field Name="status">
+                <Value>In Testing</Value>
+            </Field>
+            <Field Name="story-points"/>
+            <Field Name="sprint-id"/>
+            <Field Name="watch-id"/>
+            <Field Name="is-leaf">
+                <Value>Y</Value>
+            </Field>
+            <Field Name="kan-parent-duration">
+                <Value>0</Value>
+            </Field>
+            <Field Name="vts">
+                <Value>2013-05-27 06:13:29</Value>
+            </Field>
+            <Field Name="theme-id">
+                <Value>4188</Value>
+            </Field>
+            <Field Name="team-id"/>
+            <Field Name="invested"/>
+            <Field Name="owner">
+                <Value>null@localhost</Value>
+            </Field>
+            <Field Name="linked-entities-info">
+                <Value>1</Value>
+            </Field>
+            <Field Name="bi-req-type">
+                <Value></Value>
+            </Field>
+            <Field Name="feature-id">
+                <Value>1439</Value>
+            </Field>
+        </Fields>
+        <RelatedEntities/>
+    </Entity>
+    <Entity Type="requirement">
+        <Fields>
+            <Field Name="cover-status">
+                <Value>Not Covered</Value>
+            </Field>
+            <Field Name="vc-checkout-comments">
+                <Value></Value>
+            </Field>
+            <Field Name="rbt-analysis-setup-data">
+                <Value></Value>
+            </Field>
+            <Field Name="vc-checkin-time">
+                <Value></Value>
+            </Field>
+            <Field Name="rbt-custom-testing-level">
+                <Value></Value>
+            </Field>
+            <Field Name="istemplate">
+                <Value>0</Value>
+            </Field>
+            <Field Name="rbt-effective-bsns-impact">
+                <Value></Value>
+            </Field>
+            <Field Name="rbt-bsns-impact">
+                <Value></Value>
+            </Field>
+            <Field Name="description">
+                <Value>something</Value>
+            </Field>
+            <Field Name="vc-version-number"/>
+            <Field Name="rbt-effective-fail-prob">
+                <Value></Value>
+            </Field>
+            <Field Name="request-status">
+                <Value></Value>
+            </Field>
+            <Field Name="request-updates">
+                <Value></Value>
+            </Field>
+            <Field Name="rbt-assessment-data">
+                <Value></Value>
+            </Field>
+            <Field Name="req-type">
+                <Value></Value>
+            </Field>
+            <Field Name="rbt-custom-fail-prob">
+                <Value></Value>
+            </Field>
+            <Field Name="not-run-at">
+                <Value>0</Value>
+            </Field>
+            <Field Name="check-out-user-name">
+                <Value></Value>
+            </Field>
+            <Field Name="order-id">
+                <Value>1</Value>
+            </Field>
+            <Field Name="rbt-testing-level">
+                <Value></Value>
+            </Field>
+            <Field Name="vc-checkin-date"/>
+            <Field Name="parent-id">
+                <Value>4126</Value>
+            </Field>
+            <Field Name="target-rel">
+                <Value ReferenceValue="Test Release">1001</Value>
+            </Field>
+            <Field Name="rbt-custom-risk">
+                <Value></Value>
+            </Field>
+            <Field Name="req-rich-content">
+                <Value></Value>
+            </Field>
+            <Field Name="products-id"/>
+            <Field Name="owner">
+                <Value>null@localhost</Value>
+            </Field>
+            <Field Name="rbt-effective-risk">
+                <Value></Value>
+            </Field>
+            <Field Name="request-type">
+                <Value></Value>
+            </Field>
+            <Field Name="user-05">
+                <Value></Value>
+            </Field>
+            <Field Name="rbt-last-analysis-date"/>
+            <Field Name="no-of-sons">
+                <Value>0</Value>
+            </Field>
+            <Field Name="rbt-use-custom-risk">
+                <Value></Value>
+            </Field>
+            <Field Name="user-04">
+                <Value></Value>
+            </Field>
+            <Field Name="user-03">
+                <Value></Value>
+            </Field>
+            <Field Name="rbt-testing-hours"/>
+            <Field Name="user-02"/>
+            <Field Name="user-01">
+                <Value></Value>
+            </Field>
+            <Field Name="no-of-blis">
+                <Value>0</Value>
+            </Field>
+            <Field Name="request-id"/>
+            <Field Name="request-server">
+                <Value></Value>
+            </Field>
+            <Field Name="request-assign-to">
+                <Value></Value>
+            </Field>
+            <Field Name="has-rich-content">
+                <Value>N</Value>
+            </Field>
+            <Field Name="vc-checkout-date"/>
+            <Field Name="user-06">
+                <Value></Value>
+            </Field>
+            <Field Name="id">
+                <Value>4199</Value>
+            </Field>
+            <Field Name="rbt-risk">
+                <Value></Value>
+            </Field>
+            <Field Name="rbt-effective-func-cmplx">
+                <Value></Value>
+            </Field>
+            <Field Name="name">
+                <Value>somewhat</Value>
+            </Field>
+            <Field Name="has-linkage">
+                <Value>N</Value>
+            </Field>
+            <Field Name="rbt-custom-testing-hours"/>
+            <Field Name="vc-status">
+                <Value></Value>
+            </Field>
+            <Field Name="rbt-custom-func-cmplx">
+                <Value></Value>
+            </Field>
+            <Field Name="vc-checkin-user-name">
+                <Value></Value>
+            </Field>
+            <Field Name="creation-time">
+                <Value>2012-12-06</Value>
+            </Field>
+            <Field Name="request-note">
+                <Value></Value>
+            </Field>
+            <Field Name="rbt-use-custom-tl-and-te">
+                <Value></Value>
+            </Field>
+            <Field Name="target-rel-varchar">
+                <Value>;1001;</Value>
+            </Field>
+            <Field Name="req-ver-stamp">
+                <Value>12</Value>
+            </Field>
+            <Field Name="passed-at">
+                <Value>0</Value>
+            </Field>
+            <Field Name="req-time">
+                <Value>01:25:23</Value>
+            </Field>
+            <Field Name="last-modified">
+                <Value>2012-12-31 01:28:55</Value>
+            </Field>
+            <Field Name="target-rcyc-varchar">
+                <Value>;1001;</Value>
+            </Field>
+            <Field Name="hierarchical-path">
+                <Value>AAACQBAAA</Value>
+            </Field>
+            <Field Name="application-name">
+                <Value></Value>
+            </Field>
+            <Field Name="rbt-use-custom-bsns-impact">
+                <Value></Value>
+            </Field>
+            <Field Name="rbt-custom-bsns-impact">
+                <Value></Value>
+            </Field>
+            <Field Name="vc-checkout-time">
+                <Value></Value>
+            </Field>
+            <Field Name="type-id">
+                <Value>70</Value>
+            </Field>
+            <Field Name="attachment">
+                <Value></Value>
+            </Field>
+            <Field Name="failed-at">
+                <Value>0</Value>
+            </Field>
+            <Field Name="vc-checkin-comments">
+                <Value></Value>
+            </Field>
+            <Field Name="rbt-rnd-estim-effort-hours"/>
+            <Field Name="rbt-func-cmplx">
+                <Value></Value>
+            </Field>
+            <Field Name="rbt-use-custom-fail-prob">
+                <Value></Value>
+            </Field>
+            <Field Name="rbt-use-custom-func-cmplx">
+                <Value></Value>
+            </Field>
+            <Field Name="req-reviewed">
+                <Value></Value>
+            </Field>
+            <Field Name="rbt-analysis-result-data">
+                <Value></Value>
+            </Field>
+            <Field Name="target-rcyc">
+                <Value ReferenceValue="Sprint 1">1001</Value>
+            </Field>
+            <Field Name="req-priority">
+                <Value></Value>
+            </Field>
+            <Field Name="rbt-ignore-in-analysis">
+                <Value></Value>
+            </Field>
+            <Field Name="rbt-analysis-parent-req-id"/>
+            <Field Name="rbt-fail-prob">
+                <Value></Value>
+            </Field>
+            <Field Name="father-name">
+                <Value>placeholder</Value>
+            </Field>
+        </Fields>
+        <RelatedEntities/>
+    </Entity>
+</Entities>

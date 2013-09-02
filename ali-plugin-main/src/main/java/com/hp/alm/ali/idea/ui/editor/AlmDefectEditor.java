@@ -35,7 +35,7 @@ public class AlmDefectEditor extends EntityEditor {
         super.update();
         CustomizationService customizationService = project.getComponent(CustomizationService.class);
         final EditableField statusField = getField("status");
-        String newStatus = customizationService.getNewDefectStatus(true, new AbstractCachingService.Callback<String>() {
+        String newStatus = customizationService.getNewDefectStatus(new AbstractCachingService.DispatchCallback<String>() {
             @Override
             public void loaded(String value) {
                 if(!value.isEmpty()) {

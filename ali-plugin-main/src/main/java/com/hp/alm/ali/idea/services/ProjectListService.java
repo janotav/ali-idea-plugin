@@ -52,21 +52,6 @@ public class ProjectListService extends AbstractCachingService<String, Map<Integ
         }
     }
 
-    public void getProjectListAsync(String entityType, final Field field, final Callback<List<String>> callback) {
-        String type;
-        if(field.getRelatedType() != null) {
-            type = field.getRelatedType();
-        } else {
-            type = entityType;
-        }
-        getValueAsync(type, new Callback<Map<Integer, List<String>>>() {
-            @Override
-            public void loaded(Map<Integer, List<String>> data) {
-                callback.loaded(data.get(field.getListId()));
-            }
-        });
-    }
-
     @Override
     protected Map<Integer, List<String>> doGetValue(String entityType) {
         Map<Integer, List<String>> map = new HashMap<Integer, List<String>>();

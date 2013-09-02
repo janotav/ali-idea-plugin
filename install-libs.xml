@@ -9,7 +9,7 @@
 
 -->
 <project name="install-libs">
-    <target name="install-libs">
+  <target name="install-libs">
     <exec executable="mvn">
       <arg value="install:install-file"/>
       <arg value="-DgroupId=com.intellij"/>
@@ -596,9 +596,25 @@
     </exec>
     <exec executable="mvn">
       <arg value="install:install-file"/>
-      <arg value="-Dfile=${IDEA_HOME}/plugins/junit/lib/junit-rt.jar"/>
+      <arg value="-Dfile=${IDEA_HOME}/plugins/tasks/lib/tasks-core.jar"/>
       <arg value="-DgroupId=com.intellij.plugins"/>
-      <arg value="-DartifactId=junit-rt"/>
+      <arg value="-DartifactId=tasks-core"/>
+      <arg value="-Dversion=${IDEA_VERSION}"/>
+      <arg value="-Dpackaging=jar"/>
+    </exec>
+    <exec executable="mvn">
+      <arg value="install:install-file"/>
+      <arg value="-Dfile=${IDEA_HOME}/plugins/tasks/lib/tasks-java.jar"/>
+      <arg value="-DgroupId=com.intellij.plugins"/>
+      <arg value="-DartifactId=tasks-java"/>
+      <arg value="-Dversion=${IDEA_VERSION}"/>
+      <arg value="-Dpackaging=jar"/>
+    </exec>
+    <exec executable="mvn">
+      <arg value="install:install-file"/>
+      <arg value="-Dfile=${IDEA_HOME}/plugins/tasks/lib/jira-connector.jar"/>
+      <arg value="-DgroupId=com.intellij.plugins"/>
+      <arg value="-DartifactId=jira-connector"/>
       <arg value="-Dversion=${IDEA_VERSION}"/>
       <arg value="-Dpackaging=jar"/>
     </exec>

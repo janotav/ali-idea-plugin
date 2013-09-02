@@ -69,4 +69,6 @@ public interface ServerStrategy extends EntityQueryProcessor {
 
     List<AliContent> getSupportedContent();
 
+    String getFieldAlias(String entityType, String property);
+
 }

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Fields>
+    <Field PhysicalName="TE_DESCRIPTION" Name="description" Label="Description">
+        <Size>-1</Size>
+        <History>false</History>
+        <Required>false</Required>
+        <System>true</System>
+        <Type>Memo</Type>
+        <Verify>false</Verify>
+        <Virtual>false</Virtual>
+        <Active>true</Active>
+        <Editable>true</Editable>
+        <Filterable>true</Filterable>
+        <Groupable>false</Groupable>
+        <SupportsMultivalue>false</SupportsMultivalue>
+        <Visible>true</Visible>
+        <MemoContainsHtml>true</MemoContainsHtml>
+        <VersionControlled>false</VersionControlled>
+    </Field>
+    <Field PhysicalName="TE_NAME" Name="name" Label="Name">
+        <Size>255</Size>
+        <History>false</History>
+        <Required>true</Required>
+        <System>true</System>
+        <Type>String</Type>
+        <Verify>false</Verify>
+        <Virtual>false</Virtual>
+        <Active>true</Active>
+        <Editable>true</Editable>
+        <Filterable>true</Filterable>
+        <Groupable>false</Groupable>
+        <SupportsMultivalue>false</SupportsMultivalue>
+        <Visible>true</Visible>
+        <MemoContainsHtml>false</MemoContainsHtml>
+        <VersionControlled>false</VersionControlled>
+    </Field>
+    <Field PhysicalName="TE_MEMBERS_CAPACITY" Name="members-capacity" Label="Team Capacity per Day (hours)">
+        <Size>255</Size>
+        <History>false</History>
+        <Required>false</Required>
+        <System>true</System>
+        <Type>Number</Type>
+        <Verify>false</Verify>
+        <Virtual>true</Virtual>
+        <Active>true</Active>
+        <Editable>false</Editable>
+        <Filterable>false</Filterable>
+        <Groupable>false</Groupable>
+        <SupportsMultivalue>false</SupportsMultivalue>
+        <Visible>true</Visible>
+        <MemoContainsHtml>false</MemoContainsHtml>
+        <VersionControlled>false</VersionControlled>
+    </Field>
+    <Field PhysicalName="TE_ESTIMATED_VELOCITY" Name="estimated-velocity"
+           Label="Team estimated velocity (Story Points)">
+        <Size>255</Size>
+        <History>false</History>
+        <Required>false</Required>
+        <System>true</System>
+        <Type>Number</Type>
+        <Verify>false</Verify>
+        <Virtual>false</Virtual>
+        <Active>true</Active>
+        <Editable>true</Editable>
+        <Filterable>false</Filterable>
+        <Groupable>false</Groupable>
+        <SupportsMultivalue>false</SupportsMultivalue>
+        <Visible>true</Visible>
+        <MemoContainsHtml>false</MemoContainsHtml>
+        <VersionControlled>false</VersionControlled>
+    </Field>
+    <Field PhysicalName="TE_IS_ACTIVE_IN_CURRENT_SPRINT" Name="is-active-in-current-sprint"
+           Label="is active in current sprint">
+        <Size>1</Size>
+        <History>false</History>
+        <Required>false</Required>
+        <System>true</System>
+        <Type>String</Type>
+        <Verify>false</Verify>
+        <Virtual>true</Virtual>
+        <Active>true</Active>
+        <Editable>false</Editable>
+        <Filterable>false</Filterable>
+        <Groupable>false</Groupable>
+        <SupportsMultivalue>false</SupportsMultivalue>
+        <Visible>true</Visible>
+        <MemoContainsHtml>false</MemoContainsHtml>
+        <VersionControlled>false</VersionControlled>
+    </Field>
+    <Field PhysicalName="TE_NUMBER_OF_MEMBERS" Name="number-of-members" Label="number of team members">
+        <Size>255</Size>
+        <History>false</History>
+        <Required>false</Required>
+        <System>true</System>
+        <Type>Number</Type>
+        <Verify>false</Verify>
+        <Virtual>true</Virtual>
+        <Active>true</Active>
+        <Editable>false</Editable>
+        <Filterable>false</Filterable>
+        <Groupable>false</Groupable>
+        <SupportsMultivalue>false</SupportsMultivalue>
+        <Visible>true</Visible>
+        <MemoContainsHtml>false</MemoContainsHtml>
+        <VersionControlled>false</VersionControlled>
+    </Field>
+    <Field PhysicalName="TE_RELEASE_ID" Name="release-id">
+        <Size>40</Size>
+        <History>false</History>
+        <Required>true</Required>
+        <System>true</System>
+        <Type>Number</Type>
+        <Verify>false</Verify>
+        <Virtual>false</Virtual>
+        <Active>true</Active>
+        <Editable>false</Editable>
+        <Filterable>true</Filterable>
+        <Groupable>false</Groupable>
+        <SupportsMultivalue>false</SupportsMultivalue>
+        <Visible>true</Visible>
+        <MemoContainsHtml>false</MemoContainsHtml>
+        <VersionControlled>false</VersionControlled>
+        <References>
+            <RelationReference RelationName="teamRelease" ReferencedEntityType="release"/>
+        </References>
+    </Field>
+    <Field PhysicalName="TE_ID" Name="id">
+        <Size>40</Size>
+        <History>false</History>
+        <Required>false</Required>
+        <System>true</System>
+        <Type>Number</Type>
+        <Verify>false</Verify>
+        <Virtual>false</Virtual>
+        <Active>true</Active>
+        <Editable>false</Editable>
+        <Filterable>true</Filterable>
+        <Groupable>false</Groupable>
+        <SupportsMultivalue>false</SupportsMultivalue>
+        <Visible>true</Visible>
+        <MemoContainsHtml>false</MemoContainsHtml>
+        <VersionControlled>false</VersionControlled>
+    </Field>
+</Fields>

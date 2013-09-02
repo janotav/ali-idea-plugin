@@ -14,8 +14,8 @@
         <module>ali-lang</module>
         <module>ali-rest-client</module>
         <module>ali-plugin-main</module>
+        <module>ali-test-support</module>
         <module>idea-sdk</module>
-        <module>integration-tests</module>
     </modules>
 
 </project>

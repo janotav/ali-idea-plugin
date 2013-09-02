@@ -125,6 +125,10 @@ public class AliContentFactory implements ToolWindowFactory {
                     fContent.setDisplayName(entityLabel + " #" + entity.getId());
                 }
             });
+            if(idx < 0) {
+                // ToolWindowHeadlessManager does not accept -1
+                idx = toolWindow.getContentManager().getContentCount();
+            }
             toolWindow.getContentManager().addContent(content, idx);
             toolWindow.getContentManager().addContentManagerListener(entityDetail);
             entityDetail.updateSelection(toolWindow.getContentManager().getSelectedContent());
