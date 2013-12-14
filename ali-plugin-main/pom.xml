@@ -156,10 +156,6 @@
                             <tasks>
                                 <replace file="${project.build.outputDirectory}/META-INF/plugin.xml"
                                          token="@{idea.build}" value="${idea.build}"/>
-                                <replace file="${project.build.outputDirectory}/META-INF/plugin.xml"
-                                         token="@{ali.buildNumber}" value="${buildNumber}"/>
-                                <replace file="${project.build.outputDirectory}/META-INF/plugin.xml"
-                                         token="@{ali.sourceRevision}" value="${sourceRevision}"/>
                             </tasks>
                         </configuration>
                     </execution>

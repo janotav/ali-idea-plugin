@@ -2,14 +2,14 @@
     <id>com.hp.alm.ali</id>
     <name>HP ALI</name>
     <description>Application Lifecycle Intelligence for HP ALM</description>
-    <version>3.7.@{idea.build}.@{ali.buildNumber}</version>
+    <version>3.7.@{idea.build}</version>
     <vendor logo="/ali_icon.png" url="https://hpln.hp.com/group/application-lifecycle-intelligence">HP</vendor>
 
     <idea-version since-build="@{idea.build}"/>
 
     <change-notes>
         <![CDATA[
-      <h3>Changes in @{ali.sourceRevision}</h3>
+      <h3>Changes in 3.7</h3>
       <ul>
         <li>Switching to the public codebase</li>
       </ul>

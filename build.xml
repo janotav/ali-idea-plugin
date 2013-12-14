@@ -54,9 +54,6 @@
             <arg value="package"/>
             <arg value="-Didea.build=${IDEA_BUILD}"/>
             <arg value="-Didea.version=${IDEA_VERSION}"/>
-            <!-- in regular build following values are provided by CI -->
-            <arg value="-DsourceRevision=latest"/>
-            <arg value="-DbuildNumber=999999"/>
             <!-- needed for test execution -->
             <arg value="-Didea.home.path=${IDEA_HOME}"/>
             <arg value="-Didea.platform.prefix=Idea"/>
