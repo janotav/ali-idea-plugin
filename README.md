@@ -16,25 +16,26 @@ Intellij IDEA or download manually from the plugin [homepage].
 Building
 --------
 
-If you wish to build the plugin from the sources you first need to populate your local maven repository with
-Intellij IDEA libraries that are not available in the public maven repository. Convenience ANT script is provided to
-simplify this task. Before using this script make sure that IDEA_HOME points to your IDEA installation.
+Both supported Intellij versions (12.1.1 and 13) need to be present for the build process to complete. First you need to
+populate your local maven repository with Intellij IDEA libraries that are not available in the public maven repository.
+Convenience ANT script is provided to simplify this task.
 
 ```
-    $ ant build
+    $ ant install-sdk -DIDEA_HOME=<Idea Community 12.1.1 Home>
+    $ ant install-sdk -DIDEA_HOME=<Idea Community 13 Home>
 ```
 
-When invoked this takes care of the following:
-
-1. installs relevant jars from the IDEA_HOME installation using "mvn install:install-file"
-2. invokes "mvn package" overriding version identifiers to match your IDEA version
-3. resulting plugin is located in "target/ali-idea-plugin.zip"
-
-Alternatively if you need to tweak the build somehow, you may also run:
+Once the dependencies are present in the local repository, you can perform actual build:
 
 ```
-    $ ant install-libs
+    $ ant build -DIDEA_HOME=<Idea Community 12.1.1 Home>
 ```
 
-This installs relevant jars into your local maven repository. Then you need to specify correct "idea.build" and
-"idea.version" properties inside the "ali-plugin-main/pom.xml" and the maven project should be buildable.
+Resulting plugin is located in "ali-plugin-main/target/ali-idea-plugin.zip".
+
+In case you are extending the plugin functionality make sure to also execute the tests in the context of the other
+supported version to ensure there are no compatibility issue:
+
+```
+    $ ant test -DIDEA_HOME=<Idea Community 13 Home>
+```

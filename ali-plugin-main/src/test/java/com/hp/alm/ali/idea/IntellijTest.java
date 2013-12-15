@@ -27,6 +27,7 @@ import com.hp.alm.ali.idea.services.ErrorService;
 import com.hp.alm.ali.idea.services.MetadataService;
 import com.hp.alm.ali.idea.services.MetadataSimpleService;
 import com.hp.alm.ali.idea.services.TestMessages;
+import com.hp.alm.ali.idea.util.ApplicationUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.ui.TestDialog;
@@ -72,6 +73,7 @@ public abstract class IntellijTest {
     public TestFailure failure = new TestFailure();
 
     protected TestMessages testMessages;
+    protected TestApplication testApplication;
 
     @Before
     public void reset() throws Exception {
@@ -91,10 +93,13 @@ public abstract class IntellijTest {
         getComponent(MetadataSimpleService.class).connectedTo(ServerType.NONE);
         testMessages = new TestMessages();
         Messages.setTestDialog(testMessages);
+        testApplication = new TestApplication();
+        ApplicationUtil._setApplication(testApplication);
     }
 
     @After
     public void done() throws Throwable {
+        testApplication.waitForBackgroundActivityToFinish();
         if(handler != null) {
             handler.finish();
         }

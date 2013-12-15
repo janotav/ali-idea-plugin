@@ -16,12 +16,12 @@
 
 package com.hp.alm.ali.idea.rest;
 
+import com.hp.alm.ali.idea.util.ApplicationUtil;
 import com.hp.alm.ali.rest.client.exception.AuthenticationFailureException;
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationListener;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
-import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.ui.UIUtil;
 import org.jetbrains.annotations.TestOnly;
@@ -109,7 +109,7 @@ public class TroubleShootService implements RestServiceLogger {
             long now = System.currentTimeMillis();
             if(id % 10 == 0 && now >= lastNotification + notificationDelay && project != null) {
                 lastNotification = now;
-                ApplicationManager.getApplication().invokeLater(new Runnable() {
+                ApplicationUtil.invokeLater(new Runnable() {
                     public void run() {
                         serviceNotification.expire();
                         Notifications.Bus.notify(serviceNotification, project);

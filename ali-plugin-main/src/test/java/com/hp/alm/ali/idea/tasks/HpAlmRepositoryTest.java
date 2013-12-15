@@ -157,6 +157,10 @@ public class HpAlmRepositoryTest extends IntellijTest {
             @Override
             public void register(@NotNull String groupDisplayName, @NotNull NotificationDisplayType defaultDisplayType, boolean shouldLog) {
             }
+
+            // needed for 13, adapter class not defined in 12.1.1
+            public void register(@NotNull String groupDisplayName, @NotNull NotificationDisplayType defaultDisplayType, boolean shouldLog, boolean shouldReadAloud) {
+            }
         });
 
         Task[] list = repository.getIssues("foo", 5, 100);

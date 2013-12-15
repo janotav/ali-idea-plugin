@@ -12,6 +12,7 @@
       <h3>Changes in 3.7</h3>
       <ul>
         <li>Switching to the public codebase</li>
+        <li>[compatibility] IDEA 13 compatibility fixes</li>
       </ul>
 
       <h3>Changes in Rev. 139214</h3>
@@ -293,6 +294,18 @@
         <component>
             <implementation-class>com.hp.alm.ali.idea.util.FileEditorManager</implementation-class>
             <interface-class>com.hp.alm.ali.idea.util.FileEditorManager</interface-class>
+        </component>
+        <component>
+            <implementation-class>com.hp.alm.ali.idea.util.IdeaCompatibilityImpl</implementation-class>
+            <interface-class>com.hp.alm.ali.idea.IdeaCompatibility</interface-class>
+        </component>
+        <component>
+            <implementation-class>com.hp.alm.ali.idea.tasks.Tasks129Impl</implementation-class>
+            <interface-class>com.hp.alm.ali.idea.tasks.Tasks129Impl</interface-class>
+        </component>
+        <component>
+            <implementation-class>com.hp.alm.ali.idea.tasks.Tasks133Impl</implementation-class>
+            <interface-class>com.hp.alm.ali.idea.tasks.Tasks133Impl</interface-class>
         </component>
     </project-components>
 

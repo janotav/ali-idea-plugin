@@ -67,7 +67,7 @@ public class AliConfigurable implements SearchableConfigurable, DocumentListener
     protected ConfigurationField passwdField;
     protected JCheckBox storePasswd;
 
-    private JButton testButton = new JButton("Test", IconLoader.getIcon("/general/toolWindowRun.png"));
+    private JButton testButton = new JButton("Test", IconLoader.getIcon("/toolwindows/toolWindowRun.png"));
     private JLabel testLabel = new JLabel("");
 
     protected JPanel configurationPanel;
@@ -203,7 +203,7 @@ public class AliConfigurable implements SearchableConfigurable, DocumentListener
             @Override
             public void actionPerformed(ActionEvent e) {
                 FileChooserDescriptor desc = new FileChooserDescriptor(true, false, false, false, false, false);
-                final VirtualFile[] file = FileChooserFactory.getInstance().createFileChooser(desc, browse).choose(null, null);
+                final VirtualFile[] file = FileChooserFactory.getInstance().createFileChooser(desc, null, browse).choose(null, null);
                 if(file.length == 0) {
                     return;
                 }

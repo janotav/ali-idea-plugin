@@ -31,9 +31,19 @@
         </dependency>
         <dependency>
             <groupId>com.hp.alm.ali</groupId>
-            <artifactId>idea-sdk</artifactId>
+            <artifactId>idea-sdk-${idea.version}</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.hp.alm.ali</groupId>
+            <artifactId>tasks-impl-129</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.hp.alm.ali</groupId>
+            <artifactId>tasks-impl-133</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>net.coderazzi</groupId>
@@ -98,12 +108,6 @@
         <dependency>
             <groupId>com.intellij.plugins</groupId>
             <artifactId>tasks-java</artifactId>
-            <version>${idea.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.intellij.plugins</groupId>
-            <artifactId>jira-connector</artifactId>
             <version>${idea.version}</version>
             <scope>test</scope>
         </dependency>

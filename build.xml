@@ -3,7 +3,6 @@
     <property environment="env"/>
 
     <target name="check-args">
-        <property name="IDEA_HOME" value="${env.IDEA_HOME}"/>
         <fail message="IDEA_HOME not specified or invalid">
             <condition>
                 <not>
@@ -42,14 +41,7 @@
         <echo>Found IDEA build: ${IDEA_VERSION} (${IDEA_BUILD})</echo>
     </target>
 
-    <target name="install-libs" depends="check-args">
-        <ant antfile="install-libs.xml" target="install-libs"/>
-    </target>
-
-    <target name="build" depends="install-libs,build-nolibs">
-    </target>
-
-    <target name="build-nolibs" depends="check-args">
+    <target name="build" depends="check-args">
         <exec executable="mvn" failonerror="true">
             <arg value="package"/>
             <arg value="-Didea.build=${IDEA_BUILD}"/>
@@ -61,4 +53,25 @@
         <echo>built: ali-plugin-main/target/ali-idea-plugin.zip</echo>
     </target>
 
+    <target name="test" depends="check-args">
+        <exec executable="mvn" failonerror="true">
+            <arg value="test"/>
+            <arg value="-Didea.build=${IDEA_BUILD}"/>
+            <arg value="-Didea.version=${IDEA_VERSION}"/>
+            <!-- needed for test execution -->
+            <arg value="-Didea.home.path=${IDEA_HOME}"/>
+            <arg value="-Didea.platform.prefix=Idea"/>
+        </exec>
+    </target>
+
+    <target name="install-sdk" depends="check-args">
+        <ant antfile="idea-sdk-${IDEA_VERSION}/install-libs.xml" target="install-libs"/>
+    </target>
+
+    <target name="extract-sdk" depends="check-args">
+        <exec executable="./extract-sdk.sh">
+            <arg value="${IDEA_HOME}"/>
+            <arg value="${IDEA_VERSION}"/>
+        </exec>
+    </target>
 </project>

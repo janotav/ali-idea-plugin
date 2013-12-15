@@ -269,7 +269,7 @@ public class GenesisDialog extends AbstractWizard<GenesisStep> implements ItemLi
         }
 
         public void actionPerformed(ActionEvent actionEvent) {
-            VirtualFile[] file = FileChooser.chooseFiles(ctx.targetBtn.getTextField(), FileChooserDescriptorFactory.createSingleFolderDescriptor(), null);
+            VirtualFile[] file = FileChooser.chooseFiles(FileChooserDescriptorFactory.createSingleFolderDescriptor(), ctx.targetBtn.getTextField(), null, null);
             if(file.length > 0) {
                 ctx.targetBtn.getTextField().setText(file[0].getPath());
             }

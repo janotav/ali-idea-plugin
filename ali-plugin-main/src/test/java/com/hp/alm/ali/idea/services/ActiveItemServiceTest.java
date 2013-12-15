@@ -17,8 +17,10 @@
 package com.hp.alm.ali.idea.services;
 
 import com.hp.alm.ali.ServerVersion;
+import com.hp.alm.ali.idea.IdeaCompatibility;
 import com.hp.alm.ali.idea.IntellijTest;
 import com.hp.alm.ali.idea.RestInvocations;
+import com.hp.alm.ali.idea.tasks.TasksApi;
 import com.hp.alm.ali.idea.content.AliContentFactory;
 import com.hp.alm.ali.idea.content.detail.EntityDetail;
 import com.hp.alm.ali.idea.entity.EntityRef;
@@ -38,6 +40,7 @@ public class ActiveItemServiceTest extends IntellijTest {
 
     private ActiveItemService activeItemService;
     private TaskManager taskManager;
+    private TasksApi tasksApi;
 
     public ActiveItemServiceTest() {
         super(ServerVersion.AGM);
@@ -47,6 +50,7 @@ public class ActiveItemServiceTest extends IntellijTest {
     public void preClean() {
        activeItemService = getComponent(ActiveItemService.class);
        taskManager = getComponent(TaskManager.class);
+       tasksApi = getComponent(IdeaCompatibility.class).getComponent(TasksApi.class);
     }
 
     @Test
@@ -118,7 +122,7 @@ public class ActiveItemServiceTest extends IntellijTest {
     @Test
     public void testActivate_taskManager() {
         LocalTaskImpl localTask = new LocalTaskImpl("test" + System.currentTimeMillis(), "testing");
-        taskManager.activateTask(localTask, false, false);
+        tasksApi.activateTask(localTask);
 
         handler.async();
         taskManager.addTaskListener(new TaskListenerAdapter() {

@@ -135,11 +135,14 @@ public class TroubleShootServiceTest extends IntellijTest {
 
             @Override
             public void register(@NotNull String groupDisplayName, @NotNull NotificationDisplayType defaultDisplayType) {
-
             }
 
             @Override
             public void register(@NotNull String groupDisplayName, @NotNull NotificationDisplayType defaultDisplayType, boolean shouldLog) {
+            }
+
+            // needed for 13, adapter class not defined in 12.1.1
+            public void register(@NotNull String groupDisplayName, @NotNull NotificationDisplayType defaultDisplayType, boolean shouldLog, boolean shouldReadAloud) {
             }
         });
 
@@ -147,6 +150,7 @@ public class TroubleShootServiceTest extends IntellijTest {
         for(int i = 0; i < 100; i++) {
             troubleShootService.request(getProject(), "GET", new MyInputData("<foo/>"), "defects/{0}", "0");
         }
+        testApplication.waitForBackgroundActivityToFinish();
         // only 1 notification due to notification delay
         Assert.assertEquals(1, times.getValue());
 

@@ -42,7 +42,7 @@ public class UploadField extends BaseField {
         if(editable) {
             textFieldWithBrowseButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent actionEvent) {
-                    VirtualFile[] file = FileChooser.chooseFiles(textFieldWithBrowseButton.getTextField(), new FileChooserDescriptor(true, false, true, true, false, false), lastDir);
+                    VirtualFile[] file = FileChooser.chooseFiles(new FileChooserDescriptor(true, false, true, true, false, false), textFieldWithBrowseButton.getTextField(), null, lastDir);
                     if(file.length > 0) {
                         textFieldWithBrowseButton.getTextField().setText(file[0].getPath());
                         lastDir = file[0].getParent();
