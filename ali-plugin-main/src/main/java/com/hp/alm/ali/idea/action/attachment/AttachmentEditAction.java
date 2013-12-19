@@ -57,7 +57,9 @@ public class AttachmentEditAction extends EntityAction {
         final Entity attachmentEntity = project.getComponent(AttachmentService.class).getAttachmentEntity(entity.getPropertyValue("name"), parent);
 
         String name = entity.getPropertyValue("name");
-        AttachmentEditor editor = new AttachmentEditor(project, "Modify Attachment: " + name, attachmentEntity, false, project.getComponent(RestService.class).getServerTypeIfAvailable() == ServerType.ALM12, new BaseEditor.SaveHandler() {
+        ServerType serverType = project.getComponent(RestService.class).getServerTypeIfAvailable();
+        AttachmentEditor editor = new AttachmentEditor(project, "Modify Attachment: " + name, attachmentEntity, false,
+                (serverType == ServerType.ALM115 || serverType == ServerType.ALM12), new BaseEditor.SaveHandler() {
             @Override
             public boolean save(Entity modified, Entity base) {
                 updateAttachment(project, parent, attachmentEntity, modified);

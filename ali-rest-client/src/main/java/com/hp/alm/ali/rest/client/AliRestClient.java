@@ -16,62 +16,33 @@
 
 package com.hp.alm.ali.rest.client;
 
-import static com.hp.alm.ali.utils.PathUtils.pathJoin;
-
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.nio.charset.Charset;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import com.hp.alm.ali.rest.client.exception.AuthenticationFailureException;
+import com.hp.alm.ali.rest.client.exception.HttpStatusBasedException;
+import com.hp.alm.ali.rest.client.filter.Filter;
+import com.hp.alm.ali.rest.client.filter.IdentityFilter;
+import com.hp.alm.ali.rest.client.filter.IssueTicketFilter;
+import com.hp.alm.ali.rest.client.filter.ResponseFilter;
+import com.hp.alm.ali.utils.XmlUtils;
+import org.apache.commons.httpclient.*;
+import org.apache.commons.httpclient.auth.AuthPolicy;
+import org.apache.commons.httpclient.auth.AuthScope;
+import org.apache.commons.httpclient.methods.*;
+import org.apache.commons.httpclient.params.HttpMethodParams;
+import org.apache.commons.io.IOUtils;
+import org.jdom.Element;
+import org.jdom.output.XMLOutputter;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
+import java.io.*;
+import java.net.URLEncoder;
+import java.nio.charset.Charset;
+import java.text.MessageFormat;
+import java.util.*;
 
-import com.hp.alm.ali.rest.client.filter.Filter;
-import com.hp.alm.ali.rest.client.filter.IdentityFilter;
-import com.hp.alm.ali.rest.client.filter.IssueTicketFilter;
-import com.hp.alm.ali.rest.client.filter.ResponseFilter;
-import org.apache.commons.httpclient.Cookie;
-import org.apache.commons.httpclient.Credentials;
-import org.apache.commons.httpclient.DefaultHttpMethodRetryHandler;
-import org.apache.commons.httpclient.Header;
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.HttpMethod;
-import org.apache.commons.httpclient.HttpStatus;
-import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;
-import org.apache.commons.httpclient.StatusLine;
-import org.apache.commons.httpclient.URIException;
-import org.apache.commons.httpclient.UsernamePasswordCredentials;
-import org.apache.commons.httpclient.auth.AuthPolicy;
-import org.apache.commons.httpclient.auth.AuthScope;
-import org.apache.commons.httpclient.methods.DeleteMethod;
-import org.apache.commons.httpclient.methods.EntityEnclosingMethod;
-import org.apache.commons.httpclient.methods.GetMethod;
-import org.apache.commons.httpclient.methods.PostMethod;
-import org.apache.commons.httpclient.methods.PutMethod;
-import org.apache.commons.httpclient.methods.RequestEntity;
-
-import com.hp.alm.ali.rest.client.exception.AuthenticationFailureException;
-import com.hp.alm.ali.rest.client.exception.HttpStatusBasedException;
-import com.hp.alm.ali.utils.XmlUtils;
-import org.apache.commons.httpclient.params.HttpMethodParams;
-import org.apache.commons.io.IOUtils;
-import org.jdom.Element;
-import org.jdom.output.XMLOutputter;
+import static com.hp.alm.ali.utils.PathUtils.pathJoin;
 
 /**
  * Thin wrapper around commons-http client that provides basic support for communication with the HP ALM REST.
@@ -279,8 +250,21 @@ public class AliRestClient implements RestClient {
 
         Cookie[] cookies = httpClient.getState().getCookies();
         Cookie ssoCookie = getSessionCookieByName(cookies, COOKIE_SSO_NAME);
-        Cookie qcCookie = getSessionCookieByName(cookies, COOKIE_SESSION_NAME);
         addTenantCookie(ssoCookie);
+
+        //Since ALM 12.00 it is required explicitly ask for QCSession calling "/rest/site-session"
+        //For all the rest of HP ALM / AGM versions it is optional
+        String siteSession = pathJoin("/", location, "/rest/site-session");
+        post = new PostMethod(siteSession);
+        resultInfo = ResultInfo.create(null);
+        executeAndWriteResponse(post, resultInfo, Collections.<Integer>emptySet());
+        //AGM throws 403
+        if (resultInfo.getHttpStatus() != HttpStatus.SC_FORBIDDEN) {
+            HttpStatusBasedException.throwForError(resultInfo);
+        }
+
+        cookies = httpClient.getState().getCookies();
+        Cookie qcCookie = getSessionCookieByName(cookies, COOKIE_SESSION_NAME);
         sessionContext = new SessionContext(location, ssoCookie, qcCookie);
     }
 
