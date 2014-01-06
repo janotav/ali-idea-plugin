@@ -36,7 +36,7 @@ public class Gauge extends JPanel {
     public Gauge(double val) {
         super(new GridBagLayout());
 
-        assertValidRange(val);
+        val = assertValidRange(val);
 
         setOpaque(false);
 
@@ -66,7 +66,7 @@ public class Gauge extends JPanel {
     }
 
     public void setValue(double val) {
-        assertValidRange(val);
+        val = assertValidRange(val);
 
         this.value = val;
         GridBagLayout layout = (GridBagLayout) getLayout();
@@ -83,10 +83,13 @@ public class Gauge extends JPanel {
         repaint();
     }
 
-    private void assertValidRange(double val) {
-        if(val < 0 || val > 1) {
-            throw new IllegalArgumentException("expected 0 <= val <= 1");
+    private double assertValidRange(double val) {
+        if(val < 0) {
+            val = 0;
+        } else if(val > 1) {
+            val = 1;
         }
+        return val;
     }
 
     public double getValue() {
