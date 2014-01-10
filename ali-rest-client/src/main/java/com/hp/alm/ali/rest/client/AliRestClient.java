@@ -115,6 +115,8 @@ public class AliRestClient implements RestClient {
     static final String COOKIE_SSO_NAME = "LWSSO_COOKIE_KEY";
     static final String COOKIE_SESSION_NAME = "QCSession";
 
+    static final String CLIENT_TYPE = "ALI_IDEA_plugin";
+
     public static final int DEFAULT_CLIENT_TIMEOUT = 30000;
 
     private final String location;
@@ -222,11 +224,8 @@ public class AliRestClient implements RestClient {
 
         // first try Apollo style login
         String authPoint = pathJoin("/", location, "/authentication-point/alm-authenticate");
-        PostMethod post = new PostMethod(authPoint);
-        String xml = createAuthXml();
-        post.setRequestEntity(createRequestEntity(InputData.create(xml)));
-        post.addRequestHeader("Content-type", "application/xml");
-
+        String authXml = createAuthXml();
+        PostMethod post = initPostMethod(authPoint, authXml);
         ResultInfo resultInfo = ResultInfo.create(null);
         executeAndWriteResponse(post, resultInfo, Collections.<Integer>emptySet());
 
@@ -254,8 +253,9 @@ public class AliRestClient implements RestClient {
 
         //Since ALM 12.00 it is required explicitly ask for QCSession calling "/rest/site-session"
         //For all the rest of HP ALM / AGM versions it is optional
-        String siteSession = pathJoin("/", location, "/rest/site-session");
-        post = new PostMethod(siteSession);
+        String siteSessionPoint = pathJoin("/", location, "/rest/site-session");
+        String sessionParamXml = createRestSessionXml();
+        post = initPostMethod(siteSessionPoint, sessionParamXml);
         resultInfo = ResultInfo.create(null);
         executeAndWriteResponse(post, resultInfo, Collections.<Integer>emptySet());
         //AGM throws 403
@@ -268,6 +268,14 @@ public class AliRestClient implements RestClient {
         sessionContext = new SessionContext(location, ssoCookie, qcCookie);
     }
 
+    private PostMethod initPostMethod(String restEndPoint, String xml) {
+        PostMethod post = new PostMethod(restEndPoint);
+        post.setRequestEntity(createRequestEntity(InputData.create(xml)));
+        post.addRequestHeader("Content-type", "application/xml");
+
+        return post;
+    }
+
     private String createAuthXml() {
         Element authElem = new Element("alm-authentication");
         Element userElem = new Element("user");
@@ -277,6 +285,14 @@ public class AliRestClient implements RestClient {
         passElem.setText(password);
         authElem.addContent(passElem);
         return new XMLOutputter().outputString(authElem);
+    }
+
+    private String createRestSessionXml() {
+        Element sessionParamElem = new Element("session-parameters");
+        Element clientTypeElem = new Element("client-type");
+        sessionParamElem.addContent(clientTypeElem);
+        clientTypeElem.setText(CLIENT_TYPE);
+        return new XMLOutputter().outputString(sessionParamElem);
     }
 
     private void addTenantCookie(Cookie ssoCookie) {
