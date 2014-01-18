@@ -16,6 +16,8 @@
 
 package com.hp.alm.ali.idea.translate.expr;
 
+import org.apache.commons.lang.CharUtils;
+
 import java.util.NoSuchElementException;
 
 class Lexer {
@@ -61,7 +63,7 @@ class Lexer {
 
                 if(str.substring(pos).toUpperCase().startsWith(type.getRepr())) {
                     int len = type.getRepr().length();
-                    if(Character.isAlphabetic(type.getRepr().charAt(len - 1)) && str.length() > pos + len && Character.isAlphabetic(str.charAt(pos + len))) {
+                    if(CharUtils.isAsciiAlphanumeric(type.getRepr().charAt(len - 1)) && str.length() > pos + len && CharUtils.isAsciiAlphanumeric(str.charAt(pos + len))) {
                         // don't split words to match lexeme
                         continue;
                     }
