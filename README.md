@@ -16,7 +16,8 @@ Intellij IDEA or download manually from the plugin [homepage].
 Building
 --------
 
- * Both supported Intellij versions (12.1.1 and 13) need to be present for the build process to complete.
+ * Both supported Intellij community versions (12.1.1 and 13) need to be present for the build process to complete.
+   Build against ultimate edition is technically possible, but might require manual changes to the dependencies.
  * Requires Ant (for dependency extraction) and Maven (for actual build). If maven is not present on the system path,
    append "-Dmaven.executable=/path/to/maven/bin/mvn" when executing ant commands described bellow.
 
