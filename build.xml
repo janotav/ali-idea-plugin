@@ -2,7 +2,7 @@
 
     <property environment="env"/>
 
-    <target name="check-args">
+    <target name="check-args" depends="setup-maven-linux,setup-maven-win">
         <fail message="IDEA_HOME not specified or invalid">
             <condition>
                 <not>
@@ -39,10 +39,25 @@
         </loadresource>
 
         <echo>Found IDEA build: ${IDEA_VERSION} (${IDEA_BUILD})</echo>
+        <echo>Maven executable: ${maven.executable}</echo>
+    </target>
+
+    <target name="setup-maven-win" depends="check-os" if="win_os">
+        <property name="maven.executable">mvn.bat</property>
+    </target>
+
+    <target name="setup-maven-linux" depends="check-os" unless="win_os">
+        <property name="maven.executable">mvn</property>
+    </target>
+
+    <target name="check-os">
+        <condition property="win_os">
+            <os family="windows" />
+        </condition>
     </target>
 
     <target name="build" depends="check-args">
-        <exec executable="mvn" failonerror="true">
+        <exec executable="${maven.executable}" failonerror="true">
             <arg value="package"/>
             <arg value="-Didea.build=${IDEA_BUILD}"/>
             <arg value="-Didea.version=${IDEA_VERSION}"/>
@@ -54,7 +69,7 @@
     </target>
 
     <target name="test" depends="check-args">
-        <exec executable="mvn" failonerror="true">
+        <exec executable="${maven.executable}" failonerror="true">
             <arg value="test"/>
             <arg value="-Didea.build=${IDEA_BUILD}"/>
             <arg value="-Didea.version=${IDEA_VERSION}"/>

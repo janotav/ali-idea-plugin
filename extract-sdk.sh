@@ -16,7 +16,8 @@ HEADER
 
 cat << ANT_HEADER >> idea-sdk-$version/install-libs.xml
 <project name="install-libs">
-  <target name="install-libs">
+  <import file="../build.xml"/>
+  <target name="install-libs" depends="setup-maven-linux,setup-maven-win">
 ANT_HEADER
 
 cat << POM_HEADER >> idea-sdk-$version/pom.xml
@@ -46,7 +47,7 @@ function addDependency {
     file=`basename $fullPath .jar`
 
     {
-        echo '    <exec executable="mvn">'
+        echo '    <exec executable="${maven.executable}">'
         echo '      <arg value="install:install-file"/>'
         echo '      <arg value="-DgroupId='$groupId'"/>'
         echo '      <arg value="-Dpackaging=jar"/>'
