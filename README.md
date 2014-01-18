@@ -16,9 +16,12 @@ Intellij IDEA or download manually from the plugin [homepage].
 Building
 --------
 
-Both supported Intellij versions (12.1.1 and 13) need to be present for the build process to complete. First you need to
-populate your local maven repository with Intellij IDEA libraries that are not available in the public maven repository.
-Convenience ANT script is provided to simplify this task.
+ * Both supported Intellij versions (12.1.1 and 13) need to be present for the build process to complete.
+ * Requires Ant (for dependency extraction) and Maven (for actual build). If maven is not present on the system path,
+   append "-Dmaven.executable=/path/to/maven/bin/mvn" when executing ant commands described bellow.
+
+First you need to populate your local maven repository with Intellij IDEA libraries that are not available in the public
+maven repository. Convenience Ant script is provided to simplify this task.
 
 ```
     $ ant install-sdk -DIDEA_HOME=<Idea Community 12.1.1 Home>
