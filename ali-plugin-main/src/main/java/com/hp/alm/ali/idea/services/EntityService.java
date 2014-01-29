@@ -393,7 +393,8 @@ public class EntityService {
 
     private Entity doLock(EntityRef ref, boolean silent) {
         MyResultInfo result = new MyResultInfo();
-        if(restService.post("", result, "{0}s/{1}/lock", ref.type, ref.id) != HttpStatus.SC_OK) {
+        int httpStatus = restService.post("", result, "{0}s/{1}/lock", ref.type, ref.id);
+        if(httpStatus != HttpStatus.SC_OK && httpStatus != HttpStatus.SC_CREATED) {
             if(!silent) {
                 errorService.showException(new RestException(result));
             }

@@ -71,4 +71,10 @@ public interface ServerStrategy extends EntityQueryProcessor {
 
     String getFieldAlias(String entityType, String property);
 
+    /**
+     * Get hierarchical path logical name for entity.
+     * @param entityType entity type
+     * @return hierarchical path logical name
+     */
+    String getHierarchicalPathProperty(String entityType);
 }

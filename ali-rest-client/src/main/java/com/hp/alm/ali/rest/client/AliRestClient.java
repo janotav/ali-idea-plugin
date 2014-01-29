@@ -16,62 +16,33 @@
 
 package com.hp.alm.ali.rest.client;
 
-import static com.hp.alm.ali.utils.PathUtils.pathJoin;
-
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.nio.charset.Charset;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import com.hp.alm.ali.rest.client.exception.AuthenticationFailureException;
+import com.hp.alm.ali.rest.client.exception.HttpStatusBasedException;
+import com.hp.alm.ali.rest.client.filter.Filter;
+import com.hp.alm.ali.rest.client.filter.IdentityFilter;
+import com.hp.alm.ali.rest.client.filter.IssueTicketFilter;
+import com.hp.alm.ali.rest.client.filter.ResponseFilter;
+import com.hp.alm.ali.utils.XmlUtils;
+import org.apache.commons.httpclient.*;
+import org.apache.commons.httpclient.auth.AuthPolicy;
+import org.apache.commons.httpclient.auth.AuthScope;
+import org.apache.commons.httpclient.methods.*;
+import org.apache.commons.httpclient.params.HttpMethodParams;
+import org.apache.commons.io.IOUtils;
+import org.jdom.Element;
+import org.jdom.output.XMLOutputter;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
+import java.io.*;
+import java.net.URLEncoder;
+import java.nio.charset.Charset;
+import java.text.MessageFormat;
+import java.util.*;
 
-import com.hp.alm.ali.rest.client.filter.Filter;
-import com.hp.alm.ali.rest.client.filter.IdentityFilter;
-import com.hp.alm.ali.rest.client.filter.IssueTicketFilter;
-import com.hp.alm.ali.rest.client.filter.ResponseFilter;
-import org.apache.commons.httpclient.Cookie;
-import org.apache.commons.httpclient.Credentials;
-import org.apache.commons.httpclient.DefaultHttpMethodRetryHandler;
-import org.apache.commons.httpclient.Header;
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.HttpMethod;
-import org.apache.commons.httpclient.HttpStatus;
-import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;
-import org.apache.commons.httpclient.StatusLine;
-import org.apache.commons.httpclient.URIException;
-import org.apache.commons.httpclient.UsernamePasswordCredentials;
-import org.apache.commons.httpclient.auth.AuthPolicy;
-import org.apache.commons.httpclient.auth.AuthScope;
-import org.apache.commons.httpclient.methods.DeleteMethod;
-import org.apache.commons.httpclient.methods.EntityEnclosingMethod;
-import org.apache.commons.httpclient.methods.GetMethod;
-import org.apache.commons.httpclient.methods.PostMethod;
-import org.apache.commons.httpclient.methods.PutMethod;
-import org.apache.commons.httpclient.methods.RequestEntity;
-
-import com.hp.alm.ali.rest.client.exception.AuthenticationFailureException;
-import com.hp.alm.ali.rest.client.exception.HttpStatusBasedException;
-import com.hp.alm.ali.utils.XmlUtils;
-import org.apache.commons.httpclient.params.HttpMethodParams;
-import org.apache.commons.io.IOUtils;
-import org.jdom.Element;
-import org.jdom.output.XMLOutputter;
+import static com.hp.alm.ali.utils.PathUtils.pathJoin;
 
 /**
  * Thin wrapper around commons-http client that provides basic support for communication with the HP ALM REST.
@@ -143,6 +114,8 @@ public class AliRestClient implements RestClient {
 
     static final String COOKIE_SSO_NAME = "LWSSO_COOKIE_KEY";
     static final String COOKIE_SESSION_NAME = "QCSession";
+
+    static final String CLIENT_TYPE = "ALI_IDEA_plugin";
 
     public static final int DEFAULT_CLIENT_TIMEOUT = 30000;
 
@@ -251,11 +224,8 @@ public class AliRestClient implements RestClient {
 
         // first try Apollo style login
         String authPoint = pathJoin("/", location, "/authentication-point/alm-authenticate");
-        PostMethod post = new PostMethod(authPoint);
-        String xml = createAuthXml();
-        post.setRequestEntity(createRequestEntity(InputData.create(xml)));
-        post.addRequestHeader("Content-type", "application/xml");
-
+        String authXml = createAuthXml();
+        PostMethod post = initPostMethod(authPoint, authXml);
         ResultInfo resultInfo = ResultInfo.create(null);
         executeAndWriteResponse(post, resultInfo, Collections.<Integer>emptySet());
 
@@ -279,9 +249,31 @@ public class AliRestClient implements RestClient {
 
         Cookie[] cookies = httpClient.getState().getCookies();
         Cookie ssoCookie = getSessionCookieByName(cookies, COOKIE_SSO_NAME);
-        Cookie qcCookie = getSessionCookieByName(cookies, COOKIE_SESSION_NAME);
         addTenantCookie(ssoCookie);
+
+        //Since ALM 12.00 it is required explicitly ask for QCSession calling "/rest/site-session"
+        //For all the rest of HP ALM / AGM versions it is optional
+        String siteSessionPoint = pathJoin("/", location, "/rest/site-session");
+        String sessionParamXml = createRestSessionXml();
+        post = initPostMethod(siteSessionPoint, sessionParamXml);
+        resultInfo = ResultInfo.create(null);
+        executeAndWriteResponse(post, resultInfo, Collections.<Integer>emptySet());
+        //AGM throws 403
+        if (resultInfo.getHttpStatus() != HttpStatus.SC_FORBIDDEN) {
+            HttpStatusBasedException.throwForError(resultInfo);
+        }
+
+        cookies = httpClient.getState().getCookies();
+        Cookie qcCookie = getSessionCookieByName(cookies, COOKIE_SESSION_NAME);
         sessionContext = new SessionContext(location, ssoCookie, qcCookie);
+    }
+
+    private PostMethod initPostMethod(String restEndPoint, String xml) {
+        PostMethod post = new PostMethod(restEndPoint);
+        post.setRequestEntity(createRequestEntity(InputData.create(xml)));
+        post.addRequestHeader("Content-type", "application/xml");
+
+        return post;
     }
 
     private String createAuthXml() {
@@ -293,6 +285,14 @@ public class AliRestClient implements RestClient {
         passElem.setText(password);
         authElem.addContent(passElem);
         return new XMLOutputter().outputString(authElem);
+    }
+
+    private String createRestSessionXml() {
+        Element sessionParamElem = new Element("session-parameters");
+        Element clientTypeElem = new Element("client-type");
+        sessionParamElem.addContent(clientTypeElem);
+        clientTypeElem.setText(CLIENT_TYPE);
+        return new XMLOutputter().outputString(sessionParamElem);
     }
 
     private void addTenantCookie(Cookie ssoCookie) {

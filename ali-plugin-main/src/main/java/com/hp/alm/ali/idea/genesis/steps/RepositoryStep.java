@@ -16,14 +16,14 @@
 
 package com.hp.alm.ali.idea.genesis.steps;
 
-import com.hp.alm.ali.idea.model.Entity;
 import com.hp.alm.ali.idea.entity.EntityQuery;
-import com.hp.alm.ali.idea.model.parser.EntityList;
 import com.hp.alm.ali.idea.genesis.WizardContext;
+import com.hp.alm.ali.idea.model.Entity;
+import com.hp.alm.ali.idea.model.parser.EntityList;
 
 import java.util.Arrays;
 
-public class RepositoryStep extends GenesisStep {
+public class RepositoryStep extends ServerTypeAwareStep {
     public RepositoryStep(GenesisStep previous, WizardContext ctx) {
         super(previous, ctx, Arrays.asList(ctx.repository, ctx.repositoryLbl));
     }
@@ -32,10 +32,10 @@ public class RepositoryStep extends GenesisStep {
         super._init();
 
         // FIXME: support release-repository relation directly
-        EntityList branches = EntityList.create(ctx.client.getForStream("scm-branches?query={0}",
+        EntityList branches = EntityList.create(ctx.client.getForStream(getScmBranchTemplatePref() + "?query={0}",
                 EntityQuery.encode("{release.name['" + ctx.release.getSelectedItem().toString() + "']}")));
 
-        EntityList repos = EntityList.create(ctx.client.getForStream("scm-repositories"));
+        EntityList repos = EntityList.create(ctx.client.getForStream(getScmRepositoriesTemplatePref()));
         ctx.repository.removeAllItems();
         for(Entity entity: repos) {
             for(Entity b: branches) {
