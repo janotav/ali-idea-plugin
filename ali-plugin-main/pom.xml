@@ -81,6 +81,16 @@
             <version>${idea.version}</version>
         </dependency>
         <dependency>
+            <groupId>com.intellij.plugins</groupId>
+            <artifactId>git4idea</artifactId>
+            <version>${idea.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.intellij.plugins</groupId>
+            <artifactId>svn4idea</artifactId>
+            <version>${idea.version}</version>
+        </dependency>
+        <dependency>
             <groupId>jdom</groupId>
             <artifactId>jdom</artifactId>
         </dependency>

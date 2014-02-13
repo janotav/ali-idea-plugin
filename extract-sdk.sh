@@ -80,6 +80,18 @@ for i in "$IDEA_HOME"/plugins/tasks/lib/*.jar ; do
 
 done
 
+for i in "$IDEA_HOME"/plugins/git4idea/lib/*.jar ; do
+
+    addDependency $i com.intellij.plugins plugins/git4idea/lib
+
+done
+
+for i in "$IDEA_HOME"/plugins/svn4idea/lib/*.jar ; do
+
+    addDependency $i com.intellij.plugins plugins/svn4idea/lib
+
+done
+
 cat << FOOTER >> idea-sdk-$version/install-libs.xml
   </target>
 </project>

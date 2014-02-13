@@ -53,6 +53,7 @@
 
     <depends optional="true" config-file="plugin-subversion.xml">Subversion</depends>
     <depends optional="true" config-file="plugin-tasks.xml">com.intellij.tasks</depends>
+    <depends optional="true" config-file="plugin-git.xml">Git4Idea</depends>
 
     <application-components>
       <component>
@@ -319,7 +320,6 @@
             <action id="hpali.entity.refresh" class="com.hp.alm.ali.idea.action.RefreshAction"/>
             <action id="hpali.entity.history" class="com.hp.alm.ali.idea.action.ShowHistoryAction"/>
             <action id="hpali.entity.fields" class="com.hp.alm.ali.idea.action.FieldsAction"/>
-            <action id="hpali.entity.changes" class="com.hp.alm.ali.idea.action.ShowChangesAction"/>
             <action id="hpali.entity.modify" class="com.hp.alm.ali.idea.action.ModifyAction"/>
             <action id="hpali.entity.delete" class="com.hp.alm.ali.idea.action.DeleteEntityAction"/>
             <action id="hpali.entity.activate" class="com.hp.alm.ali.idea.action.ActivateItemAction"/>
@@ -329,6 +329,7 @@
             <action id="hpali.entity.attachmentDownload" class="com.hp.alm.ali.idea.action.attachment.AttachmentDownloadAction"/>
             <action id="hpali.entity.attachmentEdit" class="com.hp.alm.ali.idea.action.attachment.AttachmentEditAction"/>
             <action id="hpali.entity.attachmentDelete" class="com.hp.alm.ali.idea.action.attachment.AttachmentDeleteAction"/>
+            <action id="hpali.entity.showAffectedPaths" class="com.hp.alm.ali.idea.action.ShowAffectedPathsAction"/>
             <action id="hpali.entity.linkEdit" class="com.hp.alm.ali.idea.action.link.LinkEditAction"/>
             <action id="hpali.entity.linkView" class="com.hp.alm.ali.idea.action.link.LinkViewAction"/>
             <action id="hpali.entity.linkDelete" class="com.hp.alm.ali.idea.action.link.LinkDeleteAction"/>
@@ -367,6 +368,7 @@
 
     <extensionPoints>
        <extensionPoint name="genesisCheckout" interface="com.hp.alm.ali.idea.genesis.checkout.CheckoutFactory"/>
+       <extensionPoint name="revisionCreator" interface="com.hp.alm.ali.idea.revision.RevisionFactory"/>
     </extensionPoints>
 
     <extensions defaultExtensionNs="com.intellij">

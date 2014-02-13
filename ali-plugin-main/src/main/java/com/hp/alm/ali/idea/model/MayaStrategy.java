@@ -143,6 +143,9 @@ public class MayaStrategy implements ServerStrategy {
                 clone.addColumn("second-endpoint-type", 1);
                 clone.addColumn("second-endpoint-name", 1);
                 clone.addColumn("second-endpoint-status", 1);
+            } else if("changeset".equals(query.getEntityType())) {
+                // needed for ShowAffectedPathsAction
+                clone.addColumn("rev", 1);
             }
         }
 
