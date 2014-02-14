@@ -19,7 +19,7 @@
             <version>${idea.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.intellij.plugins</groupId>
+            <groupId>com.intellij.plugins.tasks</groupId>
             <artifactId>tasks-api</artifactId>
             <version>${idea.version}</version>
         </dependency>

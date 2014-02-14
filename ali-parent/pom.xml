@@ -13,8 +13,6 @@
 
     <properties>
         <spring.version>3.2.4.RELEASE</spring.version>
-        <idea.build>129.239</idea.build>
-        <idea.version>IC-${idea.build}</idea.version>
     </properties>
 
     <build>
@@ -91,4 +89,23 @@
             </dependencies>
         </dependencyManagement>
 
+    <profiles>
+        <profile>
+            <id>IC-129.239</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <idea.build>129.239</idea.build>
+                <idea.version>IC-${idea.build}</idea.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>IC-133.193</id>
+            <properties>
+                <idea.build>133.193</idea.build>
+                <idea.version>IC-${idea.build}</idea.version>
+            </properties>
+        </profile>
+    </profiles>
 </project>

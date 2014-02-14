@@ -18,9 +18,6 @@ package com.hp.alm.ali.idea.tasks;
 
 import com.intellij.tasks.Task;
 
-/**
- * Task functionality accessible via {@link com.hp.alm.ali.idea.IdeaCompatibility} facade.
- */
 public interface TasksApi {
 
     void activateTask(Task task);

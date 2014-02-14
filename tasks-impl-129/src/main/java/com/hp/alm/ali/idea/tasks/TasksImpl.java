@@ -16,18 +16,16 @@
 
 package com.hp.alm.ali.idea.tasks;
 
-import com.hp.alm.ali.idea.IdeaCompatibility;
 import com.intellij.openapi.project.Project;
 import com.intellij.tasks.Task;
 import com.intellij.tasks.TaskManager;
 
-public class Tasks129Impl implements TasksApi {
+public class TasksImpl implements TasksApi {
 
     private Project project;
 
-    public Tasks129Impl(Project project, IdeaCompatibility ideaCompatibility) {
+    public TasksImpl(Project project) {
         this.project = project;
-        ideaCompatibility.register(TasksApi.class, Tasks129Impl.class, 129);
     }
 
     @Override

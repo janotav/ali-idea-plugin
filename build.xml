@@ -59,6 +59,7 @@
     <target name="build" depends="check-args">
         <exec executable="${maven.executable}" failonerror="true">
             <arg value="package"/>
+            <arg value="-P${IDEA_VERSION}"/>
             <arg value="-Didea.build=${IDEA_BUILD}"/>
             <arg value="-Didea.version=${IDEA_VERSION}"/>
             <!-- needed for test execution -->
@@ -71,6 +72,7 @@
     <target name="test" depends="check-args">
         <exec executable="${maven.executable}" failonerror="true">
             <arg value="test"/>
+            <arg value="-P${IDEA_VERSION}"/>
             <arg value="-Didea.build=${IDEA_BUILD}"/>
             <arg value="-Didea.version=${IDEA_VERSION}"/>
             <!-- needed for test execution -->

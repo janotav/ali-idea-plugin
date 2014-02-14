@@ -297,16 +297,8 @@
             <interface-class>com.hp.alm.ali.idea.util.FileEditorManager</interface-class>
         </component>
         <component>
-            <implementation-class>com.hp.alm.ali.idea.util.IdeaCompatibilityImpl</implementation-class>
-            <interface-class>com.hp.alm.ali.idea.IdeaCompatibility</interface-class>
-        </component>
-        <component>
-            <implementation-class>com.hp.alm.ali.idea.tasks.Tasks129Impl</implementation-class>
-            <interface-class>com.hp.alm.ali.idea.tasks.Tasks129Impl</interface-class>
-        </component>
-        <component>
-            <implementation-class>com.hp.alm.ali.idea.tasks.Tasks133Impl</implementation-class>
-            <interface-class>com.hp.alm.ali.idea.tasks.Tasks133Impl</interface-class>
+            <implementation-class>com.hp.alm.ali.idea.tasks.TasksImpl</implementation-class>
+            <interface-class>com.hp.alm.ali.idea.tasks.TasksApi</interface-class>
         </component>
     </project-components>
 

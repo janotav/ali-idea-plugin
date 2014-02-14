@@ -19,7 +19,7 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.intellij.plugins</groupId>
+            <groupId>com.intellij.plugins.tasks</groupId>
             <artifactId>tasks-api</artifactId>
             <version>IC-133.193</version>
         </dependency>

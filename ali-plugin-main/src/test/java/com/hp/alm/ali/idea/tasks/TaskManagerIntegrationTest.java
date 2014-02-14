@@ -17,7 +17,6 @@
 package com.hp.alm.ali.idea.tasks;
 
 import com.hp.alm.ali.ServerVersion;
-import com.hp.alm.ali.idea.IdeaCompatibility;
 import com.hp.alm.ali.idea.IntellijTest;
 import com.hp.alm.ali.idea.RestInvocations;
 import com.hp.alm.ali.idea.model.Entity;
@@ -43,7 +42,7 @@ public class TaskManagerIntegrationTest extends IntellijTest {
         taskManagerIntegration = getComponent(TaskManagerIntegration.class);
         taskManager = getComponent(TaskManager.class);
         activeItemService = getComponent(ActiveItemService.class);
-        tasksApi = getComponent(IdeaCompatibility.class).getComponent(TasksApi.class);
+        tasksApi = getComponent(TasksApi.class);
 
         // prevent detail opening when manipulating tasks in this test
         taskManagerIntegration.removeListener(activeItemService);
