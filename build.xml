@@ -60,8 +60,6 @@
         <exec executable="${maven.executable}" failonerror="true">
             <arg value="package"/>
             <arg value="-P${IDEA_VERSION}"/>
-            <arg value="-Didea.build=${IDEA_BUILD}"/>
-            <arg value="-Didea.version=${IDEA_VERSION}"/>
             <!-- needed for test execution -->
             <arg value="-Didea.home.path=${IDEA_HOME}"/>
             <arg value="-Didea.platform.prefix=Idea"/>
@@ -73,8 +71,6 @@
         <exec executable="${maven.executable}" failonerror="true">
             <arg value="test"/>
             <arg value="-P${IDEA_VERSION}"/>
-            <arg value="-Didea.build=${IDEA_BUILD}"/>
-            <arg value="-Didea.version=${IDEA_VERSION}"/>
             <!-- needed for test execution -->
             <arg value="-Didea.home.path=${IDEA_HOME}"/>
             <arg value="-Didea.platform.prefix=Idea"/>
