@@ -76,19 +76,19 @@ done
 
 for i in "$IDEA_HOME"/plugins/tasks/lib/*.jar ; do
 
-    addDependency $i com.intellij.plugins plugins/tasks/lib
+    addDependency $i com.intellij.plugins.tasks plugins/tasks/lib
 
 done
 
 for i in "$IDEA_HOME"/plugins/git4idea/lib/*.jar ; do
 
-    addDependency $i com.intellij.plugins plugins/git4idea/lib
+    addDependency $i com.intellij.plugins.git4idea plugins/git4idea/lib
 
 done
 
 for i in "$IDEA_HOME"/plugins/svn4idea/lib/*.jar ; do
 
-    addDependency $i com.intellij.plugins plugins/svn4idea/lib
+    addDependency $i com.intellij.plugins.svn4idea plugins/svn4idea/lib
 
 done
 

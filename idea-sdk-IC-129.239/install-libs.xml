@@ -587,7 +587,7 @@
     </exec>
     <exec executable="${maven.executable}">
       <arg value="install:install-file"/>
-      <arg value="-DgroupId=com.intellij.plugins"/>
+      <arg value="-DgroupId=com.intellij.plugins.tasks"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/tasks/lib/axis-1.4.jar"/>
       <arg value="-Dversion=IC-129.239"/>
@@ -595,7 +595,7 @@
     </exec>
     <exec executable="${maven.executable}">
       <arg value="install:install-file"/>
-      <arg value="-DgroupId=com.intellij.plugins"/>
+      <arg value="-DgroupId=com.intellij.plugins.tasks"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/tasks/lib/axis-jaxrpc-1.4.jar"/>
       <arg value="-Dversion=IC-129.239"/>
@@ -603,7 +603,7 @@
     </exec>
     <exec executable="${maven.executable}">
       <arg value="install:install-file"/>
-      <arg value="-DgroupId=com.intellij.plugins"/>
+      <arg value="-DgroupId=com.intellij.plugins.tasks"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/tasks/lib/axis-saaj-1.3.jar"/>
       <arg value="-Dversion=IC-129.239"/>
@@ -611,7 +611,7 @@
     </exec>
     <exec executable="${maven.executable}">
       <arg value="install:install-file"/>
-      <arg value="-DgroupId=com.intellij.plugins"/>
+      <arg value="-DgroupId=com.intellij.plugins.tasks"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/tasks/lib/commons-discovery-0.4.jar"/>
       <arg value="-Dversion=IC-129.239"/>
@@ -619,7 +619,7 @@
     </exec>
     <exec executable="${maven.executable}">
       <arg value="install:install-file"/>
-      <arg value="-DgroupId=com.intellij.plugins"/>
+      <arg value="-DgroupId=com.intellij.plugins.tasks"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/tasks/lib/jira-connector.jar"/>
       <arg value="-Dversion=IC-129.239"/>
@@ -627,7 +627,7 @@
     </exec>
     <exec executable="${maven.executable}">
       <arg value="install:install-file"/>
-      <arg value="-DgroupId=com.intellij.plugins"/>
+      <arg value="-DgroupId=com.intellij.plugins.tasks"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/tasks/lib/markdownj-core-0.4.2-SNAPSHOT.jar"/>
       <arg value="-Dversion=IC-129.239"/>
@@ -635,7 +635,7 @@
     </exec>
     <exec executable="${maven.executable}">
       <arg value="install:install-file"/>
-      <arg value="-DgroupId=com.intellij.plugins"/>
+      <arg value="-DgroupId=com.intellij.plugins.tasks"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/tasks/lib/tasks-api.jar"/>
       <arg value="-Dversion=IC-129.239"/>
@@ -643,7 +643,7 @@
     </exec>
     <exec executable="${maven.executable}">
       <arg value="install:install-file"/>
-      <arg value="-DgroupId=com.intellij.plugins"/>
+      <arg value="-DgroupId=com.intellij.plugins.tasks"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/tasks/lib/tasks-core.jar"/>
       <arg value="-Dversion=IC-129.239"/>
@@ -651,7 +651,7 @@
     </exec>
     <exec executable="${maven.executable}">
       <arg value="install:install-file"/>
-      <arg value="-DgroupId=com.intellij.plugins"/>
+      <arg value="-DgroupId=com.intellij.plugins.tasks"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/tasks/lib/tasks-java.jar"/>
       <arg value="-Dversion=IC-129.239"/>
@@ -659,7 +659,7 @@
     </exec>
     <exec executable="${maven.executable}">
       <arg value="install:install-file"/>
-      <arg value="-DgroupId=com.intellij.plugins"/>
+      <arg value="-DgroupId=com.intellij.plugins.tasks"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/tasks/lib/wsdl4j-1.4.jar"/>
       <arg value="-Dversion=IC-129.239"/>
@@ -667,7 +667,7 @@
     </exec>
     <exec executable="${maven.executable}">
       <arg value="install:install-file"/>
-      <arg value="-DgroupId=com.intellij.plugins"/>
+      <arg value="-DgroupId=com.intellij.plugins.git4idea"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/git4idea/lib/git4idea.jar"/>
       <arg value="-Dversion=IC-129.239"/>
@@ -675,7 +675,7 @@
     </exec>
     <exec executable="${maven.executable}">
       <arg value="install:install-file"/>
-      <arg value="-DgroupId=com.intellij.plugins"/>
+      <arg value="-DgroupId=com.intellij.plugins.git4idea"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/git4idea/lib/git4idea-rt.jar"/>
       <arg value="-Dversion=IC-129.239"/>
@@ -683,7 +683,7 @@
     </exec>
     <exec executable="${maven.executable}">
       <arg value="install:install-file"/>
-      <arg value="-DgroupId=com.intellij.plugins"/>
+      <arg value="-DgroupId=com.intellij.plugins.git4idea"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/git4idea/lib/ini4j-0.5.2-patched.jar"/>
       <arg value="-Dversion=IC-129.239"/>
@@ -691,7 +691,7 @@
     </exec>
     <exec executable="${maven.executable}">
       <arg value="install:install-file"/>
-      <arg value="-DgroupId=com.intellij.plugins"/>
+      <arg value="-DgroupId=com.intellij.plugins.git4idea"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/git4idea/lib/org.eclipse.jgit-2.1.0.201209190230-r.jar"/>
       <arg value="-Dversion=IC-129.239"/>
@@ -699,7 +699,7 @@
     </exec>
     <exec executable="${maven.executable}">
       <arg value="install:install-file"/>
-      <arg value="-DgroupId=com.intellij.plugins"/>
+      <arg value="-DgroupId=com.intellij.plugins.git4idea"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/git4idea/lib/resources_en.jar"/>
       <arg value="-Dversion=IC-129.239"/>
@@ -707,7 +707,7 @@
     </exec>
     <exec executable="${maven.executable}">
       <arg value="install:install-file"/>
-      <arg value="-DgroupId=com.intellij.plugins"/>
+      <arg value="-DgroupId=com.intellij.plugins.git4idea"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/git4idea/lib/trilead-ssh2.jar"/>
       <arg value="-Dversion=IC-129.239"/>
@@ -715,7 +715,7 @@
     </exec>
     <exec executable="${maven.executable}">
       <arg value="install:install-file"/>
-      <arg value="-DgroupId=com.intellij.plugins"/>
+      <arg value="-DgroupId=com.intellij.plugins.svn4idea"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/svn4idea/lib/antlr.jar"/>
       <arg value="-Dversion=IC-129.239"/>
@@ -723,7 +723,7 @@
     </exec>
     <exec executable="${maven.executable}">
       <arg value="install:install-file"/>
-      <arg value="-DgroupId=com.intellij.plugins"/>
+      <arg value="-DgroupId=com.intellij.plugins.svn4idea"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/svn4idea/lib/bindSvn.jar"/>
       <arg value="-Dversion=IC-129.239"/>
@@ -731,7 +731,7 @@
     </exec>
     <exec executable="${maven.executable}">
       <arg value="install:install-file"/>
-      <arg value="-DgroupId=com.intellij.plugins"/>
+      <arg value="-DgroupId=com.intellij.plugins.svn4idea"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/svn4idea/lib/httpclient-4.1.1.jar"/>
       <arg value="-Dversion=IC-129.239"/>
@@ -739,7 +739,7 @@
     </exec>
     <exec executable="${maven.executable}">
       <arg value="install:install-file"/>
-      <arg value="-DgroupId=com.intellij.plugins"/>
+      <arg value="-DgroupId=com.intellij.plugins.svn4idea"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/svn4idea/lib/httpcore-4.1.jar"/>
       <arg value="-Dversion=IC-129.239"/>
@@ -747,7 +747,7 @@
     </exec>
     <exec executable="${maven.executable}">
       <arg value="install:install-file"/>
-      <arg value="-DgroupId=com.intellij.plugins"/>
+      <arg value="-DgroupId=com.intellij.plugins.svn4idea"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/svn4idea/lib/javahl.jar"/>
       <arg value="-Dversion=IC-129.239"/>
@@ -755,7 +755,7 @@
     </exec>
     <exec executable="${maven.executable}">
       <arg value="install:install-file"/>
-      <arg value="-DgroupId=com.intellij.plugins"/>
+      <arg value="-DgroupId=com.intellij.plugins.svn4idea"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/svn4idea/lib/resources_en.jar"/>
       <arg value="-Dversion=IC-129.239"/>
@@ -763,7 +763,7 @@
     </exec>
     <exec executable="${maven.executable}">
       <arg value="install:install-file"/>
-      <arg value="-DgroupId=com.intellij.plugins"/>
+      <arg value="-DgroupId=com.intellij.plugins.svn4idea"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/svn4idea/lib/sequence-library.jar"/>
       <arg value="-Dversion=IC-129.239"/>
@@ -771,7 +771,7 @@
     </exec>
     <exec executable="${maven.executable}">
       <arg value="install:install-file"/>
-      <arg value="-DgroupId=com.intellij.plugins"/>
+      <arg value="-DgroupId=com.intellij.plugins.svn4idea"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/svn4idea/lib/sqljet.jar"/>
       <arg value="-Dversion=IC-129.239"/>
@@ -779,7 +779,7 @@
     </exec>
     <exec executable="${maven.executable}">
       <arg value="install:install-file"/>
-      <arg value="-DgroupId=com.intellij.plugins"/>
+      <arg value="-DgroupId=com.intellij.plugins.svn4idea"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/svn4idea/lib/svn4idea.jar"/>
       <arg value="-Dversion=IC-129.239"/>
@@ -787,7 +787,7 @@
     </exec>
     <exec executable="${maven.executable}">
       <arg value="install:install-file"/>
-      <arg value="-DgroupId=com.intellij.plugins"/>
+      <arg value="-DgroupId=com.intellij.plugins.svn4idea"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/svn4idea/lib/svnkit.jar"/>
       <arg value="-Dversion=IC-129.239"/>
@@ -795,7 +795,7 @@
     </exec>
     <exec executable="${maven.executable}">
       <arg value="install:install-file"/>
-      <arg value="-DgroupId=com.intellij.plugins"/>
+      <arg value="-DgroupId=com.intellij.plugins.svn4idea"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/svn4idea/lib/svnkit-javahl.jar"/>
       <arg value="-Dversion=IC-129.239"/>
@@ -803,7 +803,7 @@
     </exec>
     <exec executable="${maven.executable}">
       <arg value="install:install-file"/>
-      <arg value="-DgroupId=com.intellij.plugins"/>
+      <arg value="-DgroupId=com.intellij.plugins.svn4idea"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/svn4idea/lib/trilead.jar"/>
       <arg value="-Dversion=IC-129.239"/>

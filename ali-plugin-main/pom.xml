@@ -81,12 +81,12 @@
             <version>${idea.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.intellij.plugins</groupId>
+            <groupId>com.intellij.plugins.git4idea</groupId>
             <artifactId>git4idea</artifactId>
             <version>${idea.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.intellij.plugins</groupId>
+            <groupId>com.intellij.plugins.svn4idea</groupId>
             <artifactId>svn4idea</artifactId>
             <version>${idea.version}</version>
         </dependency>
