@@ -329,7 +329,8 @@
             <action id="hpali.entity.attachmentDownload" class="com.hp.alm.ali.idea.action.attachment.AttachmentDownloadAction"/>
             <action id="hpali.entity.attachmentEdit" class="com.hp.alm.ali.idea.action.attachment.AttachmentEditAction"/>
             <action id="hpali.entity.attachmentDelete" class="com.hp.alm.ali.idea.action.attachment.AttachmentDeleteAction"/>
-            <action id="hpali.entity.showAffectedPaths" class="com.hp.alm.ali.idea.action.ShowAffectedPathsAction"/>
+            <action id="hpali.entity.showAffectedPaths" class="com.hp.alm.ali.idea.action.changeset.ShowAffectedPathsAction"/>
+            <action id="hpali.entity.copyRevisionToClipboard" class="com.hp.alm.ali.idea.action.changeset.CopyRevisionToClipboardAction"/>
             <action id="hpali.entity.linkEdit" class="com.hp.alm.ali.idea.action.link.LinkEditAction"/>
             <action id="hpali.entity.linkView" class="com.hp.alm.ali.idea.action.link.LinkViewAction"/>
             <action id="hpali.entity.linkDelete" class="com.hp.alm.ali.idea.action.link.LinkDeleteAction"/>
