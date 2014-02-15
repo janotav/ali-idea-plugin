@@ -56,14 +56,18 @@
     <depends optional="true" config-file="plugin-git.xml">Git4Idea</depends>
 
     <application-components>
-      <component>
-        <implementation-class>com.hp.alm.ali.idea.cfg.AliConfiguration</implementation-class>
-        <interface-class>com.hp.alm.ali.idea.cfg.AliConfiguration</interface-class>
-      </component>
-      <component>
-        <implementation-class>com.hp.alm.ali.idea.rest.TroubleShootService</implementation-class>
-        <interface-class>com.hp.alm.ali.idea.rest.TroubleShootService</interface-class>
-      </component>
+        <component>
+            <implementation-class>com.hp.alm.ali.idea.cfg.AliConfiguration</implementation-class>
+            <interface-class>com.hp.alm.ali.idea.cfg.AliConfiguration</interface-class>
+        </component>
+        <component>
+            <implementation-class>com.hp.alm.ali.idea.rest.TroubleShootService</implementation-class>
+            <interface-class>com.hp.alm.ali.idea.rest.TroubleShootService</interface-class>
+        </component>
+        <component>
+            <implementation-class>com.hp.alm.ali.idea.genesis.ProjectImpl</implementation-class>
+            <interface-class>com.hp.alm.ali.idea.genesis.ProjectApi</interface-class>
+        </component>
     </application-components>
 
     <project-components>

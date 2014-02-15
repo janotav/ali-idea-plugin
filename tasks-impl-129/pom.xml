@@ -33,5 +33,10 @@
             <artifactId>jira-connector</artifactId>
             <version>IC-129.239</version>
         </dependency>
+        <dependency>
+            <groupId>com.intellij</groupId>
+            <artifactId>idea</artifactId>
+            <version>IC-129.239</version>
+        </dependency>
     </dependencies>
 </project>
