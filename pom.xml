@@ -26,14 +26,14 @@
             </activation>
             <modules>
                 <module>idea-sdk-IC-129.239</module>
-                <module>tasks-impl-129</module>
+                <module>idea-impl-129</module>
             </modules>
         </profile>
         <profile>
             <id>IC-133.193</id>
             <modules>
                 <module>idea-sdk-IC-133.193</module>
-                <module>tasks-impl-133</module>
+                <module>idea-impl-133</module>
             </modules>
         </profile>
     </profiles>

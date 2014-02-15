@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.hp.alm.ali</groupId>
-    <artifactId>tasks-impl-133</artifactId>
+    <artifactId>idea-impl-133</artifactId>
     <name>${artifactId}:${version}</name>
 
     <dependencies>
