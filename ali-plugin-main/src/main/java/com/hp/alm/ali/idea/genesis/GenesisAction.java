@@ -18,12 +18,13 @@ package com.hp.alm.ali.idea.genesis;
 
 import com.hp.alm.ali.idea.cfg.AliProjectConfiguration;
 import com.hp.alm.ali.idea.genesis.checkout.Checkout;
-import com.hp.alm.ali.idea.impl.NewProjectUtil;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.ProjectManager;
 import com.intellij.openapi.project.ProjectManagerAdapter;
+import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vcs.CheckoutProvider;
 import com.intellij.openapi.vcs.VcsConfiguration;
 import com.intellij.openapi.vcs.VcsKey;
@@ -64,7 +65,13 @@ public class GenesisAction extends AnAction {
                         };
 
                         ProjectManager.getInstance().addProjectManagerListener(adapter);
-                        NewProjectUtil.createNewProject(null, genesis.getTarget());
+                        try {
+                            ProjectApi projectApi = ApplicationManager.getApplication().getComponent(ProjectApi.class);
+                            projectApi.createNewProject(null, genesis.getTarget());
+                        } catch (Exception e) {
+                            Messages.showErrorDialog("Failed to complete the operation. Please invoke the project wizard manually.\nSources were " +
+                                    "checked out to the following location:\n\n " + genesis.getTarget(), "Operation Failed");
+                        }
                         ProjectManager.getInstance().removeProjectManagerListener(adapter);
                     }
                 });

@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Hewlett-Packard Development Company, L.P
+ * Copyright 2014 Hewlett-Packard Development Company, L.P
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,12 +14,20 @@
  * limitations under the License.
  */
 
-package com.hp.alm.ali.idea.tasks;
+package com.hp.alm.ali.idea.revision;
 
-import com.intellij.tasks.Task;
+import com.intellij.openapi.extensions.ExtensionPointName;
+import com.intellij.openapi.vcs.VcsRoot;
+import com.intellij.openapi.vcs.history.VcsRevisionNumber;
 
-public interface TasksApi {
+public interface RevisionFactory {
 
-    void activateTask(Task task);
+    ExtensionPointName<RevisionFactory> EXTENSION_POINT_NAME = ExtensionPointName.create("com.hp.alm.ali.revisionCreator");
+
+    VcsRevisionNumber create(String revision);
+
+    boolean matches(VcsRoot vcsRoot, String location, String alias);
+
+    String getType();
 
 }

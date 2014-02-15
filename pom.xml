@@ -15,11 +15,26 @@
         <module>ali-rest-client</module>
         <module>ali-plugin-main</module>
         <module>ali-test-support</module>
-        <module>idea-sdk-IC-129.239</module>
-        <module>idea-sdk-IC-133.193</module>
         <module>idea-compatibility</module>
-        <module>tasks-impl-129</module>
-        <module>tasks-impl-133</module>
     </modules>
 
+    <profiles>
+        <profile>
+            <id>IC-129.239</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <modules>
+                <module>idea-sdk-IC-129.239</module>
+                <module>idea-impl-129</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>IC-133.193</id>
+            <modules>
+                <module>idea-sdk-IC-133.193</module>
+                <module>idea-impl-133</module>
+            </modules>
+        </profile>
+    </profiles>
 </project>

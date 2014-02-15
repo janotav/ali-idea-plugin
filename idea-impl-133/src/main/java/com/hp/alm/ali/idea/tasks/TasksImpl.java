@@ -16,10 +16,20 @@
 
 package com.hp.alm.ali.idea.tasks;
 
+import com.intellij.openapi.project.Project;
 import com.intellij.tasks.Task;
+import com.intellij.tasks.TaskManager;
 
-public interface TasksApi {
+public class TasksImpl implements TasksApi {
 
-    void activateTask(Task task);
+    private Project project;
 
+    public TasksImpl(Project project) {
+        this.project = project;
+    }
+
+    @Override
+    public void activateTask(Task task) {
+        project.getComponent(TaskManager.class).activateTask(task, false);
+    }
 }

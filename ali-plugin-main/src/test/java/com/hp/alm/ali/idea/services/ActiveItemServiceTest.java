@@ -17,7 +17,6 @@
 package com.hp.alm.ali.idea.services;
 
 import com.hp.alm.ali.ServerVersion;
-import com.hp.alm.ali.idea.IdeaCompatibility;
 import com.hp.alm.ali.idea.IntellijTest;
 import com.hp.alm.ali.idea.RestInvocations;
 import com.hp.alm.ali.idea.tasks.TasksApi;
@@ -50,7 +49,7 @@ public class ActiveItemServiceTest extends IntellijTest {
     public void preClean() {
        activeItemService = getComponent(ActiveItemService.class);
        taskManager = getComponent(TaskManager.class);
-       tasksApi = getComponent(IdeaCompatibility.class).getComponent(TasksApi.class);
+       tasksApi = getComponent(TasksApi.class);
     }
 
     @Test

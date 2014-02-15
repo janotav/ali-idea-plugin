@@ -1,5 +1,6 @@
 <idea-plugin>
     <extensions defaultExtensionNs="com.hp.alm.ali">
        <genesisCheckout implementation="com.hp.alm.ali.idea.genesis.checkout.SubversionCheckoutFactory"/>
+       <revisionCreator implementation="com.hp.alm.ali.idea.revision.SubversionRevisionFactory"/>
     </extensions>
 </idea-plugin>

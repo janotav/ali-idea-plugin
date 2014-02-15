@@ -16,7 +16,6 @@
 
 package com.hp.alm.ali.idea.tasks;
 
-import com.hp.alm.ali.idea.IdeaCompatibility;
 import com.hp.alm.ali.idea.entity.EntityAdapter;
 import com.hp.alm.ali.idea.model.Entity;
 import com.hp.alm.ali.idea.entity.EntityRef;
@@ -33,14 +32,14 @@ public class TaskManagerIntegration {
     private Project project;
     private TaskManager taskManager;
     private EntityService entityService;
-    private IdeaCompatibility ideaCompatibility;
+    private TasksApi tasksApi;
     private WeakListeners<Listener> listeners;
     volatile private boolean fireEvent;
 
-    public TaskManagerIntegration(Project project, EntityService entityService, IdeaCompatibility ideaCompatibility) {
+    public TaskManagerIntegration(Project project, EntityService entityService, TasksApi tasksApi) {
         this.project = project;
         this.entityService = entityService;
-        this.ideaCompatibility = ideaCompatibility;
+        this.tasksApi = tasksApi;
         listeners = new WeakListeners<Listener>();
         fireEvent = true;
 
@@ -112,7 +111,7 @@ public class TaskManagerIntegration {
     private void activateTask(Task task) {
         fireEvent = false;
         try {
-            ideaCompatibility.getComponent(TasksApi.class).activateTask(task);
+            tasksApi.activateTask(task);
         } finally {
             fireEvent = true;
         }

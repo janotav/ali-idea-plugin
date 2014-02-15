@@ -382,53 +382,143 @@
             <version>IC-129.239</version>
         </dependency>
         <dependency>
-            <groupId>com.intellij.plugins</groupId>
+            <groupId>com.intellij.plugins.tasks</groupId>
             <artifactId>axis-1.4</artifactId>
             <version>IC-129.239</version>
         </dependency>
         <dependency>
-            <groupId>com.intellij.plugins</groupId>
+            <groupId>com.intellij.plugins.tasks</groupId>
             <artifactId>axis-jaxrpc-1.4</artifactId>
             <version>IC-129.239</version>
         </dependency>
         <dependency>
-            <groupId>com.intellij.plugins</groupId>
+            <groupId>com.intellij.plugins.tasks</groupId>
             <artifactId>axis-saaj-1.3</artifactId>
             <version>IC-129.239</version>
         </dependency>
         <dependency>
-            <groupId>com.intellij.plugins</groupId>
+            <groupId>com.intellij.plugins.tasks</groupId>
             <artifactId>commons-discovery-0.4</artifactId>
             <version>IC-129.239</version>
         </dependency>
         <dependency>
-            <groupId>com.intellij.plugins</groupId>
+            <groupId>com.intellij.plugins.tasks</groupId>
             <artifactId>jira-connector</artifactId>
             <version>IC-129.239</version>
         </dependency>
         <dependency>
-            <groupId>com.intellij.plugins</groupId>
+            <groupId>com.intellij.plugins.tasks</groupId>
             <artifactId>markdownj-core-0.4.2-SNAPSHOT</artifactId>
             <version>IC-129.239</version>
         </dependency>
         <dependency>
-            <groupId>com.intellij.plugins</groupId>
+            <groupId>com.intellij.plugins.tasks</groupId>
             <artifactId>tasks-api</artifactId>
             <version>IC-129.239</version>
         </dependency>
         <dependency>
-            <groupId>com.intellij.plugins</groupId>
+            <groupId>com.intellij.plugins.tasks</groupId>
             <artifactId>tasks-core</artifactId>
             <version>IC-129.239</version>
         </dependency>
         <dependency>
-            <groupId>com.intellij.plugins</groupId>
+            <groupId>com.intellij.plugins.tasks</groupId>
             <artifactId>tasks-java</artifactId>
             <version>IC-129.239</version>
         </dependency>
         <dependency>
-            <groupId>com.intellij.plugins</groupId>
+            <groupId>com.intellij.plugins.tasks</groupId>
             <artifactId>wsdl4j-1.4</artifactId>
+            <version>IC-129.239</version>
+        </dependency>
+        <dependency>
+            <groupId>com.intellij.plugins.git4idea</groupId>
+            <artifactId>git4idea</artifactId>
+            <version>IC-129.239</version>
+        </dependency>
+        <dependency>
+            <groupId>com.intellij.plugins.git4idea</groupId>
+            <artifactId>git4idea-rt</artifactId>
+            <version>IC-129.239</version>
+        </dependency>
+        <dependency>
+            <groupId>com.intellij.plugins.git4idea</groupId>
+            <artifactId>ini4j-0.5.2-patched</artifactId>
+            <version>IC-129.239</version>
+        </dependency>
+        <dependency>
+            <groupId>com.intellij.plugins.git4idea</groupId>
+            <artifactId>org.eclipse.jgit-2.1.0.201209190230-r</artifactId>
+            <version>IC-129.239</version>
+        </dependency>
+        <dependency>
+            <groupId>com.intellij.plugins.git4idea</groupId>
+            <artifactId>resources_en</artifactId>
+            <version>IC-129.239</version>
+        </dependency>
+        <dependency>
+            <groupId>com.intellij.plugins.git4idea</groupId>
+            <artifactId>trilead-ssh2</artifactId>
+            <version>IC-129.239</version>
+        </dependency>
+        <dependency>
+            <groupId>com.intellij.plugins.svn4idea</groupId>
+            <artifactId>antlr</artifactId>
+            <version>IC-129.239</version>
+        </dependency>
+        <dependency>
+            <groupId>com.intellij.plugins.svn4idea</groupId>
+            <artifactId>bindSvn</artifactId>
+            <version>IC-129.239</version>
+        </dependency>
+        <dependency>
+            <groupId>com.intellij.plugins.svn4idea</groupId>
+            <artifactId>httpclient-4.1.1</artifactId>
+            <version>IC-129.239</version>
+        </dependency>
+        <dependency>
+            <groupId>com.intellij.plugins.svn4idea</groupId>
+            <artifactId>httpcore-4.1</artifactId>
+            <version>IC-129.239</version>
+        </dependency>
+        <dependency>
+            <groupId>com.intellij.plugins.svn4idea</groupId>
+            <artifactId>javahl</artifactId>
+            <version>IC-129.239</version>
+        </dependency>
+        <dependency>
+            <groupId>com.intellij.plugins.svn4idea</groupId>
+            <artifactId>resources_en</artifactId>
+            <version>IC-129.239</version>
+        </dependency>
+        <dependency>
+            <groupId>com.intellij.plugins.svn4idea</groupId>
+            <artifactId>sequence-library</artifactId>
+            <version>IC-129.239</version>
+        </dependency>
+        <dependency>
+            <groupId>com.intellij.plugins.svn4idea</groupId>
+            <artifactId>sqljet</artifactId>
+            <version>IC-129.239</version>
+        </dependency>
+        <dependency>
+            <groupId>com.intellij.plugins.svn4idea</groupId>
+            <artifactId>svn4idea</artifactId>
+            <version>IC-129.239</version>
+        </dependency>
+        <dependency>
+            <groupId>com.intellij.plugins.svn4idea</groupId>
+            <artifactId>svnkit</artifactId>
+            <version>IC-129.239</version>
+        </dependency>
+        <dependency>
+            <groupId>com.intellij.plugins.svn4idea</groupId>
+            <artifactId>svnkit-javahl</artifactId>
+            <version>IC-129.239</version>
+        </dependency>
+        <dependency>
+            <groupId>com.intellij.plugins.svn4idea</groupId>
+            <artifactId>trilead</artifactId>
             <version>IC-129.239</version>
         </dependency>
     </dependencies>

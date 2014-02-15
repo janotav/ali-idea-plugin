@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Hewlett-Packard Development Company, L.P
+ * Copyright 2014 Hewlett-Packard Development Company, L.P
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.hp.alm.ali.idea.tasks;
+package com.hp.alm.ali.idea.genesis;
 
-import com.intellij.tasks.Task;
+import com.intellij.openapi.project.Project;
 
-public interface TasksApi {
+public interface ProjectApi {
 
-    void activateTask(Task task);
+    void createNewProject(Project projectToClose, String defaultPath);
 
 }

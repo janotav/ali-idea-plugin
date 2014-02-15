@@ -9,40 +9,29 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.hp.alm.ali</groupId>
-    <artifactId>idea-compatibility</artifactId>
+    <artifactId>idea-impl-133</artifactId>
     <name>${artifactId}:${version}</name>
 
     <dependencies>
         <dependency>
-            <groupId>com.intellij</groupId>
-            <artifactId>openapi</artifactId>
-            <version>${idea.version}</version>
+            <groupId>com.hp.alm.ali</groupId>
+            <artifactId>idea-compatibility</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.intellij.plugins.tasks</groupId>
             <artifactId>tasks-api</artifactId>
-            <version>${idea.version}</version>
+            <version>IC-133.193</version>
         </dependency>
         <dependency>
             <groupId>com.intellij</groupId>
-            <artifactId>util</artifactId>
-            <version>${idea.version}</version>
+            <artifactId>openapi</artifactId>
+            <version>IC-133.193</version>
         </dependency>
         <dependency>
             <groupId>com.intellij</groupId>
-            <artifactId>extensions</artifactId>
-            <version>${idea.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.hp.alm.ali</groupId>
-            <artifactId>ali-test-support</artifactId>
-            <version>${project.version}</version>
-            <scope>test</scope>
+            <artifactId>idea</artifactId>
+            <version>IC-133.193</version>
         </dependency>
     </dependencies>
 </project>
