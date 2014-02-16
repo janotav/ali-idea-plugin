@@ -28,10 +28,12 @@ import com.hp.alm.ali.idea.content.detail.DetailContent;
 import com.hp.alm.ali.idea.content.detail.LinksTableLoader;
 import com.hp.alm.ali.idea.content.detail.TableContent;
 import com.hp.alm.ali.idea.content.detail.TaskTableLoader;
+import com.hp.alm.ali.idea.entity.EntityQueryProcessor;
 import com.hp.alm.ali.idea.entity.edit.DummyLock;
 import com.hp.alm.ali.idea.entity.edit.EntityEditStrategy;
 import com.hp.alm.ali.idea.entity.edit.HorizonEditStrategy;
 import com.hp.alm.ali.idea.entity.edit.LockingStrategy;
+import com.hp.alm.ali.idea.filter.FilterChooser;
 import com.hp.alm.ali.idea.model.type.BacklogBlockedType;
 import com.hp.alm.ali.idea.model.type.BacklogStatusDefectType;
 import com.hp.alm.ali.idea.model.type.BacklogEntityType;
@@ -42,6 +44,7 @@ import com.hp.alm.ali.idea.model.type.SprintType;
 import com.hp.alm.ali.idea.model.type.TeamType;
 import com.hp.alm.ali.idea.model.type.ThemeType;
 import com.hp.alm.ali.idea.rest.RestService;
+import com.hp.alm.ali.idea.ui.chooser.FlatChooser;
 import com.hp.alm.ali.idea.ui.combo.LazyComboBoxModel;
 import com.hp.alm.ali.idea.ui.combo.TeamMembersComboBoxModel;
 import com.intellij.openapi.actionSystem.ActionToolbar;
@@ -78,6 +81,7 @@ public class HorizonStrategy extends ApolloStrategy {
             "requirement.has-rich-content",
             "requirement.istemplate",
             "requirement.req-type",
+            "requirement.type-id",
             "requirement.parent-id",
             "requirement.order-id",
             "requirement.father-name",
@@ -321,6 +325,25 @@ public class HorizonStrategy extends ApolloStrategy {
             return Arrays.asList("release-backlog-item");
         } else {
             return Collections.emptyList();
+        }
+    }
+
+    @Override
+    public FilterChooser getFilterChooser(String entityType, boolean multiple, boolean idSelection, boolean acceptEmpty, String value) {
+        if("requirement".equals(entityType)) {
+            FlatChooser popup = new FlatChooser(project, "requirement", multiple, acceptEmpty, new EntityQueryProcessor() {
+                @Override
+                public EntityQuery preProcess(EntityQuery query) {
+                    EntityQuery clone = query.clone();
+                    clone.setValue("type-id", String.valueOf(70));
+                    clone.setPropertyResolved("type-id", true);
+                    return clone;
+                }
+            });
+            popup.setValue(value);
+            return popup;
+        } else {
+            return super.getFilterChooser(entityType, multiple, idSelection, acceptEmpty, value);
         }
     }
 

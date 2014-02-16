@@ -22,6 +22,7 @@ import com.hp.alm.ali.idea.content.AliContent;
 import com.hp.alm.ali.idea.content.detail.DetailContent;
 import com.hp.alm.ali.idea.entity.edit.EntityEditStrategy;
 import com.hp.alm.ali.idea.entity.edit.LockingStrategy;
+import com.hp.alm.ali.idea.filter.FilterChooser;
 import com.hp.alm.ali.idea.ui.combo.LazyComboBoxModel;
 
 import java.util.List;
@@ -70,5 +71,7 @@ public interface ServerStrategy extends EntityQueryProcessor {
     List<AliContent> getSupportedContent();
 
     String getFieldAlias(String entityType, String property);
+
+    FilterChooser getFilterChooser(String entityType, boolean multiple, boolean idSelection, boolean acceptEmpty, String value);
 
 }

@@ -21,7 +21,8 @@ import com.hp.alm.ali.idea.tasks.TaskConfig;
 import com.hp.alm.ali.idea.ui.ComboItem;
 import com.hp.alm.ali.idea.model.Entity;
 import com.hp.alm.ali.idea.entity.EntityQuery;
-import com.hp.alm.ali.idea.ui.chooser.PopupDialog;
+import com.hp.alm.ali.idea.ui.chooser.EntityChooser;
+import com.hp.alm.ali.idea.ui.chooser.HierarchicalChooser;
 import com.hp.alm.ali.idea.services.FavoritesService;
 import com.hp.alm.ali.idea.rest.RestListener;
 import com.hp.alm.ali.idea.rest.RestService;
@@ -153,7 +154,7 @@ public class TaskConfigPanel extends JPanel implements RestListener {
                             return;
                         }
                         FavoritesModel favoritesModel = new FavoritesModel(project, TaskConfigPanel.this.entityType);
-                        PopupDialog popup = new PopupDialog(project, "favorite", true, false, PopupDialog.Selection.FOLLOW_ID, false, favoritesModel);
+                        EntityChooser popup = new HierarchicalChooser(project, "favorite", true, false, true, false, favoritesModel);
                         popup.setVisible(true);
                         String selectedValue = popup.getSelectedValue();
                         if(!selectedValue.isEmpty()) {

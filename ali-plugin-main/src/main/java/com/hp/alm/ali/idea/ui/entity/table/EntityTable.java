@@ -32,7 +32,6 @@ import com.hp.alm.ali.idea.translate.TranslateService;
 import com.hp.alm.ali.idea.translate.Translator;
 import com.hp.alm.ali.idea.translate.ValueCallback;
 import com.hp.alm.ali.idea.model.type.ContextAware;
-import com.hp.alm.ali.idea.services.FavoritesService;
 import com.hp.alm.ali.idea.ui.entity.EntityStatusPanel;
 import com.hp.alm.ali.idea.ui.event.PopupAdapter;
 import com.hp.alm.ali.idea.ui.entity.query.EntityQueryPanel;
@@ -73,7 +72,6 @@ import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -87,10 +85,6 @@ public class EntityTable extends JPanel implements DataProvider {
     private EntityStatusPanel statusPanel;
     private Entity masterEntity;
     private DataProvider dataProvider;
-
-    public EntityTable(Project project, String entityType, EntityQuery filter) {
-        this(project, entityType, true, filter, Collections.<String>emptySet(), null, true, null);
-    }
 
     public EntityTable(final Project project, final String entityType, boolean autoload, EntityQuery filter, final Set<String> hiddenFields, EntityQueryProcessor processor, final boolean useFavorites, final Entity masterEntity) {
         super(new BorderLayout());

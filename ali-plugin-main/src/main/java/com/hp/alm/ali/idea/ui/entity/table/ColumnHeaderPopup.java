@@ -18,12 +18,12 @@ package com.hp.alm.ali.idea.ui.entity.table;
 
 import com.hp.alm.ali.idea.entity.table.EntityTableModel;
 import com.hp.alm.ali.idea.translate.TranslateService;
+import com.hp.alm.ali.idea.ui.chooser.HierarchicalChooser;
 import com.hp.alm.ali.idea.ui.entity.query.QuerySaveAsDialog;
 import com.hp.alm.ali.idea.cfg.AliConfiguration;
 import com.hp.alm.ali.idea.cfg.AliProjectConfiguration;
 import com.hp.alm.ali.idea.entity.EntityQuery;
 import com.hp.alm.ali.idea.model.Field;
-import com.hp.alm.ali.idea.ui.chooser.PopupDialog;
 import com.hp.alm.ali.idea.entity.tree.FavoritesModel;
 import com.hp.alm.ali.idea.ui.MultipleItemsDialog;
 import com.intellij.openapi.application.ApplicationManager;
@@ -100,7 +100,7 @@ public class ColumnHeaderPopup extends JPopupMenu {
             alm.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent actionEvent) {
                     FavoritesModel favoritesModel = new FavoritesModel(project, entityType);
-                    PopupDialog popup = new PopupDialog(project, "favorite", true, false, PopupDialog.Selection.FOLLOW_ID, false, favoritesModel);
+                    HierarchicalChooser popup = new HierarchicalChooser(project, "favorite", true, false, true, false, favoritesModel);
                     popup.setVisible(true);
                     String selectedValue = popup.getSelectedValue();
                     if(!selectedValue.isEmpty()) {

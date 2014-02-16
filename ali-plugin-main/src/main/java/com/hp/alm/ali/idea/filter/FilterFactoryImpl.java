@@ -16,7 +16,7 @@
 
 package com.hp.alm.ali.idea.filter;
 
-import com.hp.alm.ali.idea.ui.chooser.PopupDialog;
+import com.hp.alm.ali.idea.rest.RestService;
 import com.intellij.openapi.project.Project;
 
 public class FilterFactoryImpl extends MultipleItemsFactory {
@@ -35,15 +35,6 @@ public class FilterFactoryImpl extends MultipleItemsFactory {
 
     @Override
     public FilterChooser createChooser(String value) {
-        PopupDialog popup;
-        if(compound) {
-            // plain integer reference (e.g. release-backlog-item.sprint-id)
-            popup = new PopupDialog(project, targetType, false, multiple, multiple? PopupDialog.Selection.APPENDING_ID: PopupDialog.Selection.FOLLOW_ID, true);
-        } else {
-            // old-school ^Releases\Release^ references
-            popup = new PopupDialog(project, targetType, false, multiple, multiple? PopupDialog.Selection.APPENDING: PopupDialog.Selection.FOLLOW, true);
-        }
-        popup.setValue(value);
-        return popup;
+        return project.getComponent(RestService.class).getServerStrategy().getFilterChooser(targetType, multiple, compound, true, value);
     }
 }

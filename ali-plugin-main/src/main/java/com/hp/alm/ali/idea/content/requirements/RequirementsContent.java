@@ -17,7 +17,7 @@
 package com.hp.alm.ali.idea.content.requirements;
 
 import com.hp.alm.ali.idea.content.EntityContentPanel;
-import com.hp.alm.ali.idea.ui.chooser.PopupDialog;
+import com.hp.alm.ali.idea.ui.chooser.HierarchicalChooser;
 import com.hp.alm.ali.idea.content.AliContent;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.IconLoader;
@@ -52,7 +52,7 @@ public class RequirementsContent implements AliContent {
         final EntityContentPanel requirementPanel = new EntityContentPanel(project, "requirement", requirementToolbar);
         gotoRequirement.setListener(new LinkListener() {
             public void linkSelected(LinkLabel aSource, Object aLinkData) {
-                PopupDialog popupDialog = new PopupDialog(project, "requirement", false, false, PopupDialog.Selection.FOLLOW_ID, false);
+                HierarchicalChooser popupDialog = new HierarchicalChooser(project, "requirement", false, false, true, false, null);
                 popupDialog.setVisible(true);
                 String idStr = popupDialog.getSelectedValue();
                 if(!idStr.isEmpty()) {

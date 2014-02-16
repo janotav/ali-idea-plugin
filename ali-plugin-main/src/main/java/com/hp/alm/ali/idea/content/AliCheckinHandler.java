@@ -17,7 +17,7 @@
 package com.hp.alm.ali.idea.content;
 
 import com.hp.alm.ali.idea.entity.EntityAdapter;
-import com.hp.alm.ali.idea.ui.chooser.PopupDialog;
+import com.hp.alm.ali.idea.filter.FilterChooser;
 import com.hp.alm.ali.idea.entity.edit.LockingStrategy;
 import com.hp.alm.ali.idea.rest.RestService;
 import com.hp.alm.ali.idea.services.MetadataService;
@@ -102,14 +102,16 @@ public class AliCheckinHandler extends CheckinHandler implements ActionListener,
         panel.setLayout(new BorderLayout());
         panel.setBorder(BorderFactory.createTitledBorder("HP ALI"));
 
-        if(ref == null) {
+        if(!restService.getServerTypeIfAvailable().isConnected()) {
+            panel.setVisible(false);
+        } else if(ref == null) {
             activeItemService.addListener(this);
             DefaultActionGroup group = new DefaultActionGroup();
             ChooseEntityTypeAction choose = new ChooseEntityTypeAction(project, panel, Arrays.asList("defect", "requirement"), new ChooseEntityTypePopup.Listener() {
                 @Override
                 public void selected(final String entityType) {
-                    PopupDialog popup = new PopupDialog(project, entityType, false, false, PopupDialog.Selection.FOLLOW_ID, false);
-                    popup.setVisible(true);
+                    FilterChooser popup = restService.getServerStrategy().getFilterChooser(entityType, false, true, false, null);
+                    popup.show();
                     String selectedId = popup.getSelectedValue();
                     if (selectedId != null && !selectedId.isEmpty()) {
                         activeItemService.activate(new Entity(entityType, Integer.valueOf(selectedId)), true, false);

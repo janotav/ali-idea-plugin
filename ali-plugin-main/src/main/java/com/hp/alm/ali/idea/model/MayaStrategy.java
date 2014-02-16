@@ -33,6 +33,7 @@ import com.hp.alm.ali.idea.entity.edit.EntityEditStrategy;
 import com.hp.alm.ali.idea.entity.edit.EntityEditStrategyImpl;
 import com.hp.alm.ali.idea.entity.edit.MayaLock;
 import com.hp.alm.ali.idea.entity.edit.LockingStrategy;
+import com.hp.alm.ali.idea.filter.FilterChooser;
 import com.hp.alm.ali.idea.model.type.BuildDurationType;
 import com.hp.alm.ali.idea.model.type.BuildStatusType;
 import com.hp.alm.ali.idea.model.type.DefectLinkIdType;
@@ -47,6 +48,9 @@ import com.hp.alm.ali.idea.model.type.TargetReleaseCycleType;
 import com.hp.alm.ali.idea.model.type.TargetReleaseType;
 import com.hp.alm.ali.idea.rest.RestService;
 import com.hp.alm.ali.idea.services.EntityService;
+import com.hp.alm.ali.idea.ui.chooser.EntityChooser;
+import com.hp.alm.ali.idea.ui.chooser.FlatChooser;
+import com.hp.alm.ali.idea.ui.chooser.HierarchicalChooser;
 import com.hp.alm.ali.idea.ui.combo.LazyComboBoxModel;
 import com.hp.alm.ali.idea.ui.combo.ProjectUsersComboBoxModel;
 import com.intellij.openapi.actionSystem.ActionToolbar;
@@ -362,6 +366,18 @@ public class MayaStrategy implements ServerStrategy {
     @Override
     public String getFieldAlias(String entityType, String property) {
         return property;
+    }
+
+    @Override
+    public FilterChooser getFilterChooser(String entityType, boolean multiple, boolean idSelection, boolean acceptEmpty, String value) {
+        EntityChooser dialog;
+        if(Metadata.getChildEntity(entityType) != null || Metadata.getParentEntity(entityType) != null) {
+            dialog = new HierarchicalChooser(project, entityType, false, multiple, idSelection, acceptEmpty, null);
+        } else {
+            dialog = new FlatChooser(project, entityType, multiple, acceptEmpty, null);
+        }
+        dialog.setValue(value);
+        return dialog;
     }
 
     protected List<Relation> relationList(String ... entityTypes) {
