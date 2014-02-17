@@ -51,10 +51,14 @@ import com.intellij.openapi.actionSystem.ActionToolbar;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.IconLoader;
 
+import javax.swing.SortOrder;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -132,6 +136,13 @@ public class HorizonStrategy extends ApolloStrategy {
         horizonFields.put("requirement", horizonRequirementFields());
     }
 
+    private static Map<String, String> orderMap;
+    static {
+        orderMap = new HashMap<String, String>();
+        orderMap.put("release-backlog-item.release-id", "target-rel");
+        orderMap.put("release-backlog-item.sprint-id", "target-rcyc");
+    }
+
     public HorizonStrategy(Project project, RestService restService) {
         super(project, restService);
     }
@@ -145,11 +156,39 @@ public class HorizonStrategy extends ApolloStrategy {
                 clone.addColumn("entity-id", 1);
             } else if("defect".equals(query.getEntityType()) || "requirement".equals(query.getEntityType())) {
                 clone.addColumn("release-backlog-item.id", 1);
+
+                LinkedHashMap<String,SortOrder> order = clone.getOrder();
+                if(containsAny(order.keySet(), orderMap.keySet())) {
+                    remapOrder(order, orderMap);
+                    clone.setOrder(order);
+                }
             } else if("project-task".equals(query.getEntityType())) {
                 clone.addColumn("release-backlog-item-id", 1);
             }
         }
         return clone;
+    }
+
+    private boolean containsAny(Set<String> set, Collection<String> items) {
+        for(String item: items) {
+            if(set.contains(item)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void remapOrder(LinkedHashMap<String,SortOrder> order, Map<String, String> orderMap) {
+        ArrayList<String> list = new ArrayList<String>(order.keySet());
+        for(String key: list) {
+            SortOrder value = order.remove(key);
+            String newKey = orderMap.get(key);
+            if(newKey != null) {
+                order.put(newKey, value);
+            } else {
+                order.put(key, value);
+            }
+        }
     }
 
     @Override
@@ -259,6 +298,7 @@ public class HorizonStrategy extends ApolloStrategy {
             metadata.getField("release-backlog-item.release-id").setClazz(ReleaseType.class);
             metadata.getField("release-backlog-item.team-id").setReferencedType("team");
             metadata.getField("release-backlog-item.team-id").setClazz(TeamType.class);
+            metadata.getField("release-backlog-item.team-id").setNoSort(true);
         }
 
         if("defect".equals(metadata.getEntityType())) {

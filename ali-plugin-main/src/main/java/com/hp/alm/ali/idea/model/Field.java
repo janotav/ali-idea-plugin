@@ -33,6 +33,7 @@ public class Field implements KeyValue {
     private boolean editable;
     private boolean blob;
     private boolean canFilter;
+    private boolean noSort;
     private boolean required;
     private String referencedType;
     private String referencedTypeField;
@@ -94,6 +95,14 @@ public class Field implements KeyValue {
         this.canFilter = canFilter;
     }
 
+    public boolean isNoSort() {
+        return noSort;
+    }
+
+    public void setNoSort(boolean noSort) {
+        this.noSort = noSort;
+    }
+
     public boolean isRequired() {
         return required;
     }
@@ -107,6 +116,7 @@ public class Field implements KeyValue {
         field.setBlob(isBlob());
         field.setRequired(isRequired());
         field.setCanFilter(isCanFilter());
+        field.setNoSort(isNoSort());
         field.setEditable(isEditable());
         field.setClazz(getClazz());
         field.setListId(getListId());

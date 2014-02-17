@@ -186,7 +186,8 @@ java.lang.IndexOutOfBoundsException: Index: 0, Size: 0
                     return;
                 }
                 int col = table.convertColumnIndexToModel(table.getTableHeader().columnAtPoint(mouseEvent.getPoint()));
-                if(model.getFields().get(col).isCanFilter()) {
+                Field field = model.getFields().get(col);
+                if(field.isCanFilter() && !field.isNoSort()) {
                     if((mouseEvent.getModifiers() & MouseEvent.CTRL_MASK) == 0) {
                         // append sort
                         rowSorter.toggleSortOrder(col, true);

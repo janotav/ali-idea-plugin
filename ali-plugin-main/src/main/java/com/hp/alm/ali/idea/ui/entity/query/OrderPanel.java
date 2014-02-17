@@ -104,7 +104,7 @@ class OrderPanel extends JPanel {
                 List<Field> available = new ArrayList<Field>(metadata.getAllFields().values());
                 for(Iterator<Field> it = available.iterator(); it.hasNext(); ) {
                     Field field = it.next();
-                    if(!field.isCanFilter() || order.containsKey(field.getName())) {
+                    if(!field.isCanFilter() || field.isNoSort() || order.containsKey(field.getName())) {
                         it.remove();
                     }
                 }
