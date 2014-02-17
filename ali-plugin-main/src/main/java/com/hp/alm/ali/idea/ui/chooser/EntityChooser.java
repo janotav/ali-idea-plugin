@@ -49,6 +49,11 @@ public class EntityChooser extends MyDialog implements FilterChooser {
         this.entityType = entityType;
 
         initialize(showCondition, acceptEmpty);
+        restoreSizeAndLocation();
+    }
+
+    protected String getDimensionKey() {
+        return "#com.hp.alm.ali.idea.ui.chooser.EntityChooser." + entityType;
     }
 
     public String getSelectedValue() {

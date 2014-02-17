@@ -22,6 +22,8 @@ import com.hp.alm.ali.idea.services.EntityLabelService;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.util.DimensionService;
+import com.intellij.ui.ScreenUtil;
 
 import javax.swing.*;
 import java.awt.*;
@@ -39,6 +41,7 @@ public class MyDialog extends JDialog implements ActionListener {
     public enum Button { OK, Cancel, Close, Clear, Save }
 
     private JPanel buttonPanel;
+    private String dimensionKey;
 
     public MyDialog(Project project, Frame frame, String title, boolean modal) {
         this(project, frame, title, modal, false);
@@ -72,6 +75,34 @@ public class MyDialog extends JDialog implements ActionListener {
 
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
+    }
+
+    protected String getDimensionKey() {
+        return null;
+    }
+
+    protected void restoreSizeAndLocation() {
+        // Dialog's size and location: migrate to DialogWrapper to avoid need for our own code
+
+        Point location = null;
+        Dimension size = null;
+        dimensionKey = getDimensionKey();
+        if (dimensionKey != null) {
+            location = DimensionService.getInstance().getLocation(dimensionKey, project);
+            size = DimensionService.getInstance().getSize(dimensionKey, project);
+        }
+        if (location != null) {
+            setLocation(location);
+        } else {
+            setLocationRelativeTo(getOwner());
+        }
+        if (size != null) {
+            setSize(size.width, size.height);
+        }
+
+        Rectangle bounds = getBounds();
+        ScreenUtil.fitToScreen(bounds);
+        setBounds(bounds);
     }
 
     protected void buttonPerformed(Button button) {
@@ -128,6 +159,14 @@ public class MyDialog extends JDialog implements ActionListener {
         }
         setVisible(false);
         dispose();
+    }
+
+    public void dispose() {
+        if(dimensionKey != null) {
+            DimensionService.getInstance().setSize(dimensionKey, getSize());
+            DimensionService.getInstance().setLocation(dimensionKey, getLocation());
+        }
+        super.dispose();
     }
 
     protected void escape() {
