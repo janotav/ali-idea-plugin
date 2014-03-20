@@ -51,6 +51,9 @@
       ]]>
     </change-notes>
 
+    <depends optional="true">com.intellij.modules.java</depends>
+    <depends optional="true">com.intellij.modules.ruby</depends>
+
     <depends optional="true" config-file="plugin-subversion.xml">Subversion</depends>
     <depends optional="true" config-file="plugin-tasks.xml">com.intellij.tasks</depends>
     <depends optional="true" config-file="plugin-git.xml">Git4Idea</depends>
