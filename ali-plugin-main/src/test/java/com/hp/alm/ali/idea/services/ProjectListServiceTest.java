@@ -84,6 +84,6 @@ public class ProjectListServiceTest extends MultiTest {
         Field field = new Field("non-existing", "Non-existing");
         field.setListId(10000);
         List<String> list = projectListService.getProjectList("defect", field);
-        Assert.assertNull(list);
+        Assert.assertTrue(list.isEmpty());
     }
 }

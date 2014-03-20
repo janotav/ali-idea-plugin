@@ -30,6 +30,7 @@ import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,10 +46,17 @@ public class ProjectListService extends AbstractCachingService<String, Map<Integ
 
     public List<String> getProjectList(String entityType, Field field) {
         String relatedType = field.getRelatedType();
+        List<String> values;
         if(relatedType != null) {
-            return getValue(relatedType).get(field.getListId());
+            values = getValue(relatedType).get(field.getListId());
         } else {
-            return getValue(entityType).get(field.getListId());
+            values = getValue(entityType).get(field.getListId());
+        }
+        if(values == null) {
+            // let's take pragmatic approach to metadata inconsistency and return empty list
+            return Collections.emptyList();
+        } else {
+            return values;
         }
     }
 
