@@ -36,14 +36,20 @@ import com.intellij.notification.Notifications;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.options.ShowSettingsUtil;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowManager;
 import com.intellij.util.net.HttpConfigurable;
+import com.intellij.util.net.IdeaWideProxySelector;
 import com.intellij.util.ui.UIUtil;
 import org.jetbrains.annotations.TestOnly;
 
 import javax.swing.event.HyperlinkEvent;
 import java.io.InputStream;
+import java.net.InetSocketAddress;
+import java.net.PasswordAuthentication;
+import java.net.Proxy;
+import java.util.List;
 
 public class RestService implements ConfigurationListener {
 
@@ -91,15 +97,23 @@ public class RestService implements ConfigurationListener {
         restClient.setEncoding(null);
         restClient.setTimeout(10000);
         HttpConfigurable httpConfigurable = HttpConfigurable.getInstance();
-        if(httpConfigurable.USE_HTTP_PROXY) {
-            restClient.setHttpProxy(httpConfigurable.PROXY_HOST, httpConfigurable.PROXY_PORT);
-            if(httpConfigurable.PROXY_AUTHENTICATION) {
-                String passwd = httpConfigurable.getPlainProxyPassword();
-                if(passwd.isEmpty()) {
-                    httpConfigurable.getPromptedAuthentication("HP ALI", "Enter HTTP Proxy Credentials:");
-                    passwd = httpConfigurable.getPlainProxyPassword();
+        IdeaWideProxySelector proxySelector = new IdeaWideProxySelector(httpConfigurable);
+        List<Proxy> proxies = proxySelector.select(VfsUtil.toUri(location));
+        if (proxies != null) {
+            for (Proxy proxy: proxies) {
+                if (HttpConfigurable.isRealProxy(proxy) && Proxy.Type.HTTP.equals(proxy.type())) {
+                    InetSocketAddress address = (InetSocketAddress)proxy.address();
+                    restClient.setHttpProxy(address.getHostName(), address.getPort());
+
+                    // not sure how IdeaWideAuthenticator & co. is supposed to work, let's try something simple:
+                    if(httpConfigurable.PROXY_AUTHENTICATION) {
+                        PasswordAuthentication authentication = httpConfigurable.getPromptedAuthentication("HP ALI", address.getHostName());
+                        if(authentication != null) {
+                            restClient.setHttpProxyCredentials(authentication.getUserName(), new String(authentication.getPassword()));
+                        }
+                    }
+                    break;
                 }
-                restClient.setHttpProxyCredentials(httpConfigurable.PROXY_LOGIN, passwd);
             }
         }
         return restClient;
