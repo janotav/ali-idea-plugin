@@ -120,7 +120,7 @@ public class RestServiceTest extends IntellijTest {
     public void testCreateRestClient_unauthenticatedProxy() {
         HttpConfigurable httpConfigurable = HttpConfigurable.getInstance();
         httpConfigurable.USE_HTTP_PROXY = true;
-        httpConfigurable.PROXY_HOST = "abcdef";
+        httpConfigurable.PROXY_HOST = "localhost";
         httpConfigurable.PROXY_PORT = 1234;
         httpConfigurable.PROXY_AUTHENTICATION = false;
 
@@ -131,7 +131,7 @@ public class RestServiceTest extends IntellijTest {
                 handler.done(new Runnable() {
                     @Override
                     public void run() {
-                        Assert.assertEquals("location", location);
+                        Assert.assertEquals("http://location", location);
                         Assert.assertEquals("domain", domain);
                         Assert.assertEquals("project", project);
                         Assert.assertEquals("user", userName);
@@ -146,7 +146,7 @@ public class RestServiceTest extends IntellijTest {
                         handler.done(new Runnable() {
                             @Override
                             public void run() {
-                                Assert.assertEquals("abcdef", proxyHost);
+                                Assert.assertEquals("localhost", proxyHost);
                                 Assert.assertEquals(1234, proxyPort);
                             }
                         });
@@ -175,14 +175,14 @@ public class RestServiceTest extends IntellijTest {
             }
         });
 
-        RestService.createRestClient("location", "domain", "project", "user", "password", RestClient.SessionStrategy.AUTO_LOGIN);
+        RestService.createRestClient("http://location", "domain", "project", "user", "password", RestClient.SessionStrategy.AUTO_LOGIN);
     }
 
     @Test
     public void testCreateRestClient_authenticatedProxy() {
         HttpConfigurable httpConfigurable = HttpConfigurable.getInstance();
         httpConfigurable.USE_HTTP_PROXY = true;
-        httpConfigurable.PROXY_HOST = "abcdef";
+        httpConfigurable.PROXY_HOST = "localhost";
         httpConfigurable.PROXY_PORT = 1234;
         httpConfigurable.PROXY_AUTHENTICATION = true;
         httpConfigurable.PROXY_LOGIN = "admin";
@@ -195,7 +195,7 @@ public class RestServiceTest extends IntellijTest {
                 handler.done(new Runnable() {
                     @Override
                     public void run() {
-                        Assert.assertEquals("location", location);
+                        Assert.assertEquals("http://location", location);
                         Assert.assertEquals("domain", domain);
                         Assert.assertEquals("project", project);
                         Assert.assertEquals("user", userName);
@@ -210,7 +210,7 @@ public class RestServiceTest extends IntellijTest {
                         handler.done(new Runnable() {
                             @Override
                             public void run() {
-                                Assert.assertEquals("abcdef", proxyHost);
+                                Assert.assertEquals("localhost", proxyHost);
                                 Assert.assertEquals(1234, proxyPort);
                             }
                         });
@@ -250,7 +250,7 @@ public class RestServiceTest extends IntellijTest {
             }
         });
 
-        RestService.createRestClient("location", "domain", "project", "user", "password", RestClient.SessionStrategy.AUTO_LOGIN);
+        RestService.createRestClient("http://location", "domain", "project", "user", "password", RestClient.SessionStrategy.AUTO_LOGIN);
     }
 
     @Test
