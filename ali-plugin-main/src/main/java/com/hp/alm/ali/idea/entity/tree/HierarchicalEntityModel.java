@@ -154,7 +154,7 @@ public class HierarchicalEntityModel extends DefaultTreeModel {
     public List<Entity> queryForNodes(EntityQuery query) {
         query.addColumn("id", 75);
         query.addColumn("name", 75);
-        String pathProperty = Metadata.getHierarchicalPathProperty(query.getEntityType());
+        String pathProperty = restService.getServerStrategy().getHierarchicalPathProperty(query.getEntityType());
         if(pathProperty != null) {
             query.addColumn(pathProperty, 75);
         }

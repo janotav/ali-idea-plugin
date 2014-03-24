@@ -39,9 +39,9 @@ public class MultipleItemsResolver implements FilterResolver {
         LinkedList<String> list = new LinkedList<String>();
         for(String item: Arrays.asList(value.split(";"))) {
             if(NO_VALUE.equals(item)) {
-                list.add("''");
+                list.add(NO_VALUE);
             } else {
-                list.add("'" + item + "'");
+                list.add("\"" + item + "\"");
             }
         }
         return StringUtils.join(list, " OR ");

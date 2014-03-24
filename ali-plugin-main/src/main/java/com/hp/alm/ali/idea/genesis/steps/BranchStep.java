@@ -16,14 +16,14 @@
 
 package com.hp.alm.ali.idea.genesis.steps;
 
-import com.hp.alm.ali.idea.model.Entity;
 import com.hp.alm.ali.idea.entity.EntityQuery;
-import com.hp.alm.ali.idea.model.parser.EntityList;
 import com.hp.alm.ali.idea.genesis.WizardContext;
+import com.hp.alm.ali.idea.model.Entity;
+import com.hp.alm.ali.idea.model.parser.EntityList;
 
 import java.util.Arrays;
 
-public class BranchStep extends GenesisStep {
+public class BranchStep extends ServerTypeAwareStep {
     public BranchStep(GenesisStep previous, WizardContext context) {
         super(previous, context, Arrays.asList(context.branch, context.branchLbl));
     }
@@ -31,7 +31,7 @@ public class BranchStep extends GenesisStep {
     public void _init() {
         super._init();
 
-        EntityList branches = EntityList.create(ctx.client.getForStream("scm-branches?query={0}",
+        EntityList branches = EntityList.create(ctx.client.getForStream(getScmBranchTemplatePref() + "?query={0}",
                 EntityQuery.encode("{release.name['" + ctx.release.getSelectedItem().toString() + "']; scm-repository.name['" + ctx.repository.getSelectedItem().toString() + "']}")));
 
         ctx.branch.removeAllItems();

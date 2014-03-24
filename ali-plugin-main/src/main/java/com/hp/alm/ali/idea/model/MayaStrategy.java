@@ -79,6 +79,15 @@ public class MayaStrategy implements ServerStrategy {
         developmentAliasMap.put("build-instance", "build-instance");
     }
 
+    private static Map<String, String> hierarchicalPath;
+    static  {
+        hierarchicalPath = new HashMap<String, String>();
+        hierarchicalPath.put("release-folder", "path");
+        hierarchicalPath.put("test-set-folder", "hierarchical-path");
+        hierarchicalPath.put("favorite-folder", "path");
+        hierarchicalPath.put("requirement", "hierarchical-path");
+    }
+
     private static Map<String, EntityQuery> mayaFilter;
     static {
         mayaFilter = new HashMap<String, EntityQuery>();
@@ -366,6 +375,11 @@ public class MayaStrategy implements ServerStrategy {
     @Override
     public String getFieldAlias(String entityType, String property) {
         return property;
+    }
+
+    @Override
+    public String getHierarchicalPathProperty(String entityType) {
+        return hierarchicalPath.get(entityType);
     }
 
     @Override

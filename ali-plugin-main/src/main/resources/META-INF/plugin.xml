@@ -176,6 +176,10 @@
             <interface-class>com.hp.alm.ali.idea.model.ApolloStrategy</interface-class>
         </component>
         <component>
+            <implementation-class>com.hp.alm.ali.idea.model.Alm12Strategy</implementation-class>
+            <interface-class>com.hp.alm.ali.idea.model.Alm12Strategy</interface-class>
+        </component>
+        <component>
             <implementation-class>com.hp.alm.ali.idea.model.MayaStrategy</implementation-class>
             <interface-class>com.hp.alm.ali.idea.model.MayaStrategy</interface-class>
         </component>

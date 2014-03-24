@@ -69,15 +69,6 @@ public class Metadata {
         }
     }
 
-    private static Map<String, String> hierarchicalPath;
-    static  {
-        hierarchicalPath = new HashMap<String, String>();
-        hierarchicalPath.put("release-folder", "path");
-        hierarchicalPath.put("test-set-folder", "hierarchical-path");
-        hierarchicalPath.put("favorite-folder", "path");
-        hierarchicalPath.put("requirement", "hierarchical-path");
-    }
-
     private static Map<String, Integer> hierarchicalPathLength;
     static {
         hierarchicalPathLength = new HashMap<String, Integer>();
@@ -134,10 +125,6 @@ public class Metadata {
 
     public static List<String> getChildEntity(String entityType) {
         return revHierarchical.get(entityType);
-    }
-
-    public static String getHierarchicalPathProperty(String entityType) {
-        return hierarchicalPath.get(entityType);
     }
 
     public static Integer getHierarchicalPathLength(String entityType) {

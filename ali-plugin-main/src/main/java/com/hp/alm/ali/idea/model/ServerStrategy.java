@@ -74,4 +74,10 @@ public interface ServerStrategy extends EntityQueryProcessor {
 
     FilterChooser getFilterChooser(String entityType, boolean multiple, boolean idSelection, boolean acceptEmpty, String value);
 
+    /**
+     * Get hierarchical path logical name for entity.
+     * @param entityType entity type
+     * @return hierarchical path logical name
+     */
+    String getHierarchicalPathProperty(String entityType);
 }

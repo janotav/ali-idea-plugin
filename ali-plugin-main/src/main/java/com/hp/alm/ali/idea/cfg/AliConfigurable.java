@@ -17,12 +17,13 @@
 package com.hp.alm.ali.idea.cfg;
 
 import com.hp.alm.ali.idea.entity.EntityQuery;
-import com.hp.alm.ali.rest.client.RestClient;
-import com.hp.alm.ali.idea.ui.editor.field.HTMLAreaField;
+import com.hp.alm.ali.idea.model.parser.ProjectExtensionsList;
 import com.hp.alm.ali.idea.rest.RestException;
 import com.hp.alm.ali.idea.rest.RestService;
 import com.hp.alm.ali.idea.rest.ServerType;
 import com.hp.alm.ali.idea.rest.TroubleShootService;
+import com.hp.alm.ali.idea.ui.editor.field.HTMLAreaField;
+import com.hp.alm.ali.rest.client.RestClient;
 import com.hp.alm.ali.rest.client.exception.HttpClientErrorException;
 import com.intellij.ide.ui.search.SearchableOptionsRegistrar;
 import com.intellij.openapi.application.ApplicationManager;
@@ -165,6 +166,7 @@ public class AliConfigurable implements SearchableConfigurable, DocumentListener
                                 case ALM11:
                                 case ALI:
                                 case ALI2:
+                                case ALM115:
                                 case ALM12:
                                 case AGM:
                                     testLabel.setText("Connection successful (" + type.toString() + ")");
@@ -394,44 +396,18 @@ public class AliConfigurable implements SearchableConfigurable, DocumentListener
             if(loginLogout) {
                 restClient.login();
             }
+            // check for at least ALM 11
+            RestService.getForString(restClient, "defects?query={0}", EntityQuery.encode("{id[0]}"));
 
             try {
-                // check for at least ALM 11
-                RestService.getForString(restClient, "defects?query={0}", EntityQuery.encode("{id[0]}"));
-
-                // check for ALM version
-                String xml;
-                try {
-                    xml = RestService.getForString(restClient, "../../../../?alt=application%2Fatomsvc%2Bxml");
-                } catch (RestException e) {
-                    return ServerType.AGM;
+                InputStream is = restClient.getForStream("customization/extensions");
+                return checkServerType(ProjectExtensionsList.create(is));
+            } catch (HttpClientErrorException e){
+                if(e.getHttpStatus() == HttpStatus.SC_NOT_FOUND) {
+                    return checkServerTypeOldStyle(restClient);
                 }
-
-                if(xml.contains("{project}/scm/dev-bridge")) {
-                    return ServerType.AGM;
-                } else if(xml.contains("{project}/defect-links")) {
-                    return ServerType.ALM12;
-                } else if(xml.contains("{project}/build-instances")) {
-                    if(aliEnabledProject(restClient)) {
-                        return ServerType.ALI2;
-                    } else {
-                        return ServerType.ALM11;
-                    }
-                } else if(xml.contains("{project}/changesets")) {
-                    if(aliEnabledProject(restClient)) {
-                        return ServerType.ALI;
-                    } else {
-                        return ServerType.ALM11;
-                    }
-                } else {
-                    return ServerType.ALM11;
-                }
-            } finally {
-                if(loginLogout) {
-                    RestService.logout(restClient);
-                }
+                throw e;
             }
-
         } catch(HttpClientErrorException e) {
             if(e.getHttpStatus() == HttpStatus.SC_UNAUTHORIZED) {
                 throw new AuthenticationFailed();
@@ -440,6 +416,65 @@ public class AliConfigurable implements SearchableConfigurable, DocumentListener
             }
         } catch(Exception e) {
             throw new RuntimeException("Failed to connect to HP ALM: " + handleGenericException(restClient, restClient.getDomain(), restClient.getProject()));
+        } finally {
+            if(loginLogout) {
+                RestService.logout(restClient);
+            }
+        }
+    }
+
+    /*
+     * Check server type on the basis of REST service document. This way is valid for ALM 11.5X version and higher
+     * @param projectExtensionsList parsed list of extensions and theirs version enabled on the project
+     * @return server type
+     */
+    private static ServerType checkServerType(ProjectExtensionsList projectExtensionsList) {
+        String version = null;
+        // check for ALM version
+        //TODO PD: There should be check for existence of ALI extension (HP ALM 11.5X or higher). ALI extension isn't present by default
+        for (String[] ext : projectExtensionsList) {
+           if ("QUALITY_CENTER".equals(ext[0])) {
+               version = ext[1];
+           }
+        }
+
+        if(version.startsWith("11.5")) {
+            return ServerType.ALM115;
+        } else if(version.startsWith("12.")) {
+            return ServerType.ALM12;
+        }
+        else {
+            return ServerType.AGM;
+        }
+    }
+    /*
+     * Check server type on the basis of REST service document. It is the old way which should be used just for ALM 11.00
+     * @param restClient rest client
+     * @return server type
+     */
+    private static ServerType checkServerTypeOldStyle(RestClient restClient) {
+        // check for ALM version
+        String xml;
+        try {
+            xml = RestService.getForString(restClient, "../../../../?alt=application%2Fatomsvc%2Bxml");
+        } catch (RestException e) {
+            return ServerType.AGM;
+        }
+
+        if(xml.contains("{project}/build-instances")) {
+            if(aliEnabledProject(restClient)) {
+                return ServerType.ALI2;
+            } else {
+                return ServerType.ALM11;
+            }
+        } else if(xml.contains("{project}/changesets")) {
+            if(aliEnabledProject(restClient)) {
+                return ServerType.ALI;
+            } else {
+                return ServerType.ALM11;
+            }
+        } else {
+            return ServerType.ALM11;
         }
     }
 
