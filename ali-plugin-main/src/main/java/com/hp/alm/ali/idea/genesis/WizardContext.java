@@ -17,6 +17,7 @@
 package com.hp.alm.ali.idea.genesis;
 
 import com.hp.alm.ali.idea.genesis.checkout.Checkout;
+import com.hp.alm.ali.idea.rest.ServerType;
 import com.hp.alm.ali.rest.client.RestClient;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
 
@@ -47,5 +48,6 @@ public class WizardContext {
     public Checkout checkout;
     public RestClient client;
     public JComponent panel;
+    public ServerType serverType;
 
 }

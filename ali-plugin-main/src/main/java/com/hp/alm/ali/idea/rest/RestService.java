@@ -267,10 +267,6 @@ public class RestService implements ConfigurationListener {
         return serverType;
     }
 
-    public synchronized boolean serverTypeIsApollo() {
-        return serverType != null && serverType.isApollo();
-    }
-
     public synchronized ServerType getServerType() throws InterruptedException {
         while(serverType == ServerType.CONNECTING) {
             wait();

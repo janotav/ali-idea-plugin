@@ -383,6 +383,22 @@ public class MayaStrategy implements ServerStrategy {
     }
 
     @Override
+    public boolean hasSecondLevelDefectLink() {
+        return true;
+    }
+
+    @Override
+    public List<String> getDefectLinkColumns() {
+        return Arrays.asList(
+                "first-endpoint-id",
+                "second-endpoint-id",
+                "second-endpoint-type",
+                "second-endpoint-status",
+                "second-endpoint-name",
+                "comment");
+    }
+
+    @Override
     public FilterChooser getFilterChooser(String entityType, boolean multiple, boolean idSelection, boolean acceptEmpty, String value) {
         EntityChooser dialog;
         if(Metadata.getChildEntity(entityType) != null || Metadata.getParentEntity(entityType) != null) {

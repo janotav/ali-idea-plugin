@@ -59,7 +59,7 @@ public class AttachmentEditAction extends EntityAction {
         String name = entity.getPropertyValue("name");
         ServerType serverType = project.getComponent(RestService.class).getServerTypeIfAvailable();
         AttachmentEditor editor = new AttachmentEditor(project, "Modify Attachment: " + name, attachmentEntity, false,
-                (serverType == ServerType.ALM115 || serverType == ServerType.ALM12), new BaseEditor.SaveHandler() {
+                (serverType == ServerType.ALM11_5 || serverType == ServerType.ALM12), new BaseEditor.SaveHandler() {
             @Override
             public boolean save(Entity modified, Entity base) {
                 updateAttachment(project, parent, attachmentEntity, modified);

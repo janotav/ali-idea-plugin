@@ -80,4 +80,8 @@ public interface ServerStrategy extends EntityQueryProcessor {
      * @return hierarchical path logical name
      */
     String getHierarchicalPathProperty(String entityType);
+
+    boolean hasSecondLevelDefectLink();
+
+    List<String> getDefectLinkColumns();
 }

@@ -21,7 +21,9 @@ import com.hp.alm.ali.idea.entity.tree.HierarchicalEntityModel;
 import com.hp.alm.ali.idea.model.Entity;
 import com.hp.alm.ali.idea.entity.EntityQuery;
 import com.hp.alm.ali.idea.model.Metadata;
+import com.hp.alm.ali.idea.rest.RestService;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.project.Project;
 import com.intellij.util.ui.UIUtil;
 import org.apache.commons.lang.StringUtils;
 
@@ -36,9 +38,11 @@ import java.util.Set;
 
 class FilterableTree extends JTree implements Runnable {
     final private LinkedList<String> queue = new LinkedList<String>();
+    private RestService restService;
 
-    public FilterableTree(HierarchicalEntityModel treeModel) {
+    public FilterableTree(Project project, HierarchicalEntityModel treeModel) {
         super(treeModel);
+        restService = project.getComponent(RestService.class);
     }
 
     public void setFilter(String filter) {
@@ -90,7 +94,7 @@ class FilterableTree extends JTree implements Runnable {
             String entityType = selected.get(0).getType();
             EntityQuery parentQuery = new EntityQuery(model.getParentEntity(entityType));
             parentQuery.addColumn("parent-id", 75);
-            String pathProperty = Metadata.getHierarchicalPathProperty(entityType);
+            String pathProperty = restService.getServerStrategy().getHierarchicalPathProperty(entityType);
             if(pathProperty != null) {
                 // if hierarchical path is available search for all parents at once
                 int length = Metadata.getHierarchicalPathLength(entityType);

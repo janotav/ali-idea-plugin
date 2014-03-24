@@ -29,25 +29,23 @@ public enum ServerType {
     CONNECTING("Connecting..."),
     NONE("Not Connected"),
     NEEDS_PASSWORD("Needs Password"),
-    ALM11("ALM 11", MayaStrategy.class, false),
-    ALI("ALI 1.x", AliStrategy.class, false),
-    ALI2("ALI 2.0", Ali2Strategy.class, false),
-    ALM115("ALM 11.5x", ApolloStrategy.class, true),
-    ALM12("ALM 12", Alm12Strategy.class, true),
-    AGM("AGM", HorizonStrategy.class, true);
+    ALM11("ALM 11", MayaStrategy.class),
+    ALI("ALI 1.x", AliStrategy.class),
+    ALI2("ALI 2.0", Ali2Strategy.class),
+    ALM11_5("ALM 11.5x", ApolloStrategy.class),
+    ALM12("ALM 12", Alm12Strategy.class),
+    AGM("AGM", HorizonStrategy.class);
 
     private String name;
     private Class<? extends ServerStrategy> clazz;
-    private boolean apollo; // TODO: remove
 
     private ServerType(String name) {
         this.name = name;
     }
 
-    private ServerType(String name, Class<? extends ServerStrategy> clazz, boolean apollo) {
+    private ServerType(String name, Class<? extends ServerStrategy> clazz) {
         this.name = name;
         this.clazz = clazz;
-        this.apollo = apollo;
     }
 
     public String toString() {
@@ -56,10 +54,6 @@ public enum ServerType {
 
     public boolean isConnected() {
         return clazz != null;
-    }
-
-    public boolean isApollo() {
-        return apollo;
     }
 
     public Class<? extends ServerStrategy> getClazz() {

@@ -78,7 +78,7 @@ public class LinkNewAction extends EntityAction {
 
                 ArrayList<String> columns = new ArrayList<String>(Arrays.asList(endpoint, "comment", "link-type", otherEndpoint, "second-endpoint-type"));
                 ServerType serverType = project.getComponent(RestService.class).getServerTypeIfAvailable();
-                if(serverType != ServerType.ALM115 && serverType != ServerType.ALM12) {
+                if(serverType != ServerType.ALM11_5 && serverType != ServerType.ALM12) {
                     columns.remove("link-type");
                 }
                 EntityEditor entityEditor = new EntityEditor(project, "Create link to {0}", link, columns, true, false, Arrays.asList(endpoint), new EntityEditor.Create(project));

@@ -21,6 +21,7 @@ import com.hp.alm.ali.idea.model.parser.RelationList;
 import com.hp.alm.ali.idea.rest.RestService;
 import com.intellij.openapi.project.Project;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -56,5 +57,22 @@ public class ApolloStrategy extends Ali2Strategy {
             ret.add(linkedTable(entity));
         }
         return ret;
+    }
+
+    @Override
+    public List<String> getDefectLinkColumns() {
+        return Arrays.asList(
+                "first-endpoint-id",
+                "second-endpoint-id",
+                "second-endpoint-type",
+                "second-endpoint-status",
+                "second-endpoint-name",
+                "comment",
+                "link-type");
+    }
+
+    @Override
+    public boolean hasSecondLevelDefectLink() {
+        return false;
     }
 }

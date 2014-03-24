@@ -64,7 +64,7 @@ class TreePanel extends JPanel {
         filerPanel.add(filterIcon);
         add(filerPanel, BorderLayout.NORTH);
 
-        tree = new FilterableTree(treeModel);
+        tree = new FilterableTree(project, treeModel);
         tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
         tree.setCellRenderer(new ALMTreeCellRenderer());
         JPanel panel = new JPanel(new BorderLayout());

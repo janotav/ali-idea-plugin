@@ -16,15 +16,15 @@
 
 package com.hp.alm.ali.idea.genesis.steps;
 
+import com.hp.alm.ali.idea.cfg.AliConfigurable;
 import com.hp.alm.ali.idea.genesis.WizardContext;
 import com.hp.alm.ali.idea.model.Entity;
 import com.hp.alm.ali.idea.model.parser.EntityList;
-import com.hp.alm.ali.idea.rest.ServerType;
 import com.intellij.openapi.ui.Messages;
 
 import java.util.Arrays;
 
-public class ReleaseStep extends ServerTypeAwareStep {
+public class ReleaseStep extends GenesisStep {
     public ReleaseStep(GenesisStep previous, WizardContext ctx) {
         super(previous, ctx, Arrays.asList(ctx.release, ctx.releaseLbl));
     }
@@ -35,13 +35,23 @@ public class ReleaseStep extends ServerTypeAwareStep {
         ctx.client.setProject((String) ctx.project.getSelectedItem());
         ctx.release.removeAllItems();
 
-        if(getServerType() == ServerType.ALI || getServerType() == ServerType.ALI2 || getServerType().isApollo()) {
-            EntityList releases = EntityList.create(ctx.client.getForStream("releases"));
-            for (Entity entity : releases) {
-                ctx.release.addItem(entity.getProperty("name"));
-            }
-        } else {
-            Messages.showInfoMessage("ALI Extension is not enabled in the specified project, environment provisioning is not supported.", "Not Available");
+        ctx.serverType = AliConfigurable.getServerType(ctx.location.getText(), (String) ctx.domain.getSelectedItem(),
+                (String) ctx.project.getSelectedItem(), ctx.username.getText(), ctx.password.getText());
+
+        switch (ctx.serverType) {
+            case ALI:
+            case ALI2:
+            case ALM11_5:
+            case ALM12:
+            case AGM:
+                EntityList releases = EntityList.create(ctx.client.getForStream("releases"));
+                for (Entity entity : releases) {
+                    ctx.release.addItem(entity.getProperty("name"));
+                }
+                break;
+
+            default:
+                Messages.showInfoMessage("ALI Extension is not enabled in the specified project, environment provisioning is not supported.", "Not Available");
         }
     }
 

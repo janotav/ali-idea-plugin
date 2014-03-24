@@ -162,7 +162,7 @@ public class EntityService {
 
     private EntityList doQuery(EntityQuery query, boolean complete) {
         InputStream is = queryForStream(query);
-        if("defect-link".equals(query.getEntityType()) && !restService.serverTypeIsApollo()) {
+        if("defect-link".equals(query.getEntityType()) && restService.getServerStrategy().hasSecondLevelDefectLink()) {
             return DefectLinkList.create(is, complete);
         } else {
             return parse(is, complete);
@@ -170,7 +170,7 @@ public class EntityService {
     }
 
     public Entity getDefectLink(int defectId, int linkId) {
-        if(restService.serverTypeIsApollo()) {
+        if(!restService.getServerStrategy().hasSecondLevelDefectLink()) {
             EntityQuery linkQuery = new EntityQuery("defect-link");
             linkQuery.setValue("id", String.valueOf(linkId));
             linkQuery.setPropertyResolved("id", true);
@@ -290,7 +290,7 @@ public class EntityService {
     }
 
     public Entity updateEntity(Entity entity, Set<String> fieldsToUpdate, boolean silent, boolean reloadOnFailure, boolean fireUpdate) {
-        if("defect-link".equals(entity.getType()) && !restService.serverTypeIsApollo()) {
+        if("defect-link".equals(entity.getType()) && restService.getServerStrategy().hasSecondLevelDefectLink()) {
             return updateOldDefectLink(entity, silent, fireUpdate);
         }
         String xml = new XMLOutputter().outputString(entity.toElement(fieldsToUpdate));
@@ -332,7 +332,7 @@ public class EntityService {
     }
 
     public Entity createEntity(Entity entity, boolean silent) {
-        if("defect-link".equals(entity.getType()) && !restService.serverTypeIsApollo()) {
+        if("defect-link".equals(entity.getType()) && restService.getServerStrategy().hasSecondLevelDefectLink()) {
             return createOldDefectLink(entity, silent);
         }
         String xml = new XMLOutputter().outputString(entity.toElement(null));
@@ -378,7 +378,7 @@ public class EntityService {
     }
 
     public boolean deleteEntity(Entity entity) {
-        if("defect-link".equals(entity.getType()) && !restService.getServerTypeIfAvailable().isApollo()) {
+        if("defect-link".equals(entity.getType()) && restService.getServerStrategy().hasSecondLevelDefectLink()) {
             return deleteOldDefectLink(entity);
         }
         MyResultInfo result = new MyResultInfo();

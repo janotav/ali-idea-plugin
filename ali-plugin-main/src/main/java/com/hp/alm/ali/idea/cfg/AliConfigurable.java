@@ -166,7 +166,7 @@ public class AliConfigurable implements SearchableConfigurable, DocumentListener
                                 case ALM11:
                                 case ALI:
                                 case ALI2:
-                                case ALM115:
+                                case ALM11_5:
                                 case ALM12:
                                 case AGM:
                                     testLabel.setText("Connection successful (" + type.toString() + ")");
@@ -439,7 +439,7 @@ public class AliConfigurable implements SearchableConfigurable, DocumentListener
         }
 
         if(version.startsWith("11.5")) {
-            return ServerType.ALM115;
+            return ServerType.ALM11_5;
         } else if(version.startsWith("12.")) {
             return ServerType.ALM12;
         }

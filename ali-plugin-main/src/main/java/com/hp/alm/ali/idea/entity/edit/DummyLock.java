@@ -39,7 +39,7 @@ public class DummyLock implements LockingStrategy {
     public Entity lock(Entity entity) {
         if("attachment".equals(entity.getType())) {
             return attachmentService.getAttachmentEntity(entity);
-        } else if("defect-link".equals(entity.getType()) && !restService.serverTypeIsApollo()) {
+        } else if("defect-link".equals(entity.getType()) && restService.getServerStrategy().hasSecondLevelDefectLink()) {
             return entityService.getDefectLink(Integer.valueOf(entity.getPropertyValue("first-endpoint-id")), Integer.valueOf(entity.getPropertyValue("id")));
         } else {
             return entityService.getEntity(new EntityRef(entity));

@@ -27,9 +27,8 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.IconLoader;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -52,10 +51,7 @@ public class LinkEditAction extends EntityAction {
 
     @Override
     protected void actionPerformed(AnActionEvent event, Project project, Entity entity) {
-        List<String> columns = new LinkedList<String>(Arrays.asList("first-endpoint-id", "second-endpoint-id", "second-endpoint-type", "second-endpoint-status", "second-endpoint-name", "comment", "link-type"));
-        if(!project.getComponent(RestService.class).serverTypeIsApollo()) {
-            columns.remove("link-type");
-        }
+        List<String> columns = new ArrayList<String>(project.getComponent(RestService.class).getServerStrategy().getDefectLinkColumns());
         final EntityService entityService = project.getComponent(EntityService.class);
         final Entity defectLink = entityService.getDefectLink(Integer.valueOf(entity.getPropertyValue("first-endpoint-id")), entity.getId());
 
