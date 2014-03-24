@@ -2,13 +2,21 @@
     <id>com.hp.alm.ali</id>
     <name>HP ALI</name>
     <description>Application Lifecycle Intelligence for HP ALM</description>
-    <version>3.7.@{idea.build}</version>
+    <version>3.8.@{idea.build}</version>
     <vendor logo="/ali_icon.png" url="https://hpln.hp.com/group/application-lifecycle-intelligence">HP</vendor>
 
     <idea-version since-build="@{idea.build}"/>
 
     <change-notes>
         <![CDATA[
+      <h3>Changes in 3.8</h3>
+      <ul>
+        <li>[compatibility] enable plugin in RubyMine IDE</li>
+        <li>[enhancement] improved code changes detail
+        <li>[bugfix] consider HTTP proxy exception list</li>
+        <li>[bugfix] minor fixes</li>
+      </ul>
+
       <h3>Changes in 3.7</h3>
       <ul>
         <li>Switching to the public codebase</li>
