@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<types>
+    <type name="Undefined" id="0">
+        <default-child-type-id>0</default-child-type-id>
+        <has-direct-coverage>Y</has-direct-coverage>
+        <is-document-root>N</is-document-root>
+        <risk-analysis-type>0</risk-analysis-type>
+    </type>
+    <type name="Folder" id="1">
+        <default-child-type-id>0</default-child-type-id>
+        <has-direct-coverage>N</has-direct-coverage>
+        <is-document-root>N</is-document-root>
+        <risk-analysis-type>2</risk-analysis-type>
+    </type>
+    <type name="Group" id="2">
+        <default-child-type-id>0</default-child-type-id>
+        <has-direct-coverage>N</has-direct-coverage>
+        <is-document-root>N</is-document-root>
+        <risk-analysis-type>2</risk-analysis-type>
+    </type>
+    <type name="Functional" id="3">
+        <default-child-type-id>0</default-child-type-id>
+        <has-direct-coverage>Y</has-direct-coverage>
+        <is-document-root>N</is-document-root>
+        <risk-analysis-type>1</risk-analysis-type>
+    </type>
+    <type name="Business" id="4">
+        <default-child-type-id>0</default-child-type-id>
+        <has-direct-coverage>N</has-direct-coverage>
+        <is-document-root>N</is-document-root>
+        <risk-analysis-type>1</risk-analysis-type>
+    </type>
+    <type name="Testing" id="5">
+        <default-child-type-id>0</default-child-type-id>
+        <has-direct-coverage>Y</has-direct-coverage>
+        <is-document-root>N</is-document-root>
+        <risk-analysis-type>1</risk-analysis-type>
+    </type>
+    <type name="Performance" id="6">
+        <default-child-type-id>0</default-child-type-id>
+        <has-direct-coverage>Y</has-direct-coverage>
+        <is-document-root>N</is-document-root>
+        <risk-analysis-type>1</risk-analysis-type>
+    </type>
+    <type name="Business Model" id="66">
+        <default-child-type-id>0</default-child-type-id>
+        <has-direct-coverage>Y</has-direct-coverage>
+        <is-document-root>N</is-document-root>
+        <risk-analysis-type>1</risk-analysis-type>
+    </type>
+</types>

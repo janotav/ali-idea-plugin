@@ -83,5 +83,7 @@ public interface ServerStrategy extends EntityQueryProcessor {
 
     boolean hasSecondLevelDefectLink();
 
+    boolean canEditAttachmentFileName();
+
     List<String> getDefectLinkColumns();
 }

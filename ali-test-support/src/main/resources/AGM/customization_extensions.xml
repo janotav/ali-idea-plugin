@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Extensions>
+    <Extension Name="ALI_EXTENSION" DisplayName="Application Lifecycle Intelligence">
+        <Version>2.00</Version>
+    </Extension>
+    <Extension Name="APM_EXTENSION" DisplayName="Agile Project Management Extension">
+        <Version>2.00</Version>
+    </Extension>
+    <Extension Name="ANALYSIS" DisplayName="Analysis Extension">
+        <Version>2.00</Version>
+    </Extension>
+    <Extension Name="QUALITY_CENTER" DisplayName="Quality Center">
+        <Version>2.00</Version>
+    </Extension>
+</Extensions>

@@ -89,20 +89,21 @@ public class FixtureFactory {
 
         switch (version) {
             case AGM:
-                handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/../../../../?alt=application/atomsvc+xml", 403);
-                handler.authenticate(); // client will try the request again
-                handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/../../../../?alt=application/atomsvc+xml", 403);
+                handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/customization/extensions", 200)
+                        .content("customization_extensions.xml");
 
                 RestInvocations.sprintService_getReleases(handler);
                 break;
 
-            case ALM12:
-                handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/../../../../?alt=application/atomsvc+xml", 200)
-                        .content("rest.xml");
+            case ALI11_5:
+            case ALI12:
+                handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/customization/extensions", 200)
+                        .content("customization_extensions.xml");
                 break;
 
             case ALI:
             case ALI2:
+                handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/customization/extensions", 404);
                 handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/../../../../?alt=application/atomsvc+xml", 200)
                         .content("rest.xml");
                 handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/changesets?query={id[0]}", 200)
@@ -110,6 +111,7 @@ public class FixtureFactory {
                 break;
 
             case ALM11:
+                handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/customization/extensions", 404);
                 handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/../../../../?alt=application/atomsvc+xml", 200)
                         .content("rest.xml");
                 break;

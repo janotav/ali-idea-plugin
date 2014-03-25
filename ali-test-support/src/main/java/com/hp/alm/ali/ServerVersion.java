@@ -21,7 +21,8 @@ public enum ServerVersion {
     ALM11,
     ALI,
     ALI2,
-    ALM12,
+    ALI11_5,
+    ALI12,
     AGM
 
 }

@@ -79,6 +79,6 @@ public class MultipleItemsTranslatedResolverTest extends IntellijTest {
     public void testToRESTQuery() {
         MultipleItemsTranslatedResolver resolver = new MultipleItemsTranslatedResolver(new TranslatorSync());
         String value = resolver.toRESTQuery("A;B C;\"\"");
-        Assert.assertEquals("'A' OR 'B C' OR ''", value);
+        Assert.assertEquals("\"A\" OR \"B C\" OR \"\"", value);
     }
 }

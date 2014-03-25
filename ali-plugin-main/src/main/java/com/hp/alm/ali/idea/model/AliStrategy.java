@@ -17,11 +17,8 @@
 package com.hp.alm.ali.idea.model;
 
 import com.hp.alm.ali.idea.content.detail.DetailContent;
-import com.hp.alm.ali.idea.content.detail.TableContent;
-import com.hp.alm.ali.idea.entity.EntityQuery;
 import com.hp.alm.ali.idea.rest.RestService;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.IconLoader;
 
 import java.util.List;
 
@@ -45,18 +42,7 @@ public class AliStrategy extends MayaStrategy {
     @Override
     public List<DetailContent> getDetailContent(Entity entity) {
         List<DetailContent> ret = super.getDetailContent(entity);
-        if("requirement".equals(entity.getType()) ||
-                "defect".equals(entity.getType()) ||
-                "build-instance".equals(entity.getType())) {
-            ret.add(codeChangesTable(entity));
-        }
+        aliStrategyUtil.addCodeChangesDetail(this, entity, ret);
         return ret;
-    }
-
-    private TableContent codeChangesTable(Entity entity) {
-        String alias = getDevelopmentAlias(entity.getType());
-        EntityQuery query = new EntityQuery("changeset");
-        query.getCrossFilter(entity.getType(), alias).setValue("id", String.valueOf(entity.getId()));
-        return detailTable(entity, query, "Code", IconLoader.getIcon("/diff/Diff.png"), null);
     }
 }

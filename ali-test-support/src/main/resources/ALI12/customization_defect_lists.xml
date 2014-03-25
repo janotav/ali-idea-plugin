@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Lists>
+    <List>
+        <Name>Versions</Name>
+        <Id>35</Id>
+        <LogicalName>hp.platform.versions</LogicalName>
+        <Items/>
+    </List>
+    <List>
+        <Name>Priority</Name>
+        <Id>258</Id>
+        <LogicalName>hp.qc.priority</LogicalName>
+        <Items>
+            <Item value="1-Low" logicalName="hp.qc.priority.low"/>
+            <Item value="2-Medium" logicalName="hp.qc.priority.medium"/>
+            <Item value="3-High" logicalName="hp.qc.priority.high"/>
+            <Item value="4-Very High" logicalName="hp.qc.priority.very-high"/>
+            <Item value="5-Urgent" logicalName="hp.qc.priority.urgent"/>
+        </Items>
+    </List>
+    <List>
+        <Name>All Projects</Name>
+        <Id>267</Id>
+        <LogicalName>hp.qc.all-projects</LogicalName>
+        <Items/>
+    </List>
+    <List>
+        <Name>YesNo</Name>
+        <Id>1</Id>
+        <LogicalName>hp.platform.yes-no</LogicalName>
+        <Items>
+            <Item value="N" logicalName="hp.platform.yes-no.no"/>
+            <Item value="Y" logicalName="hp.platform.yes-no.yes"/>
+        </Items>
+    </List>
+    <List>
+        <Name>Severity</Name>
+        <Id>288</Id>
+        <LogicalName>hp.qc.severity</LogicalName>
+        <Items>
+            <Item value="1-Low" logicalName="hp.qc.severity.low"/>
+            <Item value="2-Medium" logicalName="hp.qc.severity.medium"/>
+            <Item value="3-High" logicalName="hp.qc.severity.high"/>
+            <Item value="4-Very High" logicalName="hp.qc.severity.very-high"/>
+            <Item value="5-Urgent" logicalName="hp.qc.severity.urgent"/>
+        </Items>
+    </List>
+    <List>
+        <Name>Bug Status</Name>
+        <Id>217</Id>
+        <LogicalName>hp.qc.bug-status</LogicalName>
+        <Items>
+            <Item value="Closed" logicalName="hp.qc.bug-status.closed"/>
+            <Item value="Fixed" logicalName="hp.qc.bug-status.fixed"/>
+            <Item value="New" logicalName="hp.qc.bug-status.new"/>
+            <Item value="Open" logicalName="hp.qc.bug-status.open"/>
+            <Item value="Rejected" logicalName="hp.qc.bug-status.rejected"/>
+            <Item value="Reopen" logicalName="hp.qc.bug-status.reopen"/>
+        </Items>
+    </List>
+</Lists>

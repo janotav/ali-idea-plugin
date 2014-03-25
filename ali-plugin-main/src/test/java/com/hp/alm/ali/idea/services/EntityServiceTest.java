@@ -75,7 +75,7 @@ public class EntityServiceTest extends MultiTest {
         RestInvocations.loadMetadata(handler, "defect");
         RestInvocations.loadMetadata(handler, "release-backlog-item");
 
-        handler.addRequest(false, "GET", "/qcbin/rest/domains/domain/projects/project/defects?fields=priority,release-backlog-item.id&query={status['Fixed']}&order-by={priority[DESC]}", 200)
+        handler.addRequest(false, "GET", "/qcbin/rest/domains/domain/projects/project/defects?fields=priority,release-backlog-item.id&query={status[\"Fixed\"]}&order-by={priority[DESC]}", 200)
                 .content("entityServiceTest_entity.xml");
 
         EntityQuery query = new EntityQuery("defect");

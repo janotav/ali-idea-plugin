@@ -98,7 +98,8 @@ public class RequirementTypeServiceTest extends MultiTest {
                 Assert.assertEquals(Arrays.asList("Theme", "Folder", "User Story", "Group Story", "Feature"), names);
                 break;
 
-            case ALM12:
+            case ALI11_5:
+            case ALI12:
                 Assert.assertEquals(Arrays.asList("Undefined", "Folder", "Group", "Functional", "Business", "Testing", "Performance", "Business Model"), names);
                 break;
 

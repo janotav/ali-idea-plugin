@@ -22,7 +22,6 @@ import com.hp.alm.ali.idea.entity.EntityRef;
 import com.hp.alm.ali.idea.ui.editor.AttachmentEditor;
 import com.hp.alm.ali.idea.ui.editor.BaseEditor;
 import com.hp.alm.ali.idea.rest.RestService;
-import com.hp.alm.ali.idea.rest.ServerType;
 import com.hp.alm.ali.idea.services.AttachmentService;
 import com.hp.alm.ali.idea.model.Entity;
 import com.intellij.openapi.actionSystem.AnActionEvent;
@@ -57,9 +56,9 @@ public class AttachmentEditAction extends EntityAction {
         final Entity attachmentEntity = project.getComponent(AttachmentService.class).getAttachmentEntity(entity.getPropertyValue("name"), parent);
 
         String name = entity.getPropertyValue("name");
-        ServerType serverType = project.getComponent(RestService.class).getServerTypeIfAvailable();
+        boolean editableName = project.getComponent(RestService.class).getServerStrategy().canEditAttachmentFileName();
         AttachmentEditor editor = new AttachmentEditor(project, "Modify Attachment: " + name, attachmentEntity, false,
-                (serverType == ServerType.ALM11_5 || serverType == ServerType.ALM12), new BaseEditor.SaveHandler() {
+                editableName, new BaseEditor.SaveHandler() {
             @Override
             public boolean save(Entity modified, Entity base) {
                 updateAttachment(project, parent, attachmentEntity, modified);

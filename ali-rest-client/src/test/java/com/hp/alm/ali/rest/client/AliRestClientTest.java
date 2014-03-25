@@ -107,6 +107,8 @@ public class AliRestClientTest {
                 .responseBody("Unauthorized");
         handler.addRequest("GET", "/qcbin/authentication-point/authenticate", 200)
                 .expectHeader("Authorization", "Basic dXNlcjpwYXNzd29yZA==");
+        handler.addRequest("POST", "/qcbin/rest/site-session", 200)
+                .expectBody("<session-parameters><client-type>ALI_IDEA_plugin</client-type></session-parameters>");
 
         AliRestClient client = AliRestClient.create(handler.getQcUrl(), "domain", "project", "user", "password", RestClient.SessionStrategy.NONE);
         client.login();
@@ -122,6 +124,8 @@ public class AliRestClientTest {
                 .responseBody("Unauthorized");
         handler.addRequest("GET", "/qcbin/authentication-point/authenticate", 200)
                 .expectHeader("Authorization", "Basic dXNlcjpwYXNzd29yZA==");
+        handler.addRequest("POST", "/qcbin/rest/site-session", 200)
+                .expectBody("<session-parameters><client-type>ALI_IDEA_plugin</client-type></session-parameters>");
 
         AliRestClient client = AliRestClient.create(handler.getQcUrl(), "domain", "project", "user", "password", RestClient.SessionStrategy.NONE);
         client.login();
@@ -175,6 +179,8 @@ public class AliRestClientTest {
         handler.addRequest("POST", "/qcbin/authentication-point/alm-authenticate", 200)
                 .expectHeader("Proxy-Authorization", "Basic dXNlcm5hbWU6cGFzc3dvcmQ=")
                 .expectBody("<alm-authentication><user>qc_user</user><password>qc_password</password></alm-authentication>");
+        handler.addRequest("POST", "/qcbin/rest/site-session", 200)
+                .expectBody("<session-parameters><client-type>ALI_IDEA_plugin</client-type></session-parameters>");
         handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/test", 200);
 
         AliRestClient client = AliRestClient.create("http://foo/qcbin", "domain", "project", "qc_user", "qc_password", RestClient.SessionStrategy.AUTO_LOGIN);
@@ -192,6 +198,8 @@ public class AliRestClientTest {
         handler.addRequest("POST", "/qcbin/authentication-point/alm-authenticate", 200)
                 .expectHeader("Proxy-Authorization", "Basic dXNlcm5hbWU6cGFzc3dvcmQ=")
                 .expectBody("<alm-authentication><user>qc_user</user><password>qc_password</password></alm-authentication>");
+        handler.addRequest("POST", "/qcbin/rest/site-session", 200)
+                .expectBody("<session-parameters><client-type>ALI_IDEA_plugin</client-type></session-parameters>");
         handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/test", 200);
 
         AliRestClient client = AliRestClient.create("http://foo/qcbin", "domain", "project", "qc_user", "qc_password", RestClient.SessionStrategy.AUTO_LOGIN);

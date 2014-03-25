@@ -36,7 +36,8 @@ public class RestInvocations {
 
         switch (handler.getVersion()) {
             case AGM:
-            case ALM12:
+            case ALI11_5:
+            case ALI12:
                 handler.addRequest(false, "GET", "/qcbin/rest/domains/domain/projects/project/customization/entities/" + entityType + "/relations", 200)
                         .content("customization_" + shortName(entityType, handler.getVersion()) + "_relations.xml");
         }

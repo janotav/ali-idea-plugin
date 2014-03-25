@@ -209,6 +209,7 @@ public class HorizonStrategy extends ApolloStrategy {
     @Override
     public List<DetailContent> getDetailContent(Entity entity) {
         List<DetailContent> ret = super.getDetailContent(entity);
+        aliStrategyUtil.addCodeChangesDetail(this, entity, ret);
         if("defect".equals(entity.getType())) {
             ret.add(taskTable(entity));
         }
@@ -347,6 +348,11 @@ public class HorizonStrategy extends ApolloStrategy {
                 DefectsContent.getInstance(),
                 BuildsContent.getInstance(),
                 SettingsContent.getInstance());
+    }
+
+    @Override
+    public boolean canEditAttachmentFileName() {
+        return false;
     }
 
     private boolean isInvisible(String entityType, String fieldName) {

@@ -18,7 +18,9 @@ package com.hp.alm.ali.idea.rest;
 
 import com.hp.alm.ali.idea.model.Ali2Strategy;
 import com.hp.alm.ali.idea.model.AliStrategy;
+import com.hp.alm.ali.idea.model.Alm12AliStrategy;
 import com.hp.alm.ali.idea.model.Alm12Strategy;
+import com.hp.alm.ali.idea.model.ApolloAliStrategy;
 import com.hp.alm.ali.idea.model.ApolloStrategy;
 import com.hp.alm.ali.idea.model.HorizonStrategy;
 import com.hp.alm.ali.idea.model.MayaStrategy;
@@ -32,8 +34,10 @@ public enum ServerType {
     ALM11("ALM 11", MayaStrategy.class),
     ALI("ALI 1.x", AliStrategy.class),
     ALI2("ALI 2.0", Ali2Strategy.class),
-    ALM11_5("ALM 11.5x", ApolloStrategy.class),
-    ALM12("ALM 12", Alm12Strategy.class),
+    ALM11_5("ALM 11.5x*", ApolloStrategy.class),
+    ALI11_5("ALM 11.5x", ApolloAliStrategy.class),
+    ALM12("ALM 12*", Alm12Strategy.class),
+    ALI12("ALM 12", Alm12AliStrategy.class),
     AGM("AGM", HorizonStrategy.class);
 
     private String name;

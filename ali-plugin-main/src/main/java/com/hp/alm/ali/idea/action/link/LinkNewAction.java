@@ -19,7 +19,6 @@ package com.hp.alm.ali.idea.action.link;
 import com.hp.alm.ali.idea.action.EntityAction;
 import com.hp.alm.ali.idea.ui.editor.EntityEditor;
 import com.hp.alm.ali.idea.rest.RestService;
-import com.hp.alm.ali.idea.rest.ServerType;
 import com.hp.alm.ali.idea.ui.ChooseEntityTypePopup;
 import com.hp.alm.ali.idea.model.Entity;
 import com.intellij.openapi.actionSystem.AnActionEvent;
@@ -30,6 +29,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 public class LinkNewAction extends EntityAction {
@@ -76,10 +76,12 @@ public class LinkNewAction extends EntityAction {
                     otherEndpoint = "second-endpoint-id";
                 }
 
-                ArrayList<String> columns = new ArrayList<String>(Arrays.asList(endpoint, "comment", "link-type", otherEndpoint, "second-endpoint-type"));
-                ServerType serverType = project.getComponent(RestService.class).getServerTypeIfAvailable();
-                if(serverType != ServerType.ALM11_5 && serverType != ServerType.ALM12) {
-                    columns.remove("link-type");
+                List<String> columns;
+                boolean linkTypeEditable = project.getComponent(RestService.class).getServerStrategy().getDefectLinkColumns().contains("link-type");
+                if(linkTypeEditable) {
+                    columns = new ArrayList<String>(Arrays.asList(endpoint, "comment", "link-type", otherEndpoint, "second-endpoint-type"));
+                } else {
+                    columns = new ArrayList<String>(Arrays.asList(endpoint, "comment", otherEndpoint, "second-endpoint-type"));
                 }
                 EntityEditor entityEditor = new EntityEditor(project, "Create link to {0}", link, columns, true, false, Arrays.asList(endpoint), new EntityEditor.Create(project));
                 entityEditor.execute();

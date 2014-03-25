@@ -56,6 +56,6 @@ public class MultipleItemsResolverTest extends IntellijTest {
     @Test
     public void testToRESTQuery() {
         String value = resolver.toRESTQuery("A;B C;\"\"");
-        Assert.assertEquals("'A' OR 'B C' OR ''", value);
+        Assert.assertEquals("\"A\" OR \"B C\" OR \"\"", value);
     }
 }

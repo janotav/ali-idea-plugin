@@ -167,7 +167,9 @@ public class AliConfigurable implements SearchableConfigurable, DocumentListener
                                 case ALI:
                                 case ALI2:
                                 case ALM11_5:
+                                case ALI11_5:
                                 case ALM12:
+                                case ALI12:
                                 case AGM:
                                     testLabel.setText("Connection successful (" + type.toString() + ")");
                                     break;
@@ -429,22 +431,36 @@ public class AliConfigurable implements SearchableConfigurable, DocumentListener
      * @return server type
      */
     private static ServerType checkServerType(ProjectExtensionsList projectExtensionsList) {
-        String version = null;
-        // check for ALM version
-        //TODO PD: There should be check for existence of ALI extension (HP ALM 11.5X or higher). ALI extension isn't present by default
+        String qcVersion = null;
+        String aliVersion = null;
+
         for (String[] ext : projectExtensionsList) {
            if ("QUALITY_CENTER".equals(ext[0])) {
-               version = ext[1];
+               qcVersion = ext[1];
+           }
+
+           if ("ALI_EXTENSION".equals(ext[0])) {
+               aliVersion = ext[1];
+           }
+
+           if ("APM_EXTENSION".equals(ext[0])) {
+               return ServerType.AGM;
            }
         }
 
-        if(version.startsWith("11.5")) {
-            return ServerType.ALM11_5;
-        } else if(version.startsWith("12.")) {
-            return ServerType.ALM12;
-        }
-        else {
-            return ServerType.AGM;
+        if(qcVersion != null && qcVersion.startsWith("11.5")) {
+            if(aliVersion != null) {
+                return ServerType.ALI11_5;
+            } else {
+                return ServerType.ALM11_5;
+            }
+        } else {
+            // assume latest version compatibility
+            if(aliVersion != null) {
+                return ServerType.ALI12;
+            } else {
+                return ServerType.ALM12;
+            }
         }
     }
     /*

@@ -27,7 +27,6 @@ import com.hp.alm.ali.idea.content.requirements.RequirementsContent;
 import com.hp.alm.ali.idea.content.settings.SettingsContent;
 import com.hp.alm.ali.idea.content.detail.DetailContent;
 import com.hp.alm.ali.idea.content.detail.LinksTableLoader;
-import com.hp.alm.ali.idea.content.detail.QueryTableLoader;
 import com.hp.alm.ali.idea.content.detail.TableContent;
 import com.hp.alm.ali.idea.entity.edit.EntityEditStrategy;
 import com.hp.alm.ali.idea.entity.edit.EntityEditStrategyImpl;
@@ -57,7 +56,6 @@ import com.intellij.openapi.actionSystem.ActionToolbar;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.IconLoader;
 
-import javax.swing.Icon;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -110,6 +108,7 @@ public class MayaStrategy implements ServerStrategy {
     protected Project project;
     protected RestService restService;
     protected EntityService entityService;
+    protected AliStrategyUtil aliStrategyUtil;
     private EntityEditStrategy entityEditStrategy;
 
     public MayaStrategy(Project project, RestService restService) {
@@ -118,6 +117,7 @@ public class MayaStrategy implements ServerStrategy {
 
         entityEditStrategy = project.getComponent(EntityEditStrategyImpl.class);
         entityService = project.getComponent(EntityService.class);
+        aliStrategyUtil = project.getComponent(AliStrategyUtil.class);
     }
 
     @Override
@@ -193,7 +193,7 @@ public class MayaStrategy implements ServerStrategy {
         if("build-instance".equals(entity.getType())) {
             EntityQuery detailQuery  = new EntityQuery("build-artifact");
             detailQuery.setValue("build", String.valueOf(entity.getId()));
-            ret.add(detailTable(entity, detailQuery, "Artifacts", IconLoader.getIcon("/nodes/artifact.png"), null));
+            ret.add(aliStrategyUtil.detailTable(entity, detailQuery, "Artifacts", IconLoader.getIcon("/nodes/artifact.png"), null));
         }
         return ret;
     }
@@ -224,14 +224,6 @@ public class MayaStrategy implements ServerStrategy {
         set.add("second-endpoint-status");
         set.add("first-endpoint-id");
         return set;
-    }
-
-    protected TableContent detailTable(Entity entity, EntityQuery detailQuery, String label, Icon icon, ActionToolbar toolbar) {
-        return detailTable(entity, detailQuery, label, icon, toolbar, detailQuery.getPropertyMap().keySet());
-    }
-
-    protected TableContent detailTable(Entity entity, EntityQuery detailQuery, String label, Icon icon, ActionToolbar toolbar, Set<String> hiddenFields) {
-        return new TableContent(project, entity, label, icon, toolbar, new QueryTableLoader(project, entity, detailQuery, hiddenFields));
     }
 
     @Override
@@ -366,10 +358,10 @@ public class MayaStrategy implements ServerStrategy {
 
     @Override
     public List<AliContent> getSupportedContent() {
-        return Arrays.asList(
+        return new ArrayList<AliContent>(Arrays.asList(
                 DefectsContent.getInstance(),
                 RequirementsContent.getInstance(),
-                SettingsContent.getInstance());
+                SettingsContent.getInstance()));
     }
 
     @Override
@@ -385,6 +377,11 @@ public class MayaStrategy implements ServerStrategy {
     @Override
     public boolean hasSecondLevelDefectLink() {
         return true;
+    }
+
+    @Override
+    public boolean canEditAttachmentFileName() {
+        return false;
     }
 
     @Override

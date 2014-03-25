@@ -174,6 +174,8 @@ public class Handler extends AbstractHandler {
     public void authenticate() {
         addRequest("POST", "/qcbin/authentication-point/alm-authenticate", 200)
                 .expectBody("<alm-authentication><user>user</user><password>password</password></alm-authentication>");
+        addRequest("POST", "/qcbin/rest/site-session", 200)
+                .expectBody("<session-parameters><client-type>ALI_IDEA_plugin</client-type></session-parameters>");
     }
 
     public void checkpoint() throws Throwable {

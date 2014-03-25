@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Extensions>
+    <Extension Name="ALI_EXTENSION" DisplayName="Application Lifecycle Intelligence 2.6">
+        <Version>11.50</Version>
+    </Extension>
+    <Extension Name="SPRINTER_EXTENSION" DisplayName="Sprinter">
+        <Version>11.50</Version>
+    </Extension>
+    <Extension Name="ANALYSIS" DisplayName="Analysis Extension">
+        <Version>11.50</Version>
+    </Extension>
+    <Extension Name="QUALITY_CENTER" DisplayName="Quality Center">
+        <Version>11.50</Version>
+    </Extension>
+</Extensions>

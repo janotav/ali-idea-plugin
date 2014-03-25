@@ -41,8 +41,8 @@ public class ReleaseStep extends GenesisStep {
         switch (ctx.serverType) {
             case ALI:
             case ALI2:
-            case ALM11_5:
-            case ALM12:
+            case ALI11_5:
+            case ALI12:
             case AGM:
                 EntityList releases = EntityList.create(ctx.client.getForStream("releases"));
                 for (Entity entity : releases) {

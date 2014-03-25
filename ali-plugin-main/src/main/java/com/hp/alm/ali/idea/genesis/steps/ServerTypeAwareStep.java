@@ -35,14 +35,14 @@ public class ServerTypeAwareStep extends GenesisStep {
     // ServerStrategy is project-level component, we need to provide the plumbing here:
 
     protected String getScmRepositoriesTemplatePref() {
-        if (getServerType() == ServerType.ALM11_5 || getServerType() == ServerType.ALM12) {
+        if (getServerType() == ServerType.ALI11_5 || getServerType() == ServerType.ALI12) {
             return "scm-repositorys";
         }
         return "scm-repositories";
     }
 
     protected String getScmBranchTemplatePref() {
-        if (getServerType() == ServerType.ALM11_5 || getServerType() == ServerType.ALM12) {
+        if (getServerType() == ServerType.ALI11_5 || getServerType() == ServerType.ALI12) {
             return "scm-branchs";
         }
         return "scm-branches";

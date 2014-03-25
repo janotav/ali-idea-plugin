@@ -24,7 +24,7 @@ import java.util.Map;
 
 public class Alm12Strategy extends ApolloStrategy {
     private static Map<String, String> developmentAliasMap;
-    {
+    static {
         developmentAliasMap = new HashMap<String, String>();
         developmentAliasMap.put("defect", "connected-to-defect");
         developmentAliasMap.put("requirement", "connected-to-requirement");

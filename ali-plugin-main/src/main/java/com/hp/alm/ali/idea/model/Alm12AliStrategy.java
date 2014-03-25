@@ -17,37 +17,23 @@
 package com.hp.alm.ali.idea.model;
 
 import com.hp.alm.ali.idea.content.AliContent;
+import com.hp.alm.ali.idea.content.detail.DetailContent;
 import com.hp.alm.ali.idea.rest.RestService;
 import com.intellij.openapi.project.Project;
 
 import java.util.List;
 
-public class Ali2Strategy extends AliStrategy {
+public class Alm12AliStrategy extends Alm12Strategy {
 
-    public Ali2Strategy(Project project, RestService restService) {
+    public Alm12AliStrategy(Project project, RestService restService) {
         super(project, restService);
     }
 
     @Override
-    public List<Relation> getRelationList(String entityType) {
-        List<Relation> list = super.getRelationList(entityType);
-
-        if("defect".equals(entityType)) {
-            list.addAll(relationList("build-instance")); // with activity in build
-        }
-
-        if("requirement".equals(entityType)) {
-            list.addAll(relationList("build-instance")); // with activity in build
-        }
-
-        if("build-instance".equals(entityType)) {
-            list.addAll(relationList(
-                    "changeset", // containing commits
-                    "defect", //  with development activity on
-                    "requirement")); // with development activity on
-        }
-
-        return list;
+    public List<DetailContent> getDetailContent(Entity entity) {
+        List<DetailContent> ret = super.getDetailContent(entity);
+        aliStrategyUtil.addCodeChangesDetail(this, entity, ret);
+        return ret;
     }
 
     @Override

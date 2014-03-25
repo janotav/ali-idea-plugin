@@ -26,7 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ApolloStrategy extends Ali2Strategy {
+public class ApolloStrategy extends MayaStrategy {
 
     private static Map<String, String> developmentAliasMap;
     static  {
@@ -74,5 +74,10 @@ public class ApolloStrategy extends Ali2Strategy {
     @Override
     public boolean hasSecondLevelDefectLink() {
         return false;
+    }
+
+    @Override
+    public boolean canEditAttachmentFileName() {
+        return true;
     }
 }

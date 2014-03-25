@@ -11,6 +11,7 @@
         <![CDATA[
       <h3>Changes in 3.8</h3>
       <ul>
+        <li>[compatibility] support HP ALM 12</li>
         <li>[compatibility] enable plugin in RubyMine IDE</li>
         <li>[enhancement] improved code changes detail
         <li>[bugfix] consider HTTP proxy exception list</li>
@@ -176,8 +177,16 @@
             <interface-class>com.hp.alm.ali.idea.model.ApolloStrategy</interface-class>
         </component>
         <component>
+            <implementation-class>com.hp.alm.ali.idea.model.ApolloAliStrategy</implementation-class>
+            <interface-class>com.hp.alm.ali.idea.model.ApolloAliStrategy</interface-class>
+        </component>
+        <component>
             <implementation-class>com.hp.alm.ali.idea.model.Alm12Strategy</implementation-class>
             <interface-class>com.hp.alm.ali.idea.model.Alm12Strategy</interface-class>
+        </component>
+        <component>
+            <implementation-class>com.hp.alm.ali.idea.model.Alm12AliStrategy</implementation-class>
+            <interface-class>com.hp.alm.ali.idea.model.Alm12AliStrategy</interface-class>
         </component>
         <component>
             <implementation-class>com.hp.alm.ali.idea.model.MayaStrategy</implementation-class>
@@ -190,6 +199,10 @@
         <component>
             <implementation-class>com.hp.alm.ali.idea.model.Ali2Strategy</implementation-class>
             <interface-class>com.hp.alm.ali.idea.model.Ali2Strategy</interface-class>
+        </component>
+        <component>
+            <implementation-class>com.hp.alm.ali.idea.model.AliStrategyUtil</implementation-class>
+            <interface-class>com.hp.alm.ali.idea.model.AliStrategyUtil</interface-class>
         </component>
         <component>
             <implementation-class>com.hp.alm.ali.idea.model.type.PercentType</implementation-class>
