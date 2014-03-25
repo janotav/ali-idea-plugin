@@ -16,10 +16,16 @@
 
 package com.hp.alm.ali.idea.model;
 
+import com.hp.alm.ali.idea.action.ActionUtil;
 import com.hp.alm.ali.idea.content.detail.DetailContent;
+import com.hp.alm.ali.idea.content.detail.LinksTableLoader;
+import com.hp.alm.ali.idea.content.detail.TableContent;
+import com.hp.alm.ali.idea.entity.EntityQuery;
 import com.hp.alm.ali.idea.model.parser.RelationList;
 import com.hp.alm.ali.idea.rest.RestService;
+import com.intellij.openapi.actionSystem.ActionToolbar;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.IconLoader;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -57,6 +63,19 @@ public class ApolloStrategy extends MayaStrategy {
             ret.add(linkedTable(entity));
         }
         return ret;
+    }
+
+    @Override
+    protected TableContent linkedTable(final Entity entity) {
+        EntityQuery linkQuery = new EntityQuery("defect-link");
+        if("defect".equals(entity.getType())) {
+            linkQuery.setValue("first-endpoint-id", String.valueOf(entity.getId()));
+        } else {
+            linkQuery.setValue("second-endpoint-id", String.valueOf(entity.getId()));
+            linkQuery.setValue("second-endpoint-type", entity.getType());
+        }
+        ActionToolbar actionToolbar = ActionUtil.createActionToolbar("hpali.defect-link", "detail", true);
+        return new TableContent(project, entity, "Links", IconLoader.getIcon("/actions/erDiagram.png"), actionToolbar, new LinksTableLoader(project, entity, linkQuery, linkedTableHiddenFields()));
     }
 
     @Override

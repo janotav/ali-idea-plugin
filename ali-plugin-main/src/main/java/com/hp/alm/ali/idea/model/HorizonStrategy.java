@@ -25,7 +25,6 @@ import com.hp.alm.ali.idea.content.defect.DefectsContent;
 import com.hp.alm.ali.idea.content.settings.SettingsContent;
 import com.hp.alm.ali.idea.content.taskboard.TaskBoardContent;
 import com.hp.alm.ali.idea.content.detail.DetailContent;
-import com.hp.alm.ali.idea.content.detail.LinksTableLoader;
 import com.hp.alm.ali.idea.content.detail.TableContent;
 import com.hp.alm.ali.idea.content.detail.TaskTableLoader;
 import com.hp.alm.ali.idea.entity.EntityQueryProcessor;
@@ -222,19 +221,6 @@ public class HorizonStrategy extends ApolloStrategy {
     private DetailContent taskTable(Entity entity) {
         ActionToolbar actionToolbar = ActionUtil.createActionToolbar("hpali.project-task", "detail", true);
         return new TableContent(project, entity, "Tasks", IconLoader.getIcon("/fileTypes/text.png"), actionToolbar, new TaskTableLoader(project, entity));
-    }
-
-    @Override
-    protected TableContent linkedTable(final Entity entity) {
-        EntityQuery linkQuery = new EntityQuery("defect-link");
-        if("defect".equals(entity.getType())) {
-            linkQuery.setValue("first-endpoint-id", String.valueOf(entity.getId()));
-        } else {
-            linkQuery.setValue("second-endpoint-id", String.valueOf(entity.getId()));
-            linkQuery.setValue("second-endpoint-type", entity.getType());
-        }
-        ActionToolbar actionToolbar = ActionUtil.createActionToolbar("hpali.defect-link", "detail", true);
-        return new TableContent(project, entity, "Links", IconLoader.getIcon("/actions/erDiagram.png"), actionToolbar, new LinksTableLoader(project, entity, linkQuery, linkedTableHiddenFields()));
     }
 
     @Override
