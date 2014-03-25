@@ -147,17 +147,25 @@ public class MultipleItemsDialog<K, E extends KeyValue<K>> extends MyDialog impl
 
             final LinkListener selectUnselect = new LinkListener() {
                 public void linkSelected(LinkLabel aSource, Object aLinkData) {
-                    List<Integer> ixs = new ArrayList<Integer>();
-                    for (int i = 0; i < sorter.getViewRowCount(); i++) {
-                        ixs.add(sorter.convertRowIndexToModel(i));
-                    }
-                    Collections.sort(ixs);
                     if(model.isShowingSelected()) {
-                        // make sure indexes are not affected by removal by starting from the last
-                        Collections.reverse(ixs);
-                    }
-                    for(int ix: ixs) {
-                        model.setValueAt(aLinkData, ix, 0);
+                        if(!Boolean.TRUE.equals(aLinkData)) {
+                            List<Integer> ixs = new ArrayList<Integer>();
+                            for (int i = 0; i < sorter.getViewRowCount(); i++) {
+                                ixs.add(sorter.convertRowIndexToModel(i));
+                            }
+                            // make sure indexes are not affected by removal by starting from the last
+                            Collections.sort(ixs);
+                            Collections.reverse(ixs);
+                            for(int ix: ixs) {
+                                model.setValueAt(aLinkData, ix, 0);
+                            }
+                        }
+                    } else {
+                        if(Boolean.TRUE.equals(aLinkData)) {
+                            mySelectionModel.doAddSelectionInterval(0, table.getRowCount() - 1);
+                        } else {
+                            mySelectionModel.removeSelectionInterval(0, table.getRowCount() - 1);
+                        }
                     }
                 }
             };

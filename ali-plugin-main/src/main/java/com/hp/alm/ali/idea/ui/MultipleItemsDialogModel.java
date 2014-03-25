@@ -109,7 +109,8 @@ public class MultipleItemsDialogModel<K, E extends KeyValue<K>> extends Abstract
         } else if(showingSelected) {
             if(Boolean.FALSE.equals(o)) {
                 selectedFields.remove(row);
-                fireTableRowsDeleted(row, row);
+                // removal causes structural change, need to update whole table
+                fireTableDataChanged();
             }
         } else {
             KeyValue<K> field = allFields.get(row);
