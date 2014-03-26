@@ -136,12 +136,11 @@ public class HistoryDialog extends MyDialog {
         panel.setBorder(new EmptyBorder(5, 0, 5, 0));
         panel.setBackground(Color.WHITE);
 
-        User user = project.getComponent(ProjectUserService.class).getUser(userName);
-        String fullName = user == null? "": user.getFullName();
+        String fullName = project.getComponent(ProjectUserService.class).getUserFullName(userName);
 
         StringBuffer buf = new StringBuffer();
         buf.append("By ");
-        if(!fullName.isEmpty()) {
+        if(fullName != null && !fullName.isEmpty()) {
             buf.append(fullName).append(" ");
         }
         buf.append("<").append(userName).append(">");

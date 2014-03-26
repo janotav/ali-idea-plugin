@@ -143,4 +143,26 @@ public class ProjectUserServiceTest extends MultiTest {
             }
         });
     }
+
+    @Test
+    public void testGetUserFullName() {
+        RestInvocations.loadProjectUsers(handler);
+
+        String fullName = projectUserService.getUserFullName("tester");
+        Assert.assertEquals("Integration Test", fullName);
+
+        // served from the cache
+        projectUserService.getUserFullName("tester");
+    }
+
+    @Test
+    public void testGetUserFullName_nonexisting() {
+        RestInvocations.loadProjectUsers(handler);
+
+        String fullName = projectUserService.getUserFullName("nonexisting_tester");
+        Assert.assertNull(fullName);
+
+        // served from the cache
+        projectUserService.getUserFullName("nonexisting_tester");
+    }
 }

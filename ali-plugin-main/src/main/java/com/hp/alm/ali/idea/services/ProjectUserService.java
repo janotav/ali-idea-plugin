@@ -78,6 +78,15 @@ public class ProjectUserService extends AbstractCachingService<Integer, UserList
         return null;
     }
 
+    public String getUserFullName(String username) {
+        User user = getUser(username);
+        if(user != null) {
+            return user.getFullName();
+        } else {
+            return null;
+        }
+    }
+
     @Override
     protected UserList doGetValue(Integer key) {
         InputStream is = restService.getForStream("customization/users");

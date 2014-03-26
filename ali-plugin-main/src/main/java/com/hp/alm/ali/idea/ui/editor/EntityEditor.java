@@ -93,7 +93,7 @@ public class EntityEditor extends BaseEditor {
         if(field.isBlob()) {
             if(field.getName().equals("dev-comments") || field.getName().equals("comments")) {
                 String userName = project.getComponent(AliProjectConfiguration.class).getUsername();
-                String fullName = project.getComponent(ProjectUserService.class).getUser(userName).getFullName();
+                String fullName = project.getComponent(ProjectUserService.class).getUserFullName(userName);
 
                 addField(field.getName(), new CommentField(field.getLabel(), value, userName, fullName), true);
             } else {
