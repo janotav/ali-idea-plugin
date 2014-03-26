@@ -33,7 +33,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.swing.SwingUtilities;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -158,18 +157,9 @@ public class TroubleShootServiceTest extends IntellijTest {
         for(int i = 0; i < 100; i++) {
             troubleShootService.request(getProject(), "GET", new MyInputData("<foo/>"), "defects/{0}", "0");
         }
-
-        try {
-            SwingUtilities.invokeAndWait(new Runnable() {
-                @Override
-                public void run() {
-                    // additional 10 notifications
-                    Assert.assertEquals(11, times.getValue());
-                }
-            });
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        testApplication.waitForBackgroundActivityToFinish();
+        // additional 10 notifications
+        Assert.assertEquals(11, times.getValue());
 
         connection.disconnect();
         troubleShootService.stop();
