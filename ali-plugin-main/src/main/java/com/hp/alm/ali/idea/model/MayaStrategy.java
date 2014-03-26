@@ -159,6 +159,12 @@ public class MayaStrategy implements ServerStrategy {
             } else if("changeset".equals(query.getEntityType())) {
                 // needed for ShowAffectedPathsAction
                 clone.addColumn("rev", 1);
+            } else if("changeset-file".equals(query.getEntityType())) {
+                // workaround for ALM server issue: query fails unless following fields are present
+                clone.addColumn("path", 1);
+                clone.addColumn("revision", 1);
+                clone.addColumn("operation", 1);
+                clone.addColumn("file-type", 1);
             }
         }
 
