@@ -62,6 +62,7 @@ public class TaskEditor extends BaseEditor {
         if(entity.getId() > 0) {
             addField("invested", new SpinnerField("Invested", entity.getPropertyValue("invested"), true));
             addField("remaining", new SpinnerField("Remaining", entity.getPropertyValue("remaining"), true));
+            addField("estimated", new SpinnerField("Estimated", entity.getPropertyValue("estimated"), true));
         } else {
             addField("estimated", new SpinnerField("Estimated", "6", true));
         }

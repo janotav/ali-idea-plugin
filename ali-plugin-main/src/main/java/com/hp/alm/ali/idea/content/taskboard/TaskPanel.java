@@ -182,7 +182,7 @@ public class TaskPanel extends JLayeredPane implements Highlightable, DataProvid
         moveTaskAsNeeded();
 
         String remaining = task.getPropertyValue("remaining");
-        String estimated = task.getPropertyValue("estimated");
+        String invested = task.getPropertyValue("invested");
         String status = task.getPropertyValue("status");
         String assignedTo = task.getPropertyValue("assigned-to");
 
@@ -198,7 +198,7 @@ public class TaskPanel extends JLayeredPane implements Highlightable, DataProvid
         }
         if(TASK_IN_PROGRESS.equals(status)) {
             gauge.setVisible(true);
-            gauge.setValue((Double.valueOf(estimated) - Double.valueOf(remaining)) / Double.valueOf(estimated));
+            gauge.setValue(Double.valueOf(invested) / (Double.valueOf(remaining) + Double.valueOf(invested)));
             remainingLabel.setVisible(false);
         } else if(TASK_NEW.equals(status)) {
             gauge.setVisible(false);

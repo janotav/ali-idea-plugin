@@ -29,7 +29,7 @@ public class TimePanel extends JPanel {
     private JLabel effortLabel;
     private JLabel investedLabel;
     private JLabel investedEstimatedSeparator;
-    private JLabel estimatedLabel;
+    private JLabel remainingLabel;
 
     public TimePanel(Project project, TaskPanel pTaskPanel) {
         super(new FlowLayout(FlowLayout.LEFT, 2, 5));
@@ -42,36 +42,35 @@ public class TimePanel extends JPanel {
         add(investedLabel);
         investedEstimatedSeparator = new JLabel("|");
         add(investedEstimatedSeparator);
-        estimatedLabel = new JLabel();
-        add(estimatedLabel);
+        remainingLabel = new JLabel();
+        add(remainingLabel);
 
         update(pTaskPanel.getTask());
     }
 
     public void update(Entity task) {
         String remaining = task.getPropertyValue("remaining");
-        String estimated = task.getPropertyValue("estimated");
+        String invested = task.getPropertyValue("invested");
         String status = task.getPropertyValue("status");
 
-        long invested = Long.valueOf(estimated) - Long.valueOf(remaining);
-        investedLabel.setText(String.valueOf(invested));
-        estimatedLabel.setText(estimated);
+        investedLabel.setText(invested);
+        remainingLabel.setText(remaining);
 
         if(TaskPanel.TASK_IN_PROGRESS.equals(status)) {
             effortLabel.setVisible(true);
             investedLabel.setVisible(true);
             investedEstimatedSeparator.setVisible(true);
-            estimatedLabel.setVisible(true);
+            remainingLabel.setVisible(true);
         } else if(TaskPanel.TASK_NEW.equals(status)) {
             effortLabel.setVisible(false);
             investedLabel.setVisible(false);
             investedEstimatedSeparator.setVisible(false);
-            estimatedLabel.setVisible(false);
+            remainingLabel.setVisible(false);
         } else {
             effortLabel.setVisible(true);
             investedLabel.setVisible(true);
             investedEstimatedSeparator.setVisible(false);
-            estimatedLabel.setVisible(false);
+            remainingLabel.setVisible(false);
         }
     }
 }
