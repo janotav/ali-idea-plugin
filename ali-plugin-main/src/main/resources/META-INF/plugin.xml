@@ -60,8 +60,9 @@
       ]]>
     </change-notes>
 
-    <depends optional="true">com.intellij.modules.java</depends>
+    <depends optional="true" config-file="plugin-java.xml">com.intellij.modules.java</depends>
     <depends optional="true">com.intellij.modules.ruby</depends>
+    <depends optional="true">com.intellij.modules.python</depends>
 
     <depends optional="true" config-file="plugin-subversion.xml">Subversion</depends>
     <depends optional="true" config-file="plugin-tasks.xml">com.intellij.tasks</depends>
@@ -75,10 +76,6 @@
         <component>
             <implementation-class>com.hp.alm.ali.idea.rest.TroubleShootService</implementation-class>
             <interface-class>com.hp.alm.ali.idea.rest.TroubleShootService</interface-class>
-        </component>
-        <component>
-            <implementation-class>com.hp.alm.ali.idea.genesis.ProjectImpl</implementation-class>
-            <interface-class>com.hp.alm.ali.idea.genesis.ProjectApi</interface-class>
         </component>
     </application-components>
 
@@ -383,16 +380,9 @@
             <action id="hpali.link.new" class="com.hp.alm.ali.idea.action.link.LinkNewAction"/>
         </group>
         <!-- end of detail tables -->
-        <action id="genesisActionBig" class="com.hp.alm.ali.idea.genesis.GenesisAction" text="Environment Provisioning" description="Setup your development environment using HP ALI" icon="/ali_icon_64x64.png">
-            <add-to-group group-id="WelcomeScreen.QuickStart.IDEA" anchor="first"/>
-        </action>
-        <action id="genesisAction" class="com.hp.alm.ali.idea.genesis.GenesisAction" text="Environment Provisioning" description="Setup your development environment using HP ALI" icon="/ali_icon.png">
-            <add-to-group group-id="OpenProjectGroup" anchor="last"/>
-        </action>
     </actions>
 
     <extensionPoints>
-       <extensionPoint name="genesisCheckout" interface="com.hp.alm.ali.idea.genesis.checkout.CheckoutFactory"/>
        <extensionPoint name="revisionCreator" interface="com.hp.alm.ali.idea.revision.RevisionFactory"/>
     </extensionPoints>
 
