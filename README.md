@@ -1,8 +1,9 @@
 Introduction
 ------------
 
-This is the HP ALI for Intellij IDEA plugin. It provides integration with HP ALM 11, HP ALM 11.5x and HP Agile Manager
-(beta). The implementation was originally conceived by HP and later open sourced under the Apache 2.0 license.
+This is the HP ALI for Intellij IDEA plugin. It provides integration with HP ALM 11, HP ALM 11.5x, HP ALM 12 and
+HP Agile Manager (beta). The implementation was originally conceived by HP and later open sourced under the Apache 2.0
+license.
 
 The plugin is primarily developed for the Java IDE, it however may work with other flavours. If you encounter any issues
 with RubyMine, PyCharm or others, feel free to open an issue and it will be investigated.
