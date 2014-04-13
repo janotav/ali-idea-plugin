@@ -16,16 +16,22 @@
 
 package com.hp.alm.ali.idea.genesis;
 
+import com.intellij.ide.actions.ImportModuleAction;
 import com.intellij.ide.impl.NewProjectUtil;
-import com.intellij.ide.projectWizard.NewProjectWizard;
+import com.intellij.ide.util.newProjectWizard.AddModuleWizard;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.roots.ui.configuration.ModulesProvider;
+import com.intellij.openapi.vfs.LocalFileSystem;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.projectImport.ProjectImportProvider;
+
+import java.io.File;
 
 public class ProjectImpl implements ProjectApi {
 
     @Override
     public void createNewProject(Project projectToClose, String defaultPath) {
-        NewProjectWizard wizard = new NewProjectWizard(null, ModulesProvider.EMPTY_MODULES_PROVIDER, defaultPath);
+        VirtualFile file = LocalFileSystem.getInstance().findFileByIoFile(new File(defaultPath));
+        AddModuleWizard wizard = ImportModuleAction.createImportWizard(null, null, file, ProjectImportProvider.PROJECT_IMPORT_PROVIDER.getExtensions());
         NewProjectUtil.createNewProject(projectToClose, wizard);
     }
 }
