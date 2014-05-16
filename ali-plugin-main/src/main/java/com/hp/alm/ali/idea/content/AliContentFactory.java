@@ -165,7 +165,7 @@ public class AliContentFactory implements ToolWindowFactory {
             ToolWindowManager toolWindowManager = project.getComponent(ToolWindowManager.class);
             toolWindow = toolWindowManager.registerToolWindow(TOOL_WINDOW_DETAIL, true, ToolWindowAnchor.RIGHT);
             toolWindow.setToHideOnEmptyContent(true);
-            toolWindow.setIcon(IconLoader.getIcon("/ali_icon.png"));
+            toolWindow.setIcon(IconLoader.getIcon("/ali_icon_13x13.png"));
             toolWindow.getContentManager().addContentManagerListener(project.getComponent(EntityEditManager.class));
         }
         return  toolWindow;
