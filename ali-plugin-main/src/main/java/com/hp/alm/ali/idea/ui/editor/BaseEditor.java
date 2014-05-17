@@ -256,7 +256,7 @@ public abstract class BaseEditor extends MyDialog {
                 if(field.isRequired() && field.getValue().isEmpty()) {
                     label.setForeground(Color.RED);
                 } else {
-                    label.setForeground(Color.BLACK);
+                    label.setForeground(UIManager.getDefaults().getColor("Label.foreground"));
                 }
                 updateSave();
             }

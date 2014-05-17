@@ -334,16 +334,18 @@ public class MultipleItemsDialog<K, E extends KeyValue<K>> extends MyDialog impl
     private class MyRenderer extends JCheckBox implements TableCellRenderer {
 
         private Color selectedColor;
+        private Color unselectedColor;
 
         public MyRenderer() {
             setHorizontalAlignment(JCheckBox.CENTER);
             UIDefaults defaults = javax.swing.UIManager.getDefaults();
             selectedColor = defaults.getColor("List.selectionBackground");
+            unselectedColor = defaults.getColor("List.background");
         }
 
         public Component getTableCellRendererComponent(JTable jTable, Object value, boolean isSelected, boolean hasFocus, int rowIndex, int colIndex) {
             setSelected(Boolean.TRUE.equals(value));
-            setBackground(table.isRowSelected(rowIndex)? selectedColor: Color.WHITE);
+            setBackground(table.isRowSelected(rowIndex)? selectedColor: unselectedColor);
             return this;
         }
     }

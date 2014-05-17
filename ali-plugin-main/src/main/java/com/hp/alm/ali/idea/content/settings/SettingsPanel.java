@@ -64,7 +64,7 @@ public class SettingsPanel extends JPanel implements ConfigurationListener, Disp
         this.projectConf = prj.getComponent(AliProjectConfiguration.class);
 
         passwordPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        passwordPanel.setBackground(Color.WHITE);
+        passwordPanel.setBackground(bgColor);
         JLabel label = new JLabel("Password");
         label.setFont(label.getFont().deriveFont(Font.BOLD));
         passwordPanel.add(label);

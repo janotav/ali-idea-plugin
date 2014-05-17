@@ -94,7 +94,6 @@ public class PropertyGrid extends ScrollablePanel implements EntityFields.Column
         entityService.addEntityListener(this);
         restService.addServerTypeListener(this);
 
-        setBackground(Color.WHITE);
         setBorder(new EmptyBorder(2, 2, 0, 0));
 
         map = new HashMap<String, LabelAndValue>();
@@ -144,15 +143,14 @@ public class PropertyGrid extends ScrollablePanel implements EntityFields.Column
             clone.gridy = idx + 1;
             clone.gridwidth = 2;
             clone.weightx = 1;
-            clone.fill = GridBagConstraints.BOTH;
         } else {
             clone.gridx = 1;
             clone.gridy = idx;
             clone.gridwidth = 1;
             clone.weightx = 1;
-            clone.fill = GridBagConstraints.HORIZONTAL;
         }
         clone.anchor = GridBagConstraints.CENTER;
+        clone.fill = GridBagConstraints.BOTH;
         return clone;
     }
 
@@ -370,7 +368,7 @@ public class PropertyGrid extends ScrollablePanel implements EntityFields.Column
         public ColumnLabelPanel(String col) {
             super(new BorderLayout());
 
-            setBorder(BorderFactory.createCompoundBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.WHITE), // align with single line values (that are higher by default)
+            setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEmptyBorder(0, 0, 2, 0), // align with single line values (that are higher by default)
                     BorderFactory.createEtchedBorder()));
 
             myLabel = new FieldNameLabel(entity.getType(), col, metadataService);

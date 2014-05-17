@@ -71,11 +71,9 @@ public class EntityDetail extends JPanel implements ContentManagerListener, HasE
         // content
         this.entityGrid = new PropertyGrid(project, entity);
         JPanel outer = new ScrollablePanel(new BorderLayout());
-        outer.setBackground(Color.WHITE);
         outer.add(entityGrid, BorderLayout.CENTER);
 
         ScrollablePanel contentNoExpansion = new ScrollablePanel(new BorderLayout());
-        contentNoExpansion.setBackground(Color.WHITE);
         contentNoExpansion.add(outer, BorderLayout.NORTH);
         add(new JBScrollPane(contentNoExpansion), BorderLayout.CENTER);
 

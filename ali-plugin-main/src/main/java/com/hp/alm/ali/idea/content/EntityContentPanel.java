@@ -66,7 +66,6 @@ public class EntityContentPanel extends JPanel {
         add(actionToolbar.getComponent(), BorderLayout.WEST);
 
         JPanel statusBar = new JPanel();
-        statusBar.setBackground(Color.WHITE);
         statusBar.setLayout(new BorderLayout());
         statusBar.add(entityTable.getStatusComponent(), BorderLayout.WEST);
         statusBar.add(new ActiveItemLink(project), BorderLayout.EAST);

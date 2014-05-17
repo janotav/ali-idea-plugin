@@ -33,7 +33,6 @@ import javax.swing.event.ChangeListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -69,8 +68,6 @@ public class TableContent extends JPanel implements DetailContent, TableModelLis
         }
         add(toolbars, BorderLayout.NORTH);
         entityToolbar = ActionUtil.createActionToolbar("hpali.entity", "detail-table", true);
-
-        setBackground(Color.WHITE);
     }
 
     public void remove() {

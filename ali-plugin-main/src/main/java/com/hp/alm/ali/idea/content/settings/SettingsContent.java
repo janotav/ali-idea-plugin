@@ -20,7 +20,7 @@ import com.hp.alm.ali.idea.content.AliContent;
 import com.intellij.openapi.project.Project;
 
 import javax.swing.JComponent;
-import java.awt.Color;
+import javax.swing.UIManager;
 
 public class SettingsContent implements AliContent {
 
@@ -37,6 +37,6 @@ public class SettingsContent implements AliContent {
 
     @Override
     public JComponent create(Project project) {
-        return new SettingsPanel(project, Color.WHITE);
+        return new SettingsPanel(project, UIManager.getDefaults().getColor("EditorPane.background"));
     }
 }

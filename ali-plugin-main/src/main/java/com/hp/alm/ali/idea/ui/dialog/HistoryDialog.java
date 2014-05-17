@@ -21,7 +21,6 @@ import com.hp.alm.ali.idea.model.Audit;
 import com.hp.alm.ali.idea.ui.AuditFilterPanel;
 import com.hp.alm.ali.idea.model.AuditModel;
 import com.hp.alm.ali.idea.services.ProjectUserService;
-import com.hp.alm.ali.idea.model.User;
 import com.hp.alm.ali.idea.ui.editor.field.CommentField;
 import com.hp.alm.ali.idea.model.parser.AuditList;
 import com.hp.alm.ali.idea.rest.RestService;
@@ -57,7 +56,6 @@ public class HistoryDialog extends MyDialog {
 
         contentPanel = new JPanel();
         contentPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
-        contentPanel.setBackground(Color.WHITE);
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
 
         contentPanel.add(new JLabel("Loading history information..."));
@@ -134,7 +132,6 @@ public class HistoryDialog extends MyDialog {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setBorder(new EmptyBorder(5, 0, 5, 0));
-        panel.setBackground(Color.WHITE);
 
         String fullName = project.getComponent(ProjectUserService.class).getUserFullName(userName);
 
@@ -153,7 +150,6 @@ public class HistoryDialog extends MyDialog {
         label.setOpaque(true);
         label.setBorder(new EmptyBorder(12, 1, 5, 2));
         label.setFont(label.getFont().deriveFont((float) label.getFont().getSize() + 2));
-        label.setBackground(Color.WHITE);
         label.setAlignmentX(LEFT_ALIGNMENT);
         panel.add(label);
         JComponent table = createTable(properties);
@@ -165,7 +161,6 @@ public class HistoryDialog extends MyDialog {
 
     private JComponent createTable(List<String[]> properties) {
         JPanel panel = new JPanel();
-        panel.setBackground(Color.WHITE);
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         JBTable table = new JBTable(new AuditModel(properties));
         table.setDefaultRenderer(String.class, new MyTableCellRenderer());
@@ -175,7 +170,6 @@ public class HistoryDialog extends MyDialog {
         table.setShowGrid(false);
         table.setShowHorizontalLines(true);
         table.setGridColor(table.getGridColor().brighter());
-        table.getTableHeader().setBackground(Color.WHITE);
         table.getTableHeader().setResizingAllowed(false);
         table.getTableHeader().setDefaultRenderer(new MyHeaderCellRenderer());
         panel.add(table.getTableHeader());
@@ -188,7 +182,7 @@ public class HistoryDialog extends MyDialog {
         public Component getTableCellRendererComponent(JTable table, Object value, boolean selected, boolean focused, int row, int column) {
             JLabel renderer = (JLabel)super.getTableCellRendererComponent(table, value, false, false, row, column);
             renderer.setHorizontalAlignment(JLabel.LEFT);
-            renderer.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK), new EmptyBorder(0, 1, 0, 0)));
+            renderer.setBorder(BorderFactory.createEtchedBorder());
             return renderer;
         }
     }
