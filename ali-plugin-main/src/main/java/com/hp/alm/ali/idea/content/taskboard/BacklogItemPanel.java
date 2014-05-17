@@ -44,6 +44,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -80,8 +81,6 @@ public class BacklogItemPanel extends ScrollablePanel implements Highlightable, 
     public BacklogItemPanel(Project project, Entity item, TaskBoardFilter filter) {
         super(new BorderLayout());
 
-        setBackground(Color.WHITE);
-
         this.project = project;
         this.item = item;
         this.filter = filter;
@@ -92,6 +91,7 @@ public class BacklogItemPanel extends ScrollablePanel implements Highlightable, 
         header.setBorder(new EmptyBorder(0, 5, 0, 5));
         add(header, BorderLayout.NORTH);
         entityName = new JTextPane();
+        entityName.setBackground(getBackground());
         entityName.setEditable(false);
         add(entityName, BorderLayout.CENTER);
         content = new Content();
@@ -110,9 +110,13 @@ public class BacklogItemPanel extends ScrollablePanel implements Highlightable, 
         taskContent.add(getTaskContainer(TaskPanel.TASK_IN_PROGRESS));
         taskContent.add(getTaskContainer(TaskPanel.TASK_COMPLETED));
 
+        Color gridColor = UIManager.getDefaults().getColor("Table.gridColor");
+        taskContent.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 0, gridColor));
+        setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, gridColor));
+
         // we don't use gap in grid layout to avoid trailing line (on the right)
-        getTaskContainer(TaskPanel.TASK_IN_PROGRESS).setBorder(BorderFactory.createMatteBorder(0, 1, 0, 0, Color.lightGray));
-        getTaskContainer(TaskPanel.TASK_COMPLETED).setBorder(BorderFactory.createMatteBorder(0, 1, 0, 0, Color.lightGray));
+        getTaskContainer(TaskPanel.TASK_IN_PROGRESS).setBorder(BorderFactory.createMatteBorder(0, 1, 0, 0, gridColor));
+        getTaskContainer(TaskPanel.TASK_COMPLETED).setBorder(BorderFactory.createMatteBorder(0, 1, 0, 0, gridColor));
 
         simpleHighlight = new SimpleHighlight(entityName);
 

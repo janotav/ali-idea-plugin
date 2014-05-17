@@ -94,6 +94,7 @@ public class PropertyGrid extends ScrollablePanel implements EntityFields.Column
         entityService.addEntityListener(this);
         restService.addServerTypeListener(this);
 
+        setBackground(new JTextPane().getBackground());
         setBorder(new EmptyBorder(2, 2, 0, 0));
 
         map = new HashMap<String, LabelAndValue>();
@@ -368,7 +369,8 @@ public class PropertyGrid extends ScrollablePanel implements EntityFields.Column
         public ColumnLabelPanel(String col) {
             super(new BorderLayout());
 
-            setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEmptyBorder(0, 0, 2, 0), // align with single line values (that are higher by default)
+            setBorder(BorderFactory.createCompoundBorder(
+                    BorderFactory.createMatteBorder(0, 0, 2, 0, PropertyGrid.this.getBackground()), // align with single line values (that are higher by default)
                     BorderFactory.createEtchedBorder()));
 
             myLabel = new FieldNameLabel(entity.getType(), col, metadataService);

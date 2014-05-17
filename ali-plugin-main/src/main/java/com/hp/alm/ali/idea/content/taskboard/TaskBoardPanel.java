@@ -47,7 +47,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import java.awt.AWTEvent;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -84,8 +83,6 @@ public class TaskBoardPanel extends JPanel implements SprintService.Listener, En
 
     public TaskBoardPanel(final Project project) {
         super(new BorderLayout());
-
-        setBackground(Color.WHITE);
 
         this.project = project;
 
@@ -593,8 +590,9 @@ public class TaskBoardPanel extends JPanel implements SprintService.Listener, En
 
     private JComponent columnHeader(String name) {
         BoldLabel label = new BoldLabel(name);
-        label.setBorder(BorderFactory.createEtchedBorder());
-        label.setBackground(Color.lightGray);
+        label.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createEmptyBorder(0, 1, 0, 0),
+                BorderFactory.createEtchedBorder()));
         label.setPreferredSize(new Dimension(MIN_COLUMN_WIDTH, 26));
         return label;
     }

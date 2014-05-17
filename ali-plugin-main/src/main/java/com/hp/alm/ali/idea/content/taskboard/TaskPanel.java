@@ -38,6 +38,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -91,7 +92,11 @@ public class TaskPanel extends JLayeredPane implements Highlightable, DataProvid
         this.userTranslator = project.getComponent(UserType.class).getTranslator();
 
         content = new JPanel(new BorderLayout());
-        content.setBackground(new Color(0xFd, 0xF8, 0xCE));
+        Color bg = content.getBackground();
+        boolean darkTheme = isDarkTheme(bg);
+        if (!darkTheme) {
+            content.setBackground(new Color(0xFd, 0xF8, 0xCE));
+        }
         content.setBorder(new EmptyBorder(2, 12, 2, 2)); // leave room for the handle
         add(content, JLayeredPane.DEFAULT_LAYER);
 
@@ -125,13 +130,17 @@ public class TaskPanel extends JLayeredPane implements Highlightable, DataProvid
 
         overlay = new JPanel();
         overlay.setOpaque(true);
-        overlay.setBackground(new Color(0xFF, 0xFF, 0xFF, 128));
+        if (darkTheme) {
+            overlay.setBackground(new Color(bg.getRed(), bg.getGreen(), bg.getBlue(), 128));
+        } else {
+            overlay.setBackground(new Color(0xFF, 0xFF, 0xFF, 128));
+        }
         overlay.setVisible(false);
         add(overlay, JLayeredPane.PALETTE_LAYER);
 
         panelForBorder = new JPanel();
         panelForBorder.setOpaque(false);
-        panelForBorder.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.lightGray));
+        panelForBorder.setBorder(BorderFactory.createLineBorder(UIManager.getDefaults().getColor("Table.gridColor")));
         add(panelForBorder, new Integer(PALETTE_LAYER - 1));
 
         handlePanel = new JPanel(new BorderLayout());
@@ -260,6 +269,11 @@ public class TaskPanel extends JLayeredPane implements Highlightable, DataProvid
     private void doOverlay() {
         overlay.setVisible(!matched && forcedMatch.isEmpty());
         repaint(); // otherwise unmatched background is not painted properly
+    }
+
+    private boolean isDarkTheme(Color background) {
+        double value = 0.21 * background.getRed() + 0.72 * background.getGreen() + 0.07 * background.getBlue();
+        return value < 128;
     }
 
     public BacklogItemPanel getBacklogItemPanel() {

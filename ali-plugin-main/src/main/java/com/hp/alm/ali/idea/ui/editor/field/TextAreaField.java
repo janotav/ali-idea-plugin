@@ -18,8 +18,11 @@ package com.hp.alm.ali.idea.ui.editor.field;
 
 import com.hp.alm.ali.idea.action.UndoAction;
 
+import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import java.awt.Component;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class TextAreaField extends BaseField {
 
@@ -31,6 +34,24 @@ public class TextAreaField extends BaseField {
         textPane = new JTextPane();
         textPane.setText(origValue);
         textPane.setEditable(editable);
+
+        // there's no border by default? is it a bug?
+        textPane.setBorder(new JTextField().getBorder());
+        // if there's border it doesn't react to focus? bug again?
+        textPane.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                repaint();
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                repaint();
+            }
+            private void repaint() {
+                textPane.invalidate();
+                textPane.repaint();
+            }
+        });
 
         HTMLAreaField.installNavigationShortCuts(textPane);
 

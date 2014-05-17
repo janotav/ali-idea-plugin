@@ -75,6 +75,7 @@ public class EntityDetail extends JPanel implements ContentManagerListener, HasE
 
         ScrollablePanel contentNoExpansion = new ScrollablePanel(new BorderLayout());
         contentNoExpansion.add(outer, BorderLayout.NORTH);
+        contentNoExpansion.setBackground(new JTextPane().getBackground());
         add(new JBScrollPane(contentNoExpansion), BorderLayout.CENTER);
 
         restService = project.getComponent(RestService.class);

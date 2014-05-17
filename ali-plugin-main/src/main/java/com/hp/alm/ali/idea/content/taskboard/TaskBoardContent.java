@@ -24,7 +24,6 @@ import com.intellij.ui.components.JBScrollPane;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
-import java.awt.Color;
 
 public class TaskBoardContent implements AliContent {
 
@@ -48,7 +47,6 @@ public class TaskBoardContent implements AliContent {
         panel.add(scrollPane, BorderLayout.CENTER);
 
         JPanel statusBar = new JPanel();
-        statusBar.setBackground(Color.WHITE);
         statusBar.setLayout(new BorderLayout());
         statusBar.add(taskBoardPanel.getStatusComponent(), BorderLayout.WEST);
         statusBar.add(new ActiveItemLink(project), BorderLayout.EAST);

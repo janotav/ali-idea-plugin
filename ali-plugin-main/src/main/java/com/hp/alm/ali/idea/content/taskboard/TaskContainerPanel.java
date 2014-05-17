@@ -21,7 +21,6 @@ import com.hp.alm.ali.idea.model.Entity;
 
 import javax.swing.JComponent;
 import javax.swing.JPanel;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.datatransfer.Transferable;
@@ -52,7 +51,6 @@ public class TaskContainerPanel extends JPanel {
         add(dragTarget);
 
         setDropTarget(new DropTarget(this, DnDConstants.ACTION_MOVE, new TaskDropTargetListener(), true, null));
-        setBackground(Color.WHITE);
     }
 
     public void addTask(TaskPanel taskPanel) {
