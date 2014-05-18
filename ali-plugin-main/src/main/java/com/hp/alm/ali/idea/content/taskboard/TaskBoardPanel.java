@@ -20,6 +20,11 @@ import com.hp.alm.ali.idea.entity.EntityQuery;
 import com.hp.alm.ali.idea.entity.EntityRef;
 import com.hp.alm.ali.idea.entity.queue.QueryQueue;
 import com.hp.alm.ali.idea.entity.queue.QueryTarget;
+import com.hp.alm.ali.idea.filter.FilterChooser;
+import com.hp.alm.ali.idea.filter.FilterManager;
+import com.hp.alm.ali.idea.filter.MultipleItemsChooserFactory;
+import com.hp.alm.ali.idea.model.ItemsProvider;
+import com.hp.alm.ali.idea.ui.ComboItem;
 import com.hp.alm.ali.idea.ui.QuickSearchPanel;
 import com.hp.alm.ali.idea.services.EntityService;
 import com.hp.alm.ali.idea.action.ActionUtil;
@@ -36,7 +41,10 @@ import com.intellij.openapi.actionSystem.ActionPopupMenu;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.ui.components.labels.BoldLabel;
+import com.intellij.ui.components.labels.LinkLabel;
+import com.intellij.ui.components.labels.LinkListener;
 import com.intellij.util.ui.UIUtil;
+import org.apache.commons.lang.StringUtils;
 
 import javax.swing.BorderFactory;
 import javax.swing.JCheckBox;
@@ -60,15 +68,24 @@ import java.awt.event.AWTEventListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 public class TaskBoardPanel extends JPanel implements SprintService.Listener, EntityListener, QueryTarget {
 
     public static int MIN_COLUMN_WIDTH = 250;
     public static final String PLACE = "HPALI.TaskBoard";
+
+    private static final List<String> allItemStatuses = Arrays.asList(
+            BacklogItemPanel.ITEM_NEW,
+            BacklogItemPanel.ITEM_IN_PROGRESS,
+            BacklogItemPanel.ITEM_IN_TESTING,
+            BacklogItemPanel.ITEM_DONE
+    );
 
     private Project project;
     private EntityService entityService;
@@ -349,7 +366,7 @@ public class TaskBoardPanel extends JPanel implements SprintService.Listener, En
         private AssignedToComboBox assignedTo;
         private JCheckBox stories;
         private JCheckBox defects;
-        private JCheckBox doneItems;
+        private LinkLabel statusFilter;
 
         public Header() {
             super(new GridBagLayout());
@@ -382,6 +399,45 @@ public class TaskBoardPanel extends JPanel implements SprintService.Listener, En
             });
             toolbar.add(new JLabel("Assigned To:"));
             toolbar.add(assignedTo);
+
+            toolbar.add(new JLabel("Status:"));
+            statusFilter = new LinkLabel(conf.getShowStatuses(), null);
+            statusFilter.setListener(new LinkListener() {
+                @Override
+                public void linkSelected(LinkLabel aSource, Object aLinkData) {
+                    String value;
+                    if (TaskboardConfiguration.ALL_STATUSES.equals(conf.getShowStatuses())) {
+                        value = StringUtils.join(allItemStatuses, ";");
+                    } else {
+                        value = conf.getShowStatuses();
+                    }
+                    FilterChooser chooser = new MultipleItemsChooserFactory(project, "Status", true, new ItemsProvider.Loader<ComboItem>() {
+                        @Override
+                        public List<ComboItem> load() {
+                            return FilterManager.asItems(allItemStatuses, true, true);
+                        }
+                    }).createChooser(value);
+                    chooser.show();
+                    String selectedValue = chooser.getSelectedValue();
+                    if (selectedValue != null) {
+                        if (selectedValue.isEmpty())  {
+                            // treat no selected item as no filter at all
+                            conf.setShowStatuses(TaskboardConfiguration.ALL_STATUSES);
+                        } else {
+                            List<String> states = Arrays.asList(selectedValue.split(";"));
+                            if (states.size() == allItemStatuses.size()) {
+                                conf.setShowStatuses(TaskboardConfiguration.ALL_STATUSES);
+                            } else {
+                                conf.setShowStatuses(selectedValue);
+                            }
+                        }
+                        statusFilter.setText(conf.getShowStatuses());
+                        content.applyFilter();
+                    }
+                }
+            }, null);
+            toolbar.add(statusFilter);
+
             toolbar.add(new JLabel("Show:"));
             stories = new JCheckBox("User stories", conf.isShowUserStories());
             stories.addItemListener(new ItemListener() {
@@ -401,15 +457,6 @@ public class TaskBoardPanel extends JPanel implements SprintService.Listener, En
                 }
             });
             toolbar.add(defects);
-            doneItems = new JCheckBox("Done items", conf.isShowDoneItems());
-            doneItems.addItemListener(new ItemListener() {
-                @Override
-                public void itemStateChanged(ItemEvent e) {
-                    conf.setShowDoneItems(doneItems.isSelected());
-                    content.applyFilter();
-                }
-            });
-            toolbar.add(doneItems);
 
             JPanel toolbarAndWarning = new JPanel(new BorderLayout());
             toolbarAndWarning.add(toolbar, BorderLayout.NORTH);
@@ -467,8 +514,12 @@ public class TaskBoardPanel extends JPanel implements SprintService.Listener, En
         }
 
         @Override
-        public boolean isDoneItems() {
-            return doneItems.isSelected();
+        public List<String> getStatus() {
+            if (TaskboardConfiguration.ALL_STATUSES.equals(statusFilter.getText())) {
+                return allItemStatuses;
+            } else {
+                return Arrays.asList(statusFilter.getText().split(";"));
+            }
         }
     }
 

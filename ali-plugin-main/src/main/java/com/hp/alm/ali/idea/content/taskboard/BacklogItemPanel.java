@@ -62,6 +62,7 @@ public class BacklogItemPanel extends ScrollablePanel implements Highlightable, 
 
     public static final String ITEM_NEW = "New";
     public static final String ITEM_IN_PROGRESS = "In Progress";
+    public static final String ITEM_IN_TESTING = "In Testing";
     public static final String ITEM_DONE = "Done";
 
     public static final Dimension DIMENSION = new Dimension(300, 160);
@@ -258,7 +259,7 @@ public class BacklogItemPanel extends ScrollablePanel implements Highlightable, 
         } else {
             typeMatch = filter.isDefects();
         }
-        if(!filter.isDoneItems() && item.getPropertyValue("status").equals(ITEM_DONE)) {
+        if(!filter.getStatus().contains(item.getPropertyValue("status"))) {
             typeMatch = false;
         }
 

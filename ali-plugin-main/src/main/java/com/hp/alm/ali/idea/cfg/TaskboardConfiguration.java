@@ -27,10 +27,12 @@ import org.jdom.Element;
 )
 public class TaskboardConfiguration implements PersistentStateComponent<Element> {
 
+    public static final String ALL_STATUSES = "<all>";
+
     private String assignedTo;
     private boolean showDefects = true;
     private boolean showUserStories = true;
-    private boolean showDoneItems = false;
+    private String showStatuses = ALL_STATUSES;
     private String filter;
 
     public boolean isShowDefects() {
@@ -49,12 +51,12 @@ public class TaskboardConfiguration implements PersistentStateComponent<Element>
         this.showUserStories = showUserStories;
     }
 
-    public boolean isShowDoneItems() {
-        return showDoneItems;
+    public String getShowStatuses() {
+        return showStatuses;
     }
 
-    public void setShowDoneItems(boolean showDoneItems) {
-        this.showDoneItems = showDoneItems;
+    public void setShowStatuses(String statuses) {
+        this.showStatuses = statuses;
     }
 
     public String getAssignedTo() {
@@ -84,7 +86,7 @@ public class TaskboardConfiguration implements PersistentStateComponent<Element>
         }
         element.setAttribute("showUserStories", String.valueOf(showUserStories));
         element.setAttribute("showDefects", String.valueOf(showDefects));
-        element.setAttribute("showDoneItems", String.valueOf(showDoneItems));
+        element.setAttribute("showStatuses", showStatuses);
         return element;
     }
 
@@ -94,6 +96,6 @@ public class TaskboardConfiguration implements PersistentStateComponent<Element>
         filter = element.getAttributeValue("filter");
         showUserStories = Boolean.parseBoolean(element.getAttributeValue("showUserStories", "true"));
         showDefects = Boolean.parseBoolean(element.getAttributeValue("showDefects", "true"));
-        showDoneItems = Boolean.parseBoolean(element.getAttributeValue("showDoneItems", "false"));
+        showStatuses = element.getAttributeValue("showStatuses", ALL_STATUSES);
     }
 }

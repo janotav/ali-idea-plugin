@@ -16,6 +16,8 @@
 
 package com.hp.alm.ali.idea.content.taskboard;
 
+import java.util.List;
+
 public interface TaskBoardFilter {
 
     String getFilter();
@@ -26,6 +28,6 @@ public interface TaskBoardFilter {
 
     boolean isDefects();
 
-    boolean isDoneItems();
+    List<String> getStatus();
 
 }
