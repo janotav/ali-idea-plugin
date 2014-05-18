@@ -178,6 +178,7 @@ public class BacklogItemPanel extends ScrollablePanel implements Highlightable, 
                     query.addColumn("id", 1);
                     query.setValue("status", "<> Completed");
                     query.setValue("release-backlog-item-id", String.valueOf(item.getId()));
+                    query.setPropertyResolved("status", true);
                     EntityList incompleteTasks = entityService.query(query);
                     if(incompleteTasks.isEmpty()) {
                         item.setProperty("status", ITEM_DONE);
