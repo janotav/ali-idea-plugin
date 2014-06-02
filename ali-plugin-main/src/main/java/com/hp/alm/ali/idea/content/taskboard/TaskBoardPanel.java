@@ -51,6 +51,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SortOrder;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import java.awt.AWTEvent;
@@ -69,8 +70,10 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -200,6 +203,7 @@ public class TaskBoardPanel extends JPanel implements SprintService.Listener, En
         query.setValue("sprint-id", String.valueOf(sprint.getId()));
         query.setPropertyResolved("is-leaf", true);
         query.setPropertyResolved("team-id", true);
+        query.setOrder(new LinkedHashMap<String, SortOrder>(Collections.singletonMap("rank", SortOrder.ASCENDING)));
         queue.query(query);
     }
 
@@ -220,8 +224,8 @@ public class TaskBoardPanel extends JPanel implements SprintService.Listener, En
                     status.loaded(items, redo);
                 } else {
                     status.info("Loaded " + EntityStatusPanel.getItemCountString(items, "backlog items") + ", loading tasks...", null, redo);
-                    for(Entity item: items) {
-                        updateBacklogItem(item, false);
+                    for(int i = 0; i < items.size(); i++) {
+                        updateBacklogItem(items.get(i), false, i);
                     }
                 }
             }
@@ -270,10 +274,10 @@ public class TaskBoardPanel extends JPanel implements SprintService.Listener, En
         content.removeTask(id);
     }
 
-    private boolean updateBacklogItem(Entity item, boolean validate) {
+    private boolean updateBacklogItem(Entity item, boolean validate, int index) {
         ApplicationManager.getApplication().assertIsDispatchThread();
 
-        return content.updateItem(item, validate);
+        return content.updateItem(item, validate, index);
     }
 
     @Override
@@ -312,7 +316,8 @@ public class TaskBoardPanel extends JPanel implements SprintService.Listener, En
                 @Override
                 public void run() {
                     if(inThisSprint(entity)) {
-                        if(updateBacklogItem(entity, true) && event != Event.CREATE) {
+                        int index = content.getItemIndex(entity);
+                        if(updateBacklogItem(entity, true, index) && event != Event.CREATE) {
                             // only load tasks for non-created BLIs only - events will follow for those we create ourselves
                             ApplicationManager.getApplication().executeOnPooledThread(new Runnable() {
                                 @Override
@@ -530,28 +535,24 @@ public class TaskBoardPanel extends JPanel implements SprintService.Listener, En
             super(new GridBagLayout());
         }
 
-        public boolean updateItem(Entity item, boolean validate) {
+        public boolean updateItem(Entity item, boolean validate, int index) {
+            GridBagConstraints c = new GridBagConstraints();
+            c.gridy = index;
+            c.gridx = 0;
+            c.fill = GridBagConstraints.VERTICAL;
+            c.anchor = GridBagConstraints.NORTHEAST;
+            c.insets = new Insets(0, 0, 1, 1);
             BacklogItemPanel backlogItemPanel = items.get(item);
+            boolean created;
             if(backlogItemPanel == null) {
-                GridBagConstraints c = new GridBagConstraints();
-                c.gridy = items.size();
-                c.gridx = 0;
-                c.fill = GridBagConstraints.VERTICAL;
-                c.anchor = GridBagConstraints.NORTHEAST;
-                c.insets = new Insets(0, 0, 1, 1);
-                final BacklogItemPanel newItemPanel = new BacklogItemPanel(project, item, header);
-                add(newItemPanel, c);
-                items.put(item, newItemPanel);
-                c.gridx++;
-                c.fill = GridBagConstraints.BOTH;
-                c.weightx = 1;
-                c.insets = new Insets(0, 0, 1, 0);
-                add(newItemPanel.getTaskContent(), c);
-                newItemPanel.applyFilter();
+                backlogItemPanel = new BacklogItemPanel(project, item, header);
+                items.put(item, backlogItemPanel);
+                backlogItemPanel.applyFilter();
                 if(validate) {
                     revalidate();
                     repaint();
 
+                    final BacklogItemPanel newItemPanel = backlogItemPanel;
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
@@ -559,10 +560,28 @@ public class TaskBoardPanel extends JPanel implements SprintService.Listener, En
                         }
                     });
                 }
-                return true;
+                created = true;
             } else {
                 backlogItemPanel.update(item);
-                return false;
+                created = false;
+            }
+            add(backlogItemPanel, c);
+
+            c.gridx++;
+            c.fill = GridBagConstraints.BOTH;
+            c.weightx = 1;
+            c.insets = new Insets(0, 0, 1, 0);
+            add(backlogItemPanel.getTaskContent(), c);
+
+            return created;
+        }
+
+        public int getItemIndex(Entity item) {
+            BacklogItemPanel backlogItemPanel = items.get(item);
+            if (backlogItemPanel != null) {
+                return ((GridBagLayout) getLayout()).getConstraints(backlogItemPanel).gridy;
+            } else {
+                return items.size();
             }
         }
 
