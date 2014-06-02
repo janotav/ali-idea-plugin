@@ -16,6 +16,7 @@
 
 package com.hp.alm.ali.idea.content.taskboard;
 
+import com.hp.alm.ali.idea.action.ActionUtil;
 import com.hp.alm.ali.idea.ui.ActiveItemLink;
 import com.hp.alm.ali.idea.content.AliContent;
 import com.intellij.openapi.project.Project;
@@ -45,6 +46,9 @@ public class TaskBoardContent implements AliContent {
         JBScrollPane scrollPane = new JBScrollPane(taskBoardPanel, JBScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JBScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setColumnHeaderView(taskBoardPanel.getHeader());
         panel.add(scrollPane, BorderLayout.CENTER);
+
+        JComponent toolbar = ActionUtil.createActionToolbar("hpali.taskboard", TaskBoardPanel.PLACE, true, false).getComponent();
+        panel.add(toolbar, BorderLayout.WEST);
 
         JPanel statusBar = new JPanel();
         statusBar.setLayout(new BorderLayout());

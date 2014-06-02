@@ -16,6 +16,7 @@
 
 package com.hp.alm.ali.idea.content.taskboard;
 
+import com.hp.alm.ali.idea.cfg.TaskBoardConfiguration;
 import com.hp.alm.ali.idea.entity.EntityQuery;
 import com.hp.alm.ali.idea.entity.EntityRef;
 import com.hp.alm.ali.idea.entity.queue.QueryQueue;
@@ -29,7 +30,6 @@ import com.hp.alm.ali.idea.ui.QuickSearchPanel;
 import com.hp.alm.ali.idea.services.EntityService;
 import com.hp.alm.ali.idea.action.ActionUtil;
 import com.hp.alm.ali.idea.entity.EntityListener;
-import com.hp.alm.ali.idea.cfg.TaskboardConfiguration;
 import com.hp.alm.ali.idea.content.AliContentFactory;
 import com.hp.alm.ali.idea.ui.ReleaseChooser;
 import com.hp.alm.ali.idea.ui.SprintChooser;
@@ -371,10 +371,9 @@ public class TaskBoardPanel extends JPanel implements SprintService.Listener, En
         public Header() {
             super(new GridBagLayout());
 
-            final TaskboardConfiguration conf = project.getComponent(TaskboardConfiguration.class);
+            final TaskBoardConfiguration conf = project.getComponent(TaskBoardConfiguration.class);
             JPanel toolbar = new JPanel(new FlowLayout(FlowLayout.LEFT, 2, 0)); // using vertical spacing makes the bottom gap too wide (not sure why)
             toolbar.setBorder(BorderFactory.createEtchedBorder());
-            toolbar.add(ActionUtil.createActionToolbar("hpali.taskboard", PLACE, true).getComponent());
             toolbar.add(new ReleaseChooser(project));
             quickSearchPanel = new QuickSearchPanel(conf.getFilter(), new QuickSearchPanel.Target() {
                 @Override
@@ -406,7 +405,7 @@ public class TaskBoardPanel extends JPanel implements SprintService.Listener, En
                 @Override
                 public void linkSelected(LinkLabel aSource, Object aLinkData) {
                     String value;
-                    if (TaskboardConfiguration.ALL_STATUSES.equals(conf.getShowStatuses())) {
+                    if (TaskBoardConfiguration.ALL_STATUSES.equals(conf.getShowStatuses())) {
                         value = StringUtils.join(allItemStatuses, ";");
                     } else {
                         value = conf.getShowStatuses();
@@ -422,11 +421,11 @@ public class TaskBoardPanel extends JPanel implements SprintService.Listener, En
                     if (selectedValue != null) {
                         if (selectedValue.isEmpty())  {
                             // treat no selected item as no filter at all
-                            conf.setShowStatuses(TaskboardConfiguration.ALL_STATUSES);
+                            conf.setShowStatuses(TaskBoardConfiguration.ALL_STATUSES);
                         } else {
                             List<String> states = Arrays.asList(selectedValue.split(";"));
                             if (states.size() == allItemStatuses.size()) {
-                                conf.setShowStatuses(TaskboardConfiguration.ALL_STATUSES);
+                                conf.setShowStatuses(TaskBoardConfiguration.ALL_STATUSES);
                             } else {
                                 conf.setShowStatuses(selectedValue);
                             }
@@ -515,7 +514,7 @@ public class TaskBoardPanel extends JPanel implements SprintService.Listener, En
 
         @Override
         public List<String> getStatus() {
-            if (TaskboardConfiguration.ALL_STATUSES.equals(statusFilter.getText())) {
+            if (TaskBoardConfiguration.ALL_STATUSES.equals(statusFilter.getText())) {
                 return allItemStatuses;
             } else {
                 return Arrays.asList(statusFilter.getText().split(";"));

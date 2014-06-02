@@ -16,6 +16,7 @@
 
 package com.hp.alm.ali.idea.content.taskboard;
 
+import com.hp.alm.ali.idea.cfg.TaskBoardConfiguration;
 import com.hp.alm.ali.idea.ui.EntityLabel;
 import com.hp.alm.ali.idea.entity.EntityQuery;
 import com.hp.alm.ali.idea.services.EntityService;
@@ -174,16 +175,22 @@ public class BacklogItemPanel extends ScrollablePanel implements Highlightable, 
                 }
                 final Entity updatedRbi;
                 if (TaskPanel.TASK_COMPLETED.equals(newStatus)) {
-                    // when task moves to completed, we need to see if there are incomplete tasks remaining
-                    EntityQuery query = new EntityQuery("project-task");
-                    query.addColumn("id", 1);
-                    query.setValue("status", "<> Completed");
-                    query.setValue("release-backlog-item-id", String.valueOf(item.getId()));
-                    query.setPropertyResolved("status", true);
-                    EntityList incompleteTasks = entityService.query(query);
-                    if(incompleteTasks.isEmpty()) {
-                        item.setProperty("status", ITEM_DONE);
-                        updatedRbi = entityService.updateEntity(item, Collections.singleton("status"), false, true);
+                    TaskBoardConfiguration configuration = project.getComponent(TaskBoardConfiguration.class);
+                    String tasksCompletedStatus = configuration.getTasksCompletedStatus();
+                    if (tasksCompletedStatus != null) {
+                        // when task moves to completed, we need to see if there are incomplete tasks remaining
+                        EntityQuery query = new EntityQuery("project-task");
+                        query.addColumn("id", 1);
+                        query.setValue("status", "<> Completed");
+                        query.setValue("release-backlog-item-id", String.valueOf(item.getId()));
+                        query.setPropertyResolved("status", true);
+                        EntityList incompleteTasks = entityService.query(query);
+                        if(incompleteTasks.isEmpty()) {
+                            item.setProperty("status", tasksCompletedStatus);
+                            updatedRbi = entityService.updateEntity(item, Collections.singleton("status"), false, true);
+                        } else {
+                            updatedRbi = null;
+                        }
                     } else {
                         updatedRbi = null;
                     }

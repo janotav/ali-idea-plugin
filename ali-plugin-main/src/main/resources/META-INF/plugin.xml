@@ -126,8 +126,8 @@
           <interface-class>com.hp.alm.ali.idea.services.SprintService</interface-class>
       </component>
       <component>
-         <implementation-class>com.hp.alm.ali.idea.cfg.TaskboardConfiguration</implementation-class>
-         <interface-class>com.hp.alm.ali.idea.cfg.TaskboardConfiguration</interface-class>
+         <implementation-class>com.hp.alm.ali.idea.cfg.TaskBoardConfiguration</implementation-class>
+         <interface-class>com.hp.alm.ali.idea.cfg.TaskBoardConfiguration</interface-class>
       </component>
       <component>
          <implementation-class>com.hp.alm.ali.idea.services.TeamMemberService</implementation-class>
@@ -365,6 +365,7 @@
         <group id="hpali.taskboard">
             <action id="hpali.taskboard.new.story" class="com.hp.alm.ali.idea.action.taskboard.TaskBoardNewStoryAction"/>
             <action id="hpali.taskboard.new.defect" class="com.hp.alm.ali.idea.action.taskboard.TaskBoardNewDefectAction"/>
+            <action id="hpali.taskboard.settings" class="com.hp.alm.ali.idea.action.taskboard.TaskBoardSettingsAction"/>
         </group>
         <group id="hpali.defects">
             <action id="hpali.new.defect" class="com.hp.alm.ali.idea.action.NewDefectAction"/>

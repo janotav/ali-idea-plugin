@@ -25,7 +25,7 @@ import org.jdom.Element;
         name = "TaskboardConfiguration",
         storages = { @Storage(id = "default",file = "$WORKSPACE_FILE$") }
 )
-public class TaskboardConfiguration implements PersistentStateComponent<Element> {
+public class TaskBoardConfiguration implements PersistentStateComponent<Element> {
 
     public static final String ALL_STATUSES = "<all>";
 
@@ -34,6 +34,7 @@ public class TaskboardConfiguration implements PersistentStateComponent<Element>
     private boolean showUserStories = true;
     private String showStatuses = ALL_STATUSES;
     private String filter;
+    private String tasksCompletedStatus;
 
     public boolean isShowDefects() {
         return showDefects;
@@ -75,6 +76,14 @@ public class TaskboardConfiguration implements PersistentStateComponent<Element>
         this.filter = filter;
     }
 
+    public String getTasksCompletedStatus() {
+        return tasksCompletedStatus;
+    }
+
+    public void setTasksCompletedStatus(String status) {
+        this.tasksCompletedStatus = status;
+    }
+
     @Override
     public Element getState() {
         Element element = new Element(getClass().getSimpleName());
@@ -87,6 +96,9 @@ public class TaskboardConfiguration implements PersistentStateComponent<Element>
         element.setAttribute("showUserStories", String.valueOf(showUserStories));
         element.setAttribute("showDefects", String.valueOf(showDefects));
         element.setAttribute("showStatuses", showStatuses);
+        if (tasksCompletedStatus != null) {
+            element.setAttribute("tasksCompletedStatus", tasksCompletedStatus);
+        }
         return element;
     }
 
@@ -97,5 +109,6 @@ public class TaskboardConfiguration implements PersistentStateComponent<Element>
         showUserStories = Boolean.parseBoolean(element.getAttributeValue("showUserStories", "true"));
         showDefects = Boolean.parseBoolean(element.getAttributeValue("showDefects", "true"));
         showStatuses = element.getAttributeValue("showStatuses", ALL_STATUSES);
+        tasksCompletedStatus = element.getAttributeValue("tasksCompletedStatus");
     }
 }
