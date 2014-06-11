@@ -39,6 +39,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -140,7 +141,7 @@ public class TaskPanel extends JLayeredPane implements Highlightable, DataProvid
 
         panelForBorder = new JPanel();
         panelForBorder.setOpaque(false);
-        panelForBorder.setBorder(BorderFactory.createLineBorder(UIManager.getDefaults().getColor("Table.gridColor")));
+        panelForBorder.setBorder(createPanelBorder());
         add(panelForBorder, new Integer(PALETTE_LAYER - 1));
 
         handlePanel = new JPanel(new BorderLayout());
@@ -174,6 +175,10 @@ public class TaskPanel extends JLayeredPane implements Highlightable, DataProvid
         simpleHighlight = new SimpleHighlight(description);
 
         DragSource.getDefaultDragSource().createDefaultDragGestureRecognizer(handle, DnDConstants.ACTION_COPY, new TaskTransferable(this));
+    }
+
+    public static Border createPanelBorder() {
+        return BorderFactory.createLineBorder(UIManager.getDefaults().getColor("Table.gridColor"));
     }
 
     public Dimension getPreferredSize() {

@@ -48,6 +48,7 @@ public class TaskContainerPanel extends JPanel {
 
         dragTarget =  new JPanel();
         dragTarget.setVisible(false);
+        dragTarget.setBorder(TaskPanel.createPanelBorder());
         add(dragTarget);
 
         setDropTarget(new DropTarget(this, DnDConstants.ACTION_MOVE, new TaskDropTargetListener(), true, null));
