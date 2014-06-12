@@ -69,7 +69,9 @@ public class BacklogPanel extends JPanel implements SprintService.Listener, Enti
                     int[] rows = entityTable.getTable().getSelectedRows();
                     for(int row: rows) {
                         Entity entity = model.getEntity(entityTable.getTable().convertRowIndexToModel(row));
-                        list.add(new Entity(entity.getPropertyValue("entity-type"), Integer.valueOf(entity.getPropertyValue("entity-id"))));
+                        Entity workItem = new Entity(entity.getPropertyValue("entity-type"), Integer.valueOf(entity.getPropertyValue("entity-id")));
+                        workItem.mergeRelatedEntity(entity);
+                        list.add(workItem);
                     }
                     return list;
                 }

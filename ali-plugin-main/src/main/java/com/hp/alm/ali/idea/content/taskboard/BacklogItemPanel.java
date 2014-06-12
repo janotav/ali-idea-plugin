@@ -74,6 +74,7 @@ public class BacklogItemPanel extends ScrollablePanel implements Highlightable, 
     private Map<String, TaskContainerPanel> taskContainers;
     private JComponent taskContent;
     private Map<Integer, TaskPanel> tasks;
+    private Header header;
     private Content content;
     private JTextPane entityName;
     private Entity item;
@@ -89,7 +90,7 @@ public class BacklogItemPanel extends ScrollablePanel implements Highlightable, 
         entityLabelService = project.getComponent(EntityLabelService.class);
         entityService = project.getComponent(EntityService.class);
 
-        Header header = new Header();
+        header = new Header();
         header.setBorder(new EmptyBorder(0, 5, 0, 5));
         add(header, BorderLayout.NORTH);
         entityName = new JTextPane();
@@ -130,6 +131,7 @@ public class BacklogItemPanel extends ScrollablePanel implements Highlightable, 
     public void update(Entity item) {
         this.item = item;
 
+        header.update();
         content.update();
         entityName.setText(item.getPropertyValue("entity-name"));
         applyFilter();
@@ -269,6 +271,9 @@ public class BacklogItemPanel extends ScrollablePanel implements Highlightable, 
         if(!filter.getStatus().contains(item.getPropertyValue("status"))) {
             typeMatch = false;
         }
+        if (!filter.isBlocked() && !item.getPropertyValue("blocked").isEmpty()) {
+            typeMatch = false;
+        }
 
         ret.put(item, typeMatch && filterMatches(filter.getFilter(), item, "entity-name") && ownerMatches(filter.getAssignedTo(), item, "owner"));
 
@@ -350,7 +355,9 @@ public class BacklogItemPanel extends ScrollablePanel implements Highlightable, 
     @Override
     public Object getData(@NonNls String s) {
         if("entity-list".equals(s)) {
-            return Arrays.asList(new Entity(item.getPropertyValue("entity-type"), Integer.valueOf(item.getPropertyValue("entity-id"))));
+            Entity entity = new Entity(item.getPropertyValue("entity-type"), Integer.valueOf(item.getPropertyValue("entity-id")));
+            entity.mergeRelatedEntity(item);
+            return Arrays.asList(entity);
         }
         return null;
     }
@@ -422,12 +429,19 @@ public class BacklogItemPanel extends ScrollablePanel implements Highlightable, 
 
     private class Header extends JPanel {
 
+        private JLabel blocked;
+
         public Header() {
             super(new BorderLayout());
 
             setOpaque(false);
 
-            add(new EntityLabel(item.getPropertyValue("entity-type"), entityLabelService, " | ID " + item.getPropertyValue("entity-id")), BorderLayout.WEST);
+            JPanel westPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
+            blocked = new JLabel(IconLoader.getIcon("/blocked.png"));
+            blocked.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 2));
+            westPanel.add(blocked);
+            westPanel.add(new EntityLabel(item.getPropertyValue("entity-type"), entityLabelService, " | ID " + item.getPropertyValue("entity-id")));
+            add(westPanel, BorderLayout.WEST);
 
             JPanel toolbar = new JPanel();
             toolbar.setOpaque(false);
@@ -452,6 +466,18 @@ public class BacklogItemPanel extends ScrollablePanel implements Highlightable, 
             }, null);
             toolbar.add(moreLink);
             add(toolbar, BorderLayout.EAST);
+
+            update();
+        }
+
+        public void update() {
+            String reason = item.getPropertyValue("blocked");
+            if (!reason.isEmpty()) {
+                blocked.setToolTipText("Blocking reason: " + reason);
+                blocked.setVisible(true);
+            } else {
+                blocked.setVisible(false);
+            }
         }
     }
 }

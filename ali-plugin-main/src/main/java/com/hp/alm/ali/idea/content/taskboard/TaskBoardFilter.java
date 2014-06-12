@@ -28,6 +28,8 @@ public interface TaskBoardFilter {
 
     boolean isDefects();
 
+    boolean isBlocked();
+
     List<String> getStatus();
 
 }

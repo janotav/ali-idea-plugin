@@ -32,6 +32,7 @@ public class TaskBoardConfiguration implements PersistentStateComponent<Element>
     private String assignedTo;
     private boolean showDefects = true;
     private boolean showUserStories = true;
+    private boolean showBlocked = true;
     private String showStatuses = ALL_STATUSES;
     private String filter;
     private String tasksCompletedStatus;
@@ -50,6 +51,14 @@ public class TaskBoardConfiguration implements PersistentStateComponent<Element>
 
     public void setShowUserStories(boolean showUserStories) {
         this.showUserStories = showUserStories;
+    }
+
+    public boolean isShowBlocked() {
+        return showBlocked;
+    }
+
+    public void setShowBlocked(boolean showBlocked) {
+        this.showBlocked = showBlocked;
     }
 
     public String getShowStatuses() {
@@ -95,6 +104,7 @@ public class TaskBoardConfiguration implements PersistentStateComponent<Element>
         }
         element.setAttribute("showUserStories", String.valueOf(showUserStories));
         element.setAttribute("showDefects", String.valueOf(showDefects));
+        element.setAttribute("showBlocked", String.valueOf(showBlocked));
         element.setAttribute("showStatuses", showStatuses);
         if (tasksCompletedStatus != null) {
             element.setAttribute("tasksCompletedStatus", tasksCompletedStatus);
@@ -108,6 +118,7 @@ public class TaskBoardConfiguration implements PersistentStateComponent<Element>
         filter = element.getAttributeValue("filter");
         showUserStories = Boolean.parseBoolean(element.getAttributeValue("showUserStories", "true"));
         showDefects = Boolean.parseBoolean(element.getAttributeValue("showDefects", "true"));
+        showBlocked = Boolean.parseBoolean(element.getAttributeValue("showBlocked", "true"));
         showStatuses = element.getAttributeValue("showStatuses", ALL_STATUSES);
         tasksCompletedStatus = element.getAttributeValue("tasksCompletedStatus");
     }

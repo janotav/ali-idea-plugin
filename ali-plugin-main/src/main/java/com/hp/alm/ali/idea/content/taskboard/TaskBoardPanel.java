@@ -371,6 +371,7 @@ public class TaskBoardPanel extends JPanel implements SprintService.Listener, En
         private AssignedToComboBox assignedTo;
         private JCheckBox stories;
         private JCheckBox defects;
+        private JCheckBox blocked;
         private LinkLabel statusFilter;
 
         public Header() {
@@ -461,6 +462,15 @@ public class TaskBoardPanel extends JPanel implements SprintService.Listener, En
                 }
             });
             toolbar.add(defects);
+            blocked = new JCheckBox("Blocked", conf.isShowBlocked());
+            blocked.addItemListener(new ItemListener() {
+                @Override
+                public void itemStateChanged(ItemEvent e) {
+                    conf.setShowBlocked(blocked.isSelected());
+                    content.applyFilter();
+                }
+            });
+            toolbar.add(blocked);
 
             JPanel toolbarAndWarning = new JPanel(new BorderLayout());
             toolbarAndWarning.add(toolbar, BorderLayout.NORTH);
@@ -515,6 +525,11 @@ public class TaskBoardPanel extends JPanel implements SprintService.Listener, En
         @Override
         public boolean isDefects() {
             return defects.isSelected();
+        }
+
+        @Override
+        public boolean isBlocked() {
+            return blocked.isSelected();
         }
 
         @Override

@@ -366,6 +366,17 @@ public class EntityTableModel extends AbstractTableModel implements Disposable, 
                     }
                 }
             });
+        } else if("release-backlog-item".equals(entity.getType()) && entityName.equals(entity.getPropertyValue("entity-type"))) {
+            UIUtil.invokeLaterIfNeeded(new Runnable() {
+                public void run() {
+                    Entity workItem = new Entity(entity.getPropertyValue("entity-type"), Integer.valueOf(entity.getPropertyValue("entity-id")));
+                    int i = data.indexOf(workItem);
+                    if(i >= 0) {
+                        data.get(i).mergeRelatedEntity(entity);
+                        fireTableRowsUpdated(i, i);
+                    }
+                }
+            });
         }
     }
 

@@ -153,8 +153,10 @@ public class HorizonStrategy extends ApolloStrategy {
             if("release-backlog-item".equals(query.getEntityType())) {
                 clone.addColumn("entity-type", 1);
                 clone.addColumn("entity-id", 1);
+                clone.addColumn("blocked", 1);
             } else if("defect".equals(query.getEntityType()) || "requirement".equals(query.getEntityType())) {
                 clone.addColumn("release-backlog-item.id", 1);
+                clone.addColumn("release-backlog-item.blocked", 1);
 
                 LinkedHashMap<String,SortOrder> order = clone.getOrder();
                 if(containsAny(order.keySet(), orderMap.keySet())) {
@@ -291,6 +293,7 @@ public class HorizonStrategy extends ApolloStrategy {
         if("defect".equals(metadata.getEntityType())) {
             metadata.getField("status").setClazz(DefectStatusType.class);
             metadata.getField("release-backlog-item.status").setClazz(BacklogStatusDefectType.class);
+            metadata.getField("release-backlog-item.blocked").setClazz(BacklogBlockedType.class);
         }
 
         setClazz(metadata, "sprint-id", SprintType.class);

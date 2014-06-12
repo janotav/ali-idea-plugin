@@ -350,6 +350,7 @@
             <action id="hpali.entity.modify" class="com.hp.alm.ali.idea.action.ModifyAction"/>
             <action id="hpali.entity.delete" class="com.hp.alm.ali.idea.action.DeleteEntityAction"/>
             <action id="hpali.entity.activate" class="com.hp.alm.ali.idea.action.ActivateItemAction"/>
+            <action id="hpali.entity.block" class="com.hp.alm.ali.idea.action.BlockItemAction"/>
             <action id="hpali.entity.browser" class="com.hp.alm.ali.idea.action.BrowserAction"/>
             <action id="hpali.entity.attachmentOpen" class="com.hp.alm.ali.idea.action.attachment.AttachmentOpenAction"/>
             <action id="hpali.entity.attachmentBrowser" class="com.hp.alm.ali.idea.action.attachment.AttachmentBrowserAction"/>
