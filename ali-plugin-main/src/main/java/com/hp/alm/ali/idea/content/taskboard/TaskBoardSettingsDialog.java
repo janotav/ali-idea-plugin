@@ -17,7 +17,6 @@
 package com.hp.alm.ali.idea.content.taskboard;
 
 import com.hp.alm.ali.idea.cfg.TaskBoardConfiguration;
-import com.hp.alm.ali.idea.ui.BoxablePanel;
 import com.hp.alm.ali.idea.ui.dialog.MyDialog;
 import com.intellij.openapi.project.Project;
 
@@ -31,7 +30,6 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.Arrays;
@@ -50,12 +48,11 @@ public class TaskBoardSettingsDialog extends MyDialog {
 
         JPanel contentPanel = new JPanel();
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
-        contentPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 0, 0));
+        contentPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        JPanel taskComplete = new BoxablePanel();
+        JPanel taskComplete = new JPanel(new GridBagLayout());
         taskComplete.setAlignmentX(Component.LEFT_ALIGNMENT);
         taskComplete.setBorder(BorderFactory.createTitledBorder("When last task is completed"));
-        taskComplete.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         c.gridy = 0;
         c.gridx = 0;
@@ -74,20 +71,40 @@ public class TaskBoardSettingsDialog extends MyDialog {
                 itemStatuses.setEnabled(taskCompleteSwitch.isSelected());
             }
         });
-        deactivateItemSwitch = new JCheckBox("Deactivate work item if active");
+        deactivateItemSwitch = new JCheckBox("Deactivate work item");
         c.gridx = 0;
         c.gridy++;
         c.gridwidth = 2;
         taskComplete.add(deactivateItemSwitch, c);
+        // add filler
+        c.gridx = 3;
+        c.gridy++;
+        c.fill = GridBagConstraints.BOTH;
+        c.fill = GridBagConstraints.BOTH;
+        c.weightx = 1.0d;
+        c.weighty = 1.0d;
+        taskComplete.add(new JPanel(), c);
         contentPanel.add(taskComplete);
 
-        JPanel assignTask = new BoxablePanel(new FlowLayout());
+        JPanel assignTask = new JPanel(new GridBagLayout());
         assignTask.setAlignmentX(Component.LEFT_ALIGNMENT);
         assignTask.setBorder(BorderFactory.createTitledBorder("When starting work on task"));
+        c = new GridBagConstraints();
+        c.gridx = 0;
+        c.gridy = 0;
+        c.anchor = GridBagConstraints.WEST;
         assignTaskSwitch = new JCheckBox("Assign it to me");
-        assignTask.add(assignTaskSwitch);
+        assignTask.add(assignTaskSwitch, c);
         activateItemSwitch = new JCheckBox("Activate work item");
-        assignTask.add(activateItemSwitch);
+        c.gridy++;
+        assignTask.add(activateItemSwitch, c);
+        // add filler
+        c.gridx = 3;
+        c.gridy++;
+        c.fill = GridBagConstraints.BOTH;
+        c.weightx = 1.0d;
+        c.weighty = 1.0d;
+        assignTask.add(new JPanel(), c);
         contentPanel.add(assignTask);
 
         configuration = project.getComponent(TaskBoardConfiguration.class);
