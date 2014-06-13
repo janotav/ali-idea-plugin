@@ -50,6 +50,8 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragSource;
+import java.awt.dnd.DropTarget;
+import java.awt.dnd.DropTargetListener;
 import java.awt.event.MouseEvent;
 import java.util.Arrays;
 import java.util.Collections;
@@ -291,5 +293,10 @@ public class TaskPanel extends JLayeredPane implements Highlightable, DataProvid
             return Arrays.asList(task);
         }
         return null;
+    }
+
+    public void setDropTargetListener(DropTargetListener dropTargetListener) {
+        setDropTarget(new DropTarget(this, DnDConstants.ACTION_MOVE, dropTargetListener, true, null));
+        description.setDropTarget(new DropTarget(description, DnDConstants.ACTION_MOVE, dropTargetListener, true, null));
     }
 }

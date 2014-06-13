@@ -36,6 +36,7 @@ public class TaskContainerPanel extends JPanel {
     private Entity item;
     private String status;
     private BacklogItemPanel backlogItemPanel;
+    private TaskDropTargetListener taskDropTargetListener;
 
     private JComponent dragTarget;
 
@@ -51,11 +52,13 @@ public class TaskContainerPanel extends JPanel {
         dragTarget.setBorder(TaskPanel.createPanelBorder());
         add(dragTarget);
 
-        setDropTarget(new DropTarget(this, DnDConstants.ACTION_MOVE, new TaskDropTargetListener(), true, null));
+        taskDropTargetListener = new TaskDropTargetListener();
+        setDropTarget(new DropTarget(this, DnDConstants.ACTION_MOVE, taskDropTargetListener, true, null));
     }
 
     public void addTask(TaskPanel taskPanel) {
         add(taskPanel, getComponentCount() - 1);
+        taskPanel.setDropTargetListener(taskDropTargetListener);
     }
 
     public Dimension getPreferredSize() {
