@@ -57,7 +57,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
-public class PropertyGrid extends ScrollablePanel implements EntityFields.ColumnsChangeListener, CachingEntityListener, ServerTypeListener {
+public class PropertyGrid extends ScrollablePanel implements EntityFields.ColumnsChangeListener, CachingEntityListener, ServerTypeListener, HasEntity {
     private Entity entity;
     private Map<String, LabelAndValue> map;
     private List<String> columns;
@@ -214,7 +214,7 @@ public class PropertyGrid extends ScrollablePanel implements EntityFields.Column
                 final Viewer viewer;
                 Field field = metadata.getField(property);
                 if(field != null && translateService.isTranslated(field)) {
-                    viewer = new TranslatedViewer(project, entity, field, value);
+                    viewer = new TranslatedViewer(project, this, field, value);
                 } else {
                     viewer = new NavigableViewer(project, value);
                 }
