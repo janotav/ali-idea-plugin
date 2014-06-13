@@ -36,6 +36,9 @@ public class TaskBoardConfiguration implements PersistentStateComponent<Element>
     private String showStatuses = ALL_STATUSES;
     private String filter;
     private String tasksCompletedStatus;
+    private boolean assignTask;
+    private boolean deactivateItem;
+    private boolean activateItem;
 
     public boolean isShowDefects() {
         return showDefects;
@@ -93,6 +96,30 @@ public class TaskBoardConfiguration implements PersistentStateComponent<Element>
         this.tasksCompletedStatus = status;
     }
 
+    public boolean isAssignTask() {
+        return assignTask;
+    }
+
+    public void setAssignTask(boolean b) {
+        this.assignTask = b;
+    }
+
+    public boolean isDeactivateItem() {
+        return deactivateItem;
+    }
+
+    public void setDeactivateItem(boolean deactivateItem) {
+        this.deactivateItem = deactivateItem;
+    }
+
+    public boolean isActivateItem() {
+        return activateItem;
+    }
+
+    public void setActivateItem(boolean activateItem) {
+        this.activateItem = activateItem;
+    }
+
     @Override
     public Element getState() {
         Element element = new Element(getClass().getSimpleName());
@@ -109,6 +136,9 @@ public class TaskBoardConfiguration implements PersistentStateComponent<Element>
         if (tasksCompletedStatus != null) {
             element.setAttribute("tasksCompletedStatus", tasksCompletedStatus);
         }
+        element.setAttribute("assignTask", String.valueOf(assignTask));
+        element.setAttribute("deactivateItem", String.valueOf(deactivateItem));
+        element.setAttribute("activateItem", String.valueOf(activateItem));
         return element;
     }
 
@@ -121,5 +151,8 @@ public class TaskBoardConfiguration implements PersistentStateComponent<Element>
         showBlocked = Boolean.parseBoolean(element.getAttributeValue("showBlocked", "true"));
         showStatuses = element.getAttributeValue("showStatuses", ALL_STATUSES);
         tasksCompletedStatus = element.getAttributeValue("tasksCompletedStatus");
+        assignTask = Boolean.parseBoolean(element.getAttributeValue("assignTask", "false"));
+        deactivateItem = Boolean.parseBoolean(element.getAttributeValue("deactivateItem", "false"));
+        activateItem = Boolean.parseBoolean(element.getAttributeValue("activateItem", "false"));
     }
 }

@@ -16,7 +16,10 @@
 
 package com.hp.alm.ali.idea.content.taskboard;
 
+import com.hp.alm.ali.idea.cfg.AliProjectConfiguration;
 import com.hp.alm.ali.idea.cfg.TaskBoardConfiguration;
+import com.hp.alm.ali.idea.entity.EntityRef;
+import com.hp.alm.ali.idea.services.ActiveItemService;
 import com.hp.alm.ali.idea.ui.EntityLabel;
 import com.hp.alm.ali.idea.entity.EntityQuery;
 import com.hp.alm.ali.idea.services.EntityService;
@@ -55,6 +58,7 @@ import java.awt.GridLayout;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -71,6 +75,9 @@ public class BacklogItemPanel extends ScrollablePanel implements Highlightable, 
     private Project project;
     private EntityLabelService entityLabelService;
     private EntityService entityService;
+    private ActiveItemService activeItemService;
+    private TaskBoardConfiguration taskBoardConfiguration;
+    private AliProjectConfiguration aliProjectConfiguration;
     private Map<String, TaskContainerPanel> taskContainers;
     private JComponent taskContent;
     private Map<Integer, TaskPanel> tasks;
@@ -89,6 +96,9 @@ public class BacklogItemPanel extends ScrollablePanel implements Highlightable, 
         this.filter = filter;
         entityLabelService = project.getComponent(EntityLabelService.class);
         entityService = project.getComponent(EntityService.class);
+        activeItemService = project.getComponent(ActiveItemService.class);
+        taskBoardConfiguration = project.getComponent(TaskBoardConfiguration.class);
+        aliProjectConfiguration = project.getComponent(AliProjectConfiguration.class);
 
         header = new Header();
         header.setBorder(new EmptyBorder(0, 5, 0, 5));
@@ -171,15 +181,38 @@ public class BacklogItemPanel extends ScrollablePanel implements Highlightable, 
         ApplicationManager.getApplication().executeOnPooledThread(new Runnable() {
             @Override
             public void run() {
-                final Entity updatedTask = entityService.updateEntity(task, Collections.singleton("status"), false, true);
+                HashSet<String> properties = new HashSet<String>();
+                properties.add("status");
+                if (TaskPanel.TASK_IN_PROGRESS.equals(newStatus)) {
+                    // when moving task to progress
+                    if (taskBoardConfiguration.isAssignTask() && task.getPropertyValue("assigned-to").isEmpty()) {
+                        // assign them to me if they are unassigned
+                        task.setProperty("assigned-to", aliProjectConfiguration.getUsername());
+                        properties.add("assigned-to");
+                    }
+                    if (taskBoardConfiguration.isActivateItem()) {
+                        // activate work item
+                        UIUtil.invokeLaterIfNeeded(new Runnable() {
+                            @Override
+                            public void run() {
+                                Entity workItem = new Entity(item.getPropertyValue("entity-type"), Integer.valueOf(item.getPropertyValue("entity-id")));
+                                activeItemService.activate(workItem, true, false);
+                            }
+                        });
+                    }
+                }
+                final Entity updatedTask = entityService.updateEntity(task, properties, false, true);
                 if(updatedTask == null) {
                     return; // update failed
                 }
                 final Entity updatedRbi;
                 if (TaskPanel.TASK_COMPLETED.equals(newStatus)) {
-                    TaskBoardConfiguration configuration = project.getComponent(TaskBoardConfiguration.class);
-                    String tasksCompletedStatus = configuration.getTasksCompletedStatus();
-                    if (tasksCompletedStatus != null) {
+                    String tasksCompletedStatus = taskBoardConfiguration.getTasksCompletedStatus();
+                    EntityRef workItem = new EntityRef(item.getPropertyValue("entity-type"), Integer.valueOf(item.getPropertyValue("entity-id")));
+                    boolean deactivate = taskBoardConfiguration.isDeactivateItem() &&
+                            activeItemService.getActiveItem() != null &&
+                            activeItemService.getActiveItem().equals(workItem);
+                    if (tasksCompletedStatus != null || deactivate) {
                         // when task moves to completed, we need to see if there are incomplete tasks remaining
                         EntityQuery query = new EntityQuery("project-task");
                         query.addColumn("id", 1);
@@ -188,8 +221,22 @@ public class BacklogItemPanel extends ScrollablePanel implements Highlightable, 
                         query.setPropertyResolved("status", true);
                         EntityList incompleteTasks = entityService.query(query);
                         if(incompleteTasks.isEmpty()) {
-                            item.setProperty("status", tasksCompletedStatus);
-                            updatedRbi = entityService.updateEntity(item, Collections.singleton("status"), false, true);
+                            if (tasksCompletedStatus != null) {
+                                // move backlog item to target state
+                                item.setProperty("status", tasksCompletedStatus);
+                                updatedRbi = entityService.updateEntity(item, Collections.singleton("status"), false, true);
+                            } else {
+                                updatedRbi = null;
+                            }
+                            if (deactivate) {
+                                // deactivate work item
+                                UIUtil.invokeLaterIfNeeded(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        activeItemService.activate(null, true, false);
+                                    }
+                                });
+                            }
                         } else {
                             updatedRbi = null;
                         }
