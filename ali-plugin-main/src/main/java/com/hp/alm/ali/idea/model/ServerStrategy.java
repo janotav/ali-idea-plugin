@@ -20,6 +20,7 @@ import com.hp.alm.ali.idea.entity.EntityQuery;
 import com.hp.alm.ali.idea.entity.EntityQueryProcessor;
 import com.hp.alm.ali.idea.content.AliContent;
 import com.hp.alm.ali.idea.content.detail.DetailContent;
+import com.hp.alm.ali.idea.entity.EntityRef;
 import com.hp.alm.ali.idea.entity.edit.EntityEditStrategy;
 import com.hp.alm.ali.idea.entity.edit.LockingStrategy;
 import com.hp.alm.ali.idea.filter.FilterChooser;
@@ -86,4 +87,6 @@ public interface ServerStrategy extends EntityQueryProcessor {
     boolean canEditAttachmentFileName();
 
     List<String> getDefectLinkColumns();
+
+    String getCheckinPrefix(EntityRef entityRef);
 }

@@ -402,6 +402,11 @@ public class MayaStrategy implements ServerStrategy {
     }
 
     @Override
+    public String getCheckinPrefix(EntityRef entityRef) {
+        return entityRef.toString() + ":";
+    }
+
+    @Override
     public FilterChooser getFilterChooser(String entityType, boolean multiple, boolean idSelection, boolean acceptEmpty, String value) {
         EntityChooser dialog;
         if(Metadata.getChildEntity(entityType) != null || Metadata.getParentEntity(entityType) != null) {

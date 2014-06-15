@@ -28,6 +28,7 @@ import com.hp.alm.ali.idea.content.detail.DetailContent;
 import com.hp.alm.ali.idea.content.detail.TableContent;
 import com.hp.alm.ali.idea.content.detail.TaskTableLoader;
 import com.hp.alm.ali.idea.entity.EntityQueryProcessor;
+import com.hp.alm.ali.idea.entity.EntityRef;
 import com.hp.alm.ali.idea.entity.edit.DummyLock;
 import com.hp.alm.ali.idea.entity.edit.EntityEditStrategy;
 import com.hp.alm.ali.idea.entity.edit.HorizonEditStrategy;
@@ -379,6 +380,16 @@ public class HorizonStrategy extends ApolloStrategy {
             return popup;
         } else {
             return super.getFilterChooser(entityType, multiple, idSelection, acceptEmpty, value);
+        }
+    }
+
+    @Override
+    public String getCheckinPrefix(EntityRef entityRef) {
+        if ("requirement".equals(entityRef.type)) {
+            // we can't use entity label because it starts with capital letter
+            return "user story #" + entityRef.id + ":";
+        } else {
+            return super.getCheckinPrefix(entityRef);
         }
     }
 

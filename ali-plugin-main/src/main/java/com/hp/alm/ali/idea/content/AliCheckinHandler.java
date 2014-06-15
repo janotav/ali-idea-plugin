@@ -20,6 +20,10 @@ import com.hp.alm.ali.idea.entity.EntityAdapter;
 import com.hp.alm.ali.idea.filter.FilterChooser;
 import com.hp.alm.ali.idea.entity.edit.LockingStrategy;
 import com.hp.alm.ali.idea.rest.RestService;
+import com.hp.alm.ali.idea.rest.ServerType;
+import com.hp.alm.ali.idea.rest.ServerTypeListener;
+import com.hp.alm.ali.idea.services.AbstractCachingService;
+import com.hp.alm.ali.idea.services.EntityLabelService;
 import com.hp.alm.ali.idea.services.MetadataService;
 import com.hp.alm.ali.idea.services.ProjectListService;
 import com.hp.alm.ali.idea.services.ProjectUserService;
@@ -44,6 +48,7 @@ import com.intellij.openapi.editor.actions.ContentChooser;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.IconLoader;
 import com.intellij.openapi.vcs.CheckinProjectPanel;
+import com.intellij.openapi.vcs.VcsException;
 import com.intellij.openapi.vcs.checkin.CheckinHandler;
 import com.intellij.openapi.vcs.ui.RefreshableOnComponent;
 import com.intellij.ui.components.JBScrollPane;
@@ -71,7 +76,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class AliCheckinHandler extends CheckinHandler implements ActionListener, DocumentListener, ActiveItemService.Listener {
+public class AliCheckinHandler extends CheckinHandler implements ActionListener, DocumentListener, ActiveItemService.Listener, ServerTypeListener {
     private JPanel header;
     private JCheckBox markFixed;
     private JComboBox markFixedSelection;
@@ -85,16 +90,23 @@ public class AliCheckinHandler extends CheckinHandler implements ActionListener,
 
     private Project project;
     private RestService restService;
+    private EntityService entityService;
+    private EntityLabelService entityLabelService;
+    private ActiveItemService activeItemService;
     private EntityRef ref;
     private AliProjectConfiguration projConf;
     private String lastAddedComment = null;
+    private String originalMessage;
 
     public AliCheckinHandler(CheckinProjectPanel checkinProjectPanel) {
         this.checkinProjectPanel = checkinProjectPanel;
         this.project = checkinProjectPanel.getProject();
         this.restService = project.getComponent(RestService.class);
-        final ActiveItemService activeItemService = project.getComponent(ActiveItemService.class);
+        this.entityService = project.getComponent(EntityService.class);
+        this.entityLabelService = project.getComponent(EntityLabelService.class);
+        this.activeItemService = project.getComponent(ActiveItemService.class);
         this.ref = activeItemService.getActiveItem();
+        this.originalMessage = checkinProjectPanel.getCommitMessage();
 
         this.projConf = project.getComponent(AliProjectConfiguration.class);
 
@@ -102,38 +114,30 @@ public class AliCheckinHandler extends CheckinHandler implements ActionListener,
         panel.setLayout(new BorderLayout());
         panel.setBorder(BorderFactory.createTitledBorder("HP ALI"));
 
-        if(!restService.getServerTypeIfAvailable().isConnected()) {
-            panel.setVisible(false);
-        } else if(ref == null) {
-            activeItemService.addListener(this);
-            DefaultActionGroup group = new DefaultActionGroup();
-            ChooseEntityTypeAction choose = new ChooseEntityTypeAction(project, panel, Arrays.asList("defect", "requirement"), new ChooseEntityTypePopup.Listener() {
-                @Override
-                public void selected(final String entityType) {
-                    FilterChooser popup = restService.getServerStrategy().getFilterChooser(entityType, false, true, false, null);
-                    popup.show();
-                    String selectedId = popup.getSelectedValue();
-                    if (selectedId != null && !selectedId.isEmpty()) {
-                        activeItemService.activate(new Entity(entityType, Integer.valueOf(selectedId)), true, false);
-                    }
-                }
-            });
-            group.add(choose);
-            panel.add(new JLabel("Not associated with any work item"), BorderLayout.WEST);
-            ActionToolbar toolbar = ActionManager.getInstance().createActionToolbar(ActionPlaces.UNKNOWN, group, true);
-            panel.add(toolbar.getComponent(), BorderLayout.EAST);
-            choose.setComponent(toolbar.getComponent());
-        } else {
-            setupPanel(checkinProjectPanel, ref);
-        }
+        activeItemService.addListener(this);
+        restService.addServerTypeListener(this);
+
+        doConnectedTo(restService.getServerTypeIfAvailable());
     }
 
-    private void setupPanel(CheckinProjectPanel checkinProjectPanel, final EntityRef ref) {
-        // replace commit message only if necessary
-        String prefix = ref.toString() + ": ";
-        String msg = checkinProjectPanel.getCommitMessage();
-        if(!msg.startsWith(prefix)) {
-            checkinProjectPanel.setCommitMessage(prefix);
+    private void setupPanel(final CheckinProjectPanel checkinProjectPanel, final EntityRef ref) {
+        final String prefix = restService.getServerStrategy().getCheckinPrefix(ref);
+        if (!originalMessage.startsWith(prefix)) {
+            // only pre-fill message if current message doesn't refer to the correct item
+            entityService.requestCachedEntity(ref, Arrays.asList("name"), new EntityAdapter() {
+                @Override
+                public void entityLoaded(final Entity entity, Event event) {
+                    UIUtil.invokeLaterIfNeeded(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (checkinProjectPanel.getCommitMessage().equals(originalMessage)) {
+                                // only if message hasn't changed yet
+                                checkinProjectPanel.setCommitMessage(prefix + " " + entity.getPropertyValue("name"));
+                            }
+                        }
+                    });
+                }
+            });
         }
 
         markFixed = new JCheckBox("Mark " + ref.toString() + " as ");
@@ -148,7 +152,6 @@ public class AliCheckinHandler extends CheckinHandler implements ActionListener,
             jPanel.add(markFixedSelection);
             panel.add(jPanel, BorderLayout.NORTH);
 
-            final EntityService entityService = project.getComponent(EntityService.class);
             EntityListener callback = new EntityAdapter() {
                 @Override
                 public void entityLoaded(Entity entity, Event event) {
@@ -198,6 +201,15 @@ public class AliCheckinHandler extends CheckinHandler implements ActionListener,
         addComment = new JCheckBox("Add comment to "+ref.toString());
         addComment.addActionListener(this);
         header.add(addComment, BorderLayout.WEST);
+
+        // make sure checkboxes refer to correct entity label (requirement vs. User Story)
+        entityLabelService.loadEntityLabelAsync(ref.type, new AbstractCachingService.DispatchCallback<String>() {
+            @Override
+            public void loaded(String entityLabel) {
+                markFixed.setText("Mark " + entityLabel + " #" + ref.id + " as ");
+                addComment.setText("Add comment to " + entityLabel + " #" + ref.id);
+            }
+        });
 
         DefaultActionGroup group = new DefaultActionGroup();
         group.add(new AnAction("Choose Message", "Choose Recent Message", IconLoader.getIcon("/actions/consoleHistory.png")) {
@@ -252,7 +264,17 @@ public class AliCheckinHandler extends CheckinHandler implements ActionListener,
         panel.revalidate();
     }
 
+    private void removeListeners() {
+        activeItemService.removeListener(this);
+        restService.removeServerTypeListener(this);
+    }
+
+    public void checkinFailed(List<VcsException> exception) {
+        removeListeners();
+    }
+
     public void checkinSuccessful() {
+        removeListeners();
         if(markFixed == null) {
             // no associated work item
             return;
@@ -346,7 +368,48 @@ public class AliCheckinHandler extends CheckinHandler implements ActionListener,
     public void onActivated(EntityRef ref) {
         if(ref != null) {
             this.ref = ref;
-            panel.removeAll();
+            connectedTo(restService.getServerTypeIfAvailable());
+        }
+    }
+
+    @Override
+    public void connectedTo(ServerType serverType) {
+        if (!panel.isShowing()) {
+            // there is no cancel event available to the checkin handler, instead we try to detect obsolete listener
+            // invocation and cleanup
+            removeListeners();
+        } else {
+            doConnectedTo(serverType);
+        }
+    }
+
+    private void doConnectedTo(ServerType serverType) {
+        panel.removeAll();
+        if(!serverType.isConnected()) {
+            if (serverType == ServerType.CONNECTING) {
+                panel.add(new JLabel("Connecting..."));
+            } else {
+                panel.add(new JLabel("Not connected to server"));
+            }
+        } else if(ref == null) {
+            DefaultActionGroup group = new DefaultActionGroup();
+            ChooseEntityTypeAction choose = new ChooseEntityTypeAction(project, panel, Arrays.asList("defect", "requirement"), new ChooseEntityTypePopup.Listener() {
+                @Override
+                public void selected(final String entityType) {
+                    FilterChooser popup = restService.getServerStrategy().getFilterChooser(entityType, false, true, false, null);
+                    popup.show();
+                    String selectedId = popup.getSelectedValue();
+                    if (selectedId != null && !selectedId.isEmpty()) {
+                        activeItemService.activate(new Entity(entityType, Integer.valueOf(selectedId)), true, false);
+                    }
+                }
+            });
+            group.add(choose);
+            panel.add(new JLabel("Not associated with any work item"), BorderLayout.WEST);
+            ActionToolbar toolbar = ActionManager.getInstance().createActionToolbar(ActionPlaces.UNKNOWN, group, true);
+            panel.add(toolbar.getComponent(), BorderLayout.EAST);
+            choose.setComponent(toolbar.getComponent());
+        } else {
             setupPanel(checkinProjectPanel, ref);
         }
     }
