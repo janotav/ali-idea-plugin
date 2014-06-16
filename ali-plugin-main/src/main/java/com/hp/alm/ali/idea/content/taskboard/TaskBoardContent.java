@@ -44,6 +44,7 @@ public class TaskBoardContent implements AliContent {
         JPanel panel = new JPanel(new BorderLayout());
         final TaskBoardPanel taskBoardPanel = new TaskBoardPanel(project);
         JBScrollPane scrollPane = new JBScrollPane(taskBoardPanel, JBScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JBScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(TaskPanel.SIZE.height);
         scrollPane.setColumnHeaderView(taskBoardPanel.getHeader());
         panel.add(scrollPane, BorderLayout.CENTER);
 
