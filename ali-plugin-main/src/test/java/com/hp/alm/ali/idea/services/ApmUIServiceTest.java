@@ -22,7 +22,6 @@ import com.hp.alm.ali.idea.RestInvocations;
 import com.hp.alm.ali.idea.entity.EntityAdapter;
 import com.hp.alm.ali.idea.entity.EntityListener;
 import com.hp.alm.ali.idea.model.Entity;
-import com.hp.alm.ali.idea.rest.RestException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -91,7 +90,7 @@ public class ApmUIServiceTest extends IntellijTest {
     @Test
     public void testCreateRequirementInRelease() {
         handler.addRequest("POST", "/qcbin/rest/domains/domain/projects/project/apmuiservices/additemservice/createrequirementinrelease", 200)
-                .expectBody("description=something&featureID=1439&name=somewhat&parentID=0&priority=2-High&productId=0&releaseId=1001&reqType=70&sprintID=1001&storyPoints=1&teamID=101")
+                .expectBody("description=something&featureID=1439&name=somewhat&parentID=0&priority=2-High&releaseId=1001&reqType=70&sprintID=1001&storyPoints=1&teamID=101")
                 .content("apmUIServiceTest_requirement.xml");
         RestInvocations.loadMetadata(handler, "project-task");
         handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/project-tasks?fields=&query={release-backlog-item-id[4289]}&order-by={}", 200)

@@ -61,7 +61,6 @@ public class ApmUIService {
         buf.append("&name=").append(EntityQuery.encode(name));
         buf.append("&parentID=0");
         buf.append("&priority=").append(EntityQuery.encode(priority));
-        buf.append("&productId=0");
         buf.append("&releaseId=").append(releaseId);
         buf.append("&reqType=70");
         buf.append("&sprintID=").append(sprintId);
