@@ -22,6 +22,8 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.ui.UIUtil;
 
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.List;
 
 public abstract class LazyComboBox extends ChooserBox<ComboItem> {
@@ -105,5 +107,19 @@ public abstract class LazyComboBox extends ChooserBox<ComboItem> {
                 }
             }
         });
+    }
+
+    public abstract class NonLoadingItemListener implements ItemListener {
+
+        @Override
+        final public void itemStateChanged(ItemEvent e) {
+            if (!loading) {
+                // ignore events when loading items
+                doItemStateChanged(e);
+            }
+        }
+
+        public abstract void doItemStateChanged(ItemEvent e);
+
     }
 }

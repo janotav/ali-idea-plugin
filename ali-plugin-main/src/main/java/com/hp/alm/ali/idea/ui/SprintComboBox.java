@@ -21,7 +21,6 @@ import com.hp.alm.ali.idea.model.Entity;
 import com.intellij.openapi.project.Project;
 
 import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,9 +39,9 @@ public class SprintComboBox extends LazyComboBox implements SprintService.Listen
             addItem(new ComboItem(sprint, sprint.getPropertyValue("name")));
         }
 
-        addItemListener(new ItemListener() {
+        addItemListener(new NonLoadingItemListener() {
             @Override
-            public void itemStateChanged(ItemEvent e) {
+            public void doItemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
                     Object sprint = ((ComboItem) e.getItem()).getKey();
                     if (sprint instanceof Entity) {

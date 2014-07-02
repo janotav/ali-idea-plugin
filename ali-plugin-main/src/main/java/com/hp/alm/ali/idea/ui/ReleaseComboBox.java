@@ -22,7 +22,6 @@ import com.hp.alm.ali.idea.model.parser.EntityList;
 import com.intellij.openapi.project.Project;
 
 import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,10 +40,10 @@ public class ReleaseComboBox extends LazyComboBox implements SprintService.Liste
             addItem(new ComboItem(release, release.getPropertyValue("name")));
         }
 
-        addItemListener(new ItemListener() {
+        addItemListener(new NonLoadingItemListener() {
             @Override
-            public void itemStateChanged(ItemEvent e) {
-                if(!loading && e.getStateChange() == ItemEvent.SELECTED) {
+            public void doItemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
                     Object selected = ((ComboItem) e.getItem()).getKey();
                     if(selected instanceof Entity) {
                         sprintService.selectRelease((Entity)selected);
