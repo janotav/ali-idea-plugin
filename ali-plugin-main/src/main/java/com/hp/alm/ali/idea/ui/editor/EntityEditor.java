@@ -16,10 +16,12 @@
 
 package com.hp.alm.ali.idea.ui.editor;
 
+import com.hp.alm.ali.idea.cfg.EntityFields;
 import com.hp.alm.ali.idea.entity.edit.DependentValue;
 import com.hp.alm.ali.idea.model.Field;
 import com.hp.alm.ali.idea.cfg.AliProjectConfiguration;
 import com.hp.alm.ali.idea.model.type.Context;
+import com.hp.alm.ali.idea.ui.MultipleItemsDialog;
 import com.hp.alm.ali.idea.ui.editor.field.CommentField;
 import com.hp.alm.ali.idea.ui.editor.field.EditableField;
 import com.hp.alm.ali.idea.ui.editor.field.EditableFieldListener;
@@ -35,20 +37,30 @@ import com.hp.alm.ali.idea.services.ProjectListService;
 import com.hp.alm.ali.idea.services.ProjectUserService;
 import com.hp.alm.ali.idea.model.Entity;
 import com.intellij.openapi.project.Project;
+import com.intellij.util.ui.UIUtil;
 
 import javax.swing.JComponent;
+import javax.swing.JTextPane;
+import javax.swing.event.HyperlinkEvent;
+import javax.swing.event.HyperlinkListener;
+import javax.swing.text.html.HTMLEditorKit;
+import java.awt.BorderLayout;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
-public class EntityEditor extends BaseEditor {
+public class EntityEditor extends BaseEditor implements EntityFields.ColumnsChangeListener {
 
     protected Project project;
+    private EntityFields entityFields;
     private List<String> forceEditable;
     private List<String> columnsToEdit;
     private Metadata metadata;
     private Context context;
 
-    public EntityEditor(Project project, String titleTemplate, final Entity entity, List<String> columnsToEdit, boolean addRequired, boolean removeReadonly, List<String> forceEditable, SaveHandler saveHandler) {
+    public EntityEditor(final Project project, String titleTemplate, final Entity entity, List<String> columnsToEdit, boolean addRequired, boolean removeReadonly, List<String> forceEditable, SaveHandler saveHandler) {
         super(project, "", entity, saveHandler);
 
         this.project = project;
@@ -58,6 +70,8 @@ public class EntityEditor extends BaseEditor {
         setEditorTitle(project, titleTemplate, entity.getType());
 
         metadata = project.getComponent(MetadataService.class).getEntityMetadata(entity.getType());
+        entityFields = project.getComponent(AliProjectConfiguration.class).getFields(entity.getType());
+        entityFields.addColumnsChangeListener(this);
 
         if(addRequired) {
             for(Field field: metadata.getRequiredFields()) {
@@ -72,6 +86,21 @@ public class EntityEditor extends BaseEditor {
                 it.remove();
             }
         }
+
+        JTextPane addProperty = new JTextPane();
+        addProperty.setEditorKit(new HTMLEditorKit());
+        addProperty.setText("<html><body><i>Property not listed? Click <a href='#addProperty'>here</a></i></body></html>");
+        addProperty.setEditable(false);
+        addProperty.addHyperlinkListener(new HyperlinkListener() {
+            @Override
+            public void hyperlinkUpdate(HyperlinkEvent e) {
+                if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
+                    handleAddProperty();
+                }
+            }
+        });
+        gridFooter.setLayout(new BorderLayout());
+        gridFooter.add(addProperty, BorderLayout.EAST);
     }
 
     @Override
@@ -86,6 +115,49 @@ public class EntityEditor extends BaseEditor {
         }
 
         packAndPosition();
+    }
+
+    private void handleAddProperty() {
+        List<Field> available = new ArrayList<Field>();
+        for (Field field : metadata.getAllFields().values()) {
+            // offer all editable fields that are currently not present
+            if (fields.get(field.getName()) == null && field.isEditable()) {
+                available.add(field);
+            }
+        }
+        Collections.sort(available, Field.LABEL_COMPARATOR);
+        LinkedList<String> addedFields = new LinkedList<String>();
+        MultipleItemsDialog dialog = new MultipleItemsDialog(project, "Field", true, available, addedFields);
+        dialog.setVisible(true);
+        if (dialog.isOk()) {
+            entityFields.addColumns(addedFields);
+        }
+    }
+
+    @Override
+    public void columnsChanged(String columnToFocus) {
+        UIUtil.invokeLaterIfNeeded(new Runnable() {
+            @Override
+            public void run() {
+                boolean changed = false;
+                for (String field : entityFields.getColumns()) {
+                    if (getField(field) != null) {
+                        continue;
+                    }
+                    Field f = metadata.getField(field);
+                    if (f == null) {
+                        // TODO: enforce field validity instead (store fields per server type)
+                        continue;
+                    }
+                    addField(f, f.isEditable());
+                    changed = true;
+                }
+                if (changed) {
+                    gridPanel.revalidate();
+                    gridPanel.repaint();
+                }
+            }
+        });
     }
 
     private void addField(final Field field, boolean editable) {

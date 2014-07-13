@@ -25,6 +25,7 @@ import com.intellij.openapi.actionSystem.ToggleAction;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.IconLoader;
+import org.apache.commons.lang.StringUtils;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -55,9 +56,14 @@ public class BlockItemAction extends ToggleAction {
         boolean visible = hasBacklogItem && workItemTypes.contains(EntityAction.getEntityType(e));
         e.getPresentation().setVisible(visible);
         if(visible) {
-            boolean selected = isSelected(e);
-            e.getPresentation().setText(selected? "Unblock": "Block");
-            e.getPresentation().setDescription(selected? "Unblock work item": "Block work item");
+            String reason = getBlockedReason(entity);
+            if (!StringUtils.isEmpty(reason)) {
+                e.getPresentation().setText("Unblock: " + reason);
+                e.getPresentation().setDescription("Unblock work item: " + reason);
+            } else {
+                e.getPresentation().setText("Block");
+                e.getPresentation().setDescription("Block work item");
+            }
         }
     }
 
@@ -106,6 +112,14 @@ public class BlockItemAction extends ToggleAction {
     }
 
     private boolean isBlockedEntity(Entity entity) {
-        return entity != null && !entity.getPropertyValue("release-backlog-item.blocked").isEmpty();
+        return !StringUtils.isEmpty(getBlockedReason(entity));
+    }
+
+    private String getBlockedReason(Entity entity) {
+        if (entity != null) {
+            return (String) entity.getProperty("release-backlog-item.blocked");
+        } else {
+            return null;
+        }
     }
 }

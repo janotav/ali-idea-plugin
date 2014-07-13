@@ -46,7 +46,8 @@ import java.util.Map;
 public abstract class BaseEditor extends MyDialog {
 
     private GridBagConstraints gbc;
-    private JPanel gridPanel;
+    protected JPanel gridPanel;
+    protected JPanel gridFooter;
 
     protected Map<String, EditableField> fields;
     private int verticalExpandCount = 0;
@@ -73,8 +74,13 @@ public abstract class BaseEditor extends MyDialog {
                 return dim;
             }
         };
-        gridPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
-        getContentPane().add(new JBScrollPane(gridPanel, JBScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER), BorderLayout.CENTER);
+        gridFooter = new JPanel();
+
+        JPanel panel = new ScrollablePanel(new BorderLayout());
+        panel.setBorder(new EmptyBorder(10, 10, 10, 10));
+        panel.add(gridPanel, BorderLayout.CENTER);
+        panel.add(gridFooter, BorderLayout.SOUTH);
+        getContentPane().add(new JBScrollPane(panel, JBScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER));
 
         save = getButton(Button.Save);
         save.setEnabled(false);

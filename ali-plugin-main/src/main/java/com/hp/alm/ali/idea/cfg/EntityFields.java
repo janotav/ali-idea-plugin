@@ -70,6 +70,21 @@ public class EntityFields implements JDOMSerialization {
         fireColumnsChanged(column);
     }
 
+    public void addColumns(List<String> columns) {
+        boolean changed = false;
+        synchronized(this) {
+            for (String column: columns) {
+                if (!this.columns.contains(column)) {
+                    this.columns.add(column);
+                    changed = true;
+                }
+            }
+        }
+        if (changed) {
+            fireColumnsChanged(null);
+        }
+    }
+
     public void removeColumn(String column) {
         synchronized(this) {
             if(!columns.remove(column)) {
