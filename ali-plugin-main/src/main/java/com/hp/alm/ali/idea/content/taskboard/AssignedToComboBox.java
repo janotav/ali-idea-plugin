@@ -60,7 +60,7 @@ public class AssignedToComboBox extends LazyComboBox implements SprintService.Li
 
         EntityList members = teamMemberService.getTeamMembers(team);
         for(Entity member: members) {
-            items.add(new ComboItem(member.getPropertyValue("name")));
+            items.add(new ComboItem(member.getPropertyValue("name"), member.getPropertyValue("full-name")));
         }
         return items;
     }

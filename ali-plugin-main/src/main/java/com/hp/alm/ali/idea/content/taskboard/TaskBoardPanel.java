@@ -397,7 +397,7 @@ public class TaskBoardPanel extends JPanel implements SprintService.Listener, En
                 @Override
                 public void itemStateChanged(ItemEvent e) {
                     if (e.getStateChange() == ItemEvent.SELECTED) {
-                        conf.setAssignedTo(assignedTo.getSelectedItem().toString());
+                        conf.setAssignedTo(((ComboItem) assignedTo.getSelectedItem()).getKey().toString());
                         content.applyFilter();
                     }
                 }
@@ -513,7 +513,7 @@ public class TaskBoardPanel extends JPanel implements SprintService.Listener, En
             } else if(AssignedToComboBox.UNASSIGNED.equals(selectedItem)) {
                 return "";
             } else {
-                return selectedItem.toString();
+                return ((ComboItem)selectedItem).getKey().toString();
             }
         }
 
