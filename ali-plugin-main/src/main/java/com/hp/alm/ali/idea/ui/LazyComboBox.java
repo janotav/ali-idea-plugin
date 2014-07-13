@@ -62,17 +62,15 @@ public abstract class LazyComboBox extends ChooserBox<ComboItem> {
                     public void run() {
                         loading = true;
                         removeAllItems();
-                        int selectedIdx = -1;
+                        addItem(new ComboItem("Loading..."));
                         for(ComboItem item: items) {
                             addItem(item);
-                            if(item.equals(selectedItem)) {
-                                selectedIdx = getItemCount() - 1;
-                            }
                         }
                         loading = false;
-                        if(selectedIdx >= 0) {
-                            setSelectedIndex(selectedIdx);
-                        }
+                        // we need auxiliary value to ensure that following select fires an event even if it's selecting
+                        // first item (without auxiliary it would already be selected)
+                        setSelectedItem(selectedItem);
+                        removeItemAt(0);
                         if(getItemCount() > 1) {
                             setEnabled(true);
                         } else {

@@ -29,6 +29,7 @@ import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
 import com.intellij.openapi.project.Project;
+import org.apache.commons.lang.ObjectUtils;
 import org.jdom.Element;
 
 import javax.swing.SortOrder;
@@ -292,7 +293,9 @@ public class SprintService implements PersistentStateComponent<Element>, ServerT
     }
 
     public synchronized void selectSprint(Entity sprint) {
-        if((sprint != null && sprint.equals(this.sprintSelector.selected)) ||
+        // if sprint has different tense, we want the event fired (otherwise the inactive sprint warning would not be
+        // displayed when the original sprint was loaded from persisted configuration)
+        if((sprint != null && sprint.equals(this.sprintSelector.selected) && isSameTense(sprint, this.sprintSelector.selected)) ||
                 (sprint == null && this.sprintSelector.selected == null)) {
             return;
         }
@@ -377,6 +380,10 @@ public class SprintService implements PersistentStateComponent<Element>, ServerT
                 loadReleases();
             }
         });
+    }
+
+    public static boolean isSameTense(Entity sprint1, Entity sprint2) {
+        return ObjectUtils.equals(sprint1.getProperty("tense"), sprint2.getProperty("tense"));
     }
 
     public static boolean isCurrentSprint(Entity sprint) {
