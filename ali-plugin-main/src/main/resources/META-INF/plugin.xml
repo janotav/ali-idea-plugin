@@ -2,13 +2,19 @@
     <id>com.hp.alm.ali</id>
     <name>HP ALI</name>
     <description>Application Lifecycle Intelligence for HP ALM</description>
-    <version>3.9.@{idea.build}</version>
+    <version>3.10.@{idea.build}</version>
     <vendor logo="/ali_icon.png" url="https://hpln.hp.com/group/application-lifecycle-intelligence">HP</vendor>
 
     <idea-version since-build="@{idea.build}"/>
 
     <change-notes>
         <![CDATA[
+      <h3>Changes in 3.10</h3>
+      <ul>
+        <li>[enhancement] further task board improvements
+        <li>[bugfix] proper commit message when working on user story</li>
+      </ul>
+
       <h3>Changes in 3.9</h3>
       <ul>
         <li>[enhancement] task board improvements

@@ -9,7 +9,7 @@
     <name>${project.artifactId}:${project.version}</name>
     <description>Common HP ALI parent</description>
     <packaging>pom</packaging>
-    <version>3.9</version>
+    <version>3.10</version>
 
     <properties>
         <spring.version>3.2.4.RELEASE</spring.version>

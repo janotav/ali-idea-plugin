@@ -27,7 +27,7 @@ cat << POM_HEADER >> idea-sdk-$version/pom.xml
     <parent>
         <artifactId>ali-parent</artifactId>
         <groupId>com.hp.alm.ali</groupId>
-        <version>3.9</version>
+        <version>3.10</version>
         <relativePath>../ali-parent</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
