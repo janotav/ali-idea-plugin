@@ -2,7 +2,6 @@
 
 package com.hp.alm.ali.idea.checkin;
 
-import com.intellij.dvcs.repo.Repository;
 import com.intellij.openapi.vcs.CheckinProjectPanel;
 import com.intellij.openapi.vcs.FilePath;
 import com.intellij.openapi.vcs.ProjectLevelVcsManager;
@@ -25,7 +24,8 @@ public class GitCheckin implements RepositoryCheckin {
             if (repository == null) {
                 continue;
             }
-            if (repository.getState() != Repository.State.NORMAL) {
+            // can't use enum directly due to 129.239 compatibility
+            if (!"NORMAL".equals(repository.getState().name())) {
                 return true;
             }
         }
