@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.hp.alm.ali.idea.content;
+package com.hp.alm.ali.idea.checkin;
 
 import com.hp.alm.ali.idea.rest.RestService;
 import com.intellij.openapi.vcs.CheckinProjectPanel;

@@ -1,5 +1,6 @@
 <idea-plugin>
     <extensions defaultExtensionNs="com.hp.alm.ali">
         <revisionCreator implementation="com.hp.alm.ali.idea.revision.GitRevisionFactory"/>
+        <repositoryCheckin implementation="com.hp.alm.ali.idea.checkin.GitCheckin"/>
     </extensions>
 </idea-plugin>

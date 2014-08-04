@@ -398,13 +398,14 @@
 
     <extensionPoints>
        <extensionPoint name="revisionCreator" interface="com.hp.alm.ali.idea.revision.RevisionFactory"/>
+       <extensionPoint name="repositoryCheckin" interface="com.hp.alm.ali.idea.checkin.RepositoryCheckin"/>
     </extensionPoints>
 
     <extensions defaultExtensionNs="com.intellij">
        <toolWindow id="HP ALI" icon="/ali_icon_13x13.png" anchor="bottom" factoryClass="com.hp.alm.ali.idea.content.AliContentFactory"/>
        <applicationConfigurable implementation="com.hp.alm.ali.idea.cfg.AliConfigurable"/>
        <projectConfigurable implementation="com.hp.alm.ali.idea.cfg.AliProjectConfigurable"/>
-       <checkinHandlerFactory implementation="com.hp.alm.ali.idea.content.AliCheckinHandlerFactory"/>
+       <checkinHandlerFactory implementation="com.hp.alm.ali.idea.checkin.AliCheckinHandlerFactory"/>
     </extensions>
 
 </idea-plugin>

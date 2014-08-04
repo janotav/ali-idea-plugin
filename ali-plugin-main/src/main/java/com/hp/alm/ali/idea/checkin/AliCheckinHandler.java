@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.hp.alm.ali.idea.content;
+package com.hp.alm.ali.idea.checkin;
 
 import com.hp.alm.ali.idea.entity.EntityAdapter;
 import com.hp.alm.ali.idea.filter.FilterChooser;
@@ -48,6 +48,7 @@ import com.intellij.openapi.editor.actions.ContentChooser;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.IconLoader;
 import com.intellij.openapi.vcs.CheckinProjectPanel;
+import com.intellij.openapi.vcs.VcsConfiguration;
 import com.intellij.openapi.vcs.VcsException;
 import com.intellij.openapi.vcs.checkin.CheckinHandler;
 import com.intellij.openapi.vcs.ui.RefreshableOnComponent;
@@ -121,23 +122,28 @@ public class AliCheckinHandler extends CheckinHandler implements ActionListener,
     }
 
     private void setupPanel(final CheckinProjectPanel checkinProjectPanel, final EntityRef ref) {
-        final String prefix = restService.getServerStrategy().getCheckinPrefix(ref);
-        if (!originalMessage.startsWith(prefix)) {
-            // only pre-fill message if current message doesn't refer to the correct item
-            entityService.requestCachedEntity(ref, Arrays.asList("name"), new EntityAdapter() {
-                @Override
-                public void entityLoaded(final Entity entity, Event event) {
-                    UIUtil.invokeLaterIfNeeded(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (checkinProjectPanel.getCommitMessage().equals(originalMessage)) {
-                                // only if message hasn't changed yet
-                                checkinProjectPanel.setCommitMessage(prefix + " " + entity.getPropertyValue("name"));
+        if (!RepositoryCheckinHelper.isMergingCommit(checkinProjectPanel)) {
+            final String prefix = restService.getServerStrategy().getCheckinPrefix(ref);
+            if (!originalMessage.startsWith(prefix)) {
+                // only pre-fill message if current message doesn't refer to the correct item
+                entityService.requestCachedEntity(ref, Arrays.asList("name"), new EntityAdapter() {
+                    @Override
+                    public void entityLoaded(final Entity entity, Event event) {
+                        UIUtil.invokeLaterIfNeeded(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (checkinProjectPanel.getCommitMessage().equals(originalMessage)) {
+                                    // only if message hasn't changed yet
+                                    checkinProjectPanel.setCommitMessage(prefix + " " + entity.getPropertyValue("name"));
+
+                                    // store original message in order to allow revert back
+                                    VcsConfiguration.getInstance(project).saveCommitMessage(originalMessage);
+                                }
                             }
-                        }
-                    });
-                }
-            });
+                        });
+                    }
+                });
+            }
         }
 
         markFixed = new JCheckBox("Mark " + ref.toString() + " as ");
