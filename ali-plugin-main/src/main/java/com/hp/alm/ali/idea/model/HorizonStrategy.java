@@ -34,6 +34,7 @@ import com.hp.alm.ali.idea.entity.edit.EntityEditStrategy;
 import com.hp.alm.ali.idea.entity.edit.HorizonEditStrategy;
 import com.hp.alm.ali.idea.entity.edit.LockingStrategy;
 import com.hp.alm.ali.idea.filter.FilterChooser;
+import com.hp.alm.ali.idea.model.parser.AuditList;
 import com.hp.alm.ali.idea.model.type.BacklogBlockedType;
 import com.hp.alm.ali.idea.model.type.BacklogStatusDefectType;
 import com.hp.alm.ali.idea.model.type.BacklogEntityType;
@@ -52,12 +53,15 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.IconLoader;
 
 import javax.swing.SortOrder;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -390,6 +394,49 @@ public class HorizonStrategy extends ApolloStrategy {
             return "user story #" + entityRef.id + ":";
         } else {
             return super.getCheckinPrefix(entityRef);
+        }
+    }
+
+    @Override
+    public AuditList getEntityAudit(Entity entity) {
+        InputStream is = restService.getForStream("{0}s/{1}/audits", entity.getType(), entity.getId());
+        AuditList auditList = AuditList.create(is);
+
+        String bliId = (String)entity.getProperty("release-backlog-item.id");
+        if (bliId != null) {
+            InputStream blis = restService.getForStream("release-backlog-items/{0}/audits", bliId);
+            mergeAuditLists(auditList, AuditList.create(blis));
+        }
+        return auditList;
+    }
+
+    private void mergeAuditLists(AuditList target, AuditList source) {
+        target.addAll(source);
+        Collections.sort(target, new Comparator<Audit>() {
+            @Override
+            public int compare(Audit audit1, Audit audit2) {
+                long time2 = audit2.getDate().getTime();
+                long time1 = audit1.getDate().getTime();
+                if (time2 > time1) {
+                    return 1;
+                } else if (time2 < time1) {
+                    return -1;
+                } else {
+                    return 0;
+                }
+            }
+        });
+        Audit current = null;
+        for (Iterator<Audit> it = target.iterator(); it.hasNext(); ) {
+            Audit next = it.next();
+            if (current != null && current.getUsername().equals(next.getUsername()) && current.getDate().equals(next.getDate())) {
+                for(String[] properties: next.getProperties()) {
+                    current.addProperty(properties[0], properties[1], properties[2]);
+                }
+                it.remove();
+            } else {
+                current = next;
+            }
         }
     }
 

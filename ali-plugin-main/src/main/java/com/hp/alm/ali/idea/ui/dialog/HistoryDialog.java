@@ -16,8 +16,8 @@
 
 package com.hp.alm.ali.idea.ui.dialog;
 
-import com.hp.alm.ali.idea.entity.EntityRef;
 import com.hp.alm.ali.idea.model.Audit;
+import com.hp.alm.ali.idea.model.Entity;
 import com.hp.alm.ali.idea.ui.AuditFilterPanel;
 import com.hp.alm.ali.idea.model.AuditModel;
 import com.hp.alm.ali.idea.services.ProjectUserService;
@@ -34,7 +34,6 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -47,12 +46,12 @@ public class HistoryDialog extends MyDialog {
     private JPanel outer;
     private JPanel contentPanel;
 
-    public HistoryDialog(final Project project, final EntityRef entity) {
+    public HistoryDialog(final Project project, final Entity entity) {
         super(project, JOptionPane.getRootFrame(), "History...", false, true, Arrays.asList(Button.Close));
 
         this.project = project;
 
-        setEditorTitle(project, "History of {0} #" + entity.id, entity.type);
+        setEditorTitle(project, "History of {0} #" + entity.getId(), entity.getType());
 
         contentPanel = new JPanel();
         contentPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -72,9 +71,7 @@ public class HistoryDialog extends MyDialog {
 
         ApplicationManager.getApplication().executeOnPooledThread(new Runnable() {
             public void run() {
-                RestService restService = project.getComponent(RestService.class);
-                InputStream is = restService.getForStream("{0}s/{1}/audits", entity.type, entity.id);
-                final AuditList auditList = AuditList.create(is);
+                final AuditList auditList = project.getComponent(RestService.class).getServerStrategy().getEntityAudit(entity);
 
                 outer.add(new AuditFilterPanel(project, auditList, new AuditFilterPanel.Listener() {
                     public void changed(Set<String> selectedFields, Set<String> selectedUsers) {

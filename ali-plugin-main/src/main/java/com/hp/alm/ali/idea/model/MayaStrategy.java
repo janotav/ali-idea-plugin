@@ -33,6 +33,7 @@ import com.hp.alm.ali.idea.entity.edit.EntityEditStrategyImpl;
 import com.hp.alm.ali.idea.entity.edit.MayaLock;
 import com.hp.alm.ali.idea.entity.edit.LockingStrategy;
 import com.hp.alm.ali.idea.filter.FilterChooser;
+import com.hp.alm.ali.idea.model.parser.AuditList;
 import com.hp.alm.ali.idea.model.type.BuildDurationType;
 import com.hp.alm.ali.idea.model.type.BuildStatusType;
 import com.hp.alm.ali.idea.model.type.DefectLinkIdType;
@@ -56,6 +57,7 @@ import com.intellij.openapi.actionSystem.ActionToolbar;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.IconLoader;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -404,6 +406,12 @@ public class MayaStrategy implements ServerStrategy {
     @Override
     public String getCheckinPrefix(EntityRef entityRef) {
         return entityRef.toString() + ":";
+    }
+
+    @Override
+    public AuditList getEntityAudit(Entity entity) {
+        InputStream is = restService.getForStream("{0}s/{1}/audits", entity.getType(), entity.getId());
+        return AuditList.create(is);
     }
 
     @Override

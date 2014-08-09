@@ -16,7 +16,6 @@
 
 package com.hp.alm.ali.idea.action;
 
-import com.hp.alm.ali.idea.entity.EntityRef;
 import com.hp.alm.ali.idea.ui.dialog.HistoryDialog;
 import com.hp.alm.ali.idea.model.Entity;
 import com.intellij.openapi.actionSystem.AnActionEvent;
@@ -48,7 +47,7 @@ public class ShowHistoryAction extends EntityAction {
 
     @Override
     protected void actionPerformed(AnActionEvent event, Project project, Entity entity) {
-        HistoryDialog history = new HistoryDialog(project, new EntityRef(entity));
+        HistoryDialog history = new HistoryDialog(project, entity);
         history.setVisible(true);
     }
 }

@@ -24,6 +24,7 @@ import com.hp.alm.ali.idea.entity.EntityRef;
 import com.hp.alm.ali.idea.entity.edit.EntityEditStrategy;
 import com.hp.alm.ali.idea.entity.edit.LockingStrategy;
 import com.hp.alm.ali.idea.filter.FilterChooser;
+import com.hp.alm.ali.idea.model.parser.AuditList;
 import com.hp.alm.ali.idea.ui.combo.LazyComboBoxModel;
 
 import java.util.List;
@@ -89,4 +90,7 @@ public interface ServerStrategy extends EntityQueryProcessor {
     List<String> getDefectLinkColumns();
 
     String getCheckinPrefix(EntityRef entityRef);
+
+    AuditList getEntityAudit(Entity entity);
+
 }
