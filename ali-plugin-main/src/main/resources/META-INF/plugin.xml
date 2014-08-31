@@ -368,6 +368,10 @@
             <action id="hpali.entity.linkEdit" class="com.hp.alm.ali.idea.action.link.LinkEditAction"/>
             <action id="hpali.entity.linkView" class="com.hp.alm.ali.idea.action.link.LinkViewAction"/>
             <action id="hpali.entity.linkDelete" class="com.hp.alm.ali.idea.action.link.LinkDeleteAction"/>
+            <action id="hpali.entity.testModify" class="com.hp.alm.ali.idea.action.acceptance.TestEditAction"/>
+            <action id="hpali.entity.testAccepted" class="com.hp.alm.ali.idea.action.acceptance.TestAcceptedAction"/>
+            <action id="hpali.entity.testFailed" class="com.hp.alm.ali.idea.action.acceptance.TestFailedAction"/>
+            <action id="hpali.entity.testNotStarted" class="com.hp.alm.ali.idea.action.acceptance.TestNotStartedAction"/>
             <reference ref="hpali.task.modify"/>
             <reference ref="hpali.task.delete"/>
         </group>
@@ -392,6 +396,9 @@
         </group>
         <group id="hpali.defect-link">
             <action id="hpali.link.new" class="com.hp.alm.ali.idea.action.link.LinkNewAction"/>
+        </group>
+        <group id="hpali.acceptance-test">
+            <action id="hpali.test.new" class="com.hp.alm.ali.idea.action.acceptance.TestNewAction"/>
         </group>
         <!-- end of detail tables -->
     </actions>

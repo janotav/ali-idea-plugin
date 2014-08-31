@@ -38,6 +38,7 @@ public class DeleteEntityAction extends EntityAction {
         allowedTypes.add("defect");
         allowedTypes.add("requirement");
         allowedTypes.add("release-backlog-item"); // make sure we are visible in the EntityQuery("release-backlog-item") context
+        allowedTypes.add("acceptance-test");
     }
 
     public DeleteEntityAction() {

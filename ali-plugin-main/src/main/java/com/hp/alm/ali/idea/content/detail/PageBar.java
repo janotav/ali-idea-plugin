@@ -21,13 +21,19 @@ import com.hp.alm.ali.idea.rest.ServerType;
 import com.hp.alm.ali.idea.rest.ServerTypeListener;
 import com.hp.alm.ali.idea.model.Entity;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ui.JBCheckboxMenuItem;
+import com.intellij.openapi.util.IconLoader;
 import com.intellij.util.ui.UIUtil;
 
+import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.Icon;
+import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JToggleButton;
+import javax.swing.SwingUtilities;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
@@ -47,11 +53,14 @@ public class PageBar extends JPanel implements ServerTypeListener {
     private RestService restService;
     private boolean reloadNeeded;
     private Entity entity;
+    private JPanel centerPanel;
+    private JButton moreLink;
 
     public PageBar(Project project, Entity entity) {
-        super(new FlowLayout(FlowLayout.LEFT));
+        super(new GridBagLayout());
         this.entity = entity;
 
+        createCenterPanelAndMoreLink();
         components = new LinkedList<MyContentButton>();
 
         group = new ButtonGroup();
@@ -82,6 +91,24 @@ public class PageBar extends JPanel implements ServerTypeListener {
         if(reloadNeeded) {
             reload();
         }
+    }
+
+    private void createCenterPanelAndMoreLink() {
+        centerPanel = new JPanel(new ProxyFlowLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        c.gridx = 0;
+        c.gridy = 0;
+        c.anchor = GridBagConstraints.WEST;
+        c.weightx = 1;
+        add(centerPanel, c);
+        moreLink = new JButton(IconLoader.getIcon("/ide/link.png"));
+        moreLink.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
+        moreLink.addActionListener(new MoreLinkActionListener());
+        moreLink.setVisible(false);
+        ++c.gridx;
+        c.anchor = GridBagConstraints.NORTHEAST;
+        c.weightx = 0;
+        add(moreLink, c);
     }
 
     private void removeExistingComponents() {
@@ -130,7 +157,7 @@ public class PageBar extends JPanel implements ServerTypeListener {
         components.add(contentButton);
         group.add(contentButton);
         contentButton.setFocusable(false);
-        contentButton.addActionListener(new ToggleListener(content));
+        contentButton.addActionListener(new ToggleListener(contentButton));
         contentButton.getContent().addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
@@ -145,7 +172,7 @@ public class PageBar extends JPanel implements ServerTypeListener {
         });
         contentButton.setEnabled(content.getComponent() != null && restService.getServerTypeIfAvailable().isConnected());
         contentButton.setText(content.getLinkText());
-        add(contentButton);
+        centerPanel.add(contentButton);
     }
 
     public void setExtraContent(ExtraContent extraContent) {
@@ -172,15 +199,17 @@ public class PageBar extends JPanel implements ServerTypeListener {
     }
 
     private class ToggleListener implements ActionListener {
-        private DetailContent content;
+        private MyContentButton contentButton;
 
-        public ToggleListener(DetailContent content) {
-            this.content = content;
+        public ToggleListener(MyContentButton contentButton) {
+            this.contentButton = contentButton;
         }
 
         public void actionPerformed(ActionEvent actionEvent) {
-            if(!extraContent.toggleComponent(content.getComponent())) {
+            if(!extraContent.toggleComponent(contentButton.getContent().getComponent())) {
                 unselector.setSelected(true);
+            } else {
+                contentButton.setSelected(true);
             }
         }
     }
@@ -199,4 +228,61 @@ public class PageBar extends JPanel implements ServerTypeListener {
         }
     }
 
+    private class MoreLinkActionListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            final JPopupMenu menu = new JPopupMenu();
+            int n = centerPanel.getComponentCount();
+            if (n > 1) {
+                Component firstComponent = centerPanel.getComponent(0);
+                for (int i = 1; i < n; i++) {
+                    final MyContentButton component = (MyContentButton) centerPanel.getComponent(i);
+                    if (component.getY() > firstComponent.getY()) {
+                        JBCheckboxMenuItem item = new JBCheckboxMenuItem(component.getText());
+                        item.setState(component.isSelected());
+                        item.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                menu.setVisible(false);
+                                new ToggleListener(component).actionPerformed(e);
+                            }
+                        });
+                        menu.add(item);
+                    }
+                }
+            }
+            menu.show(PageBar.this, moreLink.getX(), moreLink.getY());
+        }
+    }
+
+    private class ProxyFlowLayout extends FlowLayout {
+
+        private ProxyFlowLayout() {
+            super(FlowLayout.LEFT);
+        }
+
+        @Override
+        public void layoutContainer(Container target) {
+            super.layoutContainer(target);
+            int n = centerPanel.getComponentCount();
+            if (n > 1) {
+                if (centerPanel.getComponent(n - 1).getY() > centerPanel.getComponent(0).getY()) {
+                    if (!moreLink.isVisible()) {
+                        moreLink.setVisible(true);
+                        // if the resize event is small enough, the link wouldn't (sometimes) show until next event
+                        SwingUtilities.invokeLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                PageBar.this.revalidate();
+                                PageBar.this.repaint();
+                            }
+                        });
+                    }
+                    return;
+                }
+            }
+            moreLink.setVisible(false);
+        }
+    }
 }

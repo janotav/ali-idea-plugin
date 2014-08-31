@@ -131,6 +131,7 @@ public class HorizonStrategy extends ApolloStrategy {
         addHorizonFilter(horizonDefectFilter());
         addHorizonFilter(teamFilter());
         addHorizonFilter(taskFilter());
+        addHorizonFilter(acceptanceTestFilter());
     }
 
     private static Map<String, List<String>> horizonFields;
@@ -221,6 +222,7 @@ public class HorizonStrategy extends ApolloStrategy {
         }
         if("requirement".equals(entity.getType())) {
             ret.add(taskTable(entity));
+            ret.add(acceptanceTests(entity));
         }
         return ret;
     }
@@ -228,6 +230,15 @@ public class HorizonStrategy extends ApolloStrategy {
     private DetailContent taskTable(Entity entity) {
         ActionToolbar actionToolbar = ActionUtil.createActionToolbar("hpali.project-task", "detail", true);
         return new TableContent(project, entity, "Tasks", IconLoader.getIcon("/fileTypes/text.png"), actionToolbar, new TaskTableLoader(project, entity));
+    }
+
+    private DetailContent acceptanceTests(Entity entity) {
+        ActionToolbar actionToolbar = ActionUtil.createActionToolbar("hpali.acceptance-test", "detail", true);
+        EntityQuery query = new EntityQuery("acceptance-test");
+        query.setValue("entity-id", String.valueOf(entity.getId()));
+        query.setPropertyResolved("entity-id", true);
+        query.addOrder("logical-order", SortOrder.ASCENDING);
+        return aliStrategyUtil.detailTable(entity, query, "Acceptance Tests",  IconLoader.getIcon("/fileTypes/text.png"), actionToolbar);
     }
 
     @Override
@@ -303,6 +314,12 @@ public class HorizonStrategy extends ApolloStrategy {
 
         setClazz(metadata, "sprint-id", SprintType.class);
         setClazz(metadata, "team-id", TeamType.class);
+
+        if ("acceptance-test".equals(metadata.getEntityType())) {
+            metadata.getField("owner").setLabel("Author");
+            metadata.getField("status").setLabel("Status");
+            metadata.getField("logical-order").setLabel("Order");
+        }
 
         // remove fields that should be obsolete in AgM
         for(Field field: new LinkedList<Field>(metadata.getAllFields().values())) {
@@ -518,6 +535,14 @@ public class HorizonStrategy extends ApolloStrategy {
         filter.addColumn("assigned-to", 105);
         filter.addColumn("invested", 68);
         filter.addColumn("remaining", 68);
+        return filter;
+    }
+
+    private static EntityQuery acceptanceTestFilter() {
+        EntityQuery filter = new EntityQuery("acceptance-test");
+        filter.addColumn("description", 310);
+        filter.addColumn("status", 99);
+        filter.addColumn("owner", 105);
         return filter;
     }
 
