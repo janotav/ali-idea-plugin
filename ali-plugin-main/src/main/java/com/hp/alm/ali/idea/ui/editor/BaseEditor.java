@@ -98,6 +98,7 @@ public abstract class BaseEditor extends MyDialog {
                 if(locked != null) {
                     BaseEditor.this.entity = locked;
 
+                    beforeUpdate();
                     UIUtil.invokeLaterIfNeeded(new Runnable() {
                         @Override
                         public void run() {
@@ -190,6 +191,12 @@ public abstract class BaseEditor extends MyDialog {
 
     public String validate(StringBuffer message) {
         return null;
+    }
+
+    /**
+     * Called before actual {@link #update()} outside dispatch thread.
+     */
+    public void beforeUpdate() {
     }
 
     public abstract void update();

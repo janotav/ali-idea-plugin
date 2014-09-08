@@ -23,10 +23,14 @@ import java.util.List;
 
 public class LookupListField extends AbstractListField {
 
-    public LookupListField(List<String> list, Field field, Entity entity, boolean editable) {
-        super(field.getLabel(), field.isRequired(), editable);
+    public LookupListField(List<String> list, Field field, Entity entity, boolean editable, boolean forceRequired) {
+        super(field.getLabel(), field.isRequired() || forceRequired, editable);
 
         initializeValues(list, entity.getPropertyValue(field.getName()));
+    }
+
+    public LookupListField(List<String> list, Field field, Entity entity, boolean editable) {
+        this(list, field, entity, editable, false);
     }
 
     public String getValue() {

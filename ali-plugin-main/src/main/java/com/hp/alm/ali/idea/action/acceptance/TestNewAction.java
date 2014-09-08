@@ -17,7 +17,9 @@
 package com.hp.alm.ali.idea.action.acceptance;
 
 import com.hp.alm.ali.idea.action.EntityAction;
+import com.hp.alm.ali.idea.entity.EntityRef;
 import com.hp.alm.ali.idea.model.Entity;
+import com.hp.alm.ali.idea.ui.editor.AcceptanceTestEditor;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.IconLoader;
@@ -30,5 +32,7 @@ public class TestNewAction extends EntityAction {
 
     @Override
     protected void actionPerformed(AnActionEvent event, Project project, Entity entity) {
+        AcceptanceTestEditor editor = new AcceptanceTestEditor(project, new EntityRef(entity));
+        editor.execute();
     }
 }

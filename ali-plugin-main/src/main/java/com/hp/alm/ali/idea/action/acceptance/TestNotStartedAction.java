@@ -18,6 +18,7 @@ package com.hp.alm.ali.idea.action.acceptance;
 
 import com.hp.alm.ali.idea.action.EntityAction;
 import com.hp.alm.ali.idea.model.Entity;
+import com.hp.alm.ali.idea.services.EntityService;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.IconLoader;
@@ -44,5 +45,7 @@ public class TestNotStartedAction extends EntityAction {
 
     @Override
     protected void actionPerformed(AnActionEvent event, Project project, Entity entity) {
+        entity.setProperty("status", "Not Started");
+        project.getComponent(EntityService.class).updateEntity(entity, Collections.singleton("status"), false);
     }
 }
