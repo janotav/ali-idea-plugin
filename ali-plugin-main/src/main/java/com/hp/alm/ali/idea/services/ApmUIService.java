@@ -16,8 +16,10 @@
 
 package com.hp.alm.ali.idea.services;
 
+import com.google.gson.Gson;
 import com.hp.alm.ali.idea.entity.EntityListener;
 import com.hp.alm.ali.idea.entity.EntityQuery;
+import com.hp.alm.ali.idea.model.AuthenticationInfo;
 import com.hp.alm.ali.idea.rest.MyInputData;
 import com.hp.alm.ali.idea.rest.MyResultInfo;
 import com.hp.alm.ali.idea.rest.RestException;
@@ -39,7 +41,8 @@ public class ApmUIService {
         this.errorService = errorService;
     }
 
-    public Entity createDefectInRelease(String description, String summary, String severity, String detectedBy, int releaseId, int sprintId, int teamId, int featureId) {
+    public Entity createDefectInRelease(String description, String summary, String severity, String detectedBy,
+                                        int releaseId, int sprintId, int teamId, int featureId, int workspaceId) {
         StringBuffer buf = new StringBuffer();
         buf.append("description=").append(EntityQuery.encode(description));
         buf.append("&detectedBy=").append(EntityQuery.encode(detectedBy));
@@ -50,11 +53,13 @@ public class ApmUIService {
         buf.append("&sevirity=").append(EntityQuery.encode(severity));
         buf.append("&sprintID=").append(sprintId);
         buf.append("&teamID=").append(teamId);
+        buf.append("&productGroupId=").append(workspaceId);
 
         return createItem("apmuiservices/additemservice/createdefectinrelease", buf.toString());
     }
 
-    public Entity createRequirementInRelease(String description, String name, String priority, int storyPoints, int releaseId, int sprintId, int teamId, int featureId) {
+    public Entity createRequirementInRelease(String description, String name, String priority, int storyPoints,
+                                             int releaseId, int sprintId, int teamId, int featureId, int workspaceId) {
         StringBuffer buf = new StringBuffer();
         buf.append("description=").append(EntityQuery.encode(description));
         buf.append("&featureID=").append(featureId);
@@ -66,8 +71,20 @@ public class ApmUIService {
         buf.append("&sprintID=").append(sprintId);
         buf.append("&storyPoints=").append(storyPoints);
         buf.append("&teamID=").append(teamId);
+        buf.append("&productGroupId=").append(workspaceId);
 
         return createItem("apmuiservices/additemservice/createrequirementinrelease", buf.toString());
+    }
+
+    public AuthenticationInfo getAuthenticationInfo() {
+        MyResultInfo result = new MyResultInfo();
+        int code = restService.get(result, "apmuiservices/configurationusers/authentication-info");
+        if(code == 200) {
+            return new Gson().fromJson(result.getBodyAsString(), AuthenticationInfo.class);
+        } else {
+            errorService.showException(new RestException(result));
+            return null;
+        }
     }
 
     private Entity createItem(String href, String value) {

@@ -20,6 +20,7 @@ import com.hp.alm.ali.idea.model.Field;
 import com.hp.alm.ali.idea.cfg.AliProjectConfiguration;
 import com.hp.alm.ali.idea.content.AliContentFactory;
 import com.hp.alm.ali.idea.model.type.Context;
+import com.hp.alm.ali.idea.services.WorkspaceService;
 import com.hp.alm.ali.idea.ui.editor.field.HTMLAreaField;
 import com.hp.alm.ali.idea.ui.editor.field.LookupListField;
 import com.hp.alm.ali.idea.ui.editor.field.ReferenceField;
@@ -38,6 +39,7 @@ public class DefectEditor extends BaseEditor implements BaseEditor.SaveHandler {
 
     private Project project;
     private ApmUIService apmUIService;
+    private WorkspaceService workspaceService;
     private final int releaseId;
     private final int sprintId;
     private final int teamId;
@@ -47,6 +49,7 @@ public class DefectEditor extends BaseEditor implements BaseEditor.SaveHandler {
 
         this.saveHandler = this;
         this.apmUIService = project.getComponent(ApmUIService.class);
+        this.workspaceService = project.getComponent(WorkspaceService.class);
         this.project = project;
         this.releaseId = releaseId;
         this.sprintId = sprintId;
@@ -81,7 +84,8 @@ public class DefectEditor extends BaseEditor implements BaseEditor.SaveHandler {
                 releaseId,
                 sprintId,
                 teamId,
-                featureId);
+                featureId,
+                workspaceService.getWorkspaceId());
         if(defect != null) {
             AliContentFactory.loadDetail(project, defect, true, true);
             return true;

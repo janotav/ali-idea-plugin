@@ -164,6 +164,11 @@
                     <version>${project.version}</version>
                 </dependency>
                 <dependency>
+                    <groupId>com.intellij</groupId>
+                    <artifactId>gson-2.2.1</artifactId>
+                    <version>IC-129.239</version>
+                </dependency>
+                <dependency>
                     <groupId>com.hp.alm.ali</groupId>
                     <artifactId>idea-sdk-IC-129.239</artifactId>
                     <version>${project.version}</version>
@@ -178,6 +183,11 @@
                     <groupId>com.hp.alm.ali</groupId>
                     <artifactId>idea-impl-133</artifactId>
                     <version>${project.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>com.intellij</groupId>
+                    <artifactId>gson-2.2.3</artifactId>
+                    <version>IC-133.193</version>
                 </dependency>
                 <dependency>
                     <groupId>com.hp.alm.ali</groupId>

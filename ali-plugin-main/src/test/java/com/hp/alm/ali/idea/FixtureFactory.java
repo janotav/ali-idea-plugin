@@ -91,6 +91,7 @@ public class FixtureFactory {
             case AGM:
                 handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/customization/extensions", 200)
                         .content("customization_extensions.xml");
+                RestInvocations.getAuthenticationInfo(handler);
 
                 RestInvocations.sprintService_getReleases(handler);
                 break;

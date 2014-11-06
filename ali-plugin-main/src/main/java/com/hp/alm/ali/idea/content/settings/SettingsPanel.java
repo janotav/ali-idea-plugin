@@ -55,6 +55,8 @@ public class SettingsPanel extends JPanel implements ConfigurationListener, Disp
     private JTextPane project;
     private JTextPane username;
     private JPanel passwordPanel;
+    private JComponent connectionComponent;
+    private JPanel previewAndConnection;
     private Project prj;
     private JPanel preview;
     private RestService restService;
@@ -62,6 +64,15 @@ public class SettingsPanel extends JPanel implements ConfigurationListener, Disp
     public SettingsPanel(final Project prj, Color bgColor) {
         this.prj = prj;
         this.projectConf = prj.getComponent(AliProjectConfiguration.class);
+
+        previewAndConnection = new JPanel(new GridBagLayout());
+        GridBagConstraints c2 = new GridBagConstraints();
+        c2.gridx = 0;
+        c2.gridy = 1;
+        c2.gridwidth = 2;
+        c2.weighty = 1;
+        c2.fill = GridBagConstraints.VERTICAL;
+        previewAndConnection.add(new JPanel(), c2);
 
         passwordPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         passwordPanel.setBackground(bgColor);
@@ -113,6 +124,7 @@ public class SettingsPanel extends JPanel implements ConfigurationListener, Disp
         JPanel content = new JPanel(new BorderLayout());
         content.setBackground(bgColor);
         content.add(panel, BorderLayout.NORTH);
+        content.add(previewAndConnection, BorderLayout.WEST);
 
         preview = new JPanel(new GridBagLayout()) {
             public Dimension getPreferredSize() {
@@ -161,7 +173,7 @@ public class SettingsPanel extends JPanel implements ConfigurationListener, Disp
         previewNorth.setBackground(bgColor);
         previewNorth.add(preview, BorderLayout.NORTH);
 
-        content.add(previewNorth, BorderLayout.WEST);
+        addToGridBagPanel(0, 0, previewAndConnection, previewNorth);
 
         setBackground(bgColor);
         setLayout(new BorderLayout());
@@ -170,6 +182,15 @@ public class SettingsPanel extends JPanel implements ConfigurationListener, Disp
         onChanged();
         ApplicationManager.getApplication().getComponent(AliConfiguration.class).addListener(this);
         projectConf.addListener(this);
+    }
+
+    private void addToGridBagPanel(int x, int y, JPanel gridBagPanel, JComponent comp) {
+        GridBagConstraints c = new GridBagConstraints();
+        c.gridx = x;
+        c.gridy = y;
+        c.anchor = GridBagConstraints.NORTH;
+        c.fill = GridBagConstraints.NONE;
+        gridBagPanel.add(comp, c);
     }
 
     private void checkConnection(String location, String domain, String project, String username, String password) throws AuthenticationFailed {
@@ -228,8 +249,17 @@ public class SettingsPanel extends JPanel implements ConfigurationListener, Disp
                 } else {
                     remove(passwordPanel);
                 }
+                if (connectionComponent != null) {
+                    previewAndConnection.remove(connectionComponent);
+                    connectionComponent = null;
+                }
+                if (serverType.isConnected()) {
+                    connectionComponent = prj.getComponent(serverType.getClazz()).getConnectionComponent();
+                    if (connectionComponent != null) {
+                        addToGridBagPanel(1, 0, previewAndConnection, connectionComponent);
+                    }
+                }
             }
         });
-
     }
 }

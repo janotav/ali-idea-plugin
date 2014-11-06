@@ -57,6 +57,7 @@ import com.intellij.openapi.actionSystem.ActionToolbar;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.IconLoader;
 
+import javax.swing.JComponent;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -412,6 +413,15 @@ public class MayaStrategy implements ServerStrategy {
     public AuditList getEntityAudit(Entity entity) {
         InputStream is = restService.getForStream("{0}s/{1}/audits", entity.getType(), entity.getId());
         return AuditList.create(is);
+    }
+
+    @Override
+    public void beforeConnectionHandler() {
+    }
+
+    @Override
+    public JComponent getConnectionComponent() {
+        return null;
     }
 
     @Override

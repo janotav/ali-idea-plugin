@@ -25,8 +25,17 @@ import com.intellij.openapi.project.Project;
 
 public class RestInvocations {
 
+    public static void getAuthenticationInfo(Handler handler) {
+        handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/apmuiservices/configurationusers/authentication-info", 200)
+                .content("apmUIServiceTest_authenticationInfo.json");
+    }
+
     public static void sprintService_getReleases(Handler handler) {
-        handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/releases?fields=id,name,start-date,end-date&query={}&order-by={}", 200)
+        sprintService_getReleases(handler, 1000);
+    }
+
+    public static void sprintService_getReleases(Handler handler, int workspaceId) {
+        handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/releases?fields=id,name,start-date,end-date,product-group-id&query={product-group-id["+workspaceId+"]}&order-by={}", 200)
                 .content("no_entities.xml");
     }
 

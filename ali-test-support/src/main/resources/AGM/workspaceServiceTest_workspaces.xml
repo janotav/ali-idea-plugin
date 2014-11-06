@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Entities TotalResults="3">
+    <Entity Type="product-group">
+        <Fields>
+            <Field Name="id">
+                <Value>-1</Value>
+            </Field>
+            <Field Name="delete-trial"/>
+            <Field Name="is-deleted">
+                <Value></Value>
+            </Field>
+            <Field Name="description">
+                <Value>&lt;html&gt;&lt;body&gt;&lt;p&gt;All projects&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</Value>
+            </Field>
+            <Field Name="name">
+                <Value>All</Value>
+            </Field>
+        </Fields>
+        <RelatedEntities/>
+    </Entity>
+    <Entity Type="product-group">
+        <Fields>
+            <Field Name="id">
+                <Value>1000</Value>
+            </Field>
+            <Field Name="delete-trial"/>
+            <Field Name="is-deleted">
+                <Value></Value>
+            </Field>
+            <Field Name="description">
+                <Value>&lt;html&gt;&lt;body&gt;&lt;p&gt;Blue&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</Value>
+            </Field>
+            <Field Name="name">
+                <Value>Blue</Value>
+            </Field>
+        </Fields>
+        <RelatedEntities/>
+    </Entity>
+    <Entity Type="product-group">
+        <Fields>
+            <Field Name="id">
+                <Value>1001</Value>
+            </Field>
+            <Field Name="delete-trial"/>
+            <Field Name="is-deleted">
+                <Value></Value>
+            </Field>
+            <Field Name="description">
+                <Value>&lt;html&gt;&lt;body&gt;&lt;p&gt;Green&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</Value>
+            </Field>
+            <Field Name="name">
+                <Value>Green</Value>
+            </Field>
+        </Fields>
+        <RelatedEntities/>
+    </Entity>
+</Entities>

@@ -347,6 +347,14 @@
             <implementation-class>com.hp.alm.ali.idea.tasks.TasksImpl</implementation-class>
             <interface-class>com.hp.alm.ali.idea.tasks.TasksApi</interface-class>
         </component>
+        <component>
+            <implementation-class>com.hp.alm.ali.idea.cfg.WorkspaceConfiguration</implementation-class>
+            <interface-class>com.hp.alm.ali.idea.cfg.WorkspaceConfiguration</interface-class>
+        </component>
+        <component>
+            <implementation-class>com.hp.alm.ali.idea.services.WorkspaceService</implementation-class>
+            <interface-class>com.hp.alm.ali.idea.services.WorkspaceService</interface-class>
+        </component>
     </project-components>
 
     <actions>

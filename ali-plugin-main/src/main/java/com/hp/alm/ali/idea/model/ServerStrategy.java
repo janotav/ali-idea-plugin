@@ -27,6 +27,7 @@ import com.hp.alm.ali.idea.filter.FilterChooser;
 import com.hp.alm.ali.idea.model.parser.AuditList;
 import com.hp.alm.ali.idea.ui.combo.LazyComboBoxModel;
 
+import javax.swing.JComponent;
 import java.util.List;
 
 public interface ServerStrategy extends EntityQueryProcessor {
@@ -92,5 +93,9 @@ public interface ServerStrategy extends EntityQueryProcessor {
     String getCheckinPrefix(EntityRef entityRef);
 
     AuditList getEntityAudit(Entity entity);
+
+    void beforeConnectionHandler();
+
+    JComponent getConnectionComponent();
 
 }

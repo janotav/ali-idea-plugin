@@ -128,6 +128,7 @@ public class SprintServiceTest extends IntellijTest {
     public void testConnectedTo() throws Throwable {
         selectTestRelease();
 
+        RestInvocations.getAuthenticationInfo(handler);
         releaseSprintTeamRequests_TestRelease(handler);
 
         // re-connecting triggers data reload
@@ -381,7 +382,7 @@ public class SprintServiceTest extends IntellijTest {
 
     private void releaseSprintTeamRequests_TestRelease(Handler handler) {
         sprintTeamRequests_TestRelease(handler);
-        handler.addRequest(false, "GET", "/qcbin/rest/domains/domain/projects/project/releases?fields=id,name,start-date,end-date&query={}&order-by={}", 200)
+        handler.addRequest(false, "GET", "/qcbin/rest/domains/domain/projects/project/releases?fields=id,name,start-date,end-date,product-group-id&query={product-group-id[1000]}&order-by={}", 200)
                 .content("sprintServiceTest_releases.xml");
     }
 

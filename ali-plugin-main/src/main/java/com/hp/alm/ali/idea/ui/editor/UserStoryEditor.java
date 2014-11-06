@@ -19,6 +19,7 @@ package com.hp.alm.ali.idea.ui.editor;
 import com.hp.alm.ali.idea.model.Field;
 import com.hp.alm.ali.idea.content.AliContentFactory;
 import com.hp.alm.ali.idea.model.type.Context;
+import com.hp.alm.ali.idea.services.WorkspaceService;
 import com.hp.alm.ali.idea.ui.editor.field.HTMLAreaField;
 import com.hp.alm.ali.idea.ui.editor.field.LookupListField;
 import com.hp.alm.ali.idea.ui.editor.field.ReferenceField;
@@ -38,6 +39,7 @@ public class UserStoryEditor extends BaseEditor implements BaseEditor.SaveHandle
 
     private Project project;
     private ApmUIService apmUIService;
+    private WorkspaceService workspaceService;
     private int releaseId;
     private int sprintId;
     private int teamId;
@@ -48,6 +50,7 @@ public class UserStoryEditor extends BaseEditor implements BaseEditor.SaveHandle
         this.saveHandler = this;
         this.project = project;
         this.apmUIService = project.getComponent(ApmUIService.class);
+        this.workspaceService = project.getComponent(WorkspaceService.class);
         this.releaseId = releaseId;
         this.sprintId = sprintId;
         this.teamId = teamId;
@@ -82,7 +85,8 @@ public class UserStoryEditor extends BaseEditor implements BaseEditor.SaveHandle
                 releaseId,
                 sprintId,
                 teamId,
-                featureId);
+                featureId,
+                workspaceService.getWorkspaceId());
         if(requirement != null) {
             AliContentFactory.loadDetail(project, requirement, true, true);
             return true;

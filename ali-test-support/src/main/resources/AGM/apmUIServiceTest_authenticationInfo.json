@@ -1,0 +1,30 @@
+{
+    "productGroupId" : 1000,
+    "currentUser" :
+    {
+        "fullName" : "last-name",
+        "name" : "john.doe@mail.com",
+        "phone" : "",
+        "active" : true,
+        "avatar" :-1,
+        "roles" :
+            [
+                "Tenant Administrator",
+                "Administrator",
+                "Viewer"
+            ],
+        "products" : [],
+        "productGroups" : [
+            {
+                "productGroupId" : -1,
+                "roles" : [ "Tenant Administrator" ]
+            },
+            {
+                "productGroupId" : 1000,
+                "roles" :[ "Administrator" ]
+            }
+        ],
+        "termLicense" : false
+    },
+    "productGroupValid" : true
+}

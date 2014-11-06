@@ -291,6 +291,10 @@ public class RestService implements ConfigurationListener {
     }
 
     public void setServerType(ServerType serverType) {
+        if (serverType.isConnected()) {
+            // perform additional setup (e.g. workspace selection)
+            project.getComponent(serverType.getClazz()).beforeConnectionHandler();
+        }
         synchronized (this) {
             this.serverType = serverType;
             notifyAll();
@@ -298,7 +302,7 @@ public class RestService implements ConfigurationListener {
         fireServerTypeEvent();
     }
 
-    private void fireServerTypeEvent() {
+    public void fireServerTypeEvent() {
         serverTypeListeners.fire(new WeakListeners.Action<ServerTypeListener>() {
             public void fire(ServerTypeListener listener) {
                 listener.connectedTo(serverType);

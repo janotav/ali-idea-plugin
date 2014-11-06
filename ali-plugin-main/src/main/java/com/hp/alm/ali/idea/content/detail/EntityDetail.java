@@ -26,6 +26,7 @@ import com.hp.alm.ali.idea.services.EntityService;
 import com.hp.alm.ali.idea.ui.ScrollablePanel;
 import com.hp.alm.ali.idea.action.ActionUtil;
 import com.hp.alm.ali.idea.model.Entity;
+import com.hp.alm.ali.idea.ui.WorkspaceWarningPanel;
 import com.intellij.openapi.actionSystem.ActionToolbar;
 import com.intellij.openapi.actionSystem.DataProvider;
 import com.intellij.openapi.project.Project;
@@ -47,10 +48,13 @@ public class EntityDetail extends JPanel implements ContentManagerListener, HasE
     private PropertyGrid entityGrid;
     private boolean selected;
     private PageBar pageBar;
+    private Project project;
+    private JPanel workspaceAndOuterPanel;
     private AliProjectConfiguration conf;
 
     public EntityDetail(Project project, Entity entity) {
         super(new BorderLayout());
+        this.project = project;
         this.conf = project.getComponent(AliProjectConfiguration.class);
 
         // toolbar
@@ -73,8 +77,12 @@ public class EntityDetail extends JPanel implements ContentManagerListener, HasE
         JPanel outer = new ScrollablePanel(new BorderLayout());
         outer.add(entityGrid, BorderLayout.CENTER);
 
+        workspaceAndOuterPanel = new JPanel(new BorderLayout());
+        workspaceAndOuterPanel.add(outer, BorderLayout.CENTER);
+        updateWarningPanel(entity);
+
         ScrollablePanel contentNoExpansion = new ScrollablePanel(new BorderLayout());
-        contentNoExpansion.add(outer, BorderLayout.NORTH);
+        contentNoExpansion.add(workspaceAndOuterPanel, BorderLayout.NORTH);
         contentNoExpansion.setBackground(new JTextPane().getBackground());
         add(new JBScrollPane(contentNoExpansion), BorderLayout.CENTER);
 
@@ -83,6 +91,18 @@ public class EntityDetail extends JPanel implements ContentManagerListener, HasE
 
         entityService = project.getComponent(EntityService.class);
         entityService.addEntityListener(this);
+    }
+
+    private void updateWarningPanel(Entity entity) {
+        if (workspaceAndOuterPanel.getComponentCount() < 2) {
+            // only if warning panel was not added yet
+            String workspaceId = (String) entity.getProperty("product-group-id");
+            if (workspaceId != null) {
+                // only if workspace id is already known
+                workspaceAndOuterPanel.add(new WorkspaceWarningPanel(project, Integer.valueOf(workspaceId),
+                        UIManager.getDefaults().getColor("EditorPane.background"), true), BorderLayout.NORTH);
+            }
+        }
     }
 
     @Override
@@ -100,14 +120,17 @@ public class EntityDetail extends JPanel implements ContentManagerListener, HasE
     }
 
     @Override
-    public void entityLoaded(Entity entity, Event event) {
-        if (entity.equals(entityGrid.getEntity()) && event == Event.REFRESH) {
+    public void entityLoaded(final Entity entity, final Event event) {
+        if (entity.equals(entityGrid.getEntity())) {
             UIUtil.invokeLaterIfNeeded(new Runnable() {
                 public void run() {
-                    if(selected) {
-                        pageBar.reload();
-                    } else {
-                        pageBar.markForReload();
+                    updateWarningPanel(entity);
+                    if (event == Event.REFRESH) {
+                        if(selected) {
+                            pageBar.reload();
+                        } else {
+                            pageBar.markForReload();
+                        }
                     }
                 }
             });

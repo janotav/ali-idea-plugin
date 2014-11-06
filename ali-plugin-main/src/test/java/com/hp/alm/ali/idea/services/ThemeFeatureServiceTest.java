@@ -40,7 +40,7 @@ public class ThemeFeatureServiceTest extends IntellijTest {
 
     @Test
     public void testGetFeatures() {
-        handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/requirements?fields=id,name,release-backlog-item.id,release-backlog-item.blocked&query={type-id[71]}&order-by={name[ASC]}&page-size=1000", 200)
+        handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/requirements?fields=id,name,release-backlog-item.id,release-backlog-item.blocked,product-group-id&query={product-group-id[1000]; type-id[71]}&order-by={name[ASC]}&page-size=1000", 200)
                 .content("themeFeatureServiceTest_features.xml");
 
         EntityList list = themeFeatureService.getFeatures();
@@ -54,7 +54,7 @@ public class ThemeFeatureServiceTest extends IntellijTest {
 
     @Test
     public void testGetFeatures_filter() {
-        handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/requirements?fields=id,name,release-backlog-item.id,release-backlog-item.blocked&query={name[Uno]; type-id[71]}&order-by={name[ASC]}&page-size=1000", 200)
+        handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/requirements?fields=id,name,release-backlog-item.id,release-backlog-item.blocked,product-group-id&query={name[Uno]; product-group-id[1000]; type-id[71]}&order-by={name[ASC]}&page-size=1000", 200)
                 .content("themeFeatureServiceTest_features2.xml");
 
         EntityList list = themeFeatureService.getFeatures("Uno");
@@ -64,7 +64,7 @@ public class ThemeFeatureServiceTest extends IntellijTest {
 
     @Test
     public void testGetThemes() {
-        handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/requirements?fields=id,name,release-backlog-item.id,release-backlog-item.blocked&query={type-id[72]}&order-by={name[ASC]}&page-size=1000", 200)
+        handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/requirements?fields=id,name,release-backlog-item.id,release-backlog-item.blocked,product-group-id&query={product-group-id[1000]; type-id[72]}&order-by={name[ASC]}&page-size=1000", 200)
                 .content("themeFeatureServiceTest_themes.xml");
 
         EntityList list = themeFeatureService.getThemes();
@@ -78,7 +78,7 @@ public class ThemeFeatureServiceTest extends IntellijTest {
 
     @Test
     public void testGetThemes_filter() {
-        handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/requirements?fields=id,name,release-backlog-item.id,release-backlog-item.blocked&query={name[Uno]; type-id[72]}&order-by={name[ASC]}&page-size=1000", 200)
+        handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/requirements?fields=id,name,release-backlog-item.id,release-backlog-item.blocked,product-group-id&query={name[Uno]; product-group-id[1000]; type-id[72]}&order-by={name[ASC]}&page-size=1000", 200)
                 .content("themeFeatureServiceTest_themes2.xml");
 
         EntityList list = themeFeatureService.getThemes("Uno");

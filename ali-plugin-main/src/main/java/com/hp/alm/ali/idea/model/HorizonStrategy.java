@@ -16,6 +16,7 @@
 
 package com.hp.alm.ali.idea.model;
 
+import com.hp.alm.ali.idea.cfg.WorkspaceConfiguration;
 import com.hp.alm.ali.idea.entity.EntityQuery;
 import com.hp.alm.ali.idea.action.ActionUtil;
 import com.hp.alm.ali.idea.content.AliContent;
@@ -45,6 +46,8 @@ import com.hp.alm.ali.idea.model.type.SprintType;
 import com.hp.alm.ali.idea.model.type.TeamType;
 import com.hp.alm.ali.idea.model.type.ThemeType;
 import com.hp.alm.ali.idea.rest.RestService;
+import com.hp.alm.ali.idea.services.ApmUIService;
+import com.hp.alm.ali.idea.ui.HorizonWorkspaceSelector;
 import com.hp.alm.ali.idea.ui.chooser.FlatChooser;
 import com.hp.alm.ali.idea.ui.combo.LazyComboBoxModel;
 import com.hp.alm.ali.idea.ui.combo.TeamMembersComboBoxModel;
@@ -52,6 +55,7 @@ import com.intellij.openapi.actionSystem.ActionToolbar;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.IconLoader;
 
+import javax.swing.JComponent;
 import javax.swing.SortOrder;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -71,6 +75,7 @@ import java.util.Set;
 public class HorizonStrategy extends ApolloStrategy {
 
     private static Set<String> INVISIBLE_FIELDS = new HashSet<String>(Arrays.asList(
+            "release-backlog-item.product-group-id",
             "release-backlog-item.id",
             "release-backlog-item.ver-stamp",
             "release-backlog-item.vts",
@@ -78,6 +83,9 @@ public class HorizonStrategy extends ApolloStrategy {
             "release-backlog-item.aggr-assignee",
             "release-backlog-item.bi-req-type",
 
+            "build-type.product-group-id",
+
+            "requirement.product-group-id",
             "requirement.target-rel-varchar",
             "requirement.target-rcyc-varchar",
             "requirement.req-ver-stamp",
@@ -105,6 +113,7 @@ public class HorizonStrategy extends ApolloStrategy {
             // rbt-* fields excluded by code
             // vc-* fields excluded by code
 
+            "defect.product-group-id",
             "defect.target-rel", // duplicates release-backlog-item.release-id
             "defect.target-rcyc", // duplicates release-backlog-item.sprint-id
             "defect.project",
@@ -148,8 +157,12 @@ public class HorizonStrategy extends ApolloStrategy {
         orderMap.put("release-backlog-item.sprint-id", "target-rcyc");
     }
 
-    public HorizonStrategy(Project project, RestService restService) {
+    private WorkspaceConfiguration workspaceConfiguration;
+    private AuthenticationInfo authenticationInfo;
+
+    public HorizonStrategy(Project project, RestService restService, WorkspaceConfiguration workspaceConfiguration) {
         super(project, restService);
+        this.workspaceConfiguration = workspaceConfiguration;
     }
 
     @Override
@@ -171,6 +184,32 @@ public class HorizonStrategy extends ApolloStrategy {
                 }
             } else if("project-task".equals(query.getEntityType())) {
                 clone.addColumn("release-backlog-item-id", 1);
+            }
+
+            // workspace support: add workspace condition and retrieve field
+            if ("defect".equals(query.getEntityType()) ||
+                    "requirement".equals(query.getEntityType()) ||
+                    "release-backlog-item".equals(query.getEntityType()) ||
+                    "build-type".equals(query.getEntityType()) ||
+                    "release".equals(query.getEntityType())) {
+                clone.addColumn("product-group-id", 1);
+                try {
+                    Integer.valueOf(clone.getValue("id"));
+                } catch (NumberFormatException e) {
+                    // unless query is made against particular item, add workspace condition
+                    clone.setValue("product-group-id", String.valueOf(workspaceConfiguration.getWorkspaceId()));
+                    clone.setPropertyResolved("product-group-id", true);
+                }
+            }
+            // until build instances support workspaces we need to use cross-filter
+            if ("build-instance".equals(query.getEntityType())) {
+                try {
+                    Integer.valueOf(clone.getValue("id"));
+                } catch (NumberFormatException e) {
+                    // unless query is made against particular item, add workspace condition
+                    clone.setValue("build-type.product-group-id", String.valueOf(workspaceConfiguration.getWorkspaceId()));
+                    clone.setPropertyResolved("build-type.product-group-id", true);
+                }
             }
         }
         return clone;
@@ -425,6 +464,32 @@ public class HorizonStrategy extends ApolloStrategy {
             mergeAuditLists(auditList, AuditList.create(blis));
         }
         return auditList;
+    }
+
+    @Override
+    public void beforeConnectionHandler() {
+        authenticationInfo = project.getComponent(ApmUIService.class).getAuthenticationInfo();
+        Collection<Integer> workspaces = authenticationInfo.getAssignedWorkspaces();
+        WorkspaceConfiguration workspaceConfiguration = project.getComponent(WorkspaceConfiguration.class);
+        Integer workspaceId = workspaceConfiguration.getWorkspaceId();
+        if (!workspaces.contains(workspaceId)) {
+            // select new workspace
+            Iterator<Integer> it = workspaces.iterator();
+            if (it.hasNext()) {
+                workspaceConfiguration.setWorkspaceId(it.next());
+            } else {
+                throw new RuntimeException("No workspace available");
+            }
+        }
+    }
+
+    @Override
+    public JComponent getConnectionComponent() {
+        if (authenticationInfo.getAssignedWorkspaces().size() > 1) {
+            return new HorizonWorkspaceSelector(project, authenticationInfo);
+        } else {
+            return null;
+        }
     }
 
     private void mergeAuditLists(AuditList target, AuditList source) {

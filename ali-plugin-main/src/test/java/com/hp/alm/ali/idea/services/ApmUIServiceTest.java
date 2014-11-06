@@ -21,6 +21,7 @@ import com.hp.alm.ali.idea.IntellijTest;
 import com.hp.alm.ali.idea.RestInvocations;
 import com.hp.alm.ali.idea.entity.EntityAdapter;
 import com.hp.alm.ali.idea.entity.EntityListener;
+import com.hp.alm.ali.idea.model.AuthenticationInfo;
 import com.hp.alm.ali.idea.model.Entity;
 import org.junit.Assert;
 import org.junit.Before;
@@ -44,7 +45,7 @@ public class ApmUIServiceTest extends IntellijTest {
     @Test
     public void testCreateDefectInRelease() {
         handler.addRequest("POST", "/qcbin/rest/domains/domain/projects/project/apmuiservices/additemservice/createdefectinrelease", 200)
-                .expectBody("description=something&detectedBy=me&detectedOn=&featureID=1439&name=somewhat&releaseId=1001&sevirity=2-High&sprintID=1001&teamID=101")
+                .expectBody("description=something&detectedBy=me&detectedOn=&featureID=1439&name=somewhat&releaseId=1001&sevirity=2-High&sprintID=1001&teamID=101&productGroupId=1200")
                 .content("apmUIServiceTest_defect.xml");
         RestInvocations.loadMetadata(handler, "project-task");
         handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/project-tasks?fields=&query={release-backlog-item-id[4289]}&order-by={}", 200)
@@ -84,13 +85,13 @@ public class ApmUIServiceTest extends IntellijTest {
         });
 
         handler.async(3);
-        apmUIService.createDefectInRelease("something", "somewhat", "2-High", "me", 1001, 1001, 101, 1439);
+        apmUIService.createDefectInRelease("something", "somewhat", "2-High", "me", 1001, 1001, 101, 1439, 1200);
     }
 
     @Test
     public void testCreateRequirementInRelease() {
         handler.addRequest("POST", "/qcbin/rest/domains/domain/projects/project/apmuiservices/additemservice/createrequirementinrelease", 200)
-                .expectBody("description=something&featureID=1439&name=somewhat&parentID=0&priority=2-High&releaseId=1001&reqType=70&sprintID=1001&storyPoints=1&teamID=101")
+                .expectBody("description=something&featureID=1439&name=somewhat&parentID=0&priority=2-High&releaseId=1001&reqType=70&sprintID=1001&storyPoints=1&teamID=101&productGroupId=1200")
                 .content("apmUIServiceTest_requirement.xml");
         RestInvocations.loadMetadata(handler, "project-task");
         handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/project-tasks?fields=&query={release-backlog-item-id[4289]}&order-by={}", 200)
@@ -130,16 +131,25 @@ public class ApmUIServiceTest extends IntellijTest {
         });
 
         handler.async(3);
-        apmUIService.createRequirementInRelease("something", "somewhat", "2-High", 1, 1001, 1001, 101, 1439);
+        apmUIService.createRequirementInRelease("something", "somewhat", "2-High", 1, 1001, 1001, 101, 1439, 1200);
     }
 
     @Test
     public void testCreationFailure() {
         handler.addRequest("POST", "/qcbin/rest/domains/domain/projects/project/apmuiservices/additemservice/createdefectinrelease", 500)
                 .responseBody("Bad day");
-        Entity defect = apmUIService.createDefectInRelease("something", "somewhat", "2-High", "me", 1001, 1001, 101, 1439);
+        Entity defect = apmUIService.createDefectInRelease("something", "somewhat", "2-High", "me", 1001, 1001, 101, 1439, 1200);
         Assert.assertNull(defect);
         checkError("Bad day");
+    }
+
+    @Test
+    public void testGetAuthenticationInfo() {
+        handler.addRequest("GET", "/qcbin/rest/domains/domain/projects/project/apmuiservices/configurationusers/authentication-info", 200)
+                .content("apmUIServiceTest_authenticationInfo.json");
+        AuthenticationInfo authenticationInfo = apmUIService.getAuthenticationInfo();
+        Assert.assertEquals(1, authenticationInfo.getAssignedWorkspaces().size());
+        Assert.assertEquals(1000, (int) authenticationInfo.getAssignedWorkspaces().iterator().next());
     }
 
     private abstract static class EntityCheck implements Runnable {
