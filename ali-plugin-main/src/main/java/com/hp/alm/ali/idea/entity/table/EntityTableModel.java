@@ -112,7 +112,7 @@ public class EntityTableModel extends AbstractTableModel implements Disposable, 
             status.loading();
             metadataService.loadEntityMetadataAsync(entityName, this);
         } catch(NotConnectedException e) {
-            status.info("Not connected", null, null);
+            status.info("Not connected", null, null, null);
         }
     }
 
@@ -127,7 +127,7 @@ public class EntityTableModel extends AbstractTableModel implements Disposable, 
                 if(!serverType.isConnected() || !autoload) {
                     data = EntityList.empty();
                     meta = null;
-                    status.info("Disconnected", null, null);
+                    status.info("Disconnected", null, null, null);
                     fireTableDataChanged();
                 } else {
                     loadMetaData();
@@ -346,7 +346,7 @@ public class EntityTableModel extends AbstractTableModel implements Disposable, 
                     public void run() {
                         loadMetaData();
                     }
-                });
+                }, null);
             }
         });
     }

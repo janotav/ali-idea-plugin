@@ -80,7 +80,7 @@ public class QueryQueue {
                         }
                         target.handleResult(list);
                     } catch (Exception e) {
-                        status.info("Failed to load data", e, redo);
+                        status.info("Failed to load data", e, redo, null);
                     }
                 }
             }

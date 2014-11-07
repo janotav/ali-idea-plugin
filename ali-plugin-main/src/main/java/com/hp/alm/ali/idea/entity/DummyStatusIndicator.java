@@ -29,7 +29,7 @@ public class DummyStatusIndicator implements EntityStatusIndicator {
     }
 
     @Override
-    public void info(String message, Exception e, Runnable redo) {
+    public void info(String message, Exception e, Runnable redo, Runnable more) {
     }
 
     @Override

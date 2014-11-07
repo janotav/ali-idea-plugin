@@ -17,6 +17,7 @@
 package com.hp.alm.ali.idea.ui.entity;
 
 import com.hp.alm.ali.idea.entity.EntityStatusIndicator;
+import com.hp.alm.ali.idea.model.Entity;
 import com.hp.alm.ali.idea.ui.dialog.ErrorDialog;
 import com.hp.alm.ali.idea.ui.dialog.RestErrorDetailDialog;
 import com.hp.alm.ali.idea.model.parser.EntityList;
@@ -36,6 +37,7 @@ import java.awt.FlowLayout;
 import java.awt.Insets;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.List;
 
 public class EntityStatusPanel extends JPanel implements EntityStatusIndicator, LinkListener {
 
@@ -45,8 +47,10 @@ public class EntityStatusPanel extends JPanel implements EntityStatusIndicator, 
     private JLabel icon;
     private JLabel message;
     private LinkLabel detail;
+    private LinkLabel moreLink;
     private Exception exception;
 
+    private Runnable more;
     private Runnable redo;
 
     public EntityStatusPanel(final Project project) {
@@ -66,8 +70,17 @@ public class EntityStatusPanel extends JPanel implements EntityStatusIndicator, 
                 }
             }
         }, null);
+        moreLink = new LinkLabel("(load more)", null, new LinkListener() {
+            @Override
+            public void linkSelected(LinkLabel aSource, Object aLinkData) {
+                moreLink.setVisible(false);
+                more.run();
+            }
+        }, null);
+        moreLink.setVisible(false);
 
         add(message);
+        add(moreLink);
     }
 
     @Override
@@ -76,6 +89,7 @@ public class EntityStatusPanel extends JPanel implements EntityStatusIndicator, 
             public void run() {
                 setIcon(null);
                 handleException(null);
+                handleMore(null);
                 message.setText("Loading information...");
             }
         });
@@ -83,7 +97,7 @@ public class EntityStatusPanel extends JPanel implements EntityStatusIndicator, 
 
     @Override
     public void loaded(final EntityList data, Runnable redo) {
-        info("Loaded " + getItemCountString(data, "items"), null, redo);
+        info("Loaded " + getItemCountString(data, "items"), null, redo, null);
     }
 
     @Override
@@ -93,24 +107,30 @@ public class EntityStatusPanel extends JPanel implements EntityStatusIndicator, 
                 message.setText("");
                 handleRedo(null);
                 handleException(null);
+                handleMore(null);
             }
         });
     }
 
     @Override
-    public void info(final String msg, final Exception e, final Runnable redo) {
+    public void info(final String msg, final Exception e, final Runnable redo, final Runnable more) {
         UIUtil.invokeLaterIfNeeded(new Runnable() {
             public void run() {
                 message.setText(msg);
                 handleRedo(redo);
                 handleException(e);
+                handleMore(more);
             }
         });
     }
 
     public static String getItemCountString(EntityList data, String name) {
-        if (data.getTotal() > data.size()) {
-            return data.size() + " " + name + " out of " + data.getTotal();
+        return getItemCountString(data.getTotal(), data, name);
+    }
+
+    public static String getItemCountString(int total, List<Entity> data, String name) {
+        if (total > data.size()) {
+            return data.size() + " " + name + " out of " + total;
         } else {
             return data.size() + " " + name;
         }
@@ -148,6 +168,15 @@ public class EntityStatusPanel extends JPanel implements EntityStatusIndicator, 
             setIcon(redoIcon);
         } else {
             setIcon(null);
+        }
+    }
+
+    private void handleMore(Runnable more) {
+        this.more = more;
+        if (more != null) {
+            moreLink.setVisible(true);
+        } else {
+            moreLink.setVisible(false);
         }
     }
 

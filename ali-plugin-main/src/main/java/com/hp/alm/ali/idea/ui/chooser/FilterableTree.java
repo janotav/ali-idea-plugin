@@ -198,7 +198,7 @@ class FilterableTree extends JTree implements Runnable {
                     }
                     model.getStatus().clear();
                 } catch(Exception e) {
-                    model.getStatus().info("Failed to load data", e, null);
+                    model.getStatus().info("Failed to load data", e, null, null);
                 }
             }
 

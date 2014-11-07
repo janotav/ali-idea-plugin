@@ -223,7 +223,7 @@ public class TaskBoardPanel extends JPanel implements SprintService.Listener, En
                     content.retainTasks(empty);
                     status.loaded(items, redo);
                 } else {
-                    status.info("Loaded " + EntityStatusPanel.getItemCountString(items, "backlog items") + ", loading tasks...", null, redo);
+                    status.info("Loaded " + EntityStatusPanel.getItemCountString(items, "backlog items") + ", loading tasks...", null, redo, null);
                     for(int i = 0; i < items.size(); i++) {
                         updateBacklogItem(items.get(i), false, i);
                     }
@@ -231,21 +231,47 @@ public class TaskBoardPanel extends JPanel implements SprintService.Listener, En
             }
         });
         if(!items.isEmpty()) {
-            EntityQuery query = new EntityQuery("project-task");
-            query.setOrValues("release-backlog-item-id", items.getIdStrings());
-            final EntityList tasks = entityService.query(query);
-            UIUtil.invokeLaterIfNeeded(new Runnable() {
-                @Override
-                public void run() {
-                    content.retainTasks(tasks);
-
-                    for (Entity task : tasks) {
-                        updateTask(task, false);
-                    }
-                    status.info("Loaded " + EntityStatusPanel.getItemCountString(items, "backlog items") + " and " + EntityStatusPanel.getItemCountString(tasks, "tasks"), null, redo);
-                }
-            });
+            loadTasksChunk(items, null, redo);
         }
+    }
+
+    private void loadTasksChunk(final EntityList backlogItems, final List<Entity> existingTasks, final Runnable redo) {
+        EntityQuery query = new EntityQuery("project-task");
+        query.addOrder("id", SortOrder.ASCENDING);
+        query.setOrValues("release-backlog-item-id", backlogItems.getIdStrings());
+        if (existingTasks != null) {
+            query.setStartIndex(existingTasks.size() + 1);
+        }
+        final EntityList tasks = entityService.query(query);
+        UIUtil.invokeLaterIfNeeded(new Runnable() {
+            @Override
+            public void run() {
+                final List<Entity> list;
+                if (existingTasks != null) {
+                    list = new LinkedList<Entity>();
+                    list.addAll(existingTasks);
+                    list.addAll(tasks);
+                } else {
+                    list = tasks;
+                }
+
+                content.retainTasks(tasks);
+
+                for (Entity task : tasks) {
+                    updateTask(task, false);
+                }
+                Runnable more = null;
+                if (tasks.getTotal() > list.size()) {
+                    more = new Runnable() {
+                        @Override
+                        public void run() {
+                            loadTasksChunk(backlogItems, list, redo);
+                        }
+                    };
+                }
+                status.info("Loaded " + EntityStatusPanel.getItemCountString(backlogItems, "backlog items") + " and " + EntityStatusPanel.getItemCountString(tasks.getTotal(), list, "tasks"), null, redo, more);
+            }
+        });
     }
 
     private void loadTasksOfNewlyAddedBli(Entity entity) {

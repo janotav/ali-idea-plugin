@@ -22,6 +22,6 @@ public interface StatusIndicator {
 
     void clear();
 
-    void info(String message, Exception e, Runnable redo);
+    void info(String message, Exception e, Runnable redo, Runnable more);
 
 }
