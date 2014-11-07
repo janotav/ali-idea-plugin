@@ -66,13 +66,16 @@ public class SettingsPanel extends JPanel implements ConfigurationListener, Disp
         this.projectConf = prj.getComponent(AliProjectConfiguration.class);
 
         previewAndConnection = new JPanel(new GridBagLayout());
+        previewAndConnection.setOpaque(false);
         GridBagConstraints c2 = new GridBagConstraints();
         c2.gridx = 0;
         c2.gridy = 1;
         c2.gridwidth = 2;
         c2.weighty = 1;
         c2.fill = GridBagConstraints.VERTICAL;
-        previewAndConnection.add(new JPanel(), c2);
+        JPanel filler = new JPanel();
+        filler.setOpaque(false);
+        previewAndConnection.add(filler, c2);
 
         passwordPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         passwordPanel.setBackground(bgColor);
