@@ -30,7 +30,6 @@ public class QueryQueue {
     private EntityService entityService;
     private EntityStatusIndicator status;
     private boolean updateStatus;
-    private QueryTarget target;
     final private LinkedList<Object> queue = new LinkedList<Object>();
 
     // serialized query execution: if another query comes before waiting query
@@ -38,14 +37,13 @@ public class QueryQueue {
     // the redo parameter passed into the runnable can be used as a shortcut to reschedule the action,
     // e.g. if the execution fails
 
-    public QueryQueue(Project project, EntityStatusIndicator status, boolean updateStatus, QueryTarget target) {
+    public QueryQueue(Project project, EntityStatusIndicator status, boolean updateStatus) {
         this.status = status;
         this.updateStatus = updateStatus;
-        this.target = target;
         entityService = project.getComponent(EntityService.class);
     }
 
-    public void query(final EntityQuery query) {
+    public void query(final EntityQuery query, final QueryTarget target) {
         final Object token = new Object();
         synchronized(queue) {
             queue.clear();
@@ -70,7 +68,7 @@ public class QueryQueue {
                     Runnable redo = new Runnable() {
                         @Override
                         public void run() {
-                            query(query);
+                            query(query, target);
                         }
                     };
                     try {

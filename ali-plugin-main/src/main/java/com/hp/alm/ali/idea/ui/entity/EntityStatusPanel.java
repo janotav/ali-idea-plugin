@@ -129,10 +129,14 @@ public class EntityStatusPanel extends JPanel implements EntityStatusIndicator, 
     }
 
     public static String getItemCountString(int total, List<Entity> data, String name) {
-        if (total > data.size()) {
-            return data.size() + " " + name + " out of " + total;
+        return getItemCountString(total, data.size(), name);
+    }
+
+    public static String getItemCountString(int total, int n, String name) {
+        if (total > n) {
+            return n + " " + name + " out of " + total;
         } else {
-            return data.size() + " " + name;
+            return n + " " + name;
         }
     }
 

@@ -69,18 +69,20 @@ import java.awt.event.AWTEventListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public class TaskBoardPanel extends JPanel implements SprintService.Listener, EntityListener, QueryTarget {
+public class TaskBoardPanel extends JPanel implements SprintService.Listener, EntityListener {
 
-    public static int MIN_COLUMN_WIDTH = 250;
+    public static final int BACKLOG_ITEM_PAGE_SIZE = 200;
+    public static final int TASK_PAGE_SIZE = 1000;
+    public static final int MIN_COLUMN_WIDTH = 250;
     public static final String PLACE = "HPALI.TaskBoard";
 
     private static final List<String> allItemStatuses = Arrays.asList(
@@ -107,7 +109,7 @@ public class TaskBoardPanel extends JPanel implements SprintService.Listener, En
         this.project = project;
 
         status = new EntityStatusPanel(project);
-        queue = new QueryQueue(project, status, false, this);
+        queue = new QueryQueue(project, status, false);
 
         entityService = project.getComponent(EntityService.class);
         entityService.addEntityListener(this);
@@ -192,22 +194,30 @@ public class TaskBoardPanel extends JPanel implements SprintService.Listener, En
         Entity sprint = sprintService.getSprint();
         Entity team = sprintService.getTeam();
         if(sprint != null && team != null) {
-            loadTasks(sprint, team);
+            loadTasks(sprint, team, Collections.<Entity>emptyList(), Collections.<Entity>emptyList());
         }
     }
 
-    private void loadTasks(final Entity sprint, final Entity team) {
+    private void loadTasks(final Entity sprint, final Entity team, final List<Entity> previousBacklogItems, final List<Entity> previousTasks) {
         EntityQuery query = new EntityQuery("release-backlog-item");
+        query.setStartIndex(previousBacklogItems.size() + 1);
+        query.setPageSize(BACKLOG_ITEM_PAGE_SIZE);
         query.setValue("is-leaf", "Y") ;
         query.setValue("team-id", team.getPropertyValue("id"));
         query.setValue("sprint-id", String.valueOf(sprint.getId()));
         query.setPropertyResolved("is-leaf", true);
         query.setPropertyResolved("team-id", true);
-        query.setOrder(new LinkedHashMap<String, SortOrder>(Collections.singletonMap("rank", SortOrder.ASCENDING)));
-        queue.query(query);
+        query.addOrder("rank", SortOrder.ASCENDING);
+        query.addOrder("id", SortOrder.ASCENDING);
+        queue.query(query, new QueryTarget() {
+            @Override
+            public void handleResult(EntityList list) {
+                updateBacklogItems(sprint, team, list, previousBacklogItems, previousTasks);
+            }
+        });
     }
 
-    private void updateBacklogItems(final EntityList items) {
+    private void updateBacklogItems(Entity sprint, Entity team, final EntityList items, final List<Entity> previousBacklogItems, final List<Entity> previousTasks) {
         final Runnable redo = new Runnable() {
             @Override
             public void run() {
@@ -217,59 +227,74 @@ public class TaskBoardPanel extends JPanel implements SprintService.Listener, En
         UIUtil.invokeLaterIfNeeded(new Runnable() {
             @Override
             public void run() {
-                content.retain(items);
-                if(items.isEmpty()) {
+                EntityList merged = EntityList.empty();
+                merged.addAll(previousBacklogItems);
+                merged.addAll(items);
+
+                content.retain(merged);
+                if (merged.isEmpty()) {
                     EntityList empty = EntityList.empty();
                     content.retainTasks(empty);
-                    status.loaded(items, redo);
+                    status.loaded(merged, redo);
+                } else if (items.isEmpty()) {
+                    // no more items loaded (only possible when paging is inconsistent)
+                    String backlogItemsCount = EntityStatusPanel.getItemCountString(previousBacklogItems.size(), previousBacklogItems.size(), "backlog items");
+                    String tasksCount = EntityStatusPanel.getItemCountString(previousTasks.size(), previousTasks.size(), "tasks");
+                    status.info("Loaded " + backlogItemsCount + " and " + tasksCount, null, redo, null);
                 } else {
-                    status.info("Loaded " + EntityStatusPanel.getItemCountString(items, "backlog items") + ", loading tasks...", null, redo, null);
-                    for(int i = 0; i < items.size(); i++) {
-                        updateBacklogItem(items.get(i), false, i);
+                    status.info("Loaded " + EntityStatusPanel.getItemCountString(items.getTotal(), merged.size(), "backlog items") + ", loading tasks...", null, redo, null);
+                    for (int i = previousBacklogItems.size(); i < merged.size(); i++) {
+                        updateBacklogItem(merged.get(i), false, i);
                     }
                 }
             }
         });
         if(!items.isEmpty()) {
-            loadTasksChunk(items, null, redo);
+            loadTasksChunk(sprint, team, items, previousBacklogItems, previousTasks.size(), previousTasks, 1, redo);
         }
     }
 
-    private void loadTasksChunk(final EntityList backlogItems, final List<Entity> existingTasks, final Runnable redo) {
+    private void loadTasksChunk(final Entity sprint, final Entity team, final EntityList backlogItems, final List<Entity> previousBacklogItems, final int previousTasksTotalCount, final List<Entity> previousTasks, final int startIndex, final Runnable redo) {
         EntityQuery query = new EntityQuery("project-task");
         query.addOrder("id", SortOrder.ASCENDING);
         query.setOrValues("release-backlog-item-id", backlogItems.getIdStrings());
-        if (existingTasks != null) {
-            query.setStartIndex(existingTasks.size() + 1);
-        }
+        query.setStartIndex(startIndex);
+        query.setPageSize(TASK_PAGE_SIZE);
         final EntityList tasks = entityService.query(query);
         UIUtil.invokeLaterIfNeeded(new Runnable() {
             @Override
             public void run() {
-                final List<Entity> list;
-                if (existingTasks != null) {
-                    list = new LinkedList<Entity>();
-                    list.addAll(existingTasks);
-                    list.addAll(tasks);
-                } else {
-                    list = tasks;
-                }
+                final EntityList merged = EntityList.empty();
+                merged.addAll(previousTasks);
+                merged.addAll(tasks);
 
-                content.retainTasks(tasks);
+                content.retainTasks(merged);
 
                 for (Entity task : tasks) {
                     updateTask(task, false);
                 }
                 Runnable more = null;
-                if (tasks.getTotal() > list.size()) {
+                if (tasks.getTotal() > tasks.size() + startIndex - 1) {
                     more = new Runnable() {
                         @Override
                         public void run() {
-                            loadTasksChunk(backlogItems, list, redo);
+                            loadTasksChunk(sprint, team, backlogItems, previousBacklogItems, previousTasksTotalCount, merged, startIndex + tasks.size(), redo);
+                        }
+                    };
+                } else if (backlogItems.getTotal() > previousBacklogItems.size() + backlogItems.size()) {
+                    more = new Runnable() {
+                        @Override
+                        public void run() {
+                            ArrayList<Entity> mergedItems = new ArrayList<Entity>();
+                            mergedItems.addAll(previousBacklogItems);
+                            mergedItems.addAll(backlogItems);
+                            loadTasks(sprint, team, mergedItems, merged);
                         }
                     };
                 }
-                status.info("Loaded " + EntityStatusPanel.getItemCountString(backlogItems, "backlog items") + " and " + EntityStatusPanel.getItemCountString(tasks.getTotal(), list, "tasks"), null, redo, more);
+                String backlogItemsCount = EntityStatusPanel.getItemCountString(backlogItems.getTotal(), previousBacklogItems.size() + backlogItems.size(), "backlog items");
+                String tasksCount = EntityStatusPanel.getItemCountString(previousTasksTotalCount + tasks.getTotal(), merged.size(), "tasks");
+                status.info("Loaded " + backlogItemsCount + " and " + tasksCount, null, redo, more);
             }
         });
     }
@@ -384,11 +409,6 @@ public class TaskBoardPanel extends JPanel implements SprintService.Listener, En
         Entity team = sprintService.getTeam();
         return sprint != null && sprint.getPropertyValue("id").equals(entity.getPropertyValue("sprint-id")) &&
                 team != null && team.getPropertyValue("id").equals(entity.getPropertyValue("team-id"));
-    }
-
-    @Override
-    public void handleResult(EntityList list) {
-        updateBacklogItems(list);
     }
 
     private class Header extends JPanel implements TaskBoardFilter {

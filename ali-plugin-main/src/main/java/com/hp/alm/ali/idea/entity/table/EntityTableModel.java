@@ -98,7 +98,7 @@ public class EntityTableModel extends AbstractTableModel implements Disposable, 
         entityService = project.getComponent(EntityService.class);
         translateService = project.getComponent(TranslateService.class);
         status = new DummyStatusIndicator();
-        queue = new QueryQueue(project, status, true, this);
+        queue = new QueryQueue(project, status, true);
 
         entityService.addEntityListener(this);
         restService.addServerTypeListener(this);
@@ -288,7 +288,7 @@ public class EntityTableModel extends AbstractTableModel implements Disposable, 
             clone = query.clone();
         }
         forceQuery = false;
-        queue.query(clone);
+        queue.query(clone, this);
     }
 
     public void setFilter(EntityQuery filter) {
