@@ -27,6 +27,7 @@ import java.util.HashSet;
 public class HorizonWorkspaceSelector extends JPanel {
 
     public HorizonWorkspaceSelector(Project project, AuthenticationInfo authenticationInfo) {
+        setOpaque(false);
         WorkspaceService workspaceService = project.getComponent(WorkspaceService.class);
         add(new JLabel("Workspace"));
         WorkspaceComboBox workspaceComboBox = new WorkspaceComboBox(project,

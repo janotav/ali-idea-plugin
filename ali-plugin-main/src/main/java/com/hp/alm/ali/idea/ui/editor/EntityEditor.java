@@ -88,6 +88,7 @@ public class EntityEditor extends BaseEditor implements EntityFields.ColumnsChan
         }
 
         JTextPane addProperty = new JTextPane();
+        addProperty.setBackground(gridFooter.getBackground());
         addProperty.setEditorKit(new HTMLEditorKit());
         addProperty.setText("<html><body><i>Property not listed? Click <a href='#addProperty'>here</a></i></body></html>");
         addProperty.setEditable(false);
