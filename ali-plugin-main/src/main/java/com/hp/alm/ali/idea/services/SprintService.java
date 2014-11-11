@@ -215,7 +215,9 @@ public class SprintService implements PersistentStateComponent<Element>, ServerT
         EntityQuery query = new EntityQuery("team");
         query.addColumn("id", 1);
         query.addColumn("name", 1);
-        query.setValue("release-id", release.getPropertyValue("id"));
+        // release by cross filter is necessary to support global team
+        query.setValue("release.id", release.getPropertyValue("id"));
+        query.setPropertyResolved("release.id", true);
         query.addOrder("name", SortOrder.ASCENDING);
         EntityList list = EntityList.empty();
         try {
