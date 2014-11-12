@@ -178,6 +178,7 @@ public class SprintService implements PersistentStateComponent<Element>, ServerT
         query.addColumn("start-date", 1);
         query.addColumn("end-date", 1);
         query.setValue("parent-id", String.valueOf(release.getId()));
+        query.setPropertyResolved("parent-id", true);
         query.addOrder("start-date", SortOrder.ASCENDING);
         EntityList list = EntityList.empty();
         try {

@@ -392,28 +392,13 @@ public class SprintServiceTest extends IntellijTest {
     }
 
     private void sprintRequests_TestRelease(Handler handler) {
-        RestInvocations.loadMetadata(handler, "release-cycle");
         handler.addRequest(false, "GET", "/qcbin/rest/domains/domain/projects/project/release-cycles?fields=id,name,tense,start-date,end-date&query={parent-id[1001]}&order-by={start-date[ASC]}", 200)
                 .content("sprintServiceTest_sprints.xml");
     }
 
     private void teamRequests_TestRelease(Handler handler) {
-        RestInvocations.loadMetadata(handler, "team");
-        handler.addRequest(false, "GET", "/qcbin/rest/domains/domain/projects/project/teams?fields=id,name&query={release-id[1001]}&order-by={name[ASC]}", 200)
+        handler.addRequest(false, "GET", "/qcbin/rest/domains/domain/projects/project/teams?fields=id,name&query={release.id[1001]}&order-by={name[ASC]}", 200)
                 .content("sprintServiceTest_teams.xml");
-    }
-
-    private void releaseSprintTeamRequests_None(Handler handler, boolean all) {
-        handler.addRequest(false, "GET", "/qcbin/rest/domains/domain/projects/project/releases?fields=id,name,start-date,end-date&query={}&order-by={}", 200)
-                .content("no_entities.xml");
-        if(all) {
-            RestInvocations.loadMetadata(handler, "team");
-            RestInvocations.loadMetadata(handler, "release-cycle");
-            handler.addRequest(false, "GET", "/qcbin/rest/domains/domain/projects/project/release-cycles?fields=id,name,tense,start-date,end-date&query={parent-id[1001]}&order-by={start-date[ASC]}", 200)
-                    .content("no_entities.xml");
-            handler.addRequest(false, "GET", "/qcbin/rest/domains/domain/projects/project/teams?fields=id,name&query={release-id[1001]}&order-by={name[ASC]}", 200)
-                    .content("no_entities.xml");
-        }
     }
 
     private void selectTestRelease() throws Throwable {
