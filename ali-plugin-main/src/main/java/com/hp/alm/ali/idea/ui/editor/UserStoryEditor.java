@@ -56,7 +56,7 @@ public class UserStoryEditor extends BaseEditor implements BaseEditor.SaveHandle
         this.teamId = teamId;
 
         setSize(new Dimension(640, 480));
-        setLocationRelativeTo(null);
+        centerOnOwner();
     }
 
     @Override

@@ -29,7 +29,6 @@ import com.intellij.ui.components.labels.LinkLabel;
 import com.intellij.ui.components.labels.LinkListener;
 
 import javax.swing.BorderFactory;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
@@ -48,7 +47,7 @@ import java.util.regex.Pattern;
 public class RestErrorDetailDialog extends MyDialog {
 
     public RestErrorDetailDialog(Project project, Exception exception) {
-        super(project, new JFrame(), "Error Detail", true, true, Arrays.asList(Button.Close));
+        super(project, "Error Detail", true, true, Arrays.asList(Button.Close));
 
         final JPanel areaPanel = new JPanel(new BorderLayout());
         areaPanel.setBorder(BorderFactory.createCompoundBorder(new EmptyBorder(20, 20, 20, 20), BorderFactory.createEtchedBorder()));
@@ -115,6 +114,6 @@ public class RestErrorDetailDialog extends MyDialog {
         size.width = Math.min(800, size.width);
         size.height = Math.min(600, size.height);
         setSize(size);
-        setLocationRelativeTo(null);
+        centerOnOwner();
     }
 }

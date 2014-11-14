@@ -39,7 +39,7 @@ public class TaskEditor extends BaseEditor {
         entity.setProperty("release-backlog-item-id", String.valueOf(itemId));
 
         setSize(new Dimension(640, 480));
-        setLocationRelativeTo(null);
+        centerOnOwner();
     }
 
     public TaskEditor(Project project, Entity task) {
@@ -52,7 +52,7 @@ public class TaskEditor extends BaseEditor {
         entityService = project.getComponent(EntityService.class);
 
         setSize(new Dimension(640, 480));
-        setLocationRelativeTo(null);
+        centerOnOwner();
     }
 
     @Override

@@ -43,16 +43,16 @@ public class MyDialog extends JDialog implements ActionListener {
     private JPanel buttonPanel;
     private String dimensionKey;
 
-    public MyDialog(Project project, Frame frame, String title, boolean modal) {
-        this(project, frame, title, modal, false);
+    public MyDialog(Project project, String title, boolean modal) {
+        this(project, title, modal, false);
     }
 
-    public MyDialog(Project project, Frame frame, String title, boolean modal, boolean enableEscape) {
-        this(project, frame, title, modal, enableEscape, Collections.<Button>emptyList());
+    public MyDialog(Project project, String title, boolean modal, boolean enableEscape) {
+        this(project, title, modal, enableEscape, Collections.<Button>emptyList());
     }
 
-    public MyDialog(Project project, Frame frame, String title, boolean modal, boolean enableEscape, List<Button> buttonList) {
-        super(frame, title, modal);
+    public MyDialog(Project project, String title, boolean modal, boolean enableEscape, List<Button> buttonList) {
+        super(JOptionPane.getRootFrame(), title, modal);
 
         this.project = project;
 
@@ -74,7 +74,7 @@ public class MyDialog extends JDialog implements ActionListener {
         }
 
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null);
+        centerOnOwner();
     }
 
     protected String getDimensionKey() {
@@ -94,7 +94,7 @@ public class MyDialog extends JDialog implements ActionListener {
         if (location != null) {
             setLocation(location);
         } else {
-            setLocationRelativeTo(getOwner());
+            centerOnOwner();
         }
         if (size != null) {
             setSize(size.width, size.height);
@@ -146,6 +146,10 @@ public class MyDialog extends JDialog implements ActionListener {
         JButton jButton = new JButton(button.name());
         jButton.addActionListener(this);
         return jButton;
+    }
+
+    protected void centerOnOwner() {
+        setLocationRelativeTo(getOwner());
     }
 
     protected void close(boolean cleanClose) {

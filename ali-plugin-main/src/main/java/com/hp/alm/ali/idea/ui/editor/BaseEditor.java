@@ -59,7 +59,7 @@ public abstract class BaseEditor extends MyDialog {
     protected SaveHandler saveHandler;
 
     public BaseEditor(Project project, String title, Entity entity, SaveHandler saveHandler) {
-        super(project, JOptionPane.getRootFrame(), title, false, true, Arrays.asList(Button.Save, Button.Cancel));
+        super(project, title, false, true, Arrays.asList(Button.Save, Button.Cancel));
         this.project = project;
         this.entity = entity;
         this.saveHandler = saveHandler;
@@ -170,7 +170,7 @@ public abstract class BaseEditor extends MyDialog {
 
     protected void packAndPosition() {
         pack();
-        setLocationRelativeTo(null);
+        centerOnOwner();
     }
 
     private void updateSave() {

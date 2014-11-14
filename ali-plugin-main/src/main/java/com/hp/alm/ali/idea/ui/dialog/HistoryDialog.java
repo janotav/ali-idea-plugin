@@ -47,7 +47,7 @@ public class HistoryDialog extends MyDialog {
     private JPanel contentPanel;
 
     public HistoryDialog(final Project project, final Entity entity) {
-        super(project, JOptionPane.getRootFrame(), "History...", false, true, Arrays.asList(Button.Close));
+        super(project, "History...", false, true, Arrays.asList(Button.Close));
 
         this.project = project;
 
@@ -67,7 +67,7 @@ public class HistoryDialog extends MyDialog {
         getRootPane().setDefaultButton(getButton(Button.Close));
 
         pack();
-        setLocationRelativeTo(null);
+        centerOnOwner();
 
         ApplicationManager.getApplication().executeOnPooledThread(new Runnable() {
             public void run() {

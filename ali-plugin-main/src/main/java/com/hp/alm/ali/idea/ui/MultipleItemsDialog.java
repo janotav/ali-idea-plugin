@@ -38,7 +38,6 @@ import javax.swing.DefaultListSelectionModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
@@ -83,7 +82,7 @@ public class MultipleItemsDialog<K, E extends KeyValue<K>> extends MyDialog impl
     }
 
     public MultipleItemsDialog(Project project, String title, final MultipleItemsDialogModel<K, E> model) {
-        super(project, new JFrame(), title, true);
+        super(project, title, true);
 
         this.model = model;
 
@@ -215,7 +214,7 @@ public class MultipleItemsDialog<K, E extends KeyValue<K>> extends MyDialog impl
 
         pack();
         setResizable(false);
-        setLocationRelativeTo(null);
+        centerOnOwner();
 
         requestPropertyFilterFocus(header);
 

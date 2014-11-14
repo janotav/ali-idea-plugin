@@ -24,7 +24,6 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -44,7 +43,7 @@ public class TaskBoardSettingsDialog extends MyDialog {
     private JCheckBox activateItemSwitch;
 
     public TaskBoardSettingsDialog(Project project) {
-        super(project, JOptionPane.getRootFrame(), "Task Board Settings", true, true, Arrays.asList(Button.OK, Button.Cancel));
+        super(project, "Task Board Settings", true, true, Arrays.asList(Button.OK, Button.Cancel));
 
         JPanel contentPanel = new JPanel();
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
@@ -123,7 +122,7 @@ public class TaskBoardSettingsDialog extends MyDialog {
         getRootPane().setDefaultButton(getButton(Button.OK));
 
         pack();
-        setLocationRelativeTo(null);
+        centerOnOwner();
     }
 
     protected void buttonPerformed(Button button) {

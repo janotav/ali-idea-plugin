@@ -55,7 +55,7 @@ public class AcceptanceTestEditor extends BaseEditor {
 
     private void init() {
         setSize(new Dimension(640, 480));
-        setLocationRelativeTo(null);
+        centerOnOwner();
     }
 
     public void beforeUpdate() {

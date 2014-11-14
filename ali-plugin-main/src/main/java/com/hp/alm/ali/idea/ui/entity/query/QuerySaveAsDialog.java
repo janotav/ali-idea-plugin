@@ -19,8 +19,8 @@ package com.hp.alm.ali.idea.ui.entity.query;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -41,7 +41,7 @@ public class QuerySaveAsDialog extends JDialog implements ActionListener {
     private boolean success = false;
 
     public QuerySaveAsDialog(final List<String> existing) {
-        super(new JFrame(), "Save Query As", true);
+        super(JOptionPane.getRootFrame(), "Save Query As", true);
 
         JPanel buttons = new JPanel(new FlowLayout());
         ok = new JButton("OK");
@@ -107,7 +107,7 @@ public class QuerySaveAsDialog extends JDialog implements ActionListener {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         pack();
         setResizable(false);
-        setLocationRelativeTo(null);
+        setLocationRelativeTo(getOwner());
     }
 
     public String getTargetName() {

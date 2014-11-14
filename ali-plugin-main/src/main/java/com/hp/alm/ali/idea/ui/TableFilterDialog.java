@@ -29,7 +29,6 @@ import net.coderazzi.filters.gui.IFilterHeaderObserver;
 import net.coderazzi.filters.gui.TableFilterHeader;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
@@ -67,7 +66,7 @@ public class TableFilterDialog<E> extends MyDialog implements IFilterHeaderObser
     private List<E> selectedItems = new ArrayList<E>();
 
     public TableFilterDialog(Project project, String title, boolean allowMultiple, String column, ItemsProvider<E> provider, ItemRenderer<E> renderer) {
-        super(project, new JFrame(), title, true);
+        super(project, title, true);
 
         this.provider = provider;
         this.renderer = renderer;
@@ -123,7 +122,7 @@ public class TableFilterDialog<E> extends MyDialog implements IFilterHeaderObser
         setPreferredSize(new Dimension(600, 400));
         setSize(getPreferredSize());
         setResizable(true);
-        setLocationRelativeTo(null);
+        centerOnOwner();
 
         executeQuery(true, null);
 

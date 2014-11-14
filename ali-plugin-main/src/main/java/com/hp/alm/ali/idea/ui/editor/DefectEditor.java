@@ -56,7 +56,7 @@ public class DefectEditor extends BaseEditor implements BaseEditor.SaveHandler {
         this.teamId = teamId;
 
         setSize(new Dimension(640, 480));
-        setLocationRelativeTo(null);
+        centerOnOwner();
     }
 
     @Override

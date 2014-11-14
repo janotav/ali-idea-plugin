@@ -23,8 +23,8 @@ import com.intellij.ui.components.labels.LinkListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import java.awt.BorderLayout;
@@ -39,7 +39,7 @@ import java.awt.event.ActionListener;
 public class ErrorDialog extends JDialog implements ActionListener {
 
     public ErrorDialog(String message, String detail) {
-        super(new JFrame(), "Error", true);
+        super(JOptionPane.getRootFrame(), "Error", true);
 
         JButton ok = new JButton("OK");
         ok.addActionListener(this);
@@ -52,25 +52,26 @@ public class ErrorDialog extends JDialog implements ActionListener {
         pane.setPreferredSize(new Dimension(600, 300));
         getContentPane().add(buttons, BorderLayout.SOUTH);
 
-        JPanel content = new JPanel();
+        final JPanel content = new JPanel();
         content.add(new JLabel(IconLoader.getIcon("/general/errorDialog.png")));
         content.add(new JLabel(message));
-        content.add(new LinkLabel("(show details)", null, new LinkListener() {
+        final LinkLabel showMoreLink = new LinkLabel("(show details)", null);
+        LinkListener showMoreListener = new LinkListener() {
             public void linkSelected(LinkLabel aSource, Object aLinkData) {
-                if(pane.getParent() == getContentPane()) {
-                    getContentPane().remove(pane);
-                } else {
-                    getContentPane().add(pane, BorderLayout.CENTER);
-                }
+                content.remove(showMoreLink);
+                getContentPane().add(pane, BorderLayout.CENTER);
+                setResizable(true);
                 pack();
             }
-        }));
+        };
+        showMoreLink.setListener(showMoreListener, null);
+        content.add(showMoreLink);
         getContentPane().add(content, BorderLayout.NORTH);
 
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         pack();
         setResizable(false);
-        setLocationRelativeTo(null);
+        setLocationRelativeTo(getOwner());
     }
 
     public void actionPerformed(ActionEvent actionEvent) {

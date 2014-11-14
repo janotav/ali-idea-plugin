@@ -22,7 +22,6 @@ import com.intellij.openapi.project.Project;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -43,7 +42,7 @@ public class EntityChooser extends MyDialog implements FilterChooser {
     protected String entityType;
 
     public EntityChooser(Project project, String entityType, boolean showCondition, boolean acceptEmpty) {
-        super(project, new JFrame(), "Select {0}", true, false, Arrays.asList(Button.OK, Button.Close));
+        super(project, "Select {0}", true, false, Arrays.asList(Button.OK, Button.Close));
 
         this.project = project;
         this.entityType = entityType;

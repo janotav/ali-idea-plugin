@@ -66,7 +66,7 @@ public abstract class EntityFilterDialog<E extends EntityFilter<E>> extends MyDi
     protected Project project;
 
     public EntityFilterDialog(final Project project, final String entityType, E query, final String title, Set<String> hiddenFields) {
-        super(project, new JFrame(), title, true);
+        super(project, title, true);
         this.project = project;
         this.entityType = entityType;
         this.hiddenFields = hiddenFields;
@@ -125,7 +125,7 @@ public abstract class EntityFilterDialog<E extends EntityFilter<E>> extends MyDi
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setSize(new Dimension(600, 400));
         setResizable(true);
-        setLocationRelativeTo(null);
+        centerOnOwner();
     }
 
     protected void setCrossFilterTitleBorder(JPanel panel, String label, String entity) {
