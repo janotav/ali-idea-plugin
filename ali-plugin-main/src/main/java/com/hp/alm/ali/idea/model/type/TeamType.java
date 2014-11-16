@@ -120,7 +120,8 @@ public class TeamType extends ReferenceType {
                         if(releaseId.isEmpty()) {
                             return Collections.emptyList();
                         } else {
-                            query.setValue("release-id", releaseId);
+                            query.setValue("release.id", releaseId);
+                            query.setPropertyResolved("release.id", true);
                             EntityList sprints = entityService.query(query);
                             return FilterManager.asItems(sprints, "id", multiple, false);
                         }
@@ -132,12 +133,12 @@ public class TeamType extends ReferenceType {
                     public List<ComboItem> load() {
                         EntityQuery query = new EntityQuery("team");
                         String releaseCondition = context.getEntityQuery().getValue("release-backlog-item.release-id");
-                        query.setValue("release-id", releaseCondition);
+                        query.setValue("release.id", releaseCondition);
+                        query.setPropertyResolved("release.id", true);
                         query.addColumn("id", 1);
                         query.addColumn("name", 1);
                         query.addColumn("description", 1);
                         query.addColumn("release-id", 1);
-                        query.addColumn("release.name", 1);
                         query.addOrder("name", SortOrder.ASCENDING);
                         EntityList teams = entityService.query(query);
                         Set<String> names = new HashSet<String>();
