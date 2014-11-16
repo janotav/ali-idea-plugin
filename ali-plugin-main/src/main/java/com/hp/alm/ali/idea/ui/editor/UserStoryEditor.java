@@ -66,8 +66,8 @@ public class UserStoryEditor extends BaseEditor implements BaseEditor.SaveHandle
         Field feature = metadata.getField("release-backlog-item.feature-id");
         List<String> list = project.getComponent(ProjectListService.class).getProjectList("requirement", priority);
 
-        addField("name", new TextField("Name", "", true, true));
-        addField("description", new HTMLAreaField("Description", "", true, true), true);
+        addField("name", new TextField(project, "Name", "", true, true));
+        addField("description", new HTMLAreaField(project, "Description", "", true, true), true);
         addField("feature", new ReferenceField(project, feature, new Context(entity), true));
         addField("priority", new LookupListField(list, priority, entity, true));
         addField("story-points", new SpinnerField("Story points", "0", false));

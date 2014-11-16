@@ -43,6 +43,7 @@ public class AliConfiguration implements PersistentStateComponent<Element> {
     public static final String PROPERTY_PASSWORD = "password";
     public static final String PROPERTY_STORE_PASSWORD = "store-password";
     public static final String PROPERTY_STATUS_TRANSITION = "status-transition";
+    public static final String PROPERTY_SPELL_CHECKER = "spell-checker";
 
     public String ALM_LOCATION = "";
     public String ALM_DOMAIN = "";
@@ -50,6 +51,8 @@ public class AliConfiguration implements PersistentStateComponent<Element> {
     public String ALM_USERNAME = "";
     public String ALM_PASSWORD = "";
     public boolean STORE_PASSWORD = true;
+
+    public boolean spellChecker = true;
 
     // poor man's workflow
     public String STATUS_TRANSITION;
@@ -74,6 +77,7 @@ public class AliConfiguration implements PersistentStateComponent<Element> {
         addProperty(element, PROPERTY_STORE_PASSWORD, STORE_PASSWORD);
         element.addContent(getStoredFilters());
         addProperty(element, PROPERTY_STATUS_TRANSITION, STATUS_TRANSITION);
+        addProperty(element, PROPERTY_SPELL_CHECKER, String.valueOf(spellChecker));
         return element;
     }
 
@@ -99,6 +103,7 @@ public class AliConfiguration implements PersistentStateComponent<Element> {
         ALM_PASSWORD = new String(new Base64().decode(getProperty(element, PROPERTY_PASSWORD).getBytes()));
         STORE_PASSWORD = Boolean.valueOf(getProperty(element, PROPERTY_STORE_PASSWORD));
         STATUS_TRANSITION = getProperty(element, PROPERTY_STATUS_TRANSITION);
+        spellChecker = !Boolean.FALSE.equals(Boolean.valueOf(getProperty(element, PROPERTY_SPELL_CHECKER)));
 
         Element stored = element.getChild("stored");
         if(stored != null) {

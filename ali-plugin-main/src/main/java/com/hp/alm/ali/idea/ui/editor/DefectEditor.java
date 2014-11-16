@@ -66,8 +66,8 @@ public class DefectEditor extends BaseEditor implements BaseEditor.SaveHandler {
         Field feature = metadata.getField("release-backlog-item.feature-id");
         List<String> list = project.getComponent(ProjectListService.class).getProjectList("defect", severity);
 
-        addField("summary", new TextField("Summary", "", true, true));
-        addField("description", new HTMLAreaField("Description", "", true, true), true);
+        addField("summary", new TextField(project, "Summary", "", true, true));
+        addField("description", new HTMLAreaField(project, "Description", "", true, true), true);
         addField("severity", new LookupListField(list, severity, entity, true));
         addField("feature", new ReferenceField(project, feature, new Context(entity), true));
     }

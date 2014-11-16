@@ -16,6 +16,8 @@
 
 package com.hp.alm.ali.idea.ui.editor.field;
 
+import com.hp.alm.ali.idea.cfg.AliConfiguration;
+import com.hp.alm.ali.idea.impl.SpellCheckerManager;
 import com.hp.alm.ali.idea.ui.html.HTMLLetterWrappingEditorKit;
 import com.hp.alm.ali.idea.ui.html.BodyLimitCaretListener;
 import com.hp.alm.ali.idea.ui.html.InsertHardBreakAction;
@@ -26,6 +28,7 @@ import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CustomShortcutSet;
 import com.intellij.openapi.actionSystem.IdeActions;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.ide.CopyPasteManager;
 import com.intellij.openapi.keymap.Keymap;
 import com.intellij.openapi.keymap.KeymapManager;
@@ -61,8 +64,8 @@ public class HTMLAreaField extends TextField {
 
     private JBScrollPane pane;
 
-    public HTMLAreaField(String label, String value, boolean required, boolean editable) {
-        super(createTextPane(value, editable), label, required, editable);
+    public HTMLAreaField(Project project, String label, String value, boolean required, boolean editable) {
+        super(createTextPane(project, value, editable, false), label, required, editable);
     }
 
     public static JTextPane createTextPane(String value) {
@@ -101,6 +104,10 @@ public class HTMLAreaField extends TextField {
             }
         }
         desc.setEditable(editable);
+
+        if (editable && SpellCheckerManager.isAvailable() && ApplicationManager.getApplication().getComponent(AliConfiguration.class).spellChecker) {
+            desc.getDocument().addDocumentListener(new SpellCheckDocumentListener(project, desc));
+        }
 
         Font font = UIManager.getFont("Label.font");
         String bodyRule = "body { font-family: " + font.getFamily() + "; " + "font-size: " + font.getSize() + "pt; }";

@@ -51,8 +51,8 @@ public class AttachmentEditor extends BaseEditor {
     @Override
     public void update() {
         addField(FIELD_UPLOAD, new UploadField("Upload Content", needsContent, true));
-        addField(FIELD_FILENAME, new TextField("File Name", entity.getPropertyValue(FIELD_FILENAME), false, editableFilename));
-        addField(FIELD_DESCRIPTION, new HTMLAreaField("Description", entity.getPropertyValue(FIELD_DESCRIPTION), false, true), true);
+        addField(FIELD_FILENAME, new TextField(project, "File Name", entity.getPropertyValue(FIELD_FILENAME), false, editableFilename));
+        addField(FIELD_DESCRIPTION, new HTMLAreaField(project, "Description", entity.getPropertyValue(FIELD_DESCRIPTION), false, true), true);
 
         packAndPosition();
     }

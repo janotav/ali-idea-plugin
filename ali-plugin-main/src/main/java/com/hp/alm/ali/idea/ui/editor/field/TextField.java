@@ -17,6 +17,7 @@
 package com.hp.alm.ali.idea.ui.editor.field;
 
 import com.hp.alm.ali.idea.action.UndoAction;
+import com.intellij.openapi.project.Project;
 
 import javax.swing.JTextField;
 import javax.swing.text.JTextComponent;
@@ -26,8 +27,11 @@ public class TextField extends BaseField {
 
     private JTextComponent textField;
 
-    public TextField(String label, String value, boolean required, boolean editable) {
+    public TextField(Project project, String label, String value, boolean required, boolean editable) {
         this(new JTextField(value, 12), label, required, editable);
+        if (editable) {
+            textField.getDocument().addDocumentListener(new SpellCheckDocumentListener(project, textField));
+        }
     }
 
     public TextField(JTextComponent textField, String label, boolean required, boolean editable) {

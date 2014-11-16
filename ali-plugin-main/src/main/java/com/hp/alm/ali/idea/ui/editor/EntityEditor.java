@@ -170,7 +170,7 @@ public class EntityEditor extends BaseEditor implements EntityFields.ColumnsChan
 
                 addField(field.getName(), new CommentField(field.getLabel(), value, userName, fullName), true);
             } else {
-                addField(field.getName(), new HTMLAreaField(field.getLabel(), value, field.isRequired(), editable), true);
+                addField(field.getName(), new HTMLAreaField(project, field.getLabel(), value, field.isRequired(), editable), true);
             }
         } else if(field.getClazz().equals(UserType.class)) {
             addField(field.getName(), new ReferenceField(project, field, context, editable));
@@ -182,7 +182,7 @@ public class EntityEditor extends BaseEditor implements EntityFields.ColumnsChan
         } else if(field.isReference()) {
             addField(field.getName(), new ReferenceField(project, field, context, editable));
         } else {
-            addField(field.getName(), new TextField(field.getLabel(), value, field.isRequired(), editable));
+            addField(field.getName(), new TextField(project, field.getLabel(), value, field.isRequired(), editable));
         }
         if(DependentValue.class.isAssignableFrom(field.getClazz())) {
             getField(field.getName()).addUpdateListener(new EditableFieldListener() {
