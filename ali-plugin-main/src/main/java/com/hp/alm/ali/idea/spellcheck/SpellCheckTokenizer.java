@@ -17,55 +17,35 @@
 package com.hp.alm.ali.idea.spellcheck;
 
 import java.text.BreakIterator;
-import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
 public class SpellCheckTokenizer {
 
-    private LinkedList<String> words;
+    private BreakIterator wordIterator;
     private Token token;
-    private int offset;
+    private String text;
 
     public SpellCheckTokenizer(String text) {
-        words = new LinkedList<String>();
+        this.text = text;
 
-        BreakIterator wordIterator = BreakIterator.getWordInstance();
+        wordIterator = BreakIterator.getWordInstance();
         wordIterator.setText(text);
         wordIterator.first();
-
-        // break text to words
-        while (true) {
-            int offset = wordIterator.current();
-            if (offset == BreakIterator.DONE || offset >= text.length()) {
-                break;
-            }
-            int next = wordIterator.next();
-            words.add(text.substring(offset, next == BreakIterator.DONE? text.length() - offset: next));
-        }
     }
 
     public boolean hasMoreTokens() {
-        while (true) {
-            if (token != null) {
-                return true;
-            }
-            while (!words.isEmpty()) {
-                String word = words.getFirst();
-                if (!Character.isLetter(word.charAt(0))) {
-                    // discard words not starting with letter (whitespace, punctuation etc)
-                    offset += word.length();
-                    words.removeFirst();
-                } else {
-                    break;
-                }
-            }
-            if (!words.isEmpty()) {
-                token = new Token(words.removeFirst(), offset);
-                offset += token.getLength();
-            } else {
+        while (token == null) {
+            int offset = wordIterator.current();
+            if (offset >= text.length()) {
                 return false;
             }
+            String word = text.substring(offset, wordIterator.next());
+            if (Character.isLetter(word.charAt(0))) {
+                // only words starting with letter (no whitespace, punctuation etc)
+                token = new Token(word, offset);
+            }
         }
+        return true;
     }
 
     public Token nextToken() {
