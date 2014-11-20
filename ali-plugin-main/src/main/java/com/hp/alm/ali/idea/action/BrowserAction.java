@@ -18,6 +18,10 @@ package com.hp.alm.ali.idea.action;
 
 import com.hp.alm.ali.idea.entity.EntityAdapter;
 import com.hp.alm.ali.idea.entity.EntityRef;
+import com.hp.alm.ali.idea.model.HorizonStrategy;
+import com.hp.alm.ali.idea.rest.RestService;
+import com.hp.alm.ali.idea.rest.ServerType;
+import com.hp.alm.ali.idea.services.AgmUrlService;
 import com.hp.alm.ali.idea.services.EntityService;
 import com.hp.alm.ali.idea.model.Entity;
 import com.intellij.ide.BrowserUtil;
@@ -31,10 +35,14 @@ import java.util.Set;
 
 public class BrowserAction extends EntityAction {
 
-    private static Map<String, String> entityTypes;
+    private static Map<String, Launcher> entityTypes;
     static {
-        entityTypes = new HashMap<String, String>();
-        entityTypes.put("build-artifact", "artifact-url");
+        entityTypes = new HashMap<String, Launcher>();
+        entityTypes.put("build-artifact", new PropertyLauncher("artifact-url"));
+        entityTypes.put("defect", new BacklogLauncher());
+        entityTypes.put("requirement", new BacklogLauncher());
+        entityTypes.put("build-instance", new BuildDetailLauncher());
+        entityTypes.put("changeset", new ChangesetLauncher());
     }
 
     public BrowserAction() {
@@ -47,12 +55,92 @@ public class BrowserAction extends EntityAction {
     }
 
     @Override
+    protected void update(AnActionEvent event, Project project, Entity entity) {
+        boolean enabled = entityTypes.get(entity.getType()).isEnabled(project);
+        event.getPresentation().setEnabled(enabled);
+    }
+
+    @Override
     protected void actionPerformed(AnActionEvent event, Project project, Entity entity) {
-        project.getComponent(EntityService.class).getEntityAsync(new EntityRef(entity), new EntityAdapter() {
-            @Override
-            public void entityLoaded(Entity entity, Event event) {
-                BrowserUtil.launchBrowser(entity.getPropertyValue(entityTypes.get(entity.getType())));
+        entityTypes.get(entity.getType()).launch(project, entity);
+    }
+
+    private static class ChangesetLauncher extends AgmLauncher {
+
+        @Override
+        protected String getUrl(Project project, Entity entity, String tenantId) {
+            return project.getComponent(AgmUrlService.class).getChangesetDetailUrl(entity, tenantId);
+        }
+    }
+
+    private static class BuildDetailLauncher extends AgmLauncher {
+
+        @Override
+        protected String getUrl(Project project, Entity entity, String tenantId) {
+            return project.getComponent(AgmUrlService.class).getBuildDetailUrl(entity, tenantId);
+        }
+    }
+
+    private static class BacklogLauncher extends AgmLauncher {
+
+        @Override
+        protected String getUrl(Project project, Entity entity, String tenantId) {
+            return project.getComponent(AgmUrlService.class).getBacklogUrl(entity, tenantId);
+        }
+    }
+
+    private static abstract class AgmLauncher implements Launcher {
+
+        @Override
+        public void launch(Project project, Entity entity) {
+            String tenantId = getTenantId(project);
+            if (tenantId != null) {
+                String entityUrl = getUrl(project, entity, tenantId);
+                BrowserUtil.launchBrowser(entityUrl);
             }
-        });
+        }
+
+        @Override
+        public boolean isEnabled(Project project) {
+            return project.getComponent(RestService.class).getServerTypeIfAvailable() == ServerType.AGM &&
+                    getTenantId(project) != null;
+        }
+
+        protected abstract String getUrl(Project project, Entity entity, String tenantId);
+
+        private String getTenantId(Project project) {
+            return project.getComponent(HorizonStrategy.class).getTenantId();
+        }
+    }
+
+    private static class PropertyLauncher implements Launcher {
+        private String property;
+
+        public PropertyLauncher(String property) {
+            this.property = property;
+        }
+
+        @Override
+        public void launch(Project project, Entity entity) {
+            project.getComponent(EntityService.class).getEntityAsync(new EntityRef(entity), new EntityAdapter() {
+                @Override
+                public void entityLoaded(Entity entity, Event event) {
+                    BrowserUtil.launchBrowser(entity.getPropertyValue(property));
+                }
+            });
+        }
+
+        @Override
+        public boolean isEnabled(Project project) {
+            return true;
+        }
+    }
+
+    private interface Launcher {
+
+        void launch(Project project, Entity entity);
+
+        boolean isEnabled(Project project);
+
     }
 }

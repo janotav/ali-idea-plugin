@@ -16,6 +16,8 @@
 
 package com.hp.alm.ali.rest.client;
 
+import org.apache.commons.httpclient.Cookie;
+
 import java.io.InputStream;
 import java.util.List;
 
@@ -127,6 +129,13 @@ public interface RestClient {
      * @return project
      */
     String getProject();
+
+    /**
+     * Get cookies matching given name.
+     * @param cookieName cookie name
+     * @return list of cookies
+     */
+    List<Cookie> getCookies(String cookieName);
 
     List<String> listDomains();
 

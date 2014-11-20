@@ -19,6 +19,7 @@ package com.hp.alm.ali.idea.rest;
 import com.hp.alm.ali.rest.client.InputData;
 import com.hp.alm.ali.rest.client.RestClient;
 import com.hp.alm.ali.rest.client.ResultInfo;
+import org.apache.commons.httpclient.Cookie;
 import org.junit.Assert;
 
 import java.io.InputStream;
@@ -86,6 +87,12 @@ public class MockRestClient implements RestClient {
 
     @Override
     public String getProject() {
+        Assert.fail("Not expected");
+        return null;
+    }
+
+    @Override
+    public List<Cookie> getCookies(String name) {
         Assert.fail("Not expected");
         return null;
     }

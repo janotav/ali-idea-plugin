@@ -215,6 +215,17 @@ public class AliRestClient implements RestClient {
     }
 
     @Override
+    public List<Cookie> getCookies(String cookieName) {
+        LinkedList<Cookie> ret = new LinkedList<Cookie>();
+        for (Cookie cookie: httpClient.getState().getCookies()) {
+            if (cookieName.equals(cookie.getName())) {
+                ret.add(cookie);
+            }
+        }
+        return ret;
+    }
+
+    @Override
     public synchronized void login() {
         // exclude the NTLM authentication scheme (requires NTCredentials we don't supply)
         List<String> authPrefs = new ArrayList<String>(2);

@@ -54,6 +54,7 @@ import com.hp.alm.ali.idea.ui.combo.TeamMembersComboBoxModel;
 import com.intellij.openapi.actionSystem.ActionToolbar;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.IconLoader;
+import org.apache.commons.httpclient.Cookie;
 
 import javax.swing.JComponent;
 import javax.swing.SortOrder;
@@ -159,6 +160,7 @@ public class HorizonStrategy extends ApolloStrategy {
 
     private WorkspaceConfiguration workspaceConfiguration;
     private AuthenticationInfo authenticationInfo;
+    private String tenantId;
 
     public HorizonStrategy(Project project, RestService restService, WorkspaceConfiguration workspaceConfiguration) {
         super(project, restService);
@@ -481,6 +483,19 @@ public class HorizonStrategy extends ApolloStrategy {
                 throw new RuntimeException("No workspace available");
             }
         }
+        // obtain tenant id
+        tenantId = null;
+        List<Cookie> cookies = restService.getRestClient().getCookies("TENANT_ID_COOKIE");
+        for (Cookie cookie: cookies) {
+            if ("0".equals(cookie.getValue())) {
+                // dummy tenant we use for auto-select
+                continue;
+            }
+
+            // read tenant from the TENANT_ID_COOKIE
+            tenantId = cookie.getValue();
+            break;
+        }
     }
 
     @Override
@@ -490,6 +505,10 @@ public class HorizonStrategy extends ApolloStrategy {
         } else {
             return null;
         }
+    }
+
+    public String getTenantId() {
+        return tenantId;
     }
 
     private void mergeAuditLists(AuditList target, AuditList source) {

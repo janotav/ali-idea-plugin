@@ -50,7 +50,7 @@ public abstract class EntityAction extends ConnectedAction {
         boolean enabled = isConnected(event) && entity != null && enabledPredicate(project, entity);
         event.getPresentation().setVisible(visible);
         event.getPresentation().setEnabled(enabled);
-        if(enabled) {
+        if(visible && enabled) {
             update(event, project, entity);
         }
     }

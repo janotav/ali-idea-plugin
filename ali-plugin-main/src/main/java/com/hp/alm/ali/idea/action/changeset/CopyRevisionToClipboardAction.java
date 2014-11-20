@@ -16,7 +16,7 @@ import java.util.Set;
 public class CopyRevisionToClipboardAction extends EntityAction {
 
     public CopyRevisionToClipboardAction() {
-        super("Copy Revision", "Copy Changeset Revision to Clipboard", IconLoader.getIcon("/actions/copy.png"));
+        super("Copy Revision", "Copy Changeset Revision to Clipboard", IconLoader.getIcon("/vcs/history.png"));
     }
 
     @Override
