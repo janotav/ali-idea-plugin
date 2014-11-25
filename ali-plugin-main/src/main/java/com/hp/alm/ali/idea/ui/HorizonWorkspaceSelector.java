@@ -20,16 +20,21 @@ import com.hp.alm.ali.idea.model.AuthenticationInfo;
 import com.hp.alm.ali.idea.services.WorkspaceService;
 import com.intellij.openapi.project.Project;
 
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 import java.util.HashSet;
 
 public class HorizonWorkspaceSelector extends JPanel {
 
     public HorizonWorkspaceSelector(Project project, AuthenticationInfo authenticationInfo) {
         setOpaque(false);
+        setBorder(BorderFactory.createCompoundBorder(BorderFactory.createCompoundBorder(
+                new EmptyBorder(0, 10, 10, 10), BorderFactory.createTitledBorder("Workspace")),
+                new EmptyBorder(4, 10, 10, 10)));
         WorkspaceService workspaceService = project.getComponent(WorkspaceService.class);
-        add(new JLabel("Workspace"));
+        add(new JLabel("Name"));
         WorkspaceComboBox workspaceComboBox = new WorkspaceComboBox(project,
                 workspaceService.getWorkspaceId(),
                 workspaceService.getWorkspaceName(),
