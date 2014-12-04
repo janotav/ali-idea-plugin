@@ -103,7 +103,7 @@ public class AliConfiguration implements PersistentStateComponent<Element> {
         ALM_PASSWORD = new String(new Base64().decode(getProperty(element, PROPERTY_PASSWORD).getBytes()));
         STORE_PASSWORD = Boolean.valueOf(getProperty(element, PROPERTY_STORE_PASSWORD));
         STATUS_TRANSITION = getProperty(element, PROPERTY_STATUS_TRANSITION);
-        spellChecker = !Boolean.FALSE.equals(Boolean.valueOf(getProperty(element, PROPERTY_SPELL_CHECKER)));
+        spellChecker = Boolean.valueOf(getProperty(element, PROPERTY_SPELL_CHECKER, "true"));
 
         Element stored = element.getChild("stored");
         if(stored != null) {
@@ -171,13 +171,17 @@ public class AliConfiguration implements PersistentStateComponent<Element> {
         return ALM_PASSWORD;
     }
 
-    protected String getProperty(Element element, String name) {
+    protected String getProperty(Element element, String name, String defaultValue) {
         Element child = element.getChild(name);
         if(child != null) {
             return child.getText();
         } else {
-            return "";
+            return defaultValue;
         }
+    }
+
+    protected String getProperty(Element element, String name) {
+        return getProperty(element, name, "");
     }
 
     protected void addProperty(Element element, String name, Object value) {
