@@ -2,22 +2,29 @@
     <id>com.hp.alm.ali</id>
     <name>HP ALI</name>
     <description>Application Lifecycle Intelligence for HP ALM</description>
-    <version>3.12.@{idea.build}</version>
+    <version>3.13.@{idea.build}</version>
     <vendor logo="/ali_icon.png" url="https://hpln.hp.com/group/application-lifecycle-intelligence">HP</vendor>
 
     <idea-version since-build="@{idea.build}"/>
 
     <change-notes>
         <![CDATA[
+      <h3>Changes in 3.13</h3>
+      <ul>
+        <li>[enhancement] spell-check support</li>
+        <li>[enhancement] better dialog placement when multiple displays</li>
+        <li>[enhancement] support global teams (Agile Manager)</li>
+      </ul>
+
       <h3>Changes in 3.12</h3>
       <ul>
-        <li>[enhancement] support workspaces in Agile Manager
+        <li>[enhancement] support workspaces in Agile Manager</li>
       </ul>
 
       <h3>Changes in 3.11</h3>
       <ul>
-        <li>[enhancement] support acceptance tests in Agile Manager
-        <li>[enhancement] don't override commit message when merging
+        <li>[enhancement] support acceptance tests in Agile Manager</li>
+        <li>[enhancement] don't override commit message when merging</li>
       </ul>
 
       <h3>Changes in 3.10</h3>
