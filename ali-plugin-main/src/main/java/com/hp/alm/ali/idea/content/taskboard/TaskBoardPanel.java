@@ -21,11 +21,8 @@ import com.hp.alm.ali.idea.entity.EntityQuery;
 import com.hp.alm.ali.idea.entity.EntityRef;
 import com.hp.alm.ali.idea.entity.queue.QueryQueue;
 import com.hp.alm.ali.idea.entity.queue.QueryTarget;
-import com.hp.alm.ali.idea.filter.FilterChooser;
-import com.hp.alm.ali.idea.filter.FilterManager;
-import com.hp.alm.ali.idea.filter.MultipleItemsChooserFactory;
-import com.hp.alm.ali.idea.model.ItemsProvider;
 import com.hp.alm.ali.idea.ui.ComboItem;
+import com.hp.alm.ali.idea.ui.MultiValueSelectorLabel;
 import com.hp.alm.ali.idea.ui.QuickSearchPanel;
 import com.hp.alm.ali.idea.services.EntityService;
 import com.hp.alm.ali.idea.action.ActionUtil;
@@ -41,10 +38,7 @@ import com.intellij.openapi.actionSystem.ActionPopupMenu;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.ui.components.labels.BoldLabel;
-import com.intellij.ui.components.labels.LinkLabel;
-import com.intellij.ui.components.labels.LinkListener;
 import com.intellij.util.ui.UIUtil;
-import org.apache.commons.lang.StringUtils;
 
 import javax.swing.BorderFactory;
 import javax.swing.JCheckBox;
@@ -54,6 +48,8 @@ import javax.swing.JPanel;
 import javax.swing.SortOrder;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.AWTEvent;
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -418,7 +414,7 @@ public class TaskBoardPanel extends JPanel implements SprintService.Listener, En
         private JCheckBox stories;
         private JCheckBox defects;
         private JCheckBox blocked;
-        private LinkLabel statusFilter;
+        private MultiValueSelectorLabel statusFilter;
 
         public Header() {
             super(new GridBagLayout());
@@ -451,42 +447,20 @@ public class TaskBoardPanel extends JPanel implements SprintService.Listener, En
             toolbar.add(new JLabel("Assigned To:"));
             toolbar.add(assignedTo);
 
-            toolbar.add(new JLabel("Status:"));
-            statusFilter = new LinkLabel(conf.getShowStatuses(), null);
-            statusFilter.setListener(new LinkListener() {
+            String showStatuses = conf.getShowStatuses();
+            List<String> selectedItems;
+            if (TaskBoardConfiguration.ALL_STATUSES.equals(showStatuses)) {
+                selectedItems = allItemStatuses;
+            } else {
+                selectedItems = Arrays.asList(showStatuses.split(";"));
+            }
+            statusFilter = new MultiValueSelectorLabel(project, "Status", selectedItems, allItemStatuses);
+            statusFilter.addChangeListener(new ChangeListener() {
                 @Override
-                public void linkSelected(LinkLabel aSource, Object aLinkData) {
-                    String value;
-                    if (TaskBoardConfiguration.ALL_STATUSES.equals(conf.getShowStatuses())) {
-                        value = StringUtils.join(allItemStatuses, ";");
-                    } else {
-                        value = conf.getShowStatuses();
-                    }
-                    FilterChooser chooser = new MultipleItemsChooserFactory(project, "Status", true, new ItemsProvider.Loader<ComboItem>() {
-                        @Override
-                        public List<ComboItem> load() {
-                            return FilterManager.asItems(allItemStatuses, true, true);
-                        }
-                    }).createChooser(value);
-                    chooser.show();
-                    String selectedValue = chooser.getSelectedValue();
-                    if (selectedValue != null) {
-                        if (selectedValue.isEmpty())  {
-                            // treat no selected item as no filter at all
-                            conf.setShowStatuses(TaskBoardConfiguration.ALL_STATUSES);
-                        } else {
-                            List<String> states = Arrays.asList(selectedValue.split(";"));
-                            if (states.size() == allItemStatuses.size()) {
-                                conf.setShowStatuses(TaskBoardConfiguration.ALL_STATUSES);
-                            } else {
-                                conf.setShowStatuses(selectedValue);
-                            }
-                        }
-                        statusFilter.setText(conf.getShowStatuses());
-                        content.applyFilter();
-                    }
+                public void stateChanged(ChangeEvent e) {
+                    content.applyFilter();
                 }
-            }, null);
+            });
             toolbar.add(statusFilter);
 
             toolbar.add(new JLabel("Show:"));
@@ -580,11 +554,7 @@ public class TaskBoardPanel extends JPanel implements SprintService.Listener, En
 
         @Override
         public List<String> getStatus() {
-            if (TaskBoardConfiguration.ALL_STATUSES.equals(statusFilter.getText())) {
-                return allItemStatuses;
-            } else {
-                return Arrays.asList(statusFilter.getText().split(";"));
-            }
+            return statusFilter.getSelectedValues();
         }
     }
 

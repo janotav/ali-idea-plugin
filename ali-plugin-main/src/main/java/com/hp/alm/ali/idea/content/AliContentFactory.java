@@ -37,15 +37,18 @@ import com.intellij.openapi.wm.ToolWindowFactory;
 import com.intellij.openapi.wm.ToolWindowManager;
 import com.intellij.ui.content.Content;
 import com.intellij.ui.content.ContentFactory;
+import com.intellij.ui.content.ContentManager;
 import com.intellij.ui.content.ContentManagerAdapter;
 import com.intellij.ui.content.ContentManagerEvent;
 
+import javax.swing.JComponent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.List;
 
 public class AliContentFactory implements ToolWindowFactory {
 
+    public static final String TOOL_WINDOW_MAIN = "HP ALI";
     public static final String TOOL_WINDOW_DETAIL = "ALI Detail";
 
     @Override
@@ -70,6 +73,13 @@ public class AliContentFactory implements ToolWindowFactory {
             @Override
             public void selectionChanged(ContentManagerEvent event) {
                 project.getComponent(AliProjectConfiguration.class).setSelectedContent(event.getContent().getTabName());
+            }
+
+            @Override
+            public void contentRemoveQuery(ContentManagerEvent event) {
+                if (!(event.getContent().getComponent() instanceof CloseableContent)) {
+                    event.consume();
+                }
             }
         });
         new AliContentManager(toolWindow, project);
@@ -107,6 +117,21 @@ public class AliContentFactory implements ToolWindowFactory {
             AliProjectConfiguration conf = project.getComponent(AliProjectConfiguration.class);
             conf.getDetails().setSelectedRef(new EntityRef(entity));
             toolWindow.getContentManager().setSelectedContent(content);
+        }
+    }
+
+    public static void addMainContent(Project project, JComponent component, String title, boolean select) {
+        ApplicationManager.getApplication().assertIsDispatchThread();
+
+        ToolWindowManager toolWindowManager = project.getComponent(ToolWindowManager.class);
+        ToolWindow toolWindow = toolWindowManager.getToolWindow(TOOL_WINDOW_MAIN);
+
+        ContentManager contentManager = toolWindow.getContentManager();
+        int idx = contentManager.getContentCount();
+        Content content = ContentFactory.SERVICE.getInstance().createContent(component, title, false);
+        contentManager.addContent(content, idx);
+        if (select) {
+            contentManager.setSelectedContent(content);
         }
     }
 
@@ -168,7 +193,7 @@ public class AliContentFactory implements ToolWindowFactory {
             toolWindow.setIcon(IconLoader.getIcon("/ali_icon_13x13.png"));
             toolWindow.getContentManager().addContentManagerListener(project.getComponent(EntityEditManager.class));
         }
-        return  toolWindow;
+        return toolWindow;
     }
 
     private static class MyProjectListener extends ProjectManagerAdapter {
