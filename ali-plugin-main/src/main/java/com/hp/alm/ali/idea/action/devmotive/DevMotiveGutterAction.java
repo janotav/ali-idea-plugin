@@ -16,9 +16,7 @@
 
 package com.hp.alm.ali.idea.action.devmotive;
 
-import com.hp.alm.ali.idea.content.AliContentFactory;
 import com.hp.alm.ali.idea.content.devmotive.DevMotiveAnnotationGutter;
-import com.hp.alm.ali.idea.content.devmotive.DevMotivePanel;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.editor.Editor;
@@ -36,7 +34,7 @@ public class DevMotiveGutterAction extends AnAction {
     private FileAnnotation annotation;
 
     public DevMotiveGutterAction(FileAnnotation annotation) {
-        super("DevMotive");
+        super("Dev Motive");
         this.annotation = annotation;
     }
 
@@ -45,16 +43,14 @@ public class DevMotiveGutterAction extends AnAction {
         Project project = getEventProject(e);
         if (project != null) {
             registerDevMotiveTextAnnotation(project, annotation);
-            getTemplatePresentation().setEnabled(false);
+            getTemplatePresentation().setVisible(false);
         }
     }
 
     public static void registerDevMotiveTextAnnotation(Project project, FileAnnotation annotation) {
-        DevMotivePanel devMotivePanel = AliContentFactory.addDevMotiveContent(project, annotation.getFile(), true);
-
         OpenFileDescriptor openFileDescriptor = new OpenFileDescriptor(project, annotation.getFile());
         final Editor editor = FileEditorManager.getInstance(project).openTextEditor(openFileDescriptor, true);
-        ActiveAnnotationGutter devMotiveGutterProvider = new DevMotiveAnnotationGutter(project, annotation, devMotivePanel, editor.getGutter());
+        ActiveAnnotationGutter devMotiveGutterProvider = new DevMotiveAnnotationGutter(project, annotation, editor.getGutter());
 
         UpToDateLineNumberProvider getUpToDateLineNumber = new UpToDateLineNumberProviderImpl(editor.getDocument(), project);
         AnnotationGutterLineConvertorProxy proxy = new AnnotationGutterLineConvertorProxy(getUpToDateLineNumber, devMotiveGutterProvider);

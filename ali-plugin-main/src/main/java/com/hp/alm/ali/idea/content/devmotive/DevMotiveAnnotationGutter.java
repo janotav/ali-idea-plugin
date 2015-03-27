@@ -16,6 +16,8 @@
 
 package com.hp.alm.ali.idea.content.devmotive;
 
+import com.hp.alm.ali.idea.action.devmotive.DevMotiveReopenAction;
+import com.hp.alm.ali.idea.content.AliContentFactory;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.EditorGutter;
@@ -26,17 +28,19 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vcs.actions.ActiveAnnotationGutter;
 import com.intellij.openapi.vcs.annotate.FileAnnotation;
 import com.intellij.openapi.vcs.history.VcsRevisionNumber;
+import com.intellij.ui.content.ContentManagerEvent;
+import com.intellij.ui.content.ContentManagerListener;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
-public class DevMotiveAnnotationGutter implements ActiveAnnotationGutter, ChangeListener {
+public class DevMotiveAnnotationGutter implements ActiveAnnotationGutter, ChangeListener, ContentManagerListener {
 
     private Project project;
     private FileAnnotation annotation;
@@ -44,14 +48,15 @@ public class DevMotiveAnnotationGutter implements ActiveAnnotationGutter, Change
     private EditorGutterComponentEx editorGutterComponentEx;
     private String unknownLine;
 
-    public DevMotiveAnnotationGutter(Project project, FileAnnotation annotation, DevMotivePanel devMotivePanel, EditorGutter editorGutter) {
+    public DevMotiveAnnotationGutter(Project project, FileAnnotation annotation, EditorGutter editorGutter) {
         this.project = project;
         this.annotation = annotation;
-        this.devMotivePanel = devMotivePanel;
+
+        devMotivePanel = AliContentFactory.addDevMotiveContent(project, annotation.getFile(), this, true);
+        devMotivePanel.addChangeListener(this);
 
         if (editorGutter instanceof EditorGutterComponentEx) {
             editorGutterComponentEx = (EditorGutterComponentEx) editorGutter;
-            devMotivePanel.addChangeListener(this);
             unknownLine = "???";
         } else {
             // unable to resize, make sure to reserve enough room
@@ -61,11 +66,20 @@ public class DevMotiveAnnotationGutter implements ActiveAnnotationGutter, Change
 
     @Override
     public void stateChanged(ChangeEvent e) {
-        editorGutterComponentEx.revalidateMarkup();
+        updateAnnotations();
+    }
+
+    private void updateAnnotations() {
+        if (editorGutterComponentEx != null) {
+            editorGutterComponentEx.revalidateMarkup();
+        }
     }
 
     @Override
     public void doAction(int line) {
+        if (devMotivePanel == null) {
+            return;
+        }
         VcsRevisionNumber revisionNumber = annotation.getLineRevisionNumber(line);
         if (revisionNumber != null) {
             devMotivePanel.selectRevision(revisionNumber);
@@ -74,6 +88,9 @@ public class DevMotiveAnnotationGutter implements ActiveAnnotationGutter, Change
 
     @Override
     public Cursor getCursor(int line) {
+        if (devMotivePanel == null) {
+            return Cursor.getDefaultCursor();
+        }
         VcsRevisionNumber revisionNumber = annotation.getLineRevisionNumber(line);
         if (revisionNumber != null) {
             Collection<WorkItem> workItems = devMotivePanel.getWorkItemsByRevisionNumber(revisionNumber, true);
@@ -90,6 +107,9 @@ public class DevMotiveAnnotationGutter implements ActiveAnnotationGutter, Change
         VcsRevisionNumber revisionNumber = annotation.getLineRevisionNumber(line);
         if (revisionNumber == null) {
             return null;
+        }
+        if (devMotivePanel == null) {
+            return "---";
         }
         Collection<WorkItem> workItems = devMotivePanel.getWorkItemsByRevisionNumber(revisionNumber, false);
         if (workItems == null) {
@@ -120,6 +140,9 @@ public class DevMotiveAnnotationGutter implements ActiveAnnotationGutter, Change
         VcsRevisionNumber revisionNumber = annotation.getLineRevisionNumber(line);
         if (revisionNumber == null) {
             return null;
+        }
+        if (devMotivePanel == null) {
+            return "Dev Motive closed";
         }
         Collection<WorkItem> workItems = devMotivePanel.getWorkItemsByRevisionNumber(revisionNumber, true);
         if (workItems == null) {
@@ -163,13 +186,18 @@ public class DevMotiveAnnotationGutter implements ActiveAnnotationGutter, Change
 
     @Override
     public List<AnAction> getPopupActions(int line, Editor editor) {
-        return Collections.emptyList();
+        return Arrays.<AnAction>asList(new DevMotiveReopenAction(project, annotation));
     }
 
     @Override
     public void gutterClosed() {
-        if (editorGutterComponentEx != null) {
+        releasePanel();
+    }
+
+    private void releasePanel() {
+        if (devMotivePanel != null) {
             devMotivePanel.removeChangeListener(this);
+            devMotivePanel = null;
         }
     }
 
@@ -179,5 +207,32 @@ public class DevMotiveAnnotationGutter implements ActiveAnnotationGutter, Change
         } else {
             return workItem.getType() + " #" + workItem.getId() + ": " + workItem.getName();
         }
+    }
+
+    @Override
+    public void contentAdded(ContentManagerEvent event) {
+        if (devMotivePanel == null && event.getContent().getComponent() instanceof DevMotivePanel) {
+            DevMotivePanel panel = (DevMotivePanel) event.getContent().getComponent();
+            if (annotation.getFile().equals(panel.getFile())) {
+                devMotivePanel = panel;
+                devMotivePanel.addChangeListener(this);
+            }
+        }
+    }
+
+    @Override
+    public void contentRemoved(ContentManagerEvent event) {
+        if (devMotivePanel != null && devMotivePanel.equals(event.getContent().getComponent())) {
+            releasePanel();
+            updateAnnotations();
+        }
+    }
+
+    @Override
+    public void contentRemoveQuery(ContentManagerEvent event) {
+    }
+
+    @Override
+    public void selectionChanged(ContentManagerEvent event) {
     }
 }

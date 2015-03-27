@@ -48,7 +48,7 @@ public class DevMotiveAction extends AbstractVcsAction {
             return;
         }
 
-        AliContentFactory.addDevMotiveContent(project, selectedFile, true);
+        AliContentFactory.addDevMotiveContent(project, selectedFile, null, true);
     }
 
     @Override

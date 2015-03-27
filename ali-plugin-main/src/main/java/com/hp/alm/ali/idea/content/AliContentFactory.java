@@ -43,6 +43,7 @@ import com.intellij.ui.content.ContentFactory;
 import com.intellij.ui.content.ContentManager;
 import com.intellij.ui.content.ContentManagerAdapter;
 import com.intellij.ui.content.ContentManagerEvent;
+import com.intellij.ui.content.ContentManagerListener;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -122,7 +123,7 @@ public class AliContentFactory implements ToolWindowFactory {
         }
     }
 
-    public static DevMotivePanel addDevMotiveContent(Project project, VirtualFile file, boolean select) {
+    public static DevMotivePanel addDevMotiveContent(Project project, VirtualFile file, ContentManagerListener listener, boolean select) {
         ApplicationManager.getApplication().assertIsDispatchThread();
 
         ToolWindowManager toolWindowManager = project.getComponent(ToolWindowManager.class);
@@ -139,6 +140,9 @@ public class AliContentFactory implements ToolWindowFactory {
         }
         if (select) {
             contentManager.setSelectedContent(content);
+        }
+        if (listener != null) {
+            contentManager.addContentManagerListener(listener);
         }
         return (DevMotivePanel) content.getComponent();
     }
