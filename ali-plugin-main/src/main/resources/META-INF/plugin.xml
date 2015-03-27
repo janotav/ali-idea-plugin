@@ -457,6 +457,7 @@
        <applicationConfigurable implementation="com.hp.alm.ali.idea.cfg.AliConfigurable"/>
        <projectConfigurable implementation="com.hp.alm.ali.idea.cfg.AliProjectConfigurable"/>
        <checkinHandlerFactory implementation="com.hp.alm.ali.idea.checkin.AliCheckinHandlerFactory"/>
+       <vcsAnnotationGutterActionProvider implementation="com.hp.alm.ali.idea.content.devmotive.DevMotiveAnnotationGutterActionProvider"/>
     </extensions>
 
 </idea-plugin>

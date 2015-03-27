@@ -17,7 +17,6 @@
 package com.hp.alm.ali.idea.action.devmotive;
 
 import com.hp.alm.ali.idea.content.AliContentFactory;
-import com.hp.alm.ali.idea.content.devmotive.DevMotivePanel;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.Presentation;
 import com.intellij.openapi.project.Project;
@@ -49,7 +48,7 @@ public class DevMotiveAction extends AbstractVcsAction {
             return;
         }
 
-        AliContentFactory.addMainContent(project, new DevMotivePanel(project, selectedFile), "Dev: " + selectedFile.getName(), true);
+        AliContentFactory.addDevMotiveContent(project, selectedFile, true);
     }
 
     @Override

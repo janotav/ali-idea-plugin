@@ -82,24 +82,4 @@ final public class WorkItem {
                 throw new UnsupportedOperationException();
         }
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        WorkItem workItem = (WorkItem) o;
-
-        if (id != null ? !id.equals(workItem.id) : workItem.id != null) return false;
-        if (type != workItem.type) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = type.hashCode();
-        result = 31 * result + (id != null ? id.hashCode() : 0);
-        return result;
-    }
 }

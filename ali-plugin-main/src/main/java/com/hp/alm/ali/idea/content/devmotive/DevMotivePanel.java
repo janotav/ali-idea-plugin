@@ -74,12 +74,13 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class DevMotivePanel extends JPanel implements CloseableContent, LinkListener, ChangeListener, HyperlinkListener {
+public class DevMotivePanel extends JPanel implements CloseableContent, LinkListener, ChangeListener, HyperlinkListener, DevMotive {
 
     private static final int REVISION_BATCH_SIZE = 10;
 
@@ -89,6 +90,7 @@ public class DevMotivePanel extends JPanel implements CloseableContent, LinkList
     private final DevMotiveService devMotiveService;
     private final EntityService entityService;
     private final IncompleteWarningPanel incompleteWarningPanel;
+    private final List<ChangeListener> listeners;
     private JPanel filterPanel;
 
     private MultiValueSelectorLabel userSelector;
@@ -104,11 +106,14 @@ public class DevMotivePanel extends JPanel implements CloseableContent, LinkList
     private RepositoryChangesBrowser fileChanges;
     private Map<VcsRevisionNumber, List<Change>> vcsCache;
 
+    private Map<EntityRef, WorkItem> workItemMap;
     private MultiMap<WorkItem, Commit> workItemToCommits;
+    private MultiMap<Commit, WorkItem> commitToWorkItems;
 
-    private List<Commit> allCommits;
+    private LinkedHashMap<VcsRevisionNumber, Commit> allCommits;
     private List<Commit> filteredCommits;
     private Set<Commit> processedCommits;
+    private Set<Commit> processingCommits;
 
     public DevMotivePanel(final Project project, final VirtualFile file) {
         super(new BorderLayout());
@@ -116,10 +121,14 @@ public class DevMotivePanel extends JPanel implements CloseableContent, LinkList
         this.project = project;
         this.file = file;
 
+        listeners = new LinkedList<ChangeListener>();
+
         devMotiveService = project.getComponent(DevMotiveService.class);
         entityService = project.getComponent(EntityService.class);
 
         workItemToCommits = new MultiMap<WorkItem, Commit>();
+        commitToWorkItems = new MultiMap<Commit, WorkItem>();
+        workItemMap = new HashMap<EntityRef, WorkItem>();
         vcsCache = new HashMap<VcsRevisionNumber, List<Change>>();
 
         commitsTableModel = new CommitsTableModel();
@@ -272,7 +281,7 @@ public class DevMotivePanel extends JPanel implements CloseableContent, LinkList
     private synchronized void applyFilter() {
         filterId = new Object();
         filteredCommits.clear();
-        filterCommits(allCommits, filteredCommits, null);
+        filterCommits(allCommits.values(), filteredCommits, null);
 
         for (WorkItem workItem: workItemToCommits.keySet()) {
             Collection<Commit> commits = workItemToCommits.getModifiable(workItem);
@@ -328,8 +337,9 @@ public class DevMotivePanel extends JPanel implements CloseableContent, LinkList
 
     private void initialize() {
         filteredCommits = new ArrayList<Commit>();
-        allCommits = new LinkedList<Commit>();
+        allCommits = new LinkedHashMap<VcsRevisionNumber, Commit>();
         processedCommits = new HashSet<Commit>();
+        processingCommits = new HashSet<Commit>();
 
         List<VcsFileRevision> revisions = loadRevisions();
         if (revisions != null) {
@@ -343,7 +353,7 @@ public class DevMotivePanel extends JPanel implements CloseableContent, LinkList
                     authorEmail = ((VcsFileRevisionEx) revision).getAuthorEmail();
                 }
                 String author = revision.getAuthor();
-                allCommits.add(new Commit(
+                allCommits.put(revision.getRevisionNumber(), new Commit(
                         revision,
                         author,
                         authorEmail,
@@ -352,7 +362,7 @@ public class DevMotivePanel extends JPanel implements CloseableContent, LinkList
 
             }
 
-            filteredCommits.addAll(allCommits);
+            filteredCommits.addAll(allCommits.values());
             final Set<String> users = new HashSet<String>();
             if (!filteredCommits.isEmpty()) {
                 for (Commit commit: filteredCommits) {
@@ -402,6 +412,34 @@ public class DevMotivePanel extends JPanel implements CloseableContent, LinkList
         filterPanel.add(dateSelector);
     }
 
+    public void load(final VcsRevisionNumber revisionNumber) {
+        ApplicationManager.getApplication().executeOnPooledThread(new Runnable() {
+            @Override
+            public void run() {
+                handleSingleRevision(revisionNumber);
+            }
+        });
+    }
+
+    public void handleSingleRevision(VcsRevisionNumber revisionNumber) {
+        Commit commit;
+        Object filterId;
+        synchronized (this) {
+            commit = allCommits.get(revisionNumber);
+            if (processedCommits.contains(commit)) {
+                return;
+            }
+
+            if (!processingCommits.add(commit)) {
+                return;
+            }
+
+            filterId = this.filterId;
+        }
+        Map<Commit, List<EntityRef>> result = devMotiveService.getRelatedWorkItems(Arrays.asList(commit));
+        processResult(filterId, result);
+    }
+
     private void handleNextBatch() {
         List<Commit> commits = new LinkedList<Commit>();
         final Object filterId;
@@ -409,6 +447,10 @@ public class DevMotivePanel extends JPanel implements CloseableContent, LinkList
             filterId = this.filterId;
             for (Commit commit: filteredCommits) {
                 if (processedCommits.contains(commit)) {
+                    continue;
+                }
+
+                if (!processingCommits.add(commit)) {
                     continue;
                 }
 
@@ -421,15 +463,23 @@ public class DevMotivePanel extends JPanel implements CloseableContent, LinkList
         if (commits.isEmpty()) {
             return;
         }
-        final Map<Commit, List<EntityRef>> commitToWorkItems = devMotiveService.getRelatedWorkItems(commits);
+        Map<Commit, List<EntityRef>> result = devMotiveService.getRelatedWorkItems(commits);
+        processResult(filterId, result);
+    }
+
+    private void processResult(final Object filterId, final Map<Commit, List<EntityRef>> result) {
+        if (result.isEmpty()) {
+            return;
+        }
         UIUtil.invokeLaterIfNeeded(new Runnable() {
             @Override
             public void run() {
                 synchronized (DevMotivePanel.this) {
                     boolean myQuery = filterId.equals(DevMotivePanel.this.filterId);
-                    for (Commit commit: commitToWorkItems.keySet()) {
+                    for (Commit commit : result.keySet()) {
                         processedCommits.add(commit);
-                        List<EntityRef> workItemRefs = commitToWorkItems.get(commit);
+                        processingCommits.remove(commit);
+                        List<EntityRef> workItemRefs = result.get(commit);
                         if (workItemRefs == null) {
                             WorkItem unresolved = WorkItem.unresolved();
                             workItemToCommits.getModifiable(unresolved).add(commit);
@@ -441,12 +491,16 @@ public class DevMotivePanel extends JPanel implements CloseableContent, LinkList
                             workItemToCommits.getModifiable(unassigned).add(commit);
                             if (myQuery) {
                                 addWorkItem(unassigned, commit);
-
                             }
                         } else {
-                            for (EntityRef workItemRef: workItemRefs) {
-                                WorkItem item = new WorkItem(workItemRef.type, workItemRef.id);
+                            for (EntityRef workItemRef : workItemRefs) {
+                                WorkItem item = workItemMap.get(workItemRef);
+                                if (item == null) {
+                                    item = new WorkItem(workItemRef.type, workItemRef.id);
+                                    workItemMap.put(workItemRef, item);
+                                }
                                 workItemToCommits.getModifiable(item).add(commit);
+                                commitToWorkItems.getModifiable(commit).add(item);
                                 if (myQuery) {
                                     addWorkItem(item, commit);
                                 }
@@ -454,6 +508,7 @@ public class DevMotivePanel extends JPanel implements CloseableContent, LinkList
                         }
                     }
                     incompleteWarningPanel.setState(countProcessed(), filteredCommits.size());
+                    fireChangeEvent(this);
                 }
             }
         });
@@ -493,6 +548,51 @@ public class DevMotivePanel extends JPanel implements CloseableContent, LinkList
         if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
             loadNext();
         }
+    }
+
+    public void addToSelection(Collection<WorkItem> workItems) {
+        List<WorkItem> modelItems = workItemsTableModel.getWorkItems();
+        for (WorkItem workItem: workItems) {
+            int idx = modelItems.indexOf(workItem);
+            if (idx >= 0) {
+                int row = workItemsTable.convertRowIndexToView(idx);
+                workItemsTable.getSelectionModel().addSelectionInterval(row, row);
+            }
+        }
+    }
+
+    public void addChangeListener(ChangeListener changeListener) {
+        synchronized (listeners) {
+            listeners.add(changeListener);
+        }
+    }
+
+    public void removeChangeListener(ChangeListener changeListener) {
+        synchronized (listeners) {
+            listeners.remove(changeListener);
+        }
+    }
+
+    public Collection<WorkItem> getWorkItemsByRevisionNumber(VcsRevisionNumber revisionNumber) {
+        Commit commit = allCommits.get(revisionNumber);
+        if (!processedCommits.contains(commit)) {
+            return null;
+        } else {
+            return commitToWorkItems.get(commit);
+        }
+    }
+
+    private void fireChangeEvent(Object source) {
+        synchronized (listeners) {
+            for(ChangeListener listener: listeners) {
+                listener.stateChanged(new ChangeEvent(source));
+            }
+        }
+    }
+
+    @Override
+    public VirtualFile getFile() {
+        return file;
     }
 
     private static class DateRenderer extends DefaultTableCellRenderer {
