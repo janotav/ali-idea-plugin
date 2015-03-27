@@ -160,7 +160,7 @@ public class DevMotivePanel extends JPanel implements CloseableContent, LinkList
             }
         });
 
-        workItemsTableModel = new WorkItemsTableModel(entityService);
+        workItemsTableModel = new WorkItemsTableModel();
         workItemsTable = new JBTable(workItemsTableModel);
         // TODO: show detail action into toolbar
         workItemsTable.addMouseListener(new MouseAdapter() {
@@ -550,14 +550,34 @@ public class DevMotivePanel extends JPanel implements CloseableContent, LinkList
         }
     }
 
-    public void addToSelection(Collection<WorkItem> workItems) {
-        List<WorkItem> modelItems = workItemsTableModel.getWorkItems();
-        for (WorkItem workItem: workItems) {
-            int idx = modelItems.indexOf(workItem);
-            if (idx >= 0) {
-                int row = workItemsTable.convertRowIndexToView(idx);
-                workItemsTable.getSelectionModel().addSelectionInterval(row, row);
+    public void selectRevision(VcsRevisionNumber revisionNumber) {
+        Collection<WorkItem> workItems = getWorkItemsByRevisionNumber(revisionNumber, true);
+        if (workItems != null && !workItems.isEmpty()) {
+            List<WorkItem> modelItems = workItemsTableModel.getWorkItems();
+            boolean first = true;
+            for (WorkItem workItem: workItems) {
+                int idx = modelItems.indexOf(workItem);
+                if (idx >= 0) {
+                    int row = workItemsTable.convertRowIndexToView(idx);
+                    if (first) {
+                        workItemsTable.getSelectionModel().setSelectionInterval(row, row);
+                        workItemsTable.scrollRectToVisible(workItemsTable.getCellRect(row, 0, true));
+                        first = false;
+                    } else {
+                        workItemsTable.getSelectionModel().addSelectionInterval(row, row);
+                    }
+                }
+                if (!WorkItem.Type.NONE.equals(workItem.getType())) {
+                    AliContentFactory.loadDetail(project, workItem.toEntityRef().toEntity(), true, true);
+                }
             }
+        }
+        Commit commit = allCommits.get(revisionNumber);
+        int idx = commitsTableModel.getCommits().indexOf(commit);
+        if (idx >= 0) {
+            int row = commitsTable.convertRowIndexToView(idx);
+            commitsTable.getSelectionModel().addSelectionInterval(row, row);
+            commitsTable.scrollRectToVisible(commitsTable.getCellRect(row, 0, true));
         }
     }
 
@@ -573,12 +593,20 @@ public class DevMotivePanel extends JPanel implements CloseableContent, LinkList
         }
     }
 
-    public Collection<WorkItem> getWorkItemsByRevisionNumber(VcsRevisionNumber revisionNumber) {
+    public Collection<WorkItem> getWorkItemsByRevisionNumber(VcsRevisionNumber revisionNumber, boolean all) {
         Commit commit = allCommits.get(revisionNumber);
         if (!processedCommits.contains(commit)) {
             return null;
         } else {
-            return commitToWorkItems.get(commit);
+            Collection<WorkItem> items = commitToWorkItems.get(commit);
+            if (all && items.isEmpty()) {
+                for (WorkItem auxItem: Arrays.asList(WorkItem.unassigned(), WorkItem.unresolved())) {
+                    if (workItemToCommits.getModifiable(auxItem).contains(commit)) {
+                        return Collections.singleton(auxItem);
+                    }
+                }
+            }
+            return items;
         }
     }
 

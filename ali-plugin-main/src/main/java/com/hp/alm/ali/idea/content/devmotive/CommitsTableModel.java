@@ -112,4 +112,10 @@ public class CommitsTableModel extends AbstractTableModel {
             remove(commit);
         }
     }
+
+    public List<Commit> getCommits() {
+        ApplicationManager.getApplication().assertIsDispatchThread();
+
+        return commits;
+    }
 }

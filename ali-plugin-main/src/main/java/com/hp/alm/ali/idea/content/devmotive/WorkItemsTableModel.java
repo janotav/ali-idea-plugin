@@ -16,7 +16,6 @@
 
 package com.hp.alm.ali.idea.content.devmotive;
 
-import com.hp.alm.ali.idea.services.EntityService;
 import com.intellij.openapi.application.ApplicationManager;
 
 import javax.swing.table.AbstractTableModel;
@@ -27,13 +26,11 @@ import java.util.Map;
 
 public class WorkItemsTableModel extends AbstractTableModel {
 
-    private EntityService entityService;
     private List<WorkItem> workItems;
 
     private Map<WorkItem.Type, String> labelMap;
 
-    public WorkItemsTableModel(EntityService entityService) {
-        this.entityService = entityService;
+    public WorkItemsTableModel() {
         workItems = new ArrayList<WorkItem>();
 
         labelMap = new HashMap<WorkItem.Type, String>();

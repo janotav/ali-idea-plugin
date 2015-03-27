@@ -16,7 +16,6 @@
 
 package com.hp.alm.ali.idea.content.devmotive;
 
-import com.hp.alm.ali.idea.content.AliContentFactory;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.EditorGutter;
@@ -68,15 +67,8 @@ public class DevMotiveAnnotationGutter implements ActiveAnnotationGutter, Change
     @Override
     public void doAction(int line) {
         VcsRevisionNumber revisionNumber = annotation.getLineRevisionNumber(line);
-        if (revisionNumber == null) {
-            return;
-        }
-        Collection<WorkItem> workItems = devMotivePanel.getWorkItemsByRevisionNumber(revisionNumber);
-        if (workItems != null && !workItems.isEmpty()) {
-            devMotivePanel.addToSelection(workItems);
-            for (WorkItem workItem: workItems) {
-                AliContentFactory.loadDetail(project, workItem.toEntityRef().toEntity(), true, true);
-            }
+        if (revisionNumber != null) {
+            devMotivePanel.selectRevision(revisionNumber);
         }
     }
 
@@ -84,7 +76,7 @@ public class DevMotiveAnnotationGutter implements ActiveAnnotationGutter, Change
     public Cursor getCursor(int line) {
         VcsRevisionNumber revisionNumber = annotation.getLineRevisionNumber(line);
         if (revisionNumber != null) {
-            Collection<WorkItem> workItems = devMotivePanel.getWorkItemsByRevisionNumber(revisionNumber);
+            Collection<WorkItem> workItems = devMotivePanel.getWorkItemsByRevisionNumber(revisionNumber, true);
             if (workItems != null && !workItems.isEmpty() ) {
                 return Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
             }
@@ -99,7 +91,7 @@ public class DevMotiveAnnotationGutter implements ActiveAnnotationGutter, Change
         if (revisionNumber == null) {
             return null;
         }
-        Collection<WorkItem> workItems = devMotivePanel.getWorkItemsByRevisionNumber(revisionNumber);
+        Collection<WorkItem> workItems = devMotivePanel.getWorkItemsByRevisionNumber(revisionNumber, false);
         if (workItems == null) {
             return unknownLine;
         }
@@ -129,7 +121,7 @@ public class DevMotiveAnnotationGutter implements ActiveAnnotationGutter, Change
         if (revisionNumber == null) {
             return null;
         }
-        Collection<WorkItem> workItems = devMotivePanel.getWorkItemsByRevisionNumber(revisionNumber);
+        Collection<WorkItem> workItems = devMotivePanel.getWorkItemsByRevisionNumber(revisionNumber, true);
         if (workItems == null) {
             devMotivePanel.load(revisionNumber);
             return "Loading association information...";
@@ -182,6 +174,10 @@ public class DevMotiveAnnotationGutter implements ActiveAnnotationGutter, Change
     }
 
     private String getWorkItemToolTip(WorkItem workItem) {
-        return workItem.getType() + " #" + workItem.getId() + ": " + workItem.getName();
+        if (WorkItem.Type.NONE.equals(workItem.getType())) {
+            return workItem.getName();
+        } else {
+            return workItem.getType() + " #" + workItem.getId() + ": " + workItem.getName();
+        }
     }
 }

@@ -45,6 +45,7 @@ public class DevMotiveGutterAction extends AnAction {
         Project project = getEventProject(e);
         if (project != null) {
             registerDevMotiveTextAnnotation(project, annotation);
+            getTemplatePresentation().setEnabled(false);
         }
     }
 

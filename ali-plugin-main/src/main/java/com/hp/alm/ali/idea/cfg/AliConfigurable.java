@@ -48,6 +48,7 @@ public class AliConfigurable extends AliAbstractConfigurable implements Document
 
     private AliConfiguration aliConfiguration;
     private JCheckBox spellChecker;
+    private JCheckBox devMotiveAnnotation;
 
     public String getId() {
         return "HP_ALI_ide";
@@ -75,6 +76,11 @@ public class AliConfigurable extends AliAbstractConfigurable implements Document
         c.gridy++;
         c.gridwidth = 3;
         panel.add(spellChecker, c);
+
+        devMotiveAnnotation = new JCheckBox("Enable annotations");
+        devMotiveAnnotation.setSelected(aliConfiguration.devMotiveAnnotation);
+        c.gridy++;
+        panel.add(devMotiveAnnotation, c);
     }
 
     protected Component getSouthernComponent() {
@@ -122,6 +128,9 @@ public class AliConfigurable extends AliAbstractConfigurable implements Document
                 aliConfiguration.STORE_PASSWORD)) {
             return true;
         }
+        if (devMotiveAnnotation.isSelected() != aliConfiguration.devMotiveAnnotation) {
+            return true;
+        }
         return spellChecker.isSelected() != aliConfiguration.spellChecker;
     }
 
@@ -134,6 +143,7 @@ public class AliConfigurable extends AliAbstractConfigurable implements Document
         aliConfiguration.ALM_PASSWORD = passwdField.getValue();
         aliConfiguration.STORE_PASSWORD = storePasswd.isEnabled() && storePasswd.isSelected();
         aliConfiguration.spellChecker = spellChecker.isSelected();
+        aliConfiguration.devMotiveAnnotation = devMotiveAnnotation.isSelected();
         aliConfiguration.fireChanged();
     }
 
@@ -146,6 +156,7 @@ public class AliConfigurable extends AliAbstractConfigurable implements Document
         passwdField.setValue(aliConfiguration.ALM_PASSWORD);
         storePasswd.setSelected(aliConfiguration.STORE_PASSWORD);
         spellChecker.setSelected(aliConfiguration.spellChecker);
+        devMotiveAnnotation.setSelected(aliConfiguration.devMotiveAnnotation);
         enableDisableTest();
     }
 
