@@ -36,5 +36,12 @@
                 <module>idea-impl-133</module>
             </modules>
         </profile>
+        <profile>
+            <id>IC-139.1603.1</id>
+            <modules>
+                <module>idea-sdk-IC-139.1603.1</module>
+                <module>idea-impl-139</module>
+            </modules>
+        </profile>
     </profiles>
 </project>

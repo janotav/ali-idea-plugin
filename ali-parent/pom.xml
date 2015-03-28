@@ -107,5 +107,12 @@
                 <idea.version>IC-${idea.build}</idea.version>
             </properties>
         </profile>
+        <profile>
+            <id>IC-139.1603.1</id>
+            <properties>
+                <idea.build>139.1603.1</idea.build>
+                <idea.version>IC-${idea.build}</idea.version>
+            </properties>
+        </profile>
     </profiles>
 </project>

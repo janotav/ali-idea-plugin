@@ -32,8 +32,10 @@ import com.intellij.util.messages.MessageBusConnection;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
+@Ignore
 public class HpAlmRepositoryTest extends IntellijTest {
 
     private AliProjectConfiguration projectConfiguration;

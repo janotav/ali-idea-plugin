@@ -197,5 +197,26 @@
                 </dependency>
             </dependencies>
         </profile>
+        <profile>
+            <id>IC-139.1603.1</id>
+            <dependencies>
+                <dependency>
+                    <groupId>com.hp.alm.ali</groupId>
+                    <artifactId>idea-impl-139</artifactId>
+                    <version>${project.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>com.intellij</groupId>
+                    <artifactId>gson-2.2.4</artifactId>
+                    <version>IC-139.1603.1</version>
+                </dependency>
+                <dependency>
+                    <groupId>com.hp.alm.ali</groupId>
+                    <artifactId>idea-sdk-IC-139.1603.1</artifactId>
+                    <version>${project.version}</version>
+                    <scope>test</scope>
+                </dependency>
+            </dependencies>
+        </profile>
     </profiles>
 </project>

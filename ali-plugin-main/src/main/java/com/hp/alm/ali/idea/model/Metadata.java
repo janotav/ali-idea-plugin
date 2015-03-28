@@ -83,7 +83,7 @@ public class Metadata {
     private String entityName;
 
     public Metadata(Project project, String entityName, boolean load) {
-        this.allFields = new HashMap<String, Field>();
+        this.allFields = new HashMap<String, Field>();  // TODO: LinkedHashMap?
         this.relations = new ArrayList<Relation>();
         this.entityName = entityName;
 

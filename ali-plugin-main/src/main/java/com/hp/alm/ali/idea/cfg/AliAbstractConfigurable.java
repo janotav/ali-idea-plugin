@@ -288,7 +288,7 @@ public abstract class AliAbstractConfigurable implements SearchableConfigurable,
             @Override
             public void actionPerformed(ActionEvent e) {
                 FileChooserDescriptor desc = new FileChooserDescriptor(true, false, false, false, false, false);
-                final VirtualFile[] file = FileChooserFactory.getInstance().createFileChooser(desc, null, browse).choose(null, null);
+                final VirtualFile[] file = FileChooserFactory.getInstance().createFileChooser(desc, null, browse).choose((VirtualFile)null, null);
                 if(file.length == 0) {
                     return;
                 }

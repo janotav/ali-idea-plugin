@@ -35,10 +35,12 @@ import com.hp.alm.ali.idea.translate.filter.TranslatorSync;
 import com.intellij.openapi.application.ApplicationManager;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.swing.SwingUtilities;
 
+@Ignore
 public class TranslateServiceTest extends IntellijTest {
 
     private TranslateService translateService;

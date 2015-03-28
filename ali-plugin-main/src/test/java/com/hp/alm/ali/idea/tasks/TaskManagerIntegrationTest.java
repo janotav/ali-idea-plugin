@@ -25,11 +25,9 @@ import com.intellij.tasks.LocalTask;
 import com.intellij.tasks.Task;
 import com.intellij.tasks.TaskListenerAdapter;
 import com.intellij.tasks.TaskManager;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
+@Ignore
 public class TaskManagerIntegrationTest extends IntellijTest {
 
     private TaskManagerIntegration taskManagerIntegration;

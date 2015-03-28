@@ -73,7 +73,7 @@ public abstract class ClassRecognizer implements Recognizer {
                 project.getComponent(EditSourceUtil.class).navigate(item, true, true);
                 Editor editor = project.getComponent(FileEditorManager.class).getSelectedTextEditor();
                 if(line > 0) {
-                    if(editor != null && !editor.getDocument().getText().startsWith(PsiBundle.message("psi.decompiled.text.header"))) {
+                    if(editor != null /* && !editor.getDocument().getText().startsWith(PsiBundle.message("psi.decompiled.text.header")) */) { // TODO: string missing since commit 02ca2bd104e91420543cf8c19b2c6a9cbb6c5ab7
                         editor.getCaretModel().moveToLogicalPosition(new LogicalPosition(line - 1, 0));
                         editor.getScrollingModel().scrollToCaret(ScrollType.CENTER);
                         editor.getSelectionModel().removeSelection();

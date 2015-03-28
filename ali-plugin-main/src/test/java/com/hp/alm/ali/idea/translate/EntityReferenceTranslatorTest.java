@@ -23,8 +23,10 @@ import com.hp.alm.ali.idea.entity.EntityRef;
 import com.hp.alm.ali.idea.entity.SimpleCache;
 import com.hp.alm.ali.idea.model.Entity;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
+@Ignore
 public class EntityReferenceTranslatorTest extends IntellijTest {
 
     public EntityReferenceTranslatorTest() {

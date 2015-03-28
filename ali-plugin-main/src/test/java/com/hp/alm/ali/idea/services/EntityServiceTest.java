@@ -30,6 +30,7 @@ import com.hp.alm.ali.idea.model.parser.EntityList;
 import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.swing.SortOrder;
@@ -37,6 +38,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
 
+@Ignore
 public class EntityServiceTest extends MultiTest {
 
     private EntityService entityService;

@@ -19,15 +19,11 @@ package com.hp.alm.ali.idea.entity;
 import com.hp.alm.ali.idea.cfg.JDOMSerialization;
 import org.jdom.Element;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public abstract class AbstractEntityFilter<E extends EntityFilter> implements EntityFilter<E>, JDOMSerialization {
 
-    protected Map<String, String> props = new HashMap<String, String>();
+    protected Map<String, String> props = new LinkedHashMap<String, String>();
     protected Set<String> resolvedFilters = new HashSet<String>();
     protected String entityType;
 
@@ -61,7 +57,7 @@ public abstract class AbstractEntityFilter<E extends EntityFilter> implements En
 
     @Override
     public synchronized Map<String, String> getPropertyMap() {
-        return new HashMap<String, String>(props);
+        return new LinkedHashMap<String, String>(props);
     }
 
     @Override
