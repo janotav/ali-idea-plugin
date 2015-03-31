@@ -2,13 +2,18 @@
     <id>com.hp.alm.ali</id>
     <name>HP ALI</name>
     <description>Application Lifecycle Intelligence for HP ALM</description>
-    <version>3.13.@{idea.build}</version>
+    <version>3.14.@{idea.build}</version>
     <vendor logo="/ali_icon.png" url="https://hpln.hp.com/group/application-lifecycle-intelligence">HP</vendor>
 
     <idea-version since-build="@{idea.build}"/>
 
     <change-notes>
         <![CDATA[
+      <h3>Changes in 3.14</h3>
+      <ul>
+        <li>[compatibility] support Intellij 14.1</li>
+      </ul>
+
       <h3>Changes in 3.13</h3>
       <ul>
         <li>[enhancement] spell-check support</li>
@@ -358,10 +363,6 @@
         <component>
             <implementation-class>com.hp.alm.ali.idea.util.FileEditorManager</implementation-class>
             <interface-class>com.hp.alm.ali.idea.util.FileEditorManager</interface-class>
-        </component>
-        <component>
-            <implementation-class>com.hp.alm.ali.idea.tasks.TasksImpl</implementation-class>
-            <interface-class>com.hp.alm.ali.idea.tasks.TasksApi</interface-class>
         </component>
         <component>
             <implementation-class>com.hp.alm.ali.idea.cfg.WorkspaceConfiguration</implementation-class>

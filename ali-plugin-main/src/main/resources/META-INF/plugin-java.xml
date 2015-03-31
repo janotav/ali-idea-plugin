@@ -1,11 +1,4 @@
 <idea-plugin>
-    <application-components>
-        <component>
-            <implementation-class>com.hp.alm.ali.idea.genesis.ProjectImpl</implementation-class>
-            <interface-class>com.hp.alm.ali.idea.genesis.ProjectApi</interface-class>
-        </component>
-    </application-components>
-
     <actions>
         <action id="genesisActionBig" class="com.hp.alm.ali.idea.genesis.GenesisAction" text="Environment Provisioning" description="Setup your development environment using HP ALI" icon="/ali_icon_64x64.png">
             <add-to-group group-id="WelcomeScreen.QuickStart.IDEA" anchor="first"/>

@@ -34,7 +34,6 @@ public class TaskManagerIntegrationTest extends IntellijTest {
 
     private TaskManagerIntegration taskManagerIntegration;
     private TaskManager taskManager;
-    private TasksApi tasksApi;
     private ActiveItemService activeItemService;
 
     @Before
@@ -42,7 +41,6 @@ public class TaskManagerIntegrationTest extends IntellijTest {
         taskManagerIntegration = getComponent(TaskManagerIntegration.class);
         taskManager = getComponent(TaskManager.class);
         activeItemService = getComponent(ActiveItemService.class);
-        tasksApi = getComponent(TasksApi.class);
 
         // prevent detail opening when manipulating tasks in this test
         taskManagerIntegration.removeListener(activeItemService);
@@ -148,7 +146,7 @@ public class TaskManagerIntegrationTest extends IntellijTest {
                 });
 
                 HpAlmTask task = new HpAlmTask(getProject(), new Entity("defect", 85));
-                tasksApi.activateTask(task);
+                taskManager.activateTask(task, false);
             }
         });
     }
@@ -183,6 +181,6 @@ public class TaskManagerIntegrationTest extends IntellijTest {
     private void activateDefault() {
         Task task = taskManagerIntegration._getDefaultTask();
         Assert.assertNotNull(task);
-        tasksApi.activateTask(task);
+        taskManager.activateTask(task, false);
     }
 }

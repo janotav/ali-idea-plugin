@@ -29,10 +29,12 @@ import com.intellij.notification.Notifications;
 import com.intellij.openapi.options.ShowSettingsUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.ProjectManager;
+import com.intellij.tasks.CustomTaskState;
 import com.intellij.tasks.Task;
 import com.intellij.tasks.TaskRepository;
 import com.intellij.util.xmlb.annotations.Attribute;
 import com.intellij.util.xmlb.annotations.Tag;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.event.HyperlinkEvent;
 import java.util.LinkedList;
@@ -114,6 +116,26 @@ final public class HpAlmRepository extends TaskRepository implements Comparable<
         loadTasks(query, defect, "defect", list);
         loadTasks(query, requirement, "requirement", list);
         return list.toArray(new Task[list.size()]);
+    }
+
+    @Override
+    public void setPreferredOpenTaskState(@Nullable CustomTaskState customTaskState) {
+    }
+
+    @Nullable
+    @Override
+    public CustomTaskState getPreferredOpenTaskState() {
+        return null;
+    }
+
+    @Override
+    public void setPreferredCloseTaskState(@Nullable CustomTaskState customTaskState) {
+    }
+
+    @Nullable
+    @Override
+    public CustomTaskState getPreferredCloseTaskState() {
+        return null;
     }
 
     private void loadTasks(String query, TaskConfig config, String entityType, List<HpAlmTask> tasks) {

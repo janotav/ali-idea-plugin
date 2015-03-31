@@ -32,14 +32,12 @@ public class TaskManagerIntegration {
     private Project project;
     private TaskManager taskManager;
     private EntityService entityService;
-    private TasksApi tasksApi;
     private WeakListeners<Listener> listeners;
     volatile private boolean fireEvent;
 
-    public TaskManagerIntegration(Project project, EntityService entityService, TasksApi tasksApi) {
+    public TaskManagerIntegration(Project project, EntityService entityService) {
         this.project = project;
         this.entityService = entityService;
-        this.tasksApi = tasksApi;
         listeners = new WeakListeners<Listener>();
         fireEvent = true;
 
@@ -111,7 +109,7 @@ public class TaskManagerIntegration {
     private void activateTask(Task task) {
         fireEvent = false;
         try {
-            tasksApi.activateTask(task);
+            taskManager.activateTask(task, false);
         } finally {
             fireEvent = true;
         }

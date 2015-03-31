@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.hp.alm.ali</groupId>
         <artifactId>ali-parent</artifactId>
-        <version>3.13</version>
+        <version>3.14</version>
         <relativePath>../ali-parent/pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -94,6 +94,17 @@
             <artifactId>svnkit</artifactId>
             <version>1.3.5</version>
         </dependency>
+        <dependency>
+            <groupId>com.intellij</groupId>
+            <artifactId>gson-2.3</artifactId>
+            <version>IC-141.177.4</version>
+        </dependency>
+        <dependency>
+            <groupId>com.hp.alm.ali</groupId>
+            <artifactId>idea-sdk-IC-141.177.4</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -150,73 +161,4 @@
             </plugin>
         </plugins>
     </build>
-
-    <profiles>
-        <profile>
-            <id>IC-129.239</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <dependencies>
-                <dependency>
-                    <groupId>com.hp.alm.ali</groupId>
-                    <artifactId>idea-impl-129</artifactId>
-                    <version>${project.version}</version>
-                </dependency>
-                <dependency>
-                    <groupId>com.intellij</groupId>
-                    <artifactId>gson-2.2.1</artifactId>
-                    <version>IC-129.239</version>
-                </dependency>
-                <dependency>
-                    <groupId>com.hp.alm.ali</groupId>
-                    <artifactId>idea-sdk-IC-129.239</artifactId>
-                    <version>${project.version}</version>
-                    <scope>test</scope>
-                </dependency>
-            </dependencies>
-        </profile>
-        <profile>
-            <id>IC-133.193</id>
-            <dependencies>
-                <dependency>
-                    <groupId>com.hp.alm.ali</groupId>
-                    <artifactId>idea-impl-133</artifactId>
-                    <version>${project.version}</version>
-                </dependency>
-                <dependency>
-                    <groupId>com.intellij</groupId>
-                    <artifactId>gson-2.2.3</artifactId>
-                    <version>IC-133.193</version>
-                </dependency>
-                <dependency>
-                    <groupId>com.hp.alm.ali</groupId>
-                    <artifactId>idea-sdk-IC-133.193</artifactId>
-                    <version>${project.version}</version>
-                    <scope>test</scope>
-                </dependency>
-            </dependencies>
-        </profile>
-        <profile>
-            <id>IC-139.1603.1</id>
-            <dependencies>
-                <dependency>
-                    <groupId>com.hp.alm.ali</groupId>
-                    <artifactId>idea-impl-139</artifactId>
-                    <version>${project.version}</version>
-                </dependency>
-                <dependency>
-                    <groupId>com.intellij</groupId>
-                    <artifactId>gson-2.2.4</artifactId>
-                    <version>IC-139.1603.1</version>
-                </dependency>
-                <dependency>
-                    <groupId>com.hp.alm.ali</groupId>
-                    <artifactId>idea-sdk-IC-139.1603.1</artifactId>
-                    <version>${project.version}</version>
-                    <scope>test</scope>
-                </dependency>
-            </dependencies>
-        </profile>
-    </profiles>
 </project>
