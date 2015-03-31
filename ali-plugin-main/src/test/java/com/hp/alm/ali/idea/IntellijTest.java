@@ -28,6 +28,7 @@ import com.hp.alm.ali.idea.services.MetadataService;
 import com.hp.alm.ali.idea.services.MetadataSimpleService;
 import com.hp.alm.ali.idea.services.TestMessages;
 import com.hp.alm.ali.idea.util.ApplicationUtil;
+import com.hp.alm.ali.idea.util.DetailUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.ui.TestDialog;
@@ -110,6 +111,7 @@ public abstract class IntellijTest {
         for(EntityListener listener: entityListeners) {
             entityService.removeEntityListener(listener);
         }
+        getComponent(DetailUtil.class)._restore();
         if(isIsolated()) {
             handler.getServer().stop();
         }

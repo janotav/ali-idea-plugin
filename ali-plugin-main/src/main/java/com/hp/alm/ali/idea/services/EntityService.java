@@ -32,7 +32,7 @@ import com.hp.alm.ali.idea.model.Entity;
 import com.hp.alm.ali.idea.model.parser.EntityList;
 import com.hp.alm.ali.idea.rest.RestException;
 import com.hp.alm.ali.idea.rest.RestService;
-import com.intellij.openapi.application.ApplicationManager;
+import com.hp.alm.ali.idea.util.ApplicationUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
 import org.apache.commons.httpclient.HttpStatus;
@@ -98,7 +98,7 @@ public class EntityService {
             }
             asyncRequests.put(ref, list);
         }
-        ApplicationManager.getApplication().executeOnPooledThread(new Runnable() {
+        ApplicationUtil.executeOnPooledThread(new Runnable() {
             public void run() {
                 List<EntityListener> list;
                 Entity entity;
@@ -424,7 +424,7 @@ public class EntityService {
     }
 
     public void requestCachedEntity(final EntityRef ref, final List<String> properties, final EntityListener callback) {
-        ApplicationManager.getApplication().executeOnPooledThread(new Runnable() {
+        ApplicationUtil.executeOnPooledThread(new Runnable() {
             public void run() {
                 final LinkedList<Entity> done = new LinkedList<Entity>();
                 listeners.fire(new WeakListeners.Action<EntityListener>() {

@@ -35,12 +35,10 @@ import com.hp.alm.ali.idea.translate.filter.TranslatorSync;
 import com.intellij.openapi.application.ApplicationManager;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.swing.SwingUtilities;
 
-@Ignore
 public class TranslateServiceTest extends IntellijTest {
 
     private TranslateService translateService;
@@ -144,7 +142,7 @@ public class TranslateServiceTest extends IntellijTest {
             RestInvocations.loadMetadata(handler, "release-backlog-item");
         }
 
-        handler.addRequest(false, "GET", "/qcbin/rest/domains/domain/projects/project/defects?fields=planned-closing-ver,has-change,reproducible,changeset,has-others-linkage,priority,description,dev-comments,release-backlog-item.story-points,release-backlog-item.team-id,status,release-backlog-item.kan-status-duration,release-backlog-item.no-of-sons,closing-date,release-backlog-item.kanban-parent-status-id,detected-in-rel,estimated-fix-time,release-backlog-item.remaining,release-backlog-item.entity-id,actual-fix-time,release-backlog-item.feature-id,release-backlog-item.linked-entities-info,user-04,user-03,user-02,user-01,subject,build-closed,in-bucket,id,release-backlog-item.status,release-backlog-item.release-id,release-backlog-item.entity-name,name,has-linkage,release-backlog-item.owner,release-backlog-item.estimated,release-backlog-item.entity-type,creation-time,release-backlog-item.rank,closing-version,build-detected,release-backlog-item.theme-id,detection-version,release-backlog-item.product-id,last-modified,release-backlog-item.blocked,watch-id,detected-in-rcyc,release-backlog-item.kanban-status-id,severity,attachment,release-backlog-item.kan-parent-duration,release-backlog-item.invested,release-backlog-item.sprint-id,extended-reference,release-backlog-item.watch-id,detected-by,fixed-on-date,release-backlog-item.id,product-group-id&query={id[86]}&order-by={}", 200)
+        handler.addRequest(false, "GET", "/qcbin/rest/domains/domain/projects/project/defects?fields=actual-fix-time,attachment,in-bucket,changeset,build-closed,closing-version,closing-date,dev-comments,id,status,description,detected-by,build-detected,detected-in-rcyc,detected-in-rel,detection-version,creation-time,estimated-fix-time,extended-reference,fixed-on-date,has-change,has-linkage,has-others-linkage,last-modified,planned-closing-ver,priority,user-04,user-03,reproducible,severity,subject,name,user-02,user-01,watch-id,release-backlog-item.product-id,release-backlog-item.owner,release-backlog-item.blocked,release-backlog-item.entity-name,release-backlog-item.entity-type,release-backlog-item.feature-id,release-backlog-item.invested,release-backlog-item.kanban-status-id,release-backlog-item.linked-entities-info,release-backlog-item.no-of-sons,release-backlog-item.kanban-parent-status-id,release-backlog-item.rank,release-backlog-item.release-id,release-backlog-item.entity-id,release-backlog-item.remaining,release-backlog-item.sprint-id,release-backlog-item.status,release-backlog-item.kan-parent-duration,release-backlog-item.story-points,release-backlog-item.kan-status-duration,release-backlog-item.team-id,release-backlog-item.theme-id,release-backlog-item.estimated,release-backlog-item.watch-id,release-backlog-item.id,product-group-id&query={id[86]}&order-by={}", 200)
                 .content("entityServiceTest_entity.xml");
 
         Translator translator = translateService.getReferenceTranslator("defect");

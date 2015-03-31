@@ -21,12 +21,12 @@ import com.hp.alm.ali.idea.model.Entity;
 import com.hp.alm.ali.idea.entity.EntityRef;
 import com.hp.alm.ali.idea.services.EntityService;
 import com.hp.alm.ali.idea.services.WeakListeners;
+import com.hp.alm.ali.idea.util.ApplicationUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.tasks.LocalTask;
 import com.intellij.tasks.Task;
 import com.intellij.tasks.TaskListenerAdapter;
 import com.intellij.tasks.TaskManager;
-import com.intellij.util.ui.UIUtil;
 
 public class TaskManagerIntegration {
     private Project project;
@@ -78,7 +78,7 @@ public class TaskManagerIntegration {
                 entityService.getEntityAsync(new EntityRef(entity), new EntityAdapter() {
                     @Override
                     public void entityLoaded(final Entity entity, Event event) {
-                        UIUtil.invokeLaterIfNeeded(new Runnable() {
+                        ApplicationUtil.invokeLaterIfNeeded(new Runnable() {
                             public void run() {
                                 // throws exception when not executed in dispatcher (10.5.2)
                                 activateTask(new HpAlmTask(project, entity));

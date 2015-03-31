@@ -51,9 +51,9 @@ public class ExpressionResolverTest extends IntellijTest {
 
     @Test
     public void testResolveDisplayValueAsync() {
-        ExpressionResolver resolver = new ExpressionResolver(new TranslatorAsync());
-
         final LinkedList<String> expect = new LinkedList<String>();
+        ExpressionResolver resolver = new ExpressionResolver(new TranslatorAsync(expect));
+
         expect.add("Loading...");
         expect.add("(a OR b)");
         handler.async(2);
@@ -61,14 +61,13 @@ public class ExpressionResolverTest extends IntellijTest {
             String value = resolver.resolveDisplayValue("A OR B", new ValueCallback() {
                 @Override
                 public void value(final String value) {
-                    synchronized (expect) {
-                        handler.done(new Runnable() {
-                            @Override
-                            public void run() {
-                                Assert.assertEquals(expect.removeFirst(), value);
-                            }
-                        });
-                    }
+                    handler.done(new Runnable() {
+                        @Override
+                        public void run() {
+                            Assert.assertFalse("Unexpected: " + value, expect.isEmpty());
+                            Assert.assertEquals(expect.removeFirst(), value);
+                        }
+                    });
                 }
             });
             Assert.assertEquals("Loading...", value);

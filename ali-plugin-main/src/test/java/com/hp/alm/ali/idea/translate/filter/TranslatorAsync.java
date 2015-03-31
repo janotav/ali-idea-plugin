@@ -18,16 +18,28 @@ package com.hp.alm.ali.idea.translate.filter;
 
 import com.hp.alm.ali.idea.translate.Translator;
 import com.hp.alm.ali.idea.translate.ValueCallback;
-import com.intellij.openapi.application.ApplicationManager;
+import com.hp.alm.ali.idea.util.ApplicationUtil;
 
 public class TranslatorAsync implements Translator {
 
+    final private Object lock;
+
+    public TranslatorAsync() {
+        this(new Object());
+    }
+
+    public TranslatorAsync(Object lock) {
+        this.lock = lock;
+    }
+
     @Override
     public String translate(final String value, final ValueCallback callback) {
-        ApplicationManager.getApplication().executeOnPooledThread(new Runnable() {
+        ApplicationUtil.executeOnPooledThread(new Runnable() {
             @Override
             public void run() {
-                callback.value(value.toLowerCase());
+                synchronized (lock) {
+                    callback.value(value.toLowerCase());
+                }
             }
         });
         return null;

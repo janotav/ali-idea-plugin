@@ -348,6 +348,10 @@
             <interface-class>com.hp.alm.ali.idea.util.BrowserUtil</interface-class>
         </component>
         <component>
+            <implementation-class>com.hp.alm.ali.idea.util.DetailUtil</implementation-class>
+            <interface-class>com.hp.alm.ali.idea.util.DetailUtil</interface-class>
+        </component>
+        <component>
             <implementation-class>com.hp.alm.ali.idea.util.EditSourceUtil</implementation-class>
             <interface-class>com.hp.alm.ali.idea.util.EditSourceUtil</interface-class>
         </component>

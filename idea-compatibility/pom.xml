@@ -16,22 +16,22 @@
         <dependency>
             <groupId>com.intellij</groupId>
             <artifactId>openapi</artifactId>
-            <version>IC-139.1603.1</version>
+            <version>${idea.version}</version>
         </dependency>
         <dependency>
             <groupId>com.intellij.plugins.tasks</groupId>
             <artifactId>tasks-api</artifactId>
-            <version>IC-139.1603.1</version>
+            <version>${idea.version}</version>
         </dependency>
         <dependency>
             <groupId>com.intellij</groupId>
             <artifactId>util</artifactId>
-            <version>IC-139.1603.1</version>
+            <version>${idea.version}</version>
         </dependency>
         <dependency>
             <groupId>com.intellij</groupId>
             <artifactId>extensions</artifactId>
-            <version>IC-139.1603.1</version>
+            <version>${idea.version}</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

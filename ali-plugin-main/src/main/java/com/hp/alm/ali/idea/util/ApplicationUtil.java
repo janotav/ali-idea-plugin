@@ -16,7 +16,11 @@
 
 package com.hp.alm.ali.idea.util;
 
+import com.intellij.util.ui.UIUtil;
 import org.jetbrains.annotations.TestOnly;
+
+import java.util.concurrent.Callable;
+import java.util.concurrent.Future;
 
 public class ApplicationUtil {
 
@@ -24,6 +28,18 @@ public class ApplicationUtil {
 
     public static void invokeLater(Runnable runnable) {
         application.invokeLater(runnable);
+    }
+
+    public static void executeOnPooledThread(Runnable runnable) {
+        application.executeOnPooledThread(runnable);
+    }
+
+    public static <T> Future<T> executeOnPooledThread(Callable<T> callable) {
+        return application.executeOnPooledThread(callable);
+    }
+
+    public static void invokeLaterIfNeeded(Runnable runnable) {
+        application.invokeLaterIfNeeded(runnable);
     }
 
     @TestOnly
@@ -35,6 +51,12 @@ public class ApplicationUtil {
 
         void invokeLater(Runnable runnable);
 
+        void executeOnPooledThread(Runnable runnable);
+
+        <T> Future<T> executeOnPooledThread(Callable<T> callable);
+
+        void invokeLaterIfNeeded(Runnable runnable);
+
     }
 
     private static class DefaultApplication implements Application {
@@ -42,6 +64,21 @@ public class ApplicationUtil {
         @Override
         public void invokeLater(Runnable runnable) {
             com.intellij.openapi.application.ApplicationManager.getApplication().invokeLater(runnable);
+        }
+
+        @Override
+        public void executeOnPooledThread(Runnable runnable) {
+            com.intellij.openapi.application.ApplicationManager.getApplication().executeOnPooledThread(runnable);
+        }
+
+        @Override
+        public <T> Future<T> executeOnPooledThread(Callable<T> callable) {
+            return com.intellij.openapi.application.ApplicationManager.getApplication().executeOnPooledThread(callable);
+        }
+
+        @Override
+        public void invokeLaterIfNeeded(Runnable runnable) {
+            UIUtil.invokeLaterIfNeeded(runnable);
         }
     }
 }

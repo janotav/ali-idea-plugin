@@ -23,10 +23,8 @@ import com.hp.alm.ali.idea.entity.EntityRef;
 import com.hp.alm.ali.idea.entity.SimpleCache;
 import com.hp.alm.ali.idea.model.Entity;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
-@Ignore
 public class EntityReferenceTranslatorTest extends IntellijTest {
 
     public EntityReferenceTranslatorTest() {
@@ -39,7 +37,7 @@ public class EntityReferenceTranslatorTest extends IntellijTest {
 
         RestInvocations.loadMetadata(handler, "defect");
         RestInvocations.loadMetadata(handler, "release-backlog-item");
-        handler.addRequest(false, "GET", "/qcbin/rest/domains/domain/projects/project/defects?fields=planned-closing-ver,has-change,reproducible,changeset,has-others-linkage,priority,description,dev-comments,release-backlog-item.story-points,release-backlog-item.team-id,status,release-backlog-item.kan-status-duration,release-backlog-item.no-of-sons,closing-date,release-backlog-item.kanban-parent-status-id,detected-in-rel,estimated-fix-time,release-backlog-item.remaining,release-backlog-item.entity-id,actual-fix-time,release-backlog-item.feature-id,release-backlog-item.linked-entities-info,user-04,user-03,user-02,user-01,subject,build-closed,in-bucket,id,release-backlog-item.status,release-backlog-item.release-id,release-backlog-item.entity-name,name,has-linkage,release-backlog-item.owner,release-backlog-item.estimated,release-backlog-item.entity-type,creation-time,release-backlog-item.rank,closing-version,build-detected,release-backlog-item.theme-id,detection-version,release-backlog-item.product-id,last-modified,release-backlog-item.blocked,watch-id,detected-in-rcyc,release-backlog-item.kanban-status-id,severity,attachment,release-backlog-item.kan-parent-duration,release-backlog-item.invested,release-backlog-item.sprint-id,extended-reference,release-backlog-item.watch-id,detected-by,fixed-on-date,release-backlog-item.id,product-group-id&query={id[86]}&order-by={}", 200)
+        handler.addRequest(false, "GET", "/qcbin/rest/domains/domain/projects/project/defects?fields=actual-fix-time,attachment,in-bucket,changeset,build-closed,closing-version,closing-date,dev-comments,id,status,description,detected-by,build-detected,detected-in-rcyc,detected-in-rel,detection-version,creation-time,estimated-fix-time,extended-reference,fixed-on-date,has-change,has-linkage,has-others-linkage,last-modified,planned-closing-ver,priority,user-04,user-03,reproducible,severity,subject,name,user-02,user-01,watch-id,release-backlog-item.product-id,release-backlog-item.owner,release-backlog-item.blocked,release-backlog-item.entity-name,release-backlog-item.entity-type,release-backlog-item.feature-id,release-backlog-item.invested,release-backlog-item.kanban-status-id,release-backlog-item.linked-entities-info,release-backlog-item.no-of-sons,release-backlog-item.kanban-parent-status-id,release-backlog-item.rank,release-backlog-item.release-id,release-backlog-item.entity-id,release-backlog-item.remaining,release-backlog-item.sprint-id,release-backlog-item.status,release-backlog-item.kan-parent-duration,release-backlog-item.story-points,release-backlog-item.kan-status-duration,release-backlog-item.team-id,release-backlog-item.theme-id,release-backlog-item.estimated,release-backlog-item.watch-id,release-backlog-item.id,product-group-id&query={id[86]}&order-by={}", 200)
                 .content("entityServiceTest_entity.xml");
 
         handler.async();
@@ -80,7 +78,7 @@ public class EntityReferenceTranslatorTest extends IntellijTest {
 
         RestInvocations.loadMetadata(handler, "defect");
         RestInvocations.loadMetadata(handler, "release-backlog-item");
-        handler.addRequest(false, "GET", "/qcbin/rest/domains/domain/projects/project/defects?fields=planned-closing-ver,has-change,reproducible,changeset,has-others-linkage,priority,description,dev-comments,release-backlog-item.story-points,release-backlog-item.team-id,status,release-backlog-item.kan-status-duration,release-backlog-item.no-of-sons,closing-date,release-backlog-item.kanban-parent-status-id,detected-in-rel,estimated-fix-time,release-backlog-item.remaining,release-backlog-item.entity-id,actual-fix-time,release-backlog-item.feature-id,release-backlog-item.linked-entities-info,user-04,user-03,user-02,user-01,subject,build-closed,in-bucket,id,release-backlog-item.status,release-backlog-item.release-id,release-backlog-item.entity-name,name,has-linkage,release-backlog-item.owner,release-backlog-item.estimated,release-backlog-item.entity-type,creation-time,release-backlog-item.rank,closing-version,build-detected,release-backlog-item.theme-id,detection-version,release-backlog-item.product-id,last-modified,release-backlog-item.blocked,watch-id,detected-in-rcyc,release-backlog-item.kanban-status-id,severity,attachment,release-backlog-item.kan-parent-duration,release-backlog-item.invested,release-backlog-item.sprint-id,extended-reference,release-backlog-item.watch-id,detected-by,fixed-on-date,release-backlog-item.id,product-group-id&query={id[87]}&order-by={}", 200)
+        handler.addRequest(false, "GET", "/qcbin/rest/domains/domain/projects/project/defects?fields=actual-fix-time,attachment,in-bucket,changeset,build-closed,closing-version,closing-date,dev-comments,id,status,description,detected-by,build-detected,detected-in-rcyc,detected-in-rel,detection-version,creation-time,estimated-fix-time,extended-reference,fixed-on-date,has-change,has-linkage,has-others-linkage,last-modified,planned-closing-ver,priority,user-04,user-03,reproducible,severity,subject,name,user-02,user-01,watch-id,release-backlog-item.product-id,release-backlog-item.owner,release-backlog-item.blocked,release-backlog-item.entity-name,release-backlog-item.entity-type,release-backlog-item.feature-id,release-backlog-item.invested,release-backlog-item.kanban-status-id,release-backlog-item.linked-entities-info,release-backlog-item.no-of-sons,release-backlog-item.kanban-parent-status-id,release-backlog-item.rank,release-backlog-item.release-id,release-backlog-item.entity-id,release-backlog-item.remaining,release-backlog-item.sprint-id,release-backlog-item.status,release-backlog-item.kan-parent-duration,release-backlog-item.story-points,release-backlog-item.kan-status-duration,release-backlog-item.team-id,release-backlog-item.theme-id,release-backlog-item.estimated,release-backlog-item.watch-id,release-backlog-item.id,product-group-id&query={id[87]}&order-by={}", 200)
                 .content("no_entities.xml");
 
         handler.async();
@@ -119,9 +117,9 @@ public class EntityReferenceTranslatorTest extends IntellijTest {
 
         RestInvocations.loadMetadata(handler, "build-instance");
         RestInvocations.loadMetadata(handler, "build-type");
-        handler.addRequest(false, "GET", "/qcbin/rest/domains/domain/projects/project/build-instances?fields=test-success,status-message,test-coverage,type,running,version,id,timestamp,revision,test-skip,description,name,test-fail,qa-status,test-ok,sid,status,number,label,vts,product,category,duration,start-date,build-system-url,notes,release&query={id[4546]}&order-by={}", 200)
+        handler.addRequest(false, "GET", "/qcbin/rest/domains/domain/projects/project/build-instances?fields=product,category,id,status,build-system-url,type,test-coverage,start-date,description,duration,test-fail,running,label,vts,name,notes,number,qa-status,release,revision,sid,test-skip,status-message,test-ok,timestamp,test-success,version&query={id[4546]}&order-by={}", 200)
                 .content("entity_build.xml");
-        handler.addRequest(false, "GET", "/qcbin/rest/domains/domain/projects/project/build-types?fields=enabled,sid,last,vts,defect-filter,version,product,id,category,default,description,name,server,release,product-group-id&query={id[110]}&order-by={}", 200)
+        handler.addRequest(false, "GET", "/qcbin/rest/domains/domain/projects/project/build-types?fields=category,server,id,product,default,defect-filter,description,enabled,last,vts,name,release,sid,version,product-group-id&query={id[110]}&order-by={}", 200)
                 .content("entity_build_type.xml");
 
         handler.async();
@@ -165,7 +163,7 @@ public class EntityReferenceTranslatorTest extends IntellijTest {
         EntityReferenceTranslator translator = new EntityReferenceTranslator(getProject(), "changeset", new SimpleCache());
 
         RestInvocations.loadMetadata(handler, "changeset");
-        handler.addRequest(false, "GET", "/qcbin/rest/domains/domain/projects/project/changesets?fields=id,rev,has-requirement-linkage,description,status-message,has-linkage,owner,has-defect-linkage,date,changed-file-count,changed-line-count,vts&query={id[941]}&order-by={}", 200)
+        handler.addRequest(false, "GET", "/qcbin/rest/domains/domain/projects/project/changesets?fields=id,date,owner,changed-file-count,has-defect-linkage,has-linkage,has-requirement-linkage,changed-line-count,description,vts,rev,status-message&query={id[941]}&order-by={}", 200)
                 .content("entity_changeset.xml");
 
         handler.async();

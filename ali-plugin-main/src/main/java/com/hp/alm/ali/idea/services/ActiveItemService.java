@@ -16,16 +16,16 @@
 
 package com.hp.alm.ali.idea.services;
 
-import com.hp.alm.ali.idea.content.AliContentFactory;
 import com.hp.alm.ali.idea.tasks.TaskManagerIntegration;
 import com.hp.alm.ali.idea.model.Entity;
 import com.hp.alm.ali.idea.entity.EntityRef;
+import com.hp.alm.ali.idea.util.ApplicationUtil;
+import com.hp.alm.ali.idea.util.DetailUtil;
 import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.IconLoader;
-import com.intellij.util.ui.UIUtil;
 import org.jdom.Element;
 
 import javax.swing.Icon;
@@ -40,10 +40,12 @@ public class ActiveItemService implements PersistentStateComponent<Element>, Tas
     private WeakListeners<Listener> listeners = new WeakListeners<Listener>();
     private EntityRef ref;
     private Project project;
+    private DetailUtil detailUtil;
     private TaskManagerIntegration taskManagerIntegration;
 
-    public ActiveItemService(Project project) {
+    public ActiveItemService(Project project, DetailUtil detailUtil) {
         this.project = project;
+        this.detailUtil = detailUtil;
         this.taskManagerIntegration = project.getComponent(TaskManagerIntegration.class);
 
         if(taskManagerIntegration != null) {
@@ -73,9 +75,9 @@ public class ActiveItemService implements PersistentStateComponent<Element>, Tas
     }
 
     public void selectEntityDetail(final Entity entity) {
-        UIUtil.invokeLaterIfNeeded(new Runnable() {
+        ApplicationUtil.invokeLaterIfNeeded(new Runnable() {
             public void run() {
-                AliContentFactory.loadDetail(project, entity, true, true);
+                detailUtil.loadDetail(project, entity, true, true);
             }
         });
     }

@@ -24,6 +24,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -83,7 +84,7 @@ public class Metadata {
     private String entityName;
 
     public Metadata(Project project, String entityName, boolean load) {
-        this.allFields = new HashMap<String, Field>();  // TODO: LinkedHashMap?
+        this.allFields = new LinkedHashMap<String, Field>();
         this.relations = new ArrayList<Relation>();
         this.entityName = entityName;
 

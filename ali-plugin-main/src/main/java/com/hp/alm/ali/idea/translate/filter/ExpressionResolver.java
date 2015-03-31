@@ -19,10 +19,13 @@ package com.hp.alm.ali.idea.translate.filter;
 import com.hp.alm.ali.idea.translate.expr.ExpressionBuilder;
 import com.hp.alm.ali.idea.translate.expr.ExpressionParser;
 import com.hp.alm.ali.idea.translate.expr.Node;
-import com.hp.alm.ali.idea.translate.filter.FilterResolver;
 import com.hp.alm.ali.idea.translate.TranslateService;
 import com.hp.alm.ali.idea.translate.Translator;
 import com.hp.alm.ali.idea.translate.ValueCallback;
+
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ExpressionResolver implements FilterResolver {
 
@@ -36,12 +39,14 @@ public class ExpressionResolver implements FilterResolver {
     public String resolveDisplayValue(String expr, ValueCallback onValue) {
         Node node = ExpressionParser.parse(expr);
         String value;
-        if(resolve(node, translator, onValue, node)) {
+        SingleValueCallBack callBack = new SingleValueCallBack(onValue);
+        if(resolve(node, translator, callBack, node, new HashSet<Node>(Collections.singleton(node)))) {
             value = ExpressionBuilder.build(node);
+            callBack.value(value);
         } else {
             value = TranslateService.LOADING_MESSAGE;
+            callBack.initValue(value);
         }
-        onValue.value(value);
         return value;
     }
 
@@ -62,7 +67,7 @@ public class ExpressionResolver implements FilterResolver {
         return (node.left == null || isResolved(node.left)) && (node.right == null || isResolved(node.right));
     }
 
-    private boolean resolve(final Node node, Translator translator, final ValueCallback onValue, final Node root) {
+    private boolean resolve(final Node node, Translator translator, final ValueCallback onValue, final Node root, final Set<Node> toResolve) {
         if(node.value != null) {
             final Object lock = new Object();
             synchronized (lock) {
@@ -71,9 +76,7 @@ public class ExpressionResolver implements FilterResolver {
                     public void value(String value) {
                         synchronized (lock)  {
                             node.value = value;
-                            if (isResolved(root)) {
-                                onValue.value(ExpressionBuilder.build(root));
-                            }
+                            resolved(node, onValue, root, toResolve);
                         }
                     }
                 });
@@ -81,17 +84,54 @@ public class ExpressionResolver implements FilterResolver {
                     node.value = TranslateService.LOADING_MESSAGE;
                     return false;
                 } else {
+                    resolved(node, onValue, root, toResolve);
                     return true;
                 }
             }
         }
-        boolean resolved = true;
+        boolean leftResolved = true;
         if(node.left != null) {
-            resolved = resolve(node.left, translator, onValue, root);
+            toResolve.add(node.left);
+            leftResolved = resolve(node.left, translator, onValue, root, toResolve);
         }
+        boolean rightResolved = true;
         if(node.right != null) {
-            resolved &= resolve(node.right, translator, onValue, root);
+            toResolve.add(node.right);
+            rightResolved = resolve(node.right, translator, onValue, root, toResolve);
         }
-        return resolved;
+        resolved(node, onValue, root, toResolve);
+        return leftResolved && rightResolved;
+    }
+
+    private void resolved(Node node, ValueCallback onValue, Node root, Set<Node> toResolve) {
+        synchronized (toResolve) {
+            toResolve.remove(node);
+            if (toResolve.isEmpty()) {
+                onValue.value(ExpressionBuilder.build(root));
+            }
+        }
+    }
+
+    private static class SingleValueCallBack implements ValueCallback {
+
+        private ValueCallback delegate;
+
+        public SingleValueCallBack(ValueCallback delegate) {
+            this.delegate = delegate;
+        }
+
+        @Override
+        public synchronized void value(String value) {
+            if (delegate != null) {
+                delegate.value(value);
+                delegate = null;
+            }
+        }
+
+        public synchronized void initValue(String value) {
+            if (delegate != null) {
+                delegate.value(value);
+            }
+        }
     }
 }

@@ -18,25 +18,21 @@ package com.hp.alm.ali.idea.services;
 
 import com.hp.alm.ali.ServerVersion;
 import com.hp.alm.ali.idea.IntellijTest;
-import com.hp.alm.ali.idea.RestInvocations;
 import com.hp.alm.ali.idea.tasks.TasksApi;
-import com.hp.alm.ali.idea.content.AliContentFactory;
-import com.hp.alm.ali.idea.content.detail.EntityDetail;
 import com.hp.alm.ali.idea.entity.EntityRef;
 import com.hp.alm.ali.idea.model.Entity;
-import com.intellij.openapi.wm.ToolWindowManager;
+import com.hp.alm.ali.idea.util.ApplicationUtil;
+import com.hp.alm.ali.idea.util.DetailUtil;
+import com.intellij.openapi.project.Project;
 import com.intellij.tasks.LocalTask;
 import com.intellij.tasks.TaskListenerAdapter;
 import com.intellij.tasks.TaskManager;
 import com.intellij.tasks.impl.LocalTaskImpl;
-import com.intellij.ui.content.ContentManager;
 import org.jdom.Element;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
-@Ignore
 public class ActiveItemServiceTest extends IntellijTest {
 
     private ActiveItemService activeItemService;
@@ -126,62 +122,70 @@ public class ActiveItemServiceTest extends IntellijTest {
         tasksApi.activateTask(localTask);
 
         handler.async();
-        taskManager.addTaskListener(new TaskListenerAdapter() {
+
+        ApplicationUtil.invokeLaterIfNeeded(new Runnable() {
             @Override
-            public void taskActivated(final LocalTask localTask) {
-                taskManager.removeTaskListener(this);
-                handler.done(new Runnable() {
+            public void run() {
+                taskManager.addTaskListener(new TaskListenerAdapter() {
                     @Override
-                    public void run() {
-                        Assert.assertEquals("Default", localTask.getId());
+                    public void taskActivated(final LocalTask localTask) {
+                        taskManager.removeTaskListener(this);
+                        handler.done(new Runnable() {
+                            @Override
+                            public void run() {
+                                Assert.assertEquals("Default", localTask.getId());
+                            }
+                        });
                     }
                 });
+                activeItemService.activate(null, true, false);
+                Assert.assertNull(activeItemService.getActiveItem());
             }
         });
-        activeItemService.activate(null, true, false);
-        Assert.assertNull(activeItemService.getActiveItem());
     }
 
     @Test
     public void testActivate_select() {
-        selectEntityDetailExecutionCheck(new Runnable() {
+        handler.async();
+
+        getComponent(DetailUtil.class)._setLauncher(new DetailUtil.Launcher() {
             @Override
-            public void run() {
-                activeItemService.activate(new Entity("requirement", 4), false, true);
+            public void loadDetail(Project project, final Entity entity, final boolean show, final boolean select) {
+                handler.done(new Runnable() {
+                    @Override
+                    public void run() {
+                        Assert.assertEquals("requirement", entity.getType());
+                        Assert.assertEquals(4, entity.getId());
+                        Assert.assertEquals(true, show);
+                        Assert.assertEquals(true, select);
+                    }
+                });
             }
         });
+
+        activeItemService.activate(new Entity("requirement", 4), false, true);
     }
 
     @Test
-    public void testSelectEntityDetail() {
-        selectEntityDetailExecutionCheck(new Runnable() {
+    public void testSelectEntityDetail() throws Throwable {
+        handler.async();
+
+        getComponent(DetailUtil.class)._setLauncher(new DetailUtil.Launcher() {
             @Override
-            public void run() {
-                activeItemService.selectEntityDetail(new Entity("requirement", 4));
+            public void loadDetail(Project project, final Entity entity, final boolean show, final boolean select) {
+                handler.done(new Runnable() {
+                    @Override
+                    public void run() {
+                        Assert.assertEquals("requirement", entity.getType());
+                        Assert.assertEquals(4, entity.getId());
+                        Assert.assertEquals(true, show);
+                        Assert.assertEquals(true, select);
+                    }
+                });
             }
         });
-    }
 
-    private void selectEntityDetailExecutionCheck(Runnable action) {
-        RestInvocations.loadMetadata(handler, "requirement");
-        RestInvocations.loadMetadata(handler, "release-backlog-item");
-        handler.addRequest(false, "GET", "/qcbin/rest/domains/domain/projects/project/requirements?fields=cover-status,release-backlog-item.kan-status-duration,release-backlog-item.no-of-sons,release-backlog-item.kanban-parent-status-id,release-backlog-item.feature-id,release-backlog-item.status,release-backlog-item.release-id,release-backlog-item.entity-type,creation-time,release-backlog-item.rank,last-modified,release-backlog-item.invested,release-backlog-item.sprint-id,release-backlog-item.watch-id,comments,description,release-backlog-item.story-points,release-backlog-item.team-id,release-backlog-item.entity-id,release-backlog-item.remaining,products-id,owner,release-backlog-item.linked-entities-info,no-of-sons,no-of-blis,id,release-backlog-item.entity-name,name,release-backlog-item.owner,release-backlog-item.estimated,release-backlog-item.theme-id,req-time,release-backlog-item.product-id,release-backlog-item.blocked,release-backlog-item.kanban-status-id,attachment,release-backlog-item.kan-parent-duration,req-reviewed,req-priority,release-backlog-item.id,product-group-id&query={id[4]}&order-by={}", 200);
-        RestInvocations.loadCustomizationEntities(handler, getProject());
-
-        action.run();
-
-        // the content manager mock used in tests doesn't allow to listen for events: wait for the requests
-        // moreover because the installed entity detail becomes an active source of events, test has to be isolated
-
-        handler.consume();
-
-        ContentManager contentManager = getComponent(ToolWindowManager.class).getToolWindow(AliContentFactory.TOOL_WINDOW_DETAIL).getContentManager();
-        Assert.assertEquals(1, contentManager.getContents().length);
-        EntityDetail detail = (EntityDetail)contentManager.getContents()[0].getComponent();
-        Assert.assertEquals(4, detail.getEntity().getId());
-        Assert.assertEquals("requirement", detail.getEntity().getType());
-        contentManager.removeAllContents(true);
-        detail._unregister();
+        activeItemService.selectEntityDetail(new Entity("requirement", 4));
     }
 
     private void checkActivateItem(String type, int id) {

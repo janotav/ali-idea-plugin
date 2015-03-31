@@ -1,7 +1,7 @@
 #!/bin/bash
 
-IDEA_HOME=$1
-version=$2
+IDEA_HOME="$1"
+version="$2"
 
 cat << HEADER | tee idea-sdk-$version/pom.xml > idea-sdk-$version/install-libs.xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -27,7 +27,7 @@ cat << POM_HEADER >> idea-sdk-$version/pom.xml
     <parent>
         <artifactId>ali-parent</artifactId>
         <groupId>com.hp.alm.ali</groupId>
-        <version>3.11</version>
+        <version>3.13</version>
         <relativePath>../ali-parent</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -40,11 +40,11 @@ POM_HEADER
 
 function addDependency {
 
-    fullPath=$1
-    groupId=$2
-    prefix=$3
+    fullPath="$1"
+    groupId="$2"
+    prefix="$3"
 
-    file=`basename $fullPath .jar`
+    file=`basename "$fullPath" .jar`
 
     {
         echo '    <exec executable="${maven.executable}">'
@@ -70,25 +70,25 @@ DEPENDENCY
 
 for i in "$IDEA_HOME"/lib/*.jar ; do
 
-    addDependency $i com.intellij lib
+    addDependency "$i" "com.intellij" "lib"
 
 done
 
 for i in "$IDEA_HOME"/plugins/tasks/lib/*.jar ; do
 
-    addDependency $i com.intellij.plugins.tasks plugins/tasks/lib
+    addDependency "$i" "com.intellij.plugins.tasks" "plugins/tasks/lib"
 
 done
 
 for i in "$IDEA_HOME"/plugins/git4idea/lib/*.jar ; do
 
-    addDependency $i com.intellij.plugins.git4idea plugins/git4idea/lib
+    addDependency "$i" "com.intellij.plugins.git4idea" "plugins/git4idea/lib"
 
 done
 
 for i in "$IDEA_HOME"/plugins/svn4idea/lib/*.jar ; do
 
-    addDependency $i com.intellij.plugins.svn4idea plugins/svn4idea/lib
+    addDependency "$i" "com.intellij.plugins.svn4idea" "plugins/svn4idea/lib"
 
 done
 

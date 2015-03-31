@@ -18,8 +18,11 @@ package com.hp.alm.ali.idea;
 
 import com.hp.alm.ali.idea.util.ApplicationUtil;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.util.ui.UIUtil;
 import org.junit.Assert;
 
+import java.util.concurrent.Callable;
+import java.util.concurrent.Future;
 import java.util.concurrent.Semaphore;
 
 public class TestApplication implements ApplicationUtil.Application {
@@ -32,6 +35,51 @@ public class TestApplication implements ApplicationUtil.Application {
     public void invokeLater(final Runnable runnable) {
         Assert.assertTrue(semaphore.tryAcquire());
         ApplicationManager.getApplication().invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    runnable.run();
+                } finally {
+                    semaphore.release();
+                }
+            }
+        });
+    }
+
+    @Override
+    public void executeOnPooledThread(final Runnable runnable) {
+        Assert.assertTrue(semaphore.tryAcquire());
+        ApplicationManager.getApplication().executeOnPooledThread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    runnable.run();
+                } finally {
+                    semaphore.release();
+                }
+            }
+        });
+    }
+
+    @Override
+    public <T> Future<T> executeOnPooledThread(final Callable<T> callable) {
+        Assert.assertTrue(semaphore.tryAcquire());
+        return ApplicationManager.getApplication().executeOnPooledThread(new Callable<T>() {
+            @Override
+            public T call() throws Exception {
+                try {
+                    return callable.call();
+                } finally {
+                    semaphore.release();
+                }
+            }
+        });
+    }
+
+    @Override
+    public void invokeLaterIfNeeded(final Runnable runnable) {
+        Assert.assertTrue(semaphore.tryAcquire());
+        UIUtil.invokeLaterIfNeeded(new Runnable() {
             @Override
             public void run() {
                 try {
