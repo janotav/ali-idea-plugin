@@ -436,7 +436,7 @@ public class DevMotivePanel extends JPanel implements CloseableContent, LinkList
 
             filterId = this.filterId;
         }
-        Map<Commit, List<EntityRef>> result = devMotiveService.getRelatedWorkItems(Arrays.asList(commit));
+        Map<Commit, List<EntityRef>> result = devMotiveService.getRelatedEntities(Arrays.asList(commit));
         processResult(filterId, result);
     }
 
@@ -463,7 +463,7 @@ public class DevMotivePanel extends JPanel implements CloseableContent, LinkList
         if (commits.isEmpty()) {
             return;
         }
-        Map<Commit, List<EntityRef>> result = devMotiveService.getRelatedWorkItems(commits);
+        Map<Commit, List<EntityRef>> result = devMotiveService.getRelatedEntities(commits);
         processResult(filterId, result);
     }
 
