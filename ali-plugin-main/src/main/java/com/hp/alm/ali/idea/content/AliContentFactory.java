@@ -16,6 +16,8 @@
 
 package com.hp.alm.ali.idea.content;
 
+import com.hp.alm.ali.idea.content.devmotive.DevMotive;
+import com.hp.alm.ali.idea.content.devmotive.DevMotivePanel;
 import com.hp.alm.ali.idea.entity.EntityRef;
 import com.hp.alm.ali.idea.cfg.AliProjectConfiguration;
 import com.hp.alm.ali.idea.content.settings.SettingsContent;
@@ -31,14 +33,17 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.ProjectManager;
 import com.intellij.openapi.project.ProjectManagerAdapter;
 import com.intellij.openapi.util.IconLoader;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowAnchor;
 import com.intellij.openapi.wm.ToolWindowFactory;
 import com.intellij.openapi.wm.ToolWindowManager;
 import com.intellij.ui.content.Content;
 import com.intellij.ui.content.ContentFactory;
+import com.intellij.ui.content.ContentManager;
 import com.intellij.ui.content.ContentManagerAdapter;
 import com.intellij.ui.content.ContentManagerEvent;
+import com.intellij.ui.content.ContentManagerListener;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -46,6 +51,7 @@ import java.util.List;
 
 public class AliContentFactory implements ToolWindowFactory {
 
+    public static final String TOOL_WINDOW_MAIN = "HP ALI";
     public static final String TOOL_WINDOW_DETAIL = "ALI Detail";
 
     @Override
@@ -70,6 +76,13 @@ public class AliContentFactory implements ToolWindowFactory {
             @Override
             public void selectionChanged(ContentManagerEvent event) {
                 project.getComponent(AliProjectConfiguration.class).setSelectedContent(event.getContent().getTabName());
+            }
+
+            @Override
+            public void contentRemoveQuery(ContentManagerEvent event) {
+                if (!(event.getContent().getComponent() instanceof CloseableContent)) {
+                    event.consume();
+                }
             }
         });
         new AliContentManager(toolWindow, project);
@@ -108,6 +121,48 @@ public class AliContentFactory implements ToolWindowFactory {
             conf.getDetails().setSelectedRef(new EntityRef(entity));
             toolWindow.getContentManager().setSelectedContent(content);
         }
+    }
+
+    public static DevMotivePanel addDevMotiveContent(Project project, VirtualFile file, ContentManagerListener listener, boolean select) {
+        ApplicationManager.getApplication().assertIsDispatchThread();
+
+        ToolWindowManager toolWindowManager = project.getComponent(ToolWindowManager.class);
+        ToolWindow toolWindow = toolWindowManager.getToolWindow(TOOL_WINDOW_MAIN);
+        ContentManager contentManager = toolWindow.getContentManager();
+
+        Content content = findDevMotiveContent(toolWindow, file);
+        if (content == null) {
+            contentManager = toolWindow.getContentManager();
+            int idx = contentManager.getContentCount();
+            DevMotivePanel devMotivePanel = new DevMotivePanel(project, file);
+            content = ContentFactory.SERVICE.getInstance().createContent(devMotivePanel, "Dev: " + file.getName(), false);
+            contentManager.addContent(content, idx);
+        }
+        if (select) {
+            contentManager.setSelectedContent(content);
+        }
+        if (listener != null) {
+            contentManager.addContentManagerListener(listener);
+        }
+        return (DevMotivePanel) content.getComponent();
+    }
+
+    public static Content findDevMotiveContent(ToolWindow toolWindow, VirtualFile file) {
+        for(Content content: toolWindow.getContentManager().getContents()) {
+            if(isDevMotiveContentOf(content, file)) {
+                return content;
+            }
+        }
+        return null;
+    }
+
+    public static boolean isDevMotiveContentOf(Content content, VirtualFile file) {
+        if(content.getComponent() instanceof DevMotive) {
+            if(file.equals(((DevMotive) content.getComponent()).getFile())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private static Content addEntity(Project project, ToolWindow toolWindow, final Entity entity, int idx) {
@@ -168,7 +223,7 @@ public class AliContentFactory implements ToolWindowFactory {
             toolWindow.setIcon(IconLoader.getIcon("/ali_icon_13x13.png"));
             toolWindow.getContentManager().addContentManagerListener(project.getComponent(EntityEditManager.class));
         }
-        return  toolWindow;
+        return toolWindow;
     }
 
     private static class MyProjectListener extends ProjectManagerAdapter {

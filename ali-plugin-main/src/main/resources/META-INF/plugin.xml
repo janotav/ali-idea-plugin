@@ -380,6 +380,10 @@
             <implementation-class>com.hp.alm.ali.idea.services.AgmUrlService</implementation-class>
             <interface-class>com.hp.alm.ali.idea.services.AgmUrlService</interface-class>
         </component>
+        <component>
+            <implementation-class>com.hp.alm.ali.idea.services.DevMotiveService</implementation-class>
+            <interface-class>com.hp.alm.ali.idea.services.DevMotiveService</interface-class>
+        </component>
     </project-components>
 
     <actions>
@@ -427,6 +431,8 @@
         <group id="hpali.defects">
             <action id="hpali.new.defect" class="com.hp.alm.ali.idea.action.NewDefectAction"/>
         </group>
+        <group id="hpali.DevMotive">
+        </group>
         <!-- detail tables -->
         <group id="hpali.attachment">
             <action id="hpali.new.attachment" class="com.hp.alm.ali.idea.action.attachment.AttachmentNewAction"/>
@@ -441,6 +447,9 @@
             <action id="hpali.test.new" class="com.hp.alm.ali.idea.action.acceptance.TestNewAction"/>
         </group>
         <!-- end of detail tables -->
+        <action id="hpali.dev-motive" class="com.hp.alm.ali.idea.action.devmotive.DevMotiveAction">
+            <add-to-group group-id="VersionControlsGroup" anchor="last"/>
+        </action>
     </actions>
 
     <extensionPoints>
@@ -449,10 +458,11 @@
     </extensionPoints>
 
     <extensions defaultExtensionNs="com.intellij">
-       <toolWindow id="HP ALI" icon="/ali_icon_13x13.png" anchor="bottom" factoryClass="com.hp.alm.ali.idea.content.AliContentFactory"/>
+       <toolWindow id="HP ALI" icon="/ali_icon_13x13.png" anchor="bottom" factoryClass="com.hp.alm.ali.idea.content.AliContentFactory" canCloseContents="true"/>
        <applicationConfigurable implementation="com.hp.alm.ali.idea.cfg.AliConfigurable"/>
        <projectConfigurable implementation="com.hp.alm.ali.idea.cfg.AliProjectConfigurable"/>
        <checkinHandlerFactory implementation="com.hp.alm.ali.idea.checkin.AliCheckinHandlerFactory"/>
+       <vcsAnnotationGutterActionProvider implementation="com.hp.alm.ali.idea.content.devmotive.DevMotiveAnnotationGutterActionProvider"/>
     </extensions>
 
 </idea-plugin>
