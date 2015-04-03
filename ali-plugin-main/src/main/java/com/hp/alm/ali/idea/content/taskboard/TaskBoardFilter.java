@@ -16,7 +16,7 @@
 
 package com.hp.alm.ali.idea.content.taskboard;
 
-import java.util.List;
+import java.util.Set;
 
 public interface TaskBoardFilter {
 
@@ -30,6 +30,6 @@ public interface TaskBoardFilter {
 
     boolean isBlocked();
 
-    List<String> getStatus();
+    Set<String> getStatus();
 
 }

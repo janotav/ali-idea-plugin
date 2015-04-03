@@ -16,7 +16,6 @@
 
 package com.hp.alm.ali.idea.content.devmotive;
 
-import com.hp.alm.ali.idea.action.devmotive.DevMotiveReopenAction;
 import com.hp.alm.ali.idea.content.AliContentFactory;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.editor.Editor;
@@ -27,6 +26,7 @@ import com.intellij.openapi.editor.ex.EditorGutterComponentEx;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vcs.actions.ActiveAnnotationGutter;
 import com.intellij.openapi.vcs.annotate.FileAnnotation;
+import com.intellij.openapi.vcs.history.VcsFileRevision;
 import com.intellij.openapi.vcs.history.VcsRevisionNumber;
 import com.intellij.ui.content.ContentManagerEvent;
 import com.intellij.ui.content.ContentManagerListener;
@@ -38,21 +38,20 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class DevMotiveAnnotationGutter implements ActiveAnnotationGutter, ChangeListener, ContentManagerListener {
 
-    private Project project;
     private FileAnnotation annotation;
     private DevMotivePanel devMotivePanel;
     private EditorGutterComponentEx editorGutterComponentEx;
     private String unknownLine;
 
-    public DevMotiveAnnotationGutter(Project project, FileAnnotation annotation, EditorGutter editorGutter) {
-        this.project = project;
+    public DevMotiveAnnotationGutter(Project project, FileAnnotation annotation, List<VcsFileRevision> revisions, EditorGutter editorGutter) {
         this.annotation = annotation;
 
-        devMotivePanel = AliContentFactory.addDevMotiveContent(project, annotation.getFile(), this, true);
+        devMotivePanel = AliContentFactory.addDevMotiveContent(project, annotation.getFile(), revisions, annotation.getVcsKey().getName(), this, true);
         devMotivePanel.addChangeListener(this);
 
         if (editorGutter instanceof EditorGutterComponentEx) {
@@ -146,8 +145,11 @@ public class DevMotiveAnnotationGutter implements ActiveAnnotationGutter, Change
         }
         Collection<WorkItem> workItems = devMotivePanel.getWorkItemsByRevisionNumber(revisionNumber, true);
         if (workItems == null) {
-            devMotivePanel.load(revisionNumber);
-            return "Loading association information...";
+            if (loadRevisionNumber(revisionNumber)) {
+                return "Loading association information...";
+            } else {
+                return "Revision not found";
+            }
         } else if (!workItems.isEmpty()) {
             StringBuffer buf = new StringBuffer();
             for (WorkItem workItem: workItems) {
@@ -160,6 +162,19 @@ public class DevMotiveAnnotationGutter implements ActiveAnnotationGutter, Change
         } else {
             return null;
         }
+    }
+
+    private boolean loadRevisionNumber(VcsRevisionNumber revisionNumber) {
+        List<VcsFileRevision> revisions = annotation.getRevisions();
+        if (revisions != null) {
+            for (VcsFileRevision revision: revisions) {
+                if (revisionNumber.equals(revision.getRevisionNumber())) {
+                    devMotivePanel.load(Arrays.asList(revision));
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Override
@@ -186,7 +201,7 @@ public class DevMotiveAnnotationGutter implements ActiveAnnotationGutter, Change
 
     @Override
     public List<AnAction> getPopupActions(int line, Editor editor) {
-        return Arrays.<AnAction>asList(new DevMotiveReopenAction(project, annotation));
+        return Collections.emptyList();
     }
 
     @Override

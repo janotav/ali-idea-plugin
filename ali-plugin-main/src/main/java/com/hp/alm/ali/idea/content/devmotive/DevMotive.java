@@ -16,10 +16,17 @@
 
 package com.hp.alm.ali.idea.content.devmotive;
 
+import com.intellij.openapi.vcs.history.VcsFileRevision;
 import com.intellij.openapi.vfs.VirtualFile;
+
+import java.util.List;
 
 public interface DevMotive {
 
     VirtualFile getFile();
+
+    boolean containsRevision(List<VcsFileRevision> revision);
+
+    void load(List<VcsFileRevision> revisions);
 
 }

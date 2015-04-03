@@ -30,9 +30,12 @@ import javax.swing.JPanel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 public class MultiValueSelectorLabel extends JPanel implements LinkListener {
 
@@ -40,17 +43,17 @@ public class MultiValueSelectorLabel extends JPanel implements LinkListener {
 
     private final Project project;
     private final String title;
-    private List<String> selectedItems;
+    private Set<String> selectedItems;
     private List<String> items;
 
     private final LinkLabel linkLabel;
     private final List<ChangeListener> listeners;
     private int maxWidth = 100;
 
-    public MultiValueSelectorLabel(final Project project, final String title, List<String> selectedItems, List<String> items) {
+    public MultiValueSelectorLabel(final Project project, final String title, Collection<String> selectedItems, List<String> items) {
         this.project = project;
         this.title = title;
-        this.selectedItems = selectedItems;
+        this.selectedItems = new HashSet<String>(selectedItems);
         this.items = items;
 
         listeners = new LinkedList<ChangeListener>();
@@ -72,8 +75,29 @@ public class MultiValueSelectorLabel extends JPanel implements LinkListener {
         }
     }
 
-    public List<String> getSelectedValues() {
-        return Collections.unmodifiableList(selectedItems);
+    public Set<String> getSelectedValues() {
+        return Collections.unmodifiableSet(selectedItems);
+    }
+
+    public List<String> getValues() {
+        return Collections.unmodifiableList(items);
+    }
+
+    public void addItems(Collection<String> newItems) {
+        boolean allSelected = (items.size() == selectedItems.size());
+        boolean changed = false;
+        for (String item: newItems) {
+            if (!items.contains(item)) {
+                items.add(item);
+                if (allSelected) {
+                    selectedItems.add(item);
+                }
+                changed = true;
+            }
+        }
+        if (changed) {
+            fireChangeEvent(this);
+        }
     }
 
     @Override
@@ -89,9 +113,9 @@ public class MultiValueSelectorLabel extends JPanel implements LinkListener {
         String selectedValue = chooser.getSelectedValue();
         if (selectedValue != null) {
             if (selectedValue.isEmpty()) {
-                selectedItems = items;
+                selectedItems = new HashSet<String>(items);
             } else {
-                selectedItems = Arrays.asList(selectedValue.split(";"));
+                selectedItems = new HashSet<String>(Arrays.asList(selectedValue.split(";")));
             }
             linkLabel.setText(displayValue());
             fireChangeEvent(this);

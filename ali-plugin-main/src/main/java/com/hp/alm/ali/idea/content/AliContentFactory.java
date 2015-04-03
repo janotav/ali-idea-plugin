@@ -33,6 +33,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.ProjectManager;
 import com.intellij.openapi.project.ProjectManagerAdapter;
 import com.intellij.openapi.util.IconLoader;
+import com.intellij.openapi.vcs.history.VcsFileRevision;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowAnchor;
@@ -123,20 +124,22 @@ public class AliContentFactory implements ToolWindowFactory {
         }
     }
 
-    public static DevMotivePanel addDevMotiveContent(Project project, VirtualFile file, ContentManagerListener listener, boolean select) {
+    public static DevMotivePanel addDevMotiveContent(Project project, VirtualFile file, List<VcsFileRevision> revisions, String vcsName, ContentManagerListener listener, boolean select) {
         ApplicationManager.getApplication().assertIsDispatchThread();
 
         ToolWindowManager toolWindowManager = project.getComponent(ToolWindowManager.class);
         ToolWindow toolWindow = toolWindowManager.getToolWindow(TOOL_WINDOW_MAIN);
         ContentManager contentManager = toolWindow.getContentManager();
 
-        Content content = findDevMotiveContent(toolWindow, file);
+        Content content = findDevMotiveContent(toolWindow, file, revisions);
         if (content == null) {
             contentManager = toolWindow.getContentManager();
             int idx = contentManager.getContentCount();
-            DevMotivePanel devMotivePanel = new DevMotivePanel(project, file);
-            content = ContentFactory.SERVICE.getInstance().createContent(devMotivePanel, "Dev: " + file.getName(), false);
+            DevMotivePanel devMotivePanel = new DevMotivePanel(project, file, revisions, vcsName);
+            content = ContentFactory.SERVICE.getInstance().createContent(devMotivePanel, devMotivePanel.getName(), false);
             contentManager.addContent(content, idx);
+        } else if (revisions != null) {
+            ((DevMotive) content.getComponent()).load(revisions);
         }
         if (select) {
             contentManager.setSelectedContent(content);
@@ -147,18 +150,24 @@ public class AliContentFactory implements ToolWindowFactory {
         return (DevMotivePanel) content.getComponent();
     }
 
-    public static Content findDevMotiveContent(ToolWindow toolWindow, VirtualFile file) {
+    public static Content findDevMotiveContent(ToolWindow toolWindow, VirtualFile file, List<VcsFileRevision> revisions) {
         for(Content content: toolWindow.getContentManager().getContents()) {
-            if(isDevMotiveContentOf(content, file)) {
+            if(isDevMotiveContentOf(content, file, revisions)) {
                 return content;
             }
         }
         return null;
     }
 
-    public static boolean isDevMotiveContentOf(Content content, VirtualFile file) {
+    public static boolean isDevMotiveContentOf(Content content, VirtualFile file, List<VcsFileRevision> revisions) {
         if(content.getComponent() instanceof DevMotive) {
-            if(file.equals(((DevMotive) content.getComponent()).getFile())) {
+            DevMotive devMotive = (DevMotive) content.getComponent();
+
+            if (revisions != null && devMotive.containsRevision(revisions)) {
+                return true;
+            }
+
+            if (file.equals(devMotive.getFile())) {
                 return true;
             }
         }

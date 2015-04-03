@@ -41,6 +41,7 @@ import com.intellij.openapi.vcs.history.VcsHistoryProvider;
 import com.intellij.openapi.vcs.history.VcsHistorySession;
 import com.intellij.openapi.vcs.history.VcsRevisionNumber;
 import com.intellij.openapi.vcs.versionBrowser.CommittedChangeList;
+import com.intellij.openapi.vcs.vfs.VcsVirtualFile;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.JBSplitter;
 import com.intellij.ui.components.JBScrollPane;
@@ -82,10 +83,11 @@ import java.util.Set;
 
 public class DevMotivePanel extends JPanel implements CloseableContent, LinkListener, ChangeListener, HyperlinkListener, DevMotive {
 
-    private static final int REVISION_BATCH_SIZE = 10;
+    private static final int REVISION_BATCH_SIZE = 100;
 
     private final Project project;
     private final VirtualFile file;
+    private final String vcsName;
 
     private final DevMotiveService devMotiveService;
     private final EntityService entityService;
@@ -115,11 +117,12 @@ public class DevMotivePanel extends JPanel implements CloseableContent, LinkList
     private Set<Commit> processedCommits;
     private Set<Commit> processingCommits;
 
-    public DevMotivePanel(final Project project, final VirtualFile file) {
+    public DevMotivePanel(final Project project, final VirtualFile file, List<VcsFileRevision> revisions, String vcsName) {
         super(new BorderLayout());
 
         this.project = project;
         this.file = file;
+        this.vcsName = vcsName;
 
         listeners = new LinkedList<ChangeListener>();
 
@@ -168,7 +171,7 @@ public class DevMotivePanel extends JPanel implements CloseableContent, LinkList
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() > 1) {
                     int selectedRow = workItemsTable.getSelectedRow();
-                    if(selectedRow >= 0) {
+                    if (selectedRow >= 0) {
                         int idx = workItemsTable.convertRowIndexToModel(selectedRow);
                         WorkItem workItem = workItemsTableModel.getWorkItem(idx);
                         if (workItem.getType() != WorkItem.Type.NONE) {
@@ -225,12 +228,35 @@ public class DevMotivePanel extends JPanel implements CloseableContent, LinkList
         leftAndRight.setSecondComponent(fileChanges);
         add(leftAndRight, BorderLayout.CENTER);
 
-        ApplicationManager.getApplication().executeOnPooledThread(new Runnable() {
-            @Override
-            public void run() {
-                initialize();
-            }
-        });
+        filteredCommits = new ArrayList<Commit>();
+        allCommits = new LinkedHashMap<VcsRevisionNumber, Commit>();
+        processedCommits = new HashSet<Commit>();
+        processingCommits = new HashSet<Commit>();
+
+        if (revisions == null) {
+            ApplicationManager.getApplication().executeOnPooledThread(new Runnable() {
+                @Override
+                public void run() {
+                    List<VcsFileRevision> revisions = loadRevisions();
+                    if (revisions != null) {
+                        initializeRevisions(revisions);
+                    } else {
+                        incompleteWarningPanel.markFailed();
+                    }
+                }
+            });
+        } else {
+            initializeRevisions(revisions);
+        }
+    }
+
+    public String getName() {
+        String name = "Dev: " + file.getName();
+        if (file instanceof VcsVirtualFile) {
+            return name + "(+)";
+        } else {
+            return name;
+        }
     }
 
     private List<Change> getChangeList(VcsRevisionNumber revisionNumber) {
@@ -239,6 +265,9 @@ public class DevMotivePanel extends JPanel implements CloseableContent, LinkList
             try {
                 changes = new LinkedList<Change>();
                 AbstractVcs vcs = ProjectLevelVcsManager.getInstance(project).getVcsFor(file);
+                if (vcs == null) { // VcsVirtualFile
+                    vcs = ProjectLevelVcsManager.getInstance(project).findVcsByName(vcsName);
+                }
                 Pair oneList = vcs.getCommittedChangesProvider().getOneList(file, revisionNumber);
                 changes.addAll(((ChangeList) oneList.getFirst()).getChanges());
             } catch (VcsException ex) {
@@ -335,50 +364,25 @@ public class DevMotivePanel extends JPanel implements CloseableContent, LinkList
         }
     }
 
-    private void initialize() {
-        filteredCommits = new ArrayList<Commit>();
-        allCommits = new LinkedHashMap<VcsRevisionNumber, Commit>();
-        processedCommits = new HashSet<Commit>();
-        processingCommits = new HashSet<Commit>();
-
-        List<VcsFileRevision> revisions = loadRevisions();
-        if (revisions != null) {
-            for (VcsFileRevision revision: revisions) {
-                String committer = null;
-                String committerEmail = null;
-                String authorEmail = null;
-                if (revision instanceof VcsFileRevisionEx) {
-                    committer = ((VcsFileRevisionEx) revision).getCommitterName();
-                    committerEmail = ((VcsFileRevisionEx) revision).getCommitterEmail();
-                    authorEmail = ((VcsFileRevisionEx) revision).getAuthorEmail();
-                }
-                String author = revision.getAuthor();
-                allCommits.put(revision.getRevisionNumber(), new Commit(
-                        revision,
-                        author,
-                        authorEmail,
-                        committer,
-                        committerEmail));
-
-            }
-
-            filteredCommits.addAll(allCommits.values());
-            final Set<String> users = new HashSet<String>();
-            if (!filteredCommits.isEmpty()) {
-                for (Commit commit: filteredCommits) {
-                    users.add(commit.getAuthorName());
-                }
-                handleNextBatch();
-            }
-            UIUtil.invokeLaterIfNeeded(new Runnable() {
-                @Override
-                public void run() {
-                    initFilterPanel(new LinkedList<String>(users));
-                }
-            });
-        } else {
-            incompleteWarningPanel.markFailed();
+    private void initializeRevisions(List<VcsFileRevision> revisions) {
+        for (VcsFileRevision revision: revisions) {
+            allCommits.put(revision.getRevisionNumber(), revisionToCommit(revision));
         }
+
+        filteredCommits.addAll(allCommits.values());
+        final Set<String> users = new HashSet<String>();
+        if (!filteredCommits.isEmpty()) {
+            for (Commit commit: filteredCommits) {
+                users.add(commit.getAuthorName());
+            }
+            handleNextBatch();
+        }
+        UIUtil.invokeLaterIfNeeded(new Runnable() {
+            @Override
+            public void run() {
+                initFilterPanel(users);
+            }
+        });
     }
 
     private List<VcsFileRevision> loadRevisions() {
@@ -401,43 +405,81 @@ public class DevMotivePanel extends JPanel implements CloseableContent, LinkList
         }
     }
 
-    private void initFilterPanel(List<String> users) {
-        userSelector = new MultiValueSelectorLabel(project, "Author", users, users);
-        userSelector.setMaximumWidth(20);
-        userSelector.addChangeListener(this);
-        filterPanel.add(userSelector);
+    private void initFilterPanel(Set<String> users) {
+        if (userSelector == null) {
+            userSelector = new MultiValueSelectorLabel(project, "Author", users, new ArrayList<String>(users));
+            userSelector.setMaximumWidth(20);
+            userSelector.addChangeListener(this);
+            filterPanel.add(userSelector);
 
-        dateSelector = new DateSelectorLabel(project, "Date");
-        dateSelector.addChangeListener(this);
-        filterPanel.add(dateSelector);
+            dateSelector = new DateSelectorLabel(project, "Date");
+            dateSelector.addChangeListener(this);
+            filterPanel.add(dateSelector);
+        } else {
+            userSelector.addItems(users);
+        }
     }
 
-    public void load(final VcsRevisionNumber revisionNumber) {
+    @Override
+    public void load(final List<VcsFileRevision> revisions) {
         ApplicationManager.getApplication().executeOnPooledThread(new Runnable() {
             @Override
             public void run() {
-                handleSingleRevision(revisionNumber);
+                handleRevisions(revisions);
             }
         });
     }
 
-    public void handleSingleRevision(VcsRevisionNumber revisionNumber) {
-        Commit commit;
+    public void handleRevisions(List<VcsFileRevision> revisions) {
+        List<Commit> commits = new LinkedList<Commit>();
         Object filterId;
         synchronized (this) {
-            commit = allCommits.get(revisionNumber);
-            if (processedCommits.contains(commit)) {
-                return;
-            }
+            for (VcsFileRevision revision: revisions) {
+                Commit commit = allCommits.get(revision.getRevisionNumber());
+                if (commit == null) {
+                    commit = revisionToCommit(revision);
+                    allCommits.put(revision.getRevisionNumber(), commit);
+                }
 
-            if (!processingCommits.add(commit)) {
-                return;
+                if (processedCommits.contains(commit)) {
+                    continue;
+                }
+
+                if (!processingCommits.add(commit)) {
+                    continue;
+                }
+
+                commits.add(commit);
+                if (commits.size() == REVISION_BATCH_SIZE) {
+                    break;
+                }
             }
 
             filterId = this.filterId;
         }
-        Map<Commit, List<EntityRef>> result = devMotiveService.getRelatedEntities(Arrays.asList(commit));
+        if (commits.isEmpty()) {
+            return;
+        }
+        Map<Commit, List<EntityRef>> result = devMotiveService.getRelatedEntities(commits);
         processResult(filterId, result);
+    }
+
+    private Commit revisionToCommit(VcsFileRevision revision) {
+        String committer = null;
+        String committerEmail = null;
+        String authorEmail = null;
+        if (revision instanceof VcsFileRevisionEx) {
+            committer = ((VcsFileRevisionEx) revision).getCommitterName();
+            committerEmail = ((VcsFileRevisionEx) revision).getCommitterEmail();
+            authorEmail = ((VcsFileRevisionEx) revision).getAuthorEmail();
+        }
+        String author = revision.getAuthor();
+        return new Commit(
+                revision,
+                author,
+                authorEmail,
+                committer,
+                committerEmail);
     }
 
     private void handleNextBatch() {
@@ -476,9 +518,11 @@ public class DevMotivePanel extends JPanel implements CloseableContent, LinkList
             public void run() {
                 synchronized (DevMotivePanel.this) {
                     boolean myQuery = filterId.equals(DevMotivePanel.this.filterId);
+                    Set<String> users = new HashSet<String>();
                     for (Commit commit : result.keySet()) {
                         processedCommits.add(commit);
                         processingCommits.remove(commit);
+                        users.add(commit.getAuthorName());
                         List<EntityRef> workItemRefs = result.get(commit);
                         if (workItemRefs == null) {
                             WorkItem unresolved = WorkItem.unresolved();
@@ -507,6 +551,7 @@ public class DevMotivePanel extends JPanel implements CloseableContent, LinkList
                             }
                         }
                     }
+                    initFilterPanel(users);
                     incompleteWarningPanel.setState(countProcessed(), filteredCommits.size());
                     fireChangeEvent(this);
                 }
@@ -621,6 +666,18 @@ public class DevMotivePanel extends JPanel implements CloseableContent, LinkList
     @Override
     public VirtualFile getFile() {
         return file;
+    }
+
+    @Override
+    public synchronized boolean containsRevision(List<VcsFileRevision> revisions) {
+        if (allCommits != null && revisions != null) {
+            for (VcsFileRevision revision: revisions) {
+                if (allCommits.containsKey(revision.getRevisionNumber())) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private static class DateRenderer extends DefaultTableCellRenderer {
