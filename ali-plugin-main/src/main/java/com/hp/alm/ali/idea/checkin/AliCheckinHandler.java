@@ -37,6 +37,7 @@ import com.hp.alm.ali.idea.entity.EntityListener;
 import com.hp.alm.ali.idea.cfg.AliProjectConfiguration;
 import com.hp.alm.ali.idea.ui.editor.field.CommentField;
 import com.hp.alm.ali.idea.model.Metadata;
+import com.hp.alm.ali.idea.util.ApplicationUtil;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.ActionPlaces;
@@ -379,14 +380,19 @@ public class AliCheckinHandler extends CheckinHandler implements ActionListener,
     }
 
     @Override
-    public void connectedTo(ServerType serverType) {
-        if (!panel.isShowing()) {
-            // there is no cancel event available to the checkin handler, instead we try to detect obsolete listener
-            // invocation and cleanup
-            removeListeners();
-        } else {
-            doConnectedTo(serverType);
-        }
+    public void connectedTo(final ServerType serverType) {
+        ApplicationUtil.invokeLaterIfNeeded(new Runnable() {
+            @Override
+            public void run() {
+                if (!panel.isShowing()) {
+                    // there is no cancel event available to the checkin handler, instead we try to detect obsolete listener
+                    // invocation and cleanup
+                    removeListeners();
+                } else {
+                    doConnectedTo(serverType);
+                }
+            }
+        });
     }
 
     private void doConnectedTo(ServerType serverType) {
