@@ -668,18 +668,6 @@ public class DevMotivePanel extends JPanel implements CloseableContent, LinkList
         return file;
     }
 
-    @Override
-    public synchronized boolean containsRevision(List<VcsFileRevision> revisions) {
-        if (allCommits != null && revisions != null) {
-            for (VcsFileRevision revision: revisions) {
-                if (allCommits.containsKey(revision.getRevisionNumber())) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
     private static class DateRenderer extends DefaultTableCellRenderer {
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
                                                        boolean hasFocus, int row, int column) {

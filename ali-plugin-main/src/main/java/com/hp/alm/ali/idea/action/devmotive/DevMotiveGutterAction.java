@@ -18,6 +18,8 @@ package com.hp.alm.ali.idea.action.devmotive;
 
 import com.hp.alm.ali.idea.cfg.AliConfiguration;
 import com.hp.alm.ali.idea.content.devmotive.DevMotiveAnnotationGutter;
+import com.hp.alm.ali.idea.rest.RestService;
+import com.hp.alm.ali.idea.rest.ServerType;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
@@ -61,7 +63,7 @@ public class DevMotiveGutterAction extends AnAction {
                 }
             }
         } else {
-            getTemplatePresentation().setText("Dev Motive (integration disabled)");
+            getTemplatePresentation().setVisible(false);
             getTemplatePresentation().setEnabled(false);
         }
     }
@@ -78,6 +80,15 @@ public class DevMotiveGutterAction extends AnAction {
                 editor.getGutter().registerTextAnnotation(proxy, proxy);
                 getTemplatePresentation().setVisible(false);
             }
+        }
+    }
+
+    @Override
+    public void update(AnActionEvent e) {
+        Project project = getEventProject(e);
+        if (project != null) {
+            ServerType serverType = project.getComponent(RestService.class).getServerTypeIfAvailable();
+            e.getPresentation().setEnabled(serverType.isConnected());
         }
     }
 }

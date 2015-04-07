@@ -131,7 +131,7 @@ public class AliContentFactory implements ToolWindowFactory {
         ToolWindow toolWindow = toolWindowManager.getToolWindow(TOOL_WINDOW_MAIN);
         ContentManager contentManager = toolWindow.getContentManager();
 
-        Content content = findDevMotiveContent(toolWindow, file, revisions);
+        Content content = findDevMotiveContent(toolWindow, file);
         if (content == null) {
             contentManager = toolWindow.getContentManager();
             int idx = contentManager.getContentCount();
@@ -150,22 +150,18 @@ public class AliContentFactory implements ToolWindowFactory {
         return (DevMotivePanel) content.getComponent();
     }
 
-    public static Content findDevMotiveContent(ToolWindow toolWindow, VirtualFile file, List<VcsFileRevision> revisions) {
+    public static Content findDevMotiveContent(ToolWindow toolWindow, VirtualFile file) {
         for(Content content: toolWindow.getContentManager().getContents()) {
-            if(isDevMotiveContentOf(content, file, revisions)) {
+            if(isDevMotiveContentOf(content, file)) {
                 return content;
             }
         }
         return null;
     }
 
-    public static boolean isDevMotiveContentOf(Content content, VirtualFile file, List<VcsFileRevision> revisions) {
+    public static boolean isDevMotiveContentOf(Content content, VirtualFile file) {
         if(content.getComponent() instanceof DevMotive) {
             DevMotive devMotive = (DevMotive) content.getComponent();
-
-            if (revisions != null && devMotive.containsRevision(revisions)) {
-                return true;
-            }
 
             if (file.equals(devMotive.getFile())) {
                 return true;

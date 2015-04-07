@@ -17,6 +17,7 @@
 package com.hp.alm.ali.idea.content;
 
 import com.hp.alm.ali.idea.cfg.AliProjectConfiguration;
+import com.hp.alm.ali.idea.content.devmotive.DevMotive;
 import com.hp.alm.ali.idea.model.ServerStrategy;
 import com.hp.alm.ali.idea.rest.RestService;
 import com.hp.alm.ali.idea.rest.ServerType;
@@ -80,7 +81,7 @@ public class AliContentManager implements ServerTypeListener {
                                 break;
                             }
                         }
-                        if (!found) {
+                        if (!found && !(content.getComponent() instanceof DevMotive)) {
                             toolWindow.getContentManager().removeContent(content, true);
                         }
                     }

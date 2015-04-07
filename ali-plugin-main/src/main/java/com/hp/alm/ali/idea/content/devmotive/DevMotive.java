@@ -25,8 +25,6 @@ public interface DevMotive {
 
     VirtualFile getFile();
 
-    boolean containsRevision(List<VcsFileRevision> revision);
-
     void load(List<VcsFileRevision> revisions);
 
 }

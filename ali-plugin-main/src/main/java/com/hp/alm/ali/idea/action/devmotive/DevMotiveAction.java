@@ -17,6 +17,7 @@
 package com.hp.alm.ali.idea.action.devmotive;
 
 import com.hp.alm.ali.idea.content.AliContentFactory;
+import com.hp.alm.ali.idea.rest.RestService;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.Presentation;
 import com.intellij.openapi.project.Project;
@@ -54,9 +55,10 @@ public class DevMotiveAction extends AbstractVcsAction {
     @Override
     protected void update(VcsContext context, Presentation presentation) {
         presentation.setText("Development History (Dev Motive)");
-        presentation.setEnabled(isEnabled(context));
         Project project = context.getProject();
-        presentation.setVisible(project != null && ProjectLevelVcsManager.getInstance(project).hasActiveVcss());
+        boolean visible = project != null && ProjectLevelVcsManager.getInstance(project).hasActiveVcss();
+        presentation.setVisible(visible);
+        presentation.setEnabled(visible && isEnabled(context) && project.getComponent(RestService.class).getServerTypeIfAvailable().isConnected());
     }
 
     private static VirtualFile getSelectedFile(VcsContext context) {
