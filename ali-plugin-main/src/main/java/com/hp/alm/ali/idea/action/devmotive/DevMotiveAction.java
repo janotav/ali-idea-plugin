@@ -18,6 +18,7 @@ package com.hp.alm.ali.idea.action.devmotive;
 
 import com.hp.alm.ali.idea.content.AliContentFactory;
 import com.hp.alm.ali.idea.rest.RestService;
+import com.hp.alm.ali.idea.rest.ServerType;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.Presentation;
 import com.intellij.openapi.project.Project;
@@ -58,7 +59,7 @@ public class DevMotiveAction extends AbstractVcsAction {
         Project project = context.getProject();
         boolean visible = project != null && ProjectLevelVcsManager.getInstance(project).hasActiveVcss();
         presentation.setVisible(visible);
-        presentation.setEnabled(visible && isEnabled(context) && project.getComponent(RestService.class).getServerTypeIfAvailable().isConnected());
+        presentation.setEnabled(visible && isEnabled(context) && ServerType.AGM.equals(project.getComponent(RestService.class).getServerTypeIfAvailable()));
     }
 
     private static VirtualFile getSelectedFile(VcsContext context) {

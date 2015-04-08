@@ -88,7 +88,7 @@ public class DevMotiveGutterAction extends AnAction {
         Project project = getEventProject(e);
         if (project != null) {
             ServerType serverType = project.getComponent(RestService.class).getServerTypeIfAvailable();
-            e.getPresentation().setEnabled(serverType.isConnected());
+            e.getPresentation().setEnabled(ServerType.AGM.equals(serverType));
         }
     }
 }
