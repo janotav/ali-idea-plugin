@@ -25,6 +25,7 @@ import com.hp.alm.ali.idea.services.DevMotiveService;
 import com.hp.alm.ali.idea.services.EntityService;
 import com.hp.alm.ali.idea.ui.DateSelectorLabel;
 import com.hp.alm.ali.idea.ui.MultiValueSelectorLabel;
+import com.hp.alm.ali.idea.util.ApplicationUtil;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Pair;
@@ -50,6 +51,7 @@ import com.intellij.ui.components.labels.LinkListener;
 import com.intellij.ui.table.JBTable;
 import com.intellij.util.containers.MultiMap;
 import com.intellij.util.text.DateFormatUtil;
+import com.intellij.util.ui.ComponentWithEmptyText;
 import com.intellij.util.ui.UIUtil;
 
 import javax.swing.JPanel;
@@ -98,6 +100,7 @@ public class DevMotivePanel extends JPanel implements CloseableContent, LinkList
     private MultiValueSelectorLabel userSelector;
     private DateSelectorLabel dateSelector;
     private Object filterId = new Object();
+    private Object selectId = new Object();
 
     private JTable workItemsTable;
     private WorkItemsTableModel workItemsTableModel;
@@ -105,6 +108,7 @@ public class DevMotivePanel extends JPanel implements CloseableContent, LinkList
     private JTable commitsTable;
     private CommitsTableModel commitsTableModel;
 
+    private String emptyText;
     private RepositoryChangesBrowser fileChanges;
     private Map<VcsRevisionNumber, List<Change>> vcsCache;
 
@@ -146,19 +150,18 @@ public class DevMotivePanel extends JPanel implements CloseableContent, LinkList
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 if (!e.getValueIsAdjusting()) {
-                    List<Change> allChanges = new LinkedList<Change>();
+                    List<VcsRevisionNumber> selectedRevisions = new LinkedList<VcsRevisionNumber>();
                     ListSelectionModel selectionModel = commitsTable.getSelectionModel();
                     if (!selectionModel.isSelectionEmpty()) {
                         for (int i = selectionModel.getMinSelectionIndex(); i <= selectionModel.getMaxSelectionIndex(); i++) {
                             boolean selected = selectionModel.isSelectedIndex(i);
                             if (selected) {
                                 Commit commit = commitsTableModel.getCommit(i);
-                                List<Change> changes = getChangeList(commit.getRevisionNumber());
-                                allChanges.addAll(changes);
+                                selectedRevisions.add(commit.getRevisionNumber());
                             }
                         }
                     }
-                    fileChanges.setChangesToDisplay(allChanges);
+                    showRevisions(selectedRevisions);
                 }
             }
         });
@@ -208,6 +211,7 @@ public class DevMotivePanel extends JPanel implements CloseableContent, LinkList
         });
 
         fileChanges = new RepositoryChangesBrowser(project, Collections.<CommittedChangeList>emptyList());
+        emptyText = ((ComponentWithEmptyText) fileChanges.getViewer().getPreferredFocusedComponent()).getEmptyText().getText();
 
         incompleteWarningPanel = new IncompleteWarningPanel(getBackground());
         incompleteWarningPanel.addHyperLinkListener(this);
@@ -248,6 +252,34 @@ public class DevMotivePanel extends JPanel implements CloseableContent, LinkList
         } else {
             initializeRevisions(revisions);
         }
+    }
+
+    private void showRevisions(final List<VcsRevisionNumber> selectedRevisions) {
+        ApplicationManager.getApplication().assertIsDispatchThread();
+
+        final Object selectId = new Object();
+        this.selectId = selectId;
+        fileChanges.setChangesToDisplay(Collections.<Change>emptyList());
+        fileChanges.getViewer().setEmptyText("Loading...");
+        ApplicationUtil.executeOnPooledThread(new Runnable() {
+            @Override
+            public void run() {
+                final List<Change> allChanges = new LinkedList<Change>();
+                for (VcsRevisionNumber revisionNumber: selectedRevisions) {
+                    List<Change> changes = getChangeList(revisionNumber);
+                    allChanges.addAll(changes);
+                }
+                ApplicationUtil.invokeLaterIfNeeded(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (selectId.equals(DevMotivePanel.this.selectId)) {
+                            fileChanges.setChangesToDisplay(allChanges);
+                            fileChanges.getViewer().setEmptyText(emptyText);
+                        }
+                    }
+                });
+            }
+        });
     }
 
     public String getName() {

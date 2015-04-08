@@ -26,7 +26,7 @@ import java.awt.Color;
 public class IncompleteWarningPanel extends WarningPanel {
 
     public IncompleteWarningPanel(Color background) {
-        super(HTMLAreaField.createTextPane(""), background, false, false);
+        super(HTMLAreaField.createTextPane("Retrieving revision history information..."), background, false, true);
     }
 
     public void setState(int loaded, int total) {
