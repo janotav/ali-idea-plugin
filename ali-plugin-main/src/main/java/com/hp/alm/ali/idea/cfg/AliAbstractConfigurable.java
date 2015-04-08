@@ -18,6 +18,7 @@ package com.hp.alm.ali.idea.cfg;
 
 import com.hp.alm.ali.idea.rest.ServerType;
 import com.hp.alm.ali.idea.ui.editor.field.HTMLAreaField;
+import com.hp.alm.ali.idea.util.ApplicationUtil;
 import com.intellij.ide.ui.search.SearchableOptionsRegistrar;
 import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.fileChooser.FileChooserFactory;
@@ -154,6 +155,15 @@ public abstract class AliAbstractConfigurable implements SearchableConfigurable,
         storePasswd.setEnabled(!passwdField.getValue().isEmpty());
     }
 
+    private void setTestText(final String value) {
+        ApplicationUtil.invokeLaterIfNeeded(new Runnable() {
+            @Override
+            public void run() {
+                testLabel.setText(value);
+            }
+        });
+    }
+
     private void initialize() {
         SearchableOptionsRegistrar.getInstance().addOption("integration", null, HP_ALM_INTEGRATION,getId(), NAME);
         SearchableOptionsRegistrar.getInstance().addOption("alm", null, HP_ALM_INTEGRATION, getId(), NAME);
@@ -252,11 +262,11 @@ public abstract class AliAbstractConfigurable implements SearchableConfigurable,
                                 case ALM12:
                                 case ALI12:
                                 case AGM:
-                                    testLabel.setText("Connection successful (" + type.toString() + ")");
+                                    setTestText("Connection successful (" + type.toString() + ")");
                                     break;
                             }
                         } catch(Exception e) {
-                            testLabel.setText(e.getMessage());
+                            setTestText(e.getMessage());
                         }
                     }
                 });
