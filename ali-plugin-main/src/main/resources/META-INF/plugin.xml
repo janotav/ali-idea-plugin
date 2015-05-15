@@ -460,8 +460,8 @@
 
     <extensions defaultExtensionNs="com.intellij">
        <toolWindow id="HP ALI" icon="/ali_icon_13x13.png" anchor="bottom" factoryClass="com.hp.alm.ali.idea.content.AliContentFactory" canCloseContents="true"/>
-       <applicationConfigurable implementation="com.hp.alm.ali.idea.cfg.AliConfigurable"/>
-       <projectConfigurable implementation="com.hp.alm.ali.idea.cfg.AliProjectConfigurable"/>
+       <applicationConfigurable groupId="tools" implementation="com.hp.alm.ali.idea.cfg.AliConfigurable"/>
+       <projectConfigurable groupId="tools" implementation="com.hp.alm.ali.idea.cfg.AliProjectConfigurable"/>
        <checkinHandlerFactory implementation="com.hp.alm.ali.idea.checkin.AliCheckinHandlerFactory"/>
        <vcsAnnotationGutterActionProvider implementation="com.hp.alm.ali.idea.content.devmotive.DevMotiveAnnotationGutterActionProvider"/>
     </extensions>

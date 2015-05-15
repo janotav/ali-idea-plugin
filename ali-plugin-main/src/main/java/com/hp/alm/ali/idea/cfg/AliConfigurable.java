@@ -54,8 +54,12 @@ public class AliConfigurable extends AliAbstractConfigurable implements Document
         return "HP_ALI_ide";
     }
 
+    public String getDisplayName() {
+        return "HP ALI (global)";
+    }
+
     protected void onConfigurationPanelInitialized() {
-        SearchableOptionsRegistrar.getInstance().addOption("spelling", null, HP_ALM_INTEGRATION, getId(), NAME);
+        SearchableOptionsRegistrar.getInstance().addOption("spelling", null, HP_ALM_INTEGRATION, getId(), getDisplayName());
     }
 
     protected void addAdditionalSettings(JPanel panel, GridBagConstraints c) {

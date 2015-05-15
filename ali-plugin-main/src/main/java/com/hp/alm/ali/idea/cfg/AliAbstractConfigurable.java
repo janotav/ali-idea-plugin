@@ -56,7 +56,6 @@ import java.io.InputStream;
 
 public abstract class AliAbstractConfigurable implements SearchableConfigurable, DocumentListener {
 
-    public static final String NAME = "HP ALI";
     public static final String HP_ALM_INTEGRATION = "HP ALM Integration Configuration";
 
     protected ConfigurationField locationField;
@@ -78,9 +77,7 @@ public abstract class AliAbstractConfigurable implements SearchableConfigurable,
     public void disposeUIResources() {
     }
 
-    public String getDisplayName() {
-        return NAME;
-    }
+    public abstract String getDisplayName();
 
     public Icon getIcon() {
         return null;
@@ -165,13 +162,13 @@ public abstract class AliAbstractConfigurable implements SearchableConfigurable,
     }
 
     private void initialize() {
-        SearchableOptionsRegistrar.getInstance().addOption("integration", null, HP_ALM_INTEGRATION,getId(), NAME);
-        SearchableOptionsRegistrar.getInstance().addOption("alm", null, HP_ALM_INTEGRATION, getId(), NAME);
-        SearchableOptionsRegistrar.getInstance().addOption("qc", null, HP_ALM_INTEGRATION, getId(), NAME);
-        SearchableOptionsRegistrar.getInstance().addOption("QC", null, HP_ALM_INTEGRATION, getId(), NAME);
-        SearchableOptionsRegistrar.getInstance().addOption("agm", null, HP_ALM_INTEGRATION,getId(), NAME);
-        SearchableOptionsRegistrar.getInstance().addOption("agile", null, HP_ALM_INTEGRATION, getId(), NAME);
-        SearchableOptionsRegistrar.getInstance().addOption("manager", null, HP_ALM_INTEGRATION, getId(), NAME);
+        SearchableOptionsRegistrar.getInstance().addOption("integration", null, HP_ALM_INTEGRATION,getId(), getDisplayName());
+        SearchableOptionsRegistrar.getInstance().addOption("alm", null, HP_ALM_INTEGRATION, getId(), getDisplayName());
+        SearchableOptionsRegistrar.getInstance().addOption("qc", null, HP_ALM_INTEGRATION, getId(), getDisplayName());
+        SearchableOptionsRegistrar.getInstance().addOption("QC", null, HP_ALM_INTEGRATION, getId(), getDisplayName());
+        SearchableOptionsRegistrar.getInstance().addOption("agm", null, HP_ALM_INTEGRATION,getId(), getDisplayName());
+        SearchableOptionsRegistrar.getInstance().addOption("agile", null, HP_ALM_INTEGRATION, getId(), getDisplayName());
+        SearchableOptionsRegistrar.getInstance().addOption("manager", null, HP_ALM_INTEGRATION, getId(), getDisplayName());
 
         JPanel content = new JPanel(new BorderLayout());
         JLabel label = new JLabel(IconLoader.getIcon("/ali_icon_64x64.png"));
@@ -193,7 +190,7 @@ public abstract class AliAbstractConfigurable implements SearchableConfigurable,
         c.gridwidth = 1;
         c.gridy++;
         jPanel.add(new JLabel("Location:"), c);
-        SearchableOptionsRegistrar.getInstance().addOption("location", null, "Location:", getId(), NAME);
+        SearchableOptionsRegistrar.getInstance().addOption("location", null, "Location:", getId(), getDisplayName());
         c.gridx++;
         locationField = getLocationField();
         jPanel.add((JTextComponent)locationField, c);
@@ -208,7 +205,7 @@ public abstract class AliAbstractConfigurable implements SearchableConfigurable,
         c.gridx = 1;
         c.gridy++;
         jPanel.add(new JLabel("Username:"), c);
-        SearchableOptionsRegistrar.getInstance().addOption("username", null, "Username:", getId(), NAME);
+        SearchableOptionsRegistrar.getInstance().addOption("username", null, "Username:", getId(), getDisplayName());
         c.gridx++;
         usernameField = getUsernameField();
         jPanel.add((JTextComponent)usernameField, c);
@@ -216,7 +213,7 @@ public abstract class AliAbstractConfigurable implements SearchableConfigurable,
         c.gridx = 1;
         c.gridy++;
         jPanel.add(new JLabel("Password:"), c);
-        SearchableOptionsRegistrar.getInstance().addOption("password", null, "Password:", getId(), NAME);
+        SearchableOptionsRegistrar.getInstance().addOption("password", null, "Password:", getId(), getDisplayName());
         c.gridx++;
         passwdField = getPasswordField();
         jPanel.add((JTextComponent)passwdField, c);
@@ -224,7 +221,7 @@ public abstract class AliAbstractConfigurable implements SearchableConfigurable,
         c.gridx = 1;
         c.gridy++;
         jPanel.add(new JLabel("Domain:"), c);
-        SearchableOptionsRegistrar.getInstance().addOption("domain", null, "Domain:", getId(), NAME);
+        SearchableOptionsRegistrar.getInstance().addOption("domain", null, "Domain:", getId(), getDisplayName());
         c.gridx++;
         domainField = getDomainField();
         jPanel.add((JTextComponent)domainField, c);
@@ -232,7 +229,7 @@ public abstract class AliAbstractConfigurable implements SearchableConfigurable,
         c.gridx = 1;
         c.gridy++;
         jPanel.add(new JLabel("Project:"), c);
-        SearchableOptionsRegistrar.getInstance().addOption("project", null, "Project:", getId(), NAME);
+        SearchableOptionsRegistrar.getInstance().addOption("project", null, "Project:", getId(), getDisplayName());
         c.gridx++;
         projectField = getProjectField();
         jPanel.add((JTextComponent)projectField, c);

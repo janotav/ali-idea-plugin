@@ -37,6 +37,10 @@ public class AliProjectConfigurable extends AliAbstractConfigurable {
         return "HP_ALI";
     }
 
+    public String getDisplayName() {
+        return "HP ALI (project)";
+    }
+
     protected String getCaption() {
         return "<html><body><b>"+HP_ALM_INTEGRATION+"</b><br>Project specific values.</body></html>";
     }
