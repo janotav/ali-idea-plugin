@@ -12,6 +12,7 @@
       <h3>Changes in 3.14</h3>
       <ul>
         <li>[compatibility] support Intellij 14.1</li>
+        <li>[enhancement] support Development history (DevMotive)
       </ul>
 
       <h3>Changes in 3.13</h3>
