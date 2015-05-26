@@ -39,6 +39,7 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.ui.components.labels.BoldLabel;
 import com.intellij.util.ui.UIUtil;
+import org.apache.commons.lang.StringUtils;
 
 import javax.swing.BorderFactory;
 import javax.swing.JCheckBox;
@@ -459,6 +460,12 @@ public class TaskBoardPanel extends JPanel implements SprintService.Listener, En
             statusFilter.addChangeListener(new ChangeListener() {
                 @Override
                 public void stateChanged(ChangeEvent e) {
+                    Set<String> selectedValues = statusFilter.getSelectedValues();
+                    if (selectedValues.size() == allItemStatuses.size()) {
+                        conf.setShowStatuses(TaskBoardConfiguration.ALL_STATUSES);
+                    } else {
+                        conf.setShowStatuses(StringUtils.join(selectedValues, ";"));
+                    }
                     content.applyFilter();
                 }
             });
