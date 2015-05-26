@@ -16,6 +16,7 @@
 
 package com.hp.alm.ali.idea.content.settings;
 
+import com.hp.alm.ali.idea.cfg.AliProjectConfigurable;
 import com.hp.alm.ali.idea.entity.EntityQuery;
 import com.hp.alm.ali.idea.cfg.AliConfigurable;
 import com.hp.alm.ali.idea.cfg.AliConfiguration;
@@ -237,7 +238,11 @@ public class SettingsPanel extends JPanel implements ConfigurationListener, Disp
 
     public void hyperlinkUpdate(HyperlinkEvent hyperlinkEvent) {
         if(hyperlinkEvent.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
-            ShowSettingsUtil.getInstance().showSettingsDialog(hyperlinkEvent.getDescription().equals("project")? prj: null, AliConfigurable.NAME);
+            if (hyperlinkEvent.getDescription().equals("project")) {
+                ShowSettingsUtil.getInstance().showSettingsDialog(prj, AliProjectConfigurable.DISPLAY_NAME);
+            } else {
+                ShowSettingsUtil.getInstance().showSettingsDialog(null, AliConfigurable.DISPLAY_NAME);
+            }
         }
     }
 

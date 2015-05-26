@@ -50,12 +50,14 @@ public class AliConfigurable extends AliAbstractConfigurable implements Document
     private JCheckBox spellChecker;
     private JCheckBox devMotiveAnnotation;
 
+    public static String DISPLAY_NAME = "HP ALI (global)";
+
     public String getId() {
         return "HP_ALI_ide";
     }
 
     public String getDisplayName() {
-        return "HP ALI (global)";
+        return DISPLAY_NAME;
     }
 
     protected void onConfigurationPanelInitialized() {

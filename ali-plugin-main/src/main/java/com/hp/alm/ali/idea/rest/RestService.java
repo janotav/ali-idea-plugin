@@ -16,6 +16,7 @@
 
 package com.hp.alm.ali.idea.rest;
 
+import com.hp.alm.ali.idea.cfg.AliProjectConfigurable;
 import com.hp.alm.ali.idea.cfg.AuthenticationFailed;
 import com.hp.alm.ali.idea.services.WeakListeners;
 import com.hp.alm.ali.idea.cfg.AliConfigurable;
@@ -78,7 +79,7 @@ public class RestService implements ConfigurationListener {
                 new NotificationListener() {
                     public void hyperlinkUpdate(Notification notification, HyperlinkEvent event) {
                         notification.expire();
-                        ShowSettingsUtil.getInstance().showSettingsDialog(project, AliConfigurable.NAME);
+                        ShowSettingsUtil.getInstance().showSettingsDialog(project, AliProjectConfigurable.DISPLAY_NAME);
                     }
                 });
     }

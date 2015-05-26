@@ -29,6 +29,8 @@ public class AliProjectConfigurable extends AliAbstractConfigurable {
     private AliProjectConfiguration projectConfiguration;
     private AliConfiguration ideConfiguration;
 
+    public static String DISPLAY_NAME = "HP ALI (project)";
+
     public AliProjectConfigurable(Project project) {
         this.project = project;
     }
@@ -38,7 +40,7 @@ public class AliProjectConfigurable extends AliAbstractConfigurable {
     }
 
     public String getDisplayName() {
-        return "HP ALI (project)";
+        return DISPLAY_NAME;
     }
 
     protected String getCaption() {
