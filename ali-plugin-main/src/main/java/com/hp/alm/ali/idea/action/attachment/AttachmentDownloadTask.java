@@ -31,20 +31,22 @@ import java.io.IOException;
 
 public class AttachmentDownloadTask extends Task.Backgroundable {
 
-    private File file;
+    protected File file;
     private String sourceFilename;
     private int size;
     private EntityRef entity;
+    private Runnable onFinished;
 
     private RestService restService;
 
-    public AttachmentDownloadTask(Project project, File file, String sourceFilename, int size, EntityRef entity) {
+    public AttachmentDownloadTask(Project project, File file, String sourceFilename, int size, EntityRef entity, Runnable onFinished) {
         super(project, "Download attachment: "+file.getName());
 
         this.file = file;
         this.sourceFilename = sourceFilename;
         this.size = size;
         this.entity = entity;
+        this.onFinished = onFinished;
 
         this.restService = project.getComponent(RestService.class);
     }
@@ -54,6 +56,9 @@ public class AttachmentDownloadTask extends Task.Backgroundable {
             IndicatingOutputStream ios = new IndicatingOutputStream(file, size, indicator);
             restService.get(new MyResultInfo(ios), "{0}s/{1}/attachments/{2}?alt=application/octet-stream", entity.type, entity.id, EntityQuery.encode(sourceFilename));
             ios.close();
+            if (onFinished != null) {
+                onFinished.run();
+            }
         } catch(CanceledException e) {
             // when canceled purposefully remove the incomplete file
             file.delete();

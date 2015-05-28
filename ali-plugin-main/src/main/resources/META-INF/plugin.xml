@@ -113,6 +113,10 @@
             <implementation-class>com.hp.alm.ali.idea.rest.TroubleShootService</implementation-class>
             <interface-class>com.hp.alm.ali.idea.rest.TroubleShootService</interface-class>
         </component>
+        <component>
+            <implementation-class>com.hp.alm.ali.idea.cfg.AlmRememberedInputs</implementation-class>
+            <interface-class>com.hp.alm.ali.idea.cfg.AlmRememberedInputs</interface-class>
+        </component>
     </application-components>
 
     <project-components>

@@ -50,7 +50,7 @@ public class AttachmentDownloadAction extends EntityAction {
     protected void actionPerformed(AnActionEvent event, Project project, Entity entity) {
         String name = entity.getPropertyValue("name");
         FileSaverDescriptor desc = new FileSaverDescriptor("Download Attachment", "Download attachment to the local filesystem.");
-        final VirtualFileWrapper file = FileChooserFactory.getInstance().createSaveFileDialog(desc, project).save(lastDir, name);
+        final VirtualFileWrapper file = FileChooserFactory.getInstance().createSaveFileDialog(desc, project).save(lastDir, name.replaceFirst("\\.agmlink$", ""));
         if(file != null) {
             VirtualFile vf = file.getVirtualFile(true);
             if(vf == null) {
@@ -58,7 +58,13 @@ public class AttachmentDownloadAction extends EntityAction {
                 return;
             }
             lastDir = vf.getParent();
-            ProgressManager.getInstance().run(new AttachmentDownloadTask(project, file.getFile(), name, Integer.valueOf(entity.getPropertyValue("file-size")), new EntityRef(entity.getPropertyValue("parent-type"), Integer.valueOf(entity.getPropertyValue("parent-id")))));
+            if (!name.endsWith(".agmlink") || file.getFile().getName().endsWith(".agmlink")) {
+                // either regular file or we explicitly ask for .agmlink file
+                ProgressManager.getInstance().run(new AttachmentDownloadTask(project, file.getFile(), name, Integer.valueOf(entity.getPropertyValue("file-size")), new EntityRef(entity.getPropertyValue("parent-type"), Integer.valueOf(entity.getPropertyValue("parent-id"))), null));
+            } else {
+                // download referenced content instead
+                ProgressManager.getInstance().run(new AttachmentAgmLinkDownloadTask(project, file.getFile(), name, Integer.valueOf(entity.getPropertyValue("file-size")), new EntityRef(entity.getPropertyValue("parent-type"), Integer.valueOf(entity.getPropertyValue("parent-id"))), null));
+            }
         }
     }
 }

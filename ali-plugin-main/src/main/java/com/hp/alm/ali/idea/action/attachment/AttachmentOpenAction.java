@@ -22,7 +22,6 @@ import com.hp.alm.ali.idea.model.Entity;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.fileEditor.FileEditor;
 import com.intellij.openapi.fileEditor.FileEditorManager;
-import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
@@ -71,8 +70,8 @@ public class AttachmentOpenAction extends EntityAction {
     }
 
     public static boolean isAllowed(String filename, int size) {
-        if(filename.endsWith(".agmlink") || filename.endsWith(".url") || size > 10000000) {
-            // open neither Maya nor AgM style hyperlinks
+        if (filename.endsWith(".url") || size > 10000000) {
+            // no Maya style hyperlinks
             // avoid big files too
             return false;
         } else {
@@ -82,28 +81,37 @@ public class AttachmentOpenAction extends EntityAction {
 
     public static void openAttachment(final Project project, String name, EntityRef parent, int size) {
         try {
-            final File file = File.createTempFile("tmp", "_" + name);
-            ProgressManager.getInstance().run(new AttachmentDownloadTask(project, file, name, size, parent) {
+            final File file;
+            boolean agmLink = name.endsWith(".agmlink");
+            if (agmLink) {
+                // for the file to open correctly, there must be no trailing extension
+                file = File.createTempFile("tmp", "_" + name.replaceFirst("\\.agmlink$", ""));
+            } else {
+                file = File.createTempFile("tmp", "_" + name);
+            }
+            final Runnable openFile = new Runnable() {
                 @Override
-                public void run(ProgressIndicator indicator) {
-                    super.run(indicator);
-                    if(file.exists()) {
-                        String url = VirtualFileManager.constructUrl(LocalFileSystem.PROTOCOL, FileUtil.toSystemIndependentName(file.getAbsolutePath()));
-                        final VirtualFile virtualFile = VirtualFileManager.getInstance().refreshAndFindFileByUrl(url);
-                        UIUtil.invokeLaterIfNeeded(new Runnable() {
-                            public void run() {
-                                if(virtualFile != null) {
-                                    FileEditor[] editors = project.getComponent(FileEditorManager.class).openFile(virtualFile, true);
-                                    if(editors.length > 0) {
-                                        return;
-                                    }
+                public void run() {
+                    String url = VirtualFileManager.constructUrl(LocalFileSystem.PROTOCOL, FileUtil.toSystemIndependentName(file.getAbsolutePath()));
+                    final VirtualFile virtualFile = VirtualFileManager.getInstance().refreshAndFindFileByUrl(url);
+                    UIUtil.invokeLaterIfNeeded(new Runnable() {
+                        public void run() {
+                            if(virtualFile != null) {
+                                FileEditor[] editors = project.getComponent(FileEditorManager.class).openFile(virtualFile, true);
+                                if(editors.length > 0) {
+                                    return;
                                 }
-                                Messages.showWarningDialog("No editor seems to be associated with this file type. Try to download and open the file manually.", "Not Supported");
                             }
-                        });
-                    }
+                            Messages.showWarningDialog("No editor seems to be associated with this file type. Try to download and open the file manually.", "Not Supported");
+                        }
+                    });
                 }
-            });
+            };
+            if (agmLink) {
+                ProgressManager.getInstance().run(new AttachmentAgmLinkDownloadTask(project, file, name, size, parent, openFile));
+            } else {
+                ProgressManager.getInstance().run(new AttachmentDownloadTask(project, file, name, size, parent, openFile));
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

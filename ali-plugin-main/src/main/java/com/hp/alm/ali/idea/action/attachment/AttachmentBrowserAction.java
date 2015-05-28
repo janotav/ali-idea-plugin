@@ -23,7 +23,6 @@ import com.hp.alm.ali.idea.rest.RestService;
 import com.hp.alm.ali.idea.model.Entity;
 import com.intellij.ide.BrowserUtil;
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.IconLoader;
@@ -58,32 +57,29 @@ public class AttachmentBrowserAction extends EntityAction {
         }
     }
 
-    public static void openAttachmentUrl(final Project project, String name, EntityRef parent, int size) {
+    private static void openAttachmentUrl(final Project project, String name, EntityRef parent, int size) {
         try {
             final File file = File.createTempFile("tmp", "_" + name);
             file.deleteOnExit();
-            ProgressManager.getInstance().run(new AttachmentDownloadTask(project, file, name, size, parent) {
+            ProgressManager.getInstance().run(new AttachmentDownloadTask(project, file, name, size, parent, new Runnable() {
                 @Override
-                public void run(ProgressIndicator indicator) {
-                    super.run(indicator);
-                    if(file.exists()) {
-                        try {
-                            FileReader reader = new FileReader(file);
-                            char[] buf = new char[16384];
-                            int n = reader.read(buf);
-                            String str = new String(buf, 0, n);
-                            Matcher matcher = Pattern.compile("^URL=(.+)$", Pattern.MULTILINE).matcher(str);
-                            if(matcher.find()) {
-                                BrowserUtil.launchBrowser(matcher.group(1));
-                            }
-                            reader.close();
-                            file.delete();
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
+                public void run() {
+                    try {
+                        FileReader reader = new FileReader(file);
+                        char[] buf = new char[16384];
+                        int n = reader.read(buf);
+                        String str = new String(buf, 0, n);
+                        Matcher matcher = Pattern.compile("^URL=(.+)$", Pattern.MULTILINE).matcher(str);
+                        if(matcher.find()) {
+                            BrowserUtil.launchBrowser(matcher.group(1));
                         }
+                        reader.close();
+                        file.delete();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
                     }
                 }
-            });
+            }));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
