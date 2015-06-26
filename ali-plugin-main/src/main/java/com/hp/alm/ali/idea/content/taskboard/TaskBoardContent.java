@@ -43,9 +43,12 @@ public class TaskBoardContent implements AliContent {
     public JComponent create(Project project) {
         JPanel panel = new JPanel(new BorderLayout());
         final TaskBoardPanel taskBoardPanel = new TaskBoardPanel(project);
+
+        panel.add(taskBoardPanel.getHeader(), BorderLayout.NORTH);
+
         JBScrollPane scrollPane = new JBScrollPane(taskBoardPanel, JBScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JBScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane.getVerticalScrollBar().setUnitIncrement(TaskPanel.SIZE.height);
-        scrollPane.setColumnHeaderView(taskBoardPanel.getHeader());
+        scrollPane.setColumnHeaderView(taskBoardPanel.getColumnHeader());
         panel.add(scrollPane, BorderLayout.CENTER);
 
         JComponent toolbar = ActionUtil.createActionToolbar("hpali.taskboard", TaskBoardPanel.PLACE, true, false).getComponent();

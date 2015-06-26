@@ -98,6 +98,7 @@ public class TaskBoardPanel extends JPanel implements SprintService.Listener, En
     private EntityStatusPanel status;
 
     private Header header;
+    private ColumnHeader columnHeader;
     private Content content;
     private TaskPanel forcedTaskPanel;
 
@@ -117,6 +118,7 @@ public class TaskBoardPanel extends JPanel implements SprintService.Listener, En
         loadTasks();
 
         header = new Header();
+        columnHeader = new ColumnHeader();
 
         content = new Content();
         add(content, BorderLayout.NORTH);
@@ -351,6 +353,10 @@ public class TaskBoardPanel extends JPanel implements SprintService.Listener, En
         return header;
     }
 
+    public JComponent getColumnHeader() {
+        return columnHeader;
+    }
+
     @Override
     public void entityLoaded(final Entity entity, final Event event) {
         if("project-task".equals(entity.getType())) {
@@ -419,7 +425,7 @@ public class TaskBoardPanel extends JPanel implements SprintService.Listener, En
         private MultiValueSelectorLabel statusFilter;
 
         public Header() {
-            super(new GridBagLayout());
+            super(new BorderLayout());
 
             final TaskBoardConfiguration conf = project.getComponent(TaskBoardConfiguration.class);
             JPanel toolbar = new JPanel(new FlowLayout(FlowLayout.LEFT, 2, 0)); // using vertical spacing makes the bottom gap too wide (not sure why)
@@ -500,32 +506,8 @@ public class TaskBoardPanel extends JPanel implements SprintService.Listener, En
             });
             toolbar.add(blocked);
 
-            JPanel toolbarAndWarning = new JPanel(new BorderLayout());
-            toolbarAndWarning.add(toolbar, BorderLayout.NORTH);
-            toolbarAndWarning.add(sprintChooser.getWarningPanel());
-
-            GridBagConstraints c = new GridBagConstraints();
-            c.gridx = 0;
-            c.gridy = 0;
-            c.fill = GridBagConstraints.HORIZONTAL;
-            c.gridwidth = 2;
-            add(toolbarAndWarning, c);
-            c.gridx = 0;
-            c.gridy++;
-            c.gridwidth = 1;
-            c.weightx = 0;
-            c.anchor = GridBagConstraints.NORTHWEST;
-            JComponent rbiHeader = columnHeader("Backlog Item");
-            rbiHeader.setPreferredSize(new Dimension(BacklogItemPanel.DIMENSION.width, 26));
-            add(rbiHeader, c);
-            c.fill = GridBagConstraints.BOTH;
-            c.gridx++;
-            c.weightx = 1;
-            JPanel taskHeader = new JPanel(new GridLayout(1, 3));
-            taskHeader.add(columnHeader(TaskPanel.TASK_NEW));
-            taskHeader.add(columnHeader(TaskPanel.TASK_IN_PROGRESS));
-            taskHeader.add(columnHeader(TaskPanel.TASK_COMPLETED));
-            add(taskHeader, c);
+            add(toolbar, BorderLayout.NORTH);
+            add(sprintChooser.getWarningPanel());
         }
 
         @Override
@@ -563,6 +545,32 @@ public class TaskBoardPanel extends JPanel implements SprintService.Listener, En
         @Override
         public Set<String> getStatus() {
             return statusFilter.getSelectedValues();
+        }
+    }
+
+    private class ColumnHeader extends JPanel {
+
+        public ColumnHeader() {
+            super(new GridBagLayout());
+
+            GridBagConstraints c = new GridBagConstraints();
+            c.fill = GridBagConstraints.HORIZONTAL;
+            c.gridx = 0;
+            c.gridy = 0;
+            c.gridwidth = 1;
+            c.weightx = 0;
+            c.anchor = GridBagConstraints.NORTHWEST;
+            JComponent rbiHeader = columnHeader("Backlog Item");
+            rbiHeader.setPreferredSize(new Dimension(BacklogItemPanel.DIMENSION.width, 26));
+            add(rbiHeader, c);
+            c.fill = GridBagConstraints.BOTH;
+            c.gridx++;
+            c.weightx = 1;
+            JPanel taskHeader = new JPanel(new GridLayout(1, 3));
+            taskHeader.add(columnHeader(TaskPanel.TASK_NEW));
+            taskHeader.add(columnHeader(TaskPanel.TASK_IN_PROGRESS));
+            taskHeader.add(columnHeader(TaskPanel.TASK_COMPLETED));
+            add(taskHeader, c);
         }
     }
 
