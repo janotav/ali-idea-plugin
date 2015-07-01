@@ -20,7 +20,7 @@ import com.hp.alm.ali.idea.model.Entity;
 import com.hp.alm.ali.idea.impl.SvnCheckoutProvider;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vcs.CheckoutProvider;
-import org.tmatesoft.svn.core.SVNDepth;
+import org.jetbrains.idea.svn.api.Depth;
 import org.tmatesoft.svn.core.wc.SVNRevision;
 
 import java.io.File;
@@ -45,7 +45,7 @@ public class SubversionCheckout implements Checkout {
     public String doCheckout(Project project, CheckoutProvider.Listener listener) {
         String url = String.valueOf(repo.getProperty("location")) + branch.getProperty("path");
         File projectDir = new File(path);
-        SvnCheckoutProvider.doCheckout(project, projectDir, url, SVNRevision.HEAD, SVNDepth.INFINITY, false, listener);
+        SvnCheckoutProvider.doCheckout(project, projectDir, url, SVNRevision.HEAD, Depth.INFINITY, false, listener);
         return path;
     }
 }
