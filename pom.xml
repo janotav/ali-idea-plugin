@@ -7,7 +7,7 @@
     <name>${project.artifactId}:${project.version}</name>
     <description>HP ALI Intellij Plugin</description>
     <packaging>pom</packaging>
-    <version>3.14</version>
+    <version>3.15</version>
 
     <modules>
         <module>ali-parent</module>

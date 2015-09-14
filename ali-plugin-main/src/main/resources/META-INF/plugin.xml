@@ -2,13 +2,18 @@
     <id>com.hp.alm.ali</id>
     <name>HP ALI</name>
     <description>Application Lifecycle Intelligence for HP ALM</description>
-    <version>3.14.@{idea.build}</version>
+    <version>3.15.@{idea.build}</version>
     <vendor logo="/ali_icon.png" url="https://hpln.hp.com/group/application-lifecycle-intelligence">HP</vendor>
 
     <idea-version since-build="@{idea.build}"/>
 
     <change-notes>
         <![CDATA[
+      <h3>Changes in 3.15</h3>
+      <ul>
+        <li>[enhancement] support "agmlink" attachments
+      </ul>
+
       <h3>Changes in 3.14</h3>
       <ul>
         <li>[compatibility] support Intellij 14.1</li>
