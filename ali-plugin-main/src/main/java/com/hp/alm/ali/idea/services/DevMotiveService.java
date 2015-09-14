@@ -17,6 +17,7 @@
 package com.hp.alm.ali.idea.services;
 
 import com.hp.alm.ali.idea.cfg.WorkspaceConfiguration;
+import com.hp.alm.ali.idea.cfg.XMLOutputterFactory;
 import com.hp.alm.ali.idea.content.devmotive.Commit;
 import com.hp.alm.ali.idea.content.devmotive.CommitInfo;
 import com.hp.alm.ali.idea.entity.EntityRef;
@@ -27,7 +28,6 @@ import com.hp.alm.ali.idea.ui.editor.field.CommentField;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.lang.StringUtils;
 import org.jdom.Element;
-import org.jdom.output.XMLOutputter;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -65,7 +65,7 @@ public class DevMotiveService {
             commitElem.addContent(messageElem);
             commitsElem.addContent(commitElem);
         }
-        String commitRequest = new XMLOutputter().outputString(commitsElem);
+        String commitRequest = XMLOutputterFactory.getXMLOutputter().outputString(commitsElem);
 
         MyResultInfo result = new MyResultInfo();
         int code = restService.post(commitRequest, result, "workspace/{0}/ali/linked-items/commits", workspaceId);
