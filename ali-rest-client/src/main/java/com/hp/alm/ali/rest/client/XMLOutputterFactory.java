@@ -1,6 +1,6 @@
 // (C) Copyright 2003-2015 Hewlett-Packard Development Company, L.P.
 
-package com.hp.alm.ali.idea.cfg;
+package com.hp.alm.ali.rest.client;
 
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;

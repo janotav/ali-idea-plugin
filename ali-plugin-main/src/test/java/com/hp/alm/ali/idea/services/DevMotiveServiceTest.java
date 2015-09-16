@@ -51,7 +51,7 @@ public class DevMotiveServiceTest extends IntellijTest {
     @Test
     public void testGetRelatedEntities() throws IOException {
         handler.addRequest("POST", "/qcbin/rest/domains/domain/projects/project/workspace/1000/ali/linked-items/commits", 200)
-                .expectBody(handler.getContent("devMotiveServiceTest_input.xml"))
+                .expectXmlBody(handler.getContent("devMotiveServiceTest_input.xml"))
                 .content("devMotiveServiceTest_output.xml");
         Commit commit1 = new Commit(new MyFileRevision(new MyRevisionNumber("1"), "commit1", new Date(0)), "authorName1", "authorEmail1", "committerName1", "committerEmail1");
         Commit commit2 = new Commit(new MyFileRevision(new MyRevisionNumber("2"), "commit2", new Date(1000)), "authorName2", "authorEmail2", null, null);

@@ -29,8 +29,8 @@ import org.apache.commons.httpclient.auth.AuthScope;
 import org.apache.commons.httpclient.methods.*;
 import org.apache.commons.httpclient.params.HttpMethodParams;
 import org.apache.commons.io.IOUtils;
+import org.jdom.Document;
 import org.jdom.Element;
-import org.jdom.output.XMLOutputter;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
@@ -295,7 +295,7 @@ public class AliRestClient implements RestClient {
         Element passElem = new Element("password");
         passElem.setText(password);
         authElem.addContent(passElem);
-        return new XMLOutputter().outputString(authElem);
+        return XMLOutputterFactory.getXMLOutputter().outputString(new Document(authElem));
     }
 
     private String createRestSessionXml() {
@@ -303,7 +303,7 @@ public class AliRestClient implements RestClient {
         Element clientTypeElem = new Element("client-type");
         sessionParamElem.addContent(clientTypeElem);
         clientTypeElem.setText(CLIENT_TYPE);
-        return new XMLOutputter().outputString(sessionParamElem);
+        return XMLOutputterFactory.getXMLOutputter().outputString(new Document(sessionParamElem));
     }
 
     private void addTenantCookie(Cookie ssoCookie) {

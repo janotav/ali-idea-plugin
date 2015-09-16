@@ -16,7 +16,7 @@
 
 package com.hp.alm.ali.idea.services;
 
-import com.hp.alm.ali.idea.cfg.XMLOutputterFactory;
+import com.hp.alm.ali.rest.client.XMLOutputterFactory;
 import com.hp.alm.ali.idea.entity.EntityCrossFilter;
 import com.hp.alm.ali.idea.entity.EntityFilter;
 import com.hp.alm.ali.idea.entity.EntityQuery;
@@ -38,6 +38,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.lang.StringUtils;
+import org.jdom.Document;
 
 import javax.swing.SortOrder;
 import java.io.InputStream;
@@ -265,7 +266,7 @@ public class EntityService {
     }
 
     private Entity updateOldDefectLink(Entity entity, boolean silent, boolean fireUpdate) {
-        String xml = XMLOutputterFactory.getXMLOutputter().outputString(DefectLinkList.linkToXml(entity));
+        String xml = XMLOutputterFactory.getXMLOutputter().outputString(new Document(DefectLinkList.linkToXml(entity)));
         MyResultInfo result = new MyResultInfo();
         if(restService.put(xml, result, "defects/{0}/defect-links/{1}", entity.getPropertyValue("first-endpoint-id"), entity.getId()) != HttpStatus.SC_OK) {
             if(!silent) {
@@ -293,7 +294,7 @@ public class EntityService {
         if("defect-link".equals(entity.getType()) && restService.getServerStrategy().hasSecondLevelDefectLink()) {
             return updateOldDefectLink(entity, silent, fireUpdate);
         }
-        String xml = XMLOutputterFactory.getXMLOutputter().outputString(entity.toElement(fieldsToUpdate));
+        String xml = XMLOutputterFactory.getXMLOutputter().outputString(new Document(entity.toElement(fieldsToUpdate)));
         MyResultInfo result = new MyResultInfo();
         if(restService.put(xml, result, "{0}s/{1}", entity.getType(), entity.getId()) != HttpStatus.SC_OK) {
             if(!silent) {
@@ -317,7 +318,7 @@ public class EntityService {
     }
 
     private Entity createOldDefectLink(Entity entity, boolean silent) {
-        String xml = XMLOutputterFactory.getXMLOutputter().outputString(DefectLinkList.linkToXml(entity));
+        String xml = XMLOutputterFactory.getXMLOutputter().outputString(new Document(DefectLinkList.linkToXml(entity)));
         MyResultInfo result = new MyResultInfo();
         if(restService.post(xml, result, "defects/{0}/defect-links", entity.getPropertyValue("first-endpoint-id")) != HttpStatus.SC_CREATED) {
             if(!silent) {
@@ -335,7 +336,7 @@ public class EntityService {
         if("defect-link".equals(entity.getType()) && restService.getServerStrategy().hasSecondLevelDefectLink()) {
             return createOldDefectLink(entity, silent);
         }
-        String xml = XMLOutputterFactory.getXMLOutputter().outputString(entity.toElement(null));
+        String xml = XMLOutputterFactory.getXMLOutputter().outputString(new Document(entity.toElement(null)));
         MyResultInfo result = new MyResultInfo();
         if(restService.post(xml, result, "{0}s", entity.getType()) != HttpStatus.SC_CREATED) {
             if(!silent) {

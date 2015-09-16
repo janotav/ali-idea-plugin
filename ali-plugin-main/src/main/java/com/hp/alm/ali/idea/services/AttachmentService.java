@@ -16,7 +16,7 @@
 
 package com.hp.alm.ali.idea.services;
 
-import com.hp.alm.ali.idea.cfg.XMLOutputterFactory;
+import com.hp.alm.ali.rest.client.XMLOutputterFactory;
 import com.hp.alm.ali.idea.entity.EntityListener;
 import com.hp.alm.ali.idea.entity.EntityQuery;
 import com.hp.alm.ali.idea.entity.EntityRef;
@@ -28,6 +28,7 @@ import com.hp.alm.ali.idea.rest.RestService;
 import com.hp.alm.ali.idea.model.Entity;
 import com.hp.alm.ali.idea.model.parser.EntityList;
 import org.apache.commons.httpclient.HttpStatus;
+import org.jdom.Document;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -103,7 +104,7 @@ public class AttachmentService {
     public Entity updateAttachmentProperty(String name, EntityRef parent, String propertyName, String propertyValue, boolean silent) {
         Entity attachment = new Entity("attachment", 0);
         attachment.setProperty(propertyName, propertyValue);
-        String xml = XMLOutputterFactory.getXMLOutputter().outputString(attachment.toElement(Collections.singleton(propertyName)));
+        String xml = XMLOutputterFactory.getXMLOutputter().outputString(new Document(attachment.toElement(Collections.singleton(propertyName))));
         MyResultInfo result = new MyResultInfo();
         if(restService.put(xml, result, "{0}s/{1}/attachments/{2}", parent.type, parent.id, EntityQuery.encode(name)) != HttpStatus.SC_OK) {
             if(!silent) {

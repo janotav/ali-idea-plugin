@@ -173,9 +173,9 @@ public class Handler extends AbstractHandler {
 
     public void authenticate() {
         addRequest("POST", "/qcbin/authentication-point/alm-authenticate", 200)
-                .expectBody("<alm-authentication><user>user</user><password>password</password></alm-authentication>");
+                .expectXmlBody("<alm-authentication><user>user</user><password>password</password></alm-authentication>");
         addRequest("POST", "/qcbin/rest/site-session", 200)
-                .expectBody("<session-parameters><client-type>ALI_IDEA_plugin</client-type></session-parameters>");
+                .expectXmlBody("<session-parameters><client-type>ALI_IDEA_plugin</client-type></session-parameters>");
     }
 
     public void checkpoint() throws Throwable {
@@ -284,6 +284,18 @@ public class Handler extends AbstractHandler {
                 @Override
                 public void evaluate(Request baseRequest, HttpServletRequest request, HttpServletResponse response, boolean soft) {
                     Assert.assertEquals(value, baseRequest.getHeader(header));
+                }
+            });
+            return this;
+        }
+
+        public MyRequest expectXmlBody(final String value) {
+            assertions.add(new Assertion() {
+                @Override
+                public void evaluate(Request baseRequest, HttpServletRequest request, HttpServletResponse response, boolean soft) throws IOException {
+                    if(!soft) {
+                        Assert.assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + value.replaceAll("\r\n", "\n") + "\n", IOUtils.toString(baseRequest.getInputStream()).replaceAll("\r\n", "\n"));
+                    }
                 }
             });
             return this;

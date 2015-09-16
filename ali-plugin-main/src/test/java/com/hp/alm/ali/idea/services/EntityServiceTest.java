@@ -211,7 +211,7 @@ public class EntityServiceTest extends MultiTest {
     @TestTarget(ServerVersion.AGM)
     public void testUpdateEntity() {
         handler.addRequest(false, "PUT", "/qcbin/rest/domains/domain/projects/project/defects/86", 200)
-                .expectBody("<Entity Type=\"defect\"><Fields><Field Name=\"status\"><Value>Closed</Value></Field></Fields></Entity>")
+                .expectXmlBody("<Entity Type=\"defect\"><Fields><Field Name=\"status\"><Value>Closed</Value></Field></Fields></Entity>")
                 .content("entityServiceTest_entity.xml");
 
         handler.async();
@@ -287,7 +287,7 @@ public class EntityServiceTest extends MultiTest {
     @TestTarget(ServerVersion.AGM)
     public void testUpdateEntity_noEvent() {
         handler.addRequest(false, "PUT", "/qcbin/rest/domains/domain/projects/project/defects/86", 200)
-                .expectBody("<Entity Type=\"defect\"><Fields><Field Name=\"status\"><Value>Closed</Value></Field></Fields></Entity>")
+                .expectXmlBody("<Entity Type=\"defect\"><Fields><Field Name=\"status\"><Value>Closed</Value></Field></Fields></Entity>")
                 .content("entityServiceTest_entity.xml");
 
         addEntityListener(new EntityAdapter() {
@@ -308,7 +308,7 @@ public class EntityServiceTest extends MultiTest {
     @TestTarget(ServerVersion.ALM11)
     public void testUpdateEntity_MayaLink() {
         handler.addRequest(false, "PUT", "/qcbin/rest/domains/domain/projects/project/defects/86/defect-links/2763", 200)
-                .expectBody("<defect-link><comment>Yes!</comment><first-endpoint-id>86</first-endpoint-id></defect-link>")
+                .expectXmlBody("<defect-link><comment>Yes!</comment><first-endpoint-id>86</first-endpoint-id></defect-link>")
                 .content("entityServiceTest_defectLink.xml");
 
         handler.async();
@@ -350,7 +350,7 @@ public class EntityServiceTest extends MultiTest {
     @TestTarget(ServerVersion.ALM11)
     public void testUpdateEntity_MayaLink_noEvent() {
         handler.addRequest(false, "PUT", "/qcbin/rest/domains/domain/projects/project/defects/86/defect-links/2763", 200)
-                .expectBody("<defect-link><comment>Yes!</comment><first-endpoint-id>86</first-endpoint-id></defect-link>")
+                .expectXmlBody("<defect-link><comment>Yes!</comment><first-endpoint-id>86</first-endpoint-id></defect-link>")
                 .content("entityServiceTest_defectLink.xml");
 
         addEntityListener(new EntityAdapter() {
@@ -371,7 +371,7 @@ public class EntityServiceTest extends MultiTest {
     @TestTarget(ServerVersion.AGM)
     public void testCreateEntity() {
         handler.addRequest(false, "POST", "/qcbin/rest/domains/domain/projects/project/defects", 201)
-                .expectBody("<Entity Type=\"defect\"><Fields><Field Name=\"status\"><Value>New</Value></Field></Fields></Entity>")
+                .expectXmlBody("<Entity Type=\"defect\"><Fields><Field Name=\"status\"><Value>New</Value></Field></Fields></Entity>")
                 .content("entityServiceTest_entity.xml");
 
         handler.async();
@@ -410,7 +410,7 @@ public class EntityServiceTest extends MultiTest {
     @TestTarget(ServerVersion.ALM11)
     public void testCreateEntity_MayaLink() {
         handler.addRequest(false, "POST", "/qcbin/rest/domains/domain/projects/project/defects/86/defect-links", 201)
-                .expectBody("<defect-link><comment>There</comment><first-endpoint-id>86</first-endpoint-id></defect-link>")
+                .expectXmlBody("<defect-link><comment>There</comment><first-endpoint-id>86</first-endpoint-id></defect-link>")
                 .content("entityServiceTest_defectLink.xml");
 
         handler.async();
