@@ -16,6 +16,7 @@
 
 package com.hp.alm.ali.idea.navigation;
 
+import com.hp.alm.ali.idea.navigation.recognizer.HREFLinkRecognizer;
 import com.hp.alm.ali.idea.ui.editor.field.HTMLAreaField;
 import com.hp.alm.ali.idea.navigation.recognizer.JavaCompileRecognizer;
 import com.hp.alm.ali.idea.navigation.recognizer.JavaStackTraceRecognizer;
@@ -34,7 +35,8 @@ public class NavigationDecorator {
             new JavaStackTraceRecognizer(),
             new JavaCompileRecognizer(),
             new SurefireTestRecognizer(),
-            new WebLinkRecognizer());
+            new WebLinkRecognizer(),
+            new HREFLinkRecognizer());
 
     public static String explode(Project project, String plain) {
         return explode(project, plain, false);
@@ -65,6 +67,10 @@ public class NavigationDecorator {
                 buf.append(toHtml(sourceIsHtml, content.substring(c.getLinkStart(), c.getLinkEnd())));
                 buf.append("</a>");
                 buf.append(toHtml(sourceIsHtml, content.substring(c.getLinkEnd(), c.getEnd())));
+                pos = c.getEnd();
+            } else {
+                // this is used to copy-through the "a href" links without implicitly creating a (broken nested) link
+                buf.append(toHtml(sourceIsHtml, content.substring(pos, c.getEnd())));
                 pos = c.getEnd();
             }
         }

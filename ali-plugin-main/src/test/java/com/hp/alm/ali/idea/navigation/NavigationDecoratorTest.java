@@ -44,4 +44,13 @@ public class NavigationDecoratorTest extends IntellijTest {
         Assert.assertEquals(
                 "Go to <a href=\"web:http://www.company.com/\">http://www.company.com/</a> <br>\nEnjoy!", value);
     }
+
+    @Test
+    public void testExplodeHtmlKeepAHref() throws InterruptedException {
+        // test depends on WebLinkRecognizer and HREFLinkRecognizer
+        String value = NavigationDecorator.explodeHtml(getProject(),
+                "Go to http://www.company.com/ <br>\nEnjoy! <a href='http://go.com'>Regular link</a>");
+        Assert.assertEquals(
+                "Go to <a href=\"web:http://www.company.com/\">http://www.company.com/</a> <br>\nEnjoy! <a href='http://go.com'>Regular link</a>", value);
+    }
 }
