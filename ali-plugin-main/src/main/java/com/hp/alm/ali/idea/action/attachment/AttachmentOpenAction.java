@@ -22,6 +22,9 @@ import com.hp.alm.ali.idea.model.Entity;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.fileEditor.FileEditor;
 import com.intellij.openapi.fileEditor.FileEditorManager;
+import com.intellij.openapi.fileTypes.FileType;
+import com.intellij.openapi.fileTypes.FileTypeManager;
+import com.intellij.openapi.fileTypes.INativeFileType;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
@@ -99,6 +102,11 @@ public class AttachmentOpenAction extends EntityAction {
                             if(virtualFile != null) {
                                 FileEditor[] editors = project.getComponent(FileEditorManager.class).openFile(virtualFile, true);
                                 if(editors.length > 0) {
+                                    return;
+                                }
+
+                                FileType type = FileTypeManager.getInstance().getKnownFileTypeOrAssociate(virtualFile, project);
+                                if (type instanceof INativeFileType && ((INativeFileType) type).openFileInAssociatedApplication(project, virtualFile)) {
                                     return;
                                 }
                             }
