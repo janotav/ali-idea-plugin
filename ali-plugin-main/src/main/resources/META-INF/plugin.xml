@@ -398,6 +398,7 @@
 
     <actions>
         <group id="hpali.task">
+            <action id="hpali.task.addInvested" class="com.hp.alm.ali.idea.action.task.TaskAddInvestedAction"/>
             <action id="hpali.task.modify" class="com.hp.alm.ali.idea.action.task.TaskEditAction"/>
             <action id="hpali.task.delete" class="com.hp.alm.ali.idea.action.task.TaskDeleteAction"/>
         </group>
