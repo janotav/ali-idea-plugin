@@ -4,7 +4,6 @@ import com.hp.alm.ali.idea.action.EntityAction;
 import com.hp.alm.ali.idea.entity.EntityEditManager;
 import com.hp.alm.ali.idea.model.Entity;
 import com.hp.alm.ali.idea.ui.editor.TaskAddInvestedEditor;
-import com.hp.alm.ali.idea.ui.editor.TaskEditor;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.IconLoader;

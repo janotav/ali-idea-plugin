@@ -6,6 +6,8 @@ import com.hp.alm.ali.idea.services.EntityService;
 import com.hp.alm.ali.idea.ui.editor.field.SpinnerField;
 import com.intellij.openapi.project.Project;
 
+import javax.swing.*;
+import javax.swing.text.html.HTMLEditorKit;
 import java.awt.*;
 
 public class TaskAddInvestedEditor extends BaseEditor {
@@ -21,13 +23,21 @@ public class TaskAddInvestedEditor extends BaseEditor {
 
         entityService = project.getComponent(EntityService.class);
 
-        setSize(new Dimension(230, 150));
+        setSize(new Dimension(290, 220));
         centerOnOwner();
     }
 
     @Override
     public void update() {
         addField("invested", new SpinnerField("Add invested", "0", true));
+
+        JTextPane addProperty = new JTextPane();
+        addProperty.setBackground(gridFooter.getBackground());
+        addProperty.setEditorKit(new HTMLEditorKit());
+        addProperty.setText("<html><body><i style=\"font-size:x-small;\"><b>Info:</b><br/>Add selected amount to invested time and removes same<br> amount from remaining time.<br/>If there is not enough remaining time it will be set to 0.</i></body></html>");
+        addProperty.setEditable(false);
+        gridFooter.add(addProperty);
+
     }
 
     public static class Edit implements SaveHandler {

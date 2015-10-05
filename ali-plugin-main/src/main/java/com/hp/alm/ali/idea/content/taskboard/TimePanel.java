@@ -26,7 +26,7 @@ import java.awt.FlowLayout;
 
 public class TimePanel extends JPanel {
 
-    private JLabel effortLabel;
+    JLabel effortLabel;
     private JLabel investedLabel;
     private JLabel investedEstimatedSeparator;
     private JLabel remainingLabel;
