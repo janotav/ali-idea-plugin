@@ -8,7 +8,6 @@ import com.intellij.openapi.project.Project;
 
 import javax.swing.*;
 import javax.swing.text.html.HTMLEditorKit;
-import java.awt.*;
 
 public class TaskAddInvestedEditor extends BaseEditor {
 
@@ -19,17 +18,14 @@ public class TaskAddInvestedEditor extends BaseEditor {
     }
 
     public TaskAddInvestedEditor(Project project, Entity task, SaveHandler saveHandler) {
-        super(project, "Add invested time", task, saveHandler);
+        super(project, "Add Invested Time", task, saveHandler);
 
         entityService = project.getComponent(EntityService.class);
-
-        setSize(new Dimension(290, 220));
-        centerOnOwner();
     }
 
     @Override
     public void update() {
-        addField("invested", new SpinnerField("Add invested", "0", true));
+        addField("invested", new SpinnerField("Invested", "0", true));
 
         JTextPane addProperty = new JTextPane();
         addProperty.setBackground(gridFooter.getBackground());
@@ -38,6 +34,7 @@ public class TaskAddInvestedEditor extends BaseEditor {
         addProperty.setEditable(false);
         gridFooter.add(addProperty);
 
+        packAndPosition();
     }
 
     public static class Edit implements SaveHandler {

@@ -163,11 +163,8 @@ public class TaskPanel extends JLayeredPane implements Highlightable, DataProvid
                     if(moreLink.contains(point)) {
                         ActionPopupMenu popupMenu = ActionUtil.createActionPopup("hpali.task", "taskboard");
                         popupMenu.getComponent().show(moreLink, 0, 0);
-                    }
-                    point = SwingUtilities.convertPoint(e.getComponent(), e.getPoint(), timePanel.effortLabel);
-                    if (timePanel.effortLabel.contains(point)) {
-                        TaskAddInvestedEditor taskAddInvestedEditor = new TaskAddInvestedEditor(project, task);
-                        taskAddInvestedEditor.execute();
+                    } else {
+                        timePanel.mouseClickedPropagate(e);
                     }
                 }
             }

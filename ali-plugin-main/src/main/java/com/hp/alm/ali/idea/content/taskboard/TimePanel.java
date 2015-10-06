@@ -16,23 +16,31 @@
 
 package com.hp.alm.ali.idea.content.taskboard;
 
+import com.hp.alm.ali.idea.entity.EntityEditManager;
 import com.hp.alm.ali.idea.model.Entity;
+import com.hp.alm.ali.idea.ui.editor.TaskAddInvestedEditor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.IconLoader;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import java.awt.FlowLayout;
+import java.awt.Point;
+import java.awt.event.MouseEvent;
 
 public class TimePanel extends JPanel {
 
-    JLabel effortLabel;
+    private Project project;
+    private Entity task;
+    private JLabel effortLabel;
     private JLabel investedLabel;
     private JLabel investedEstimatedSeparator;
     private JLabel remainingLabel;
 
     public TimePanel(Project project, TaskPanel pTaskPanel) {
         super(new FlowLayout(FlowLayout.LEFT, 2, 5));
+        this.project = project;
 
         setOpaque(false);
 
@@ -71,6 +79,19 @@ public class TimePanel extends JPanel {
             investedLabel.setVisible(true);
             investedEstimatedSeparator.setVisible(false);
             remainingLabel.setVisible(false);
+        }
+
+        this.task = task;
+    }
+
+    public void mouseClickedPropagate(MouseEvent e) {
+        Point point = SwingUtilities.convertPoint(e.getComponent(), e.getPoint(), effortLabel);
+        if (effortLabel.contains(point)) {
+            EntityEditManager entityEditManager = project.getComponent(EntityEditManager.class);
+            if (!entityEditManager.isEditing(task)) {
+                TaskAddInvestedEditor taskAddInvestedEditor = new TaskAddInvestedEditor(project, task);
+                taskAddInvestedEditor.execute();
+            }
         }
     }
 }

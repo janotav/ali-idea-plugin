@@ -14,7 +14,7 @@ import java.util.Set;
 public class TaskAddInvestedAction extends EntityAction {
 
     public TaskAddInvestedAction() {
-        super("Add invested", "Add time invested and decrease remaining time", IconLoader.getIcon("/actions/profile.png"));
+        super("Add Invested", "Add time invested and decrease remaining time", IconLoader.getIcon("/actions/profile.png"));
     }
 
     @Override
