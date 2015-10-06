@@ -30,7 +30,7 @@ public class TaskAddInvestedEditor extends BaseEditor {
         JTextPane addProperty = new JTextPane();
         addProperty.setBackground(gridFooter.getBackground());
         addProperty.setEditorKit(new HTMLEditorKit());
-        addProperty.setText("<html><body><i style=\"font-size:x-small;\"><b>Info:</b><br/>Add selected amount to invested time and removes same<br> amount from remaining time.<br/>If there is not enough remaining time it will be set to 0.</i></body></html>");
+        addProperty.setText("<html><body><i style=\"font-size:small;\"><b>Info:</b><br/>Add selected amount to invested time and removes same<br> amount from remaining time.<br/>If there is not enough remaining time it will be set to 0.</i></body></html>");
         addProperty.setEditable(false);
         gridFooter.add(addProperty);
 
