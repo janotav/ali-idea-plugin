@@ -394,6 +394,10 @@
             <implementation-class>com.hp.alm.ali.idea.services.DevMotiveService</implementation-class>
             <interface-class>com.hp.alm.ali.idea.services.DevMotiveService</interface-class>
         </component>
+        <component>
+            <implementation-class>com.hp.alm.ali.idea.content.taskboard.TaskBoardFlow</implementation-class>
+            <interface-class>com.hp.alm.ali.idea.content.taskboard.TaskBoardFlow</interface-class>
+        </component>
     </project-components>
 
     <actions>

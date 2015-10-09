@@ -18,10 +18,8 @@ package com.hp.alm.ali.idea.content.taskboard;
 
 import com.hp.alm.ali.idea.cfg.AliProjectConfiguration;
 import com.hp.alm.ali.idea.cfg.TaskBoardConfiguration;
-import com.hp.alm.ali.idea.entity.EntityRef;
 import com.hp.alm.ali.idea.services.ActiveItemService;
 import com.hp.alm.ali.idea.ui.EntityLabel;
-import com.hp.alm.ali.idea.entity.EntityQuery;
 import com.hp.alm.ali.idea.services.EntityService;
 import com.hp.alm.ali.idea.ui.ScrollablePanel;
 import com.hp.alm.ali.idea.action.ActionUtil;
@@ -30,7 +28,6 @@ import com.hp.alm.ali.idea.ui.Highlightable;
 import com.hp.alm.ali.idea.ui.SimpleHighlight;
 import com.hp.alm.ali.idea.ui.editor.TaskEditor;
 import com.hp.alm.ali.idea.model.Entity;
-import com.hp.alm.ali.idea.model.parser.EntityList;
 import com.intellij.openapi.actionSystem.ActionPopupMenu;
 import com.intellij.openapi.actionSystem.DataProvider;
 import com.intellij.openapi.application.ApplicationManager;
@@ -77,6 +74,7 @@ public class BacklogItemPanel extends ScrollablePanel implements Highlightable, 
     private EntityService entityService;
     private ActiveItemService activeItemService;
     private TaskBoardConfiguration taskBoardConfiguration;
+    private TaskBoardFlow taskBoardFlow;
     private AliProjectConfiguration aliProjectConfiguration;
     private Map<String, TaskContainerPanel> taskContainers;
     private JComponent taskContent;
@@ -98,6 +96,7 @@ public class BacklogItemPanel extends ScrollablePanel implements Highlightable, 
         entityService = project.getComponent(EntityService.class);
         activeItemService = project.getComponent(ActiveItemService.class);
         taskBoardConfiguration = project.getComponent(TaskBoardConfiguration.class);
+        taskBoardFlow = project.getComponent(TaskBoardFlow.class);
         aliProjectConfiguration = project.getComponent(AliProjectConfiguration.class);
 
         header = new Header();
@@ -205,64 +204,11 @@ public class BacklogItemPanel extends ScrollablePanel implements Highlightable, 
                 if(updatedTask == null) {
                     return; // update failed
                 }
-                final Entity updatedRbi;
-                if (TaskPanel.TASK_COMPLETED.equals(newStatus)) {
-                    String tasksCompletedStatus = taskBoardConfiguration.getTasksCompletedStatus();
-                    EntityRef workItem = new EntityRef(item.getPropertyValue("entity-type"), Integer.valueOf(item.getPropertyValue("entity-id")));
-                    boolean deactivate = taskBoardConfiguration.isDeactivateItem() &&
-                            activeItemService.getActiveItem() != null &&
-                            activeItemService.getActiveItem().equals(workItem);
-                    if (tasksCompletedStatus != null || deactivate) {
-                        // when task moves to completed, we need to see if there are incomplete tasks remaining
-                        EntityQuery query = new EntityQuery("project-task");
-                        query.addColumn("id", 1);
-                        query.setValue("status", "<> Completed");
-                        query.setValue("release-backlog-item-id", String.valueOf(item.getId()));
-                        query.setPropertyResolved("status", true);
-                        EntityList incompleteTasks = entityService.query(query);
-                        if(incompleteTasks.isEmpty()) {
-                            if (tasksCompletedStatus != null) {
-                                // move backlog item to target state
-                                item.setProperty("status", tasksCompletedStatus);
-                                updatedRbi = entityService.updateEntity(item, Collections.singleton("status"), false, true);
-                            } else {
-                                updatedRbi = null;
-                            }
-                            if (deactivate) {
-                                // deactivate work item
-                                UIUtil.invokeLaterIfNeeded(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        activeItemService.activate(null, true, false);
-                                    }
-                                });
-                            }
-                        } else {
-                            updatedRbi = null;
-                        }
-                    } else {
-                        updatedRbi = null;
-                    }
-                } else if (TaskPanel.TASK_IN_PROGRESS.equals(newStatus)) {
-                    // when task moves to progress, backlog item must move to progress too
-                    item.setProperty("status", newStatus);
-                    updatedRbi = entityService.updateEntity(item, Collections.singleton("status"), false, true);
-                } else if(ITEM_DONE.equals(item.getProperty("status"))) {
-                    // when task moves to new and backlog item was completed, move it to progress
-                    item.setProperty("status", TaskPanel.TASK_IN_PROGRESS);
-                    updatedRbi = entityService.updateEntity(item, Collections.singleton("status"), false, true);
-                } else {
-                    // do nothing otherwise
-                    updatedRbi = null;
-                }
+                taskBoardFlow.onTaskUpdated(updatedTask, item);
                 UIUtil.invokeLaterIfNeeded(new Runnable() {
                     @Override
                     public void run() {
                         taskPanel.update(updatedTask);
-
-                        if (updatedRbi != null) {
-                            update(updatedRbi);
-                        }
                     }
                 });
             }

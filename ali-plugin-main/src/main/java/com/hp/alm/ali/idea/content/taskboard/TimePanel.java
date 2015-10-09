@@ -22,6 +22,7 @@ import com.hp.alm.ali.idea.ui.editor.TaskAddInvestedEditor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.IconLoader;
 
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -85,13 +86,17 @@ public class TimePanel extends JPanel {
     }
 
     public void mouseClickedPropagate(MouseEvent e) {
-        Point point = SwingUtilities.convertPoint(e.getComponent(), e.getPoint(), effortLabel);
-        if (effortLabel.contains(point)) {
+        if (inside(e, effortLabel) || inside(e, investedLabel) || inside(e, remainingLabel)) {
             EntityEditManager entityEditManager = project.getComponent(EntityEditManager.class);
             if (!entityEditManager.isEditing(task)) {
                 TaskAddInvestedEditor taskAddInvestedEditor = new TaskAddInvestedEditor(project, task);
                 taskAddInvestedEditor.execute();
             }
         }
+    }
+
+    private boolean inside(MouseEvent e, JComponent component) {
+        Point point = SwingUtilities.convertPoint(e.getComponent(), e.getPoint(), component);
+        return component.contains(point);
     }
 }
