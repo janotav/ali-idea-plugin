@@ -28,7 +28,7 @@ import java.util.regex.Pattern;
 
 public class WebLinkRecognizer implements Recognizer {
 
-    private static final Pattern WEB_PATTERN = Pattern.compile("https?://[^ ]+");
+    private static final Pattern WEB_PATTERN = Pattern.compile("https?://[^ <]+");
 
     @Override
     public void recognize(String content, List<Candidate> candidates) {
