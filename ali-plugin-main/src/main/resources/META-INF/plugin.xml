@@ -2,13 +2,18 @@
     <id>com.hp.alm.ali</id>
     <name>HP ALI</name>
     <description>Application Lifecycle Intelligence for HP ALM</description>
-    <version>3.15.@{idea.build}</version>
+    <version>3.16.@{idea.build}</version>
     <vendor logo="/ali_icon.png" url="https://hpln.hp.com/group/application-lifecycle-intelligence">HP</vendor>
 
     <idea-version since-build="@{idea.build}"/>
 
     <change-notes>
         <![CDATA[
+      <h3>Changes in 3.16</h3>
+      <ul>
+        <li>[enhancement] add invested task time action
+      </ul>
+
       <h3>Changes in 3.15</h3>
       <ul>
         <li>[enhancement] support "agmlink" attachments
