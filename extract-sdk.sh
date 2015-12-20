@@ -3,13 +3,15 @@
 IDEA_HOME="$1"
 version="$2"
 
+mkdir -p idea-sdk-$version
+
 cat << HEADER | tee idea-sdk-$version/pom.xml > idea-sdk-$version/install-libs.xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   This is a generated file, do not edit manually unless you know what you are doing.
   To regenerate the file issue following command in the ali-idea-plugin directory (bash needed):
 
-    $ ant extract-sdk IDEA_HOME=<Idea $version Directory>
+    $ ant extract-sdk -DIDEA_HOME=<Idea $version Directory>
 
 -->
 HEADER
