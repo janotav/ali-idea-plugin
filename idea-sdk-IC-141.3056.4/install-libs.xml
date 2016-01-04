@@ -3,7 +3,7 @@
   This is a generated file, do not edit manually unless you know what you are doing.
   To regenerate the file issue following command in the ali-idea-plugin directory (bash needed):
 
-    $ ant extract-sdk IDEA_HOME=<Idea IC-141.2735.5 Directory>
+    $ ant extract-sdk -DIDEA_HOME=<Idea IC-141.3056.4 Directory>
 
 -->
 <project name="install-libs">
@@ -14,7 +14,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/annotations.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=annotations"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -22,7 +22,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/asm4-all.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=asm4-all"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -30,7 +30,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/asm-all.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=asm-all"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -38,7 +38,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/asm-commons.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=asm-commons"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -46,7 +46,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/asm.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=asm"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -54,7 +54,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/automaton.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=automaton"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -62,7 +62,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/boot.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=boot"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -70,7 +70,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/bootstrap.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=bootstrap"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -78,7 +78,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/cglib-2.2.2.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=cglib-2.2.2"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -86,7 +86,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/cli-parser-1.1.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=cli-parser-1.1"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -94,7 +94,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/commons-codec-1.8.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=commons-codec-1.8"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -102,7 +102,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/commons-httpclient-3.1-patched.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=commons-httpclient-3.1-patched"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -110,7 +110,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/commons-logging-1.1.3.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=commons-logging-1.1.3"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -118,7 +118,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/commons-net-3.3.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=commons-net-3.3"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -126,7 +126,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/ecj-4.4.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=ecj-4.4"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -134,7 +134,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/extensions.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=extensions"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -142,7 +142,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/fluent-hc-4.3.6.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=fluent-hc-4.3.6"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -150,7 +150,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/forms_rt.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=forms_rt"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -158,7 +158,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/freemarker.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=freemarker"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -166,7 +166,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/groovy-all-2.3.9.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=groovy-all-2.3.9"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -174,7 +174,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/gson-2.3.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=gson-2.3"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -182,7 +182,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/guava-17.0.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=guava-17.0"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -190,7 +190,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/hamcrest-core-1.3.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=hamcrest-core-1.3"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -198,7 +198,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/hamcrest-library-1.3.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=hamcrest-library-1.3"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -206,7 +206,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/httpclient-4.3.6.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=httpclient-4.3.6"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -214,7 +214,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/httpcore-4.3.3.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=httpcore-4.3.3"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -222,7 +222,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/httpmime-4.3.6.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=httpmime-4.3.6"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -230,7 +230,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/icons.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=icons"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -238,7 +238,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/idea.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=idea"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -246,7 +246,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/idea_rt.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=idea_rt"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -254,7 +254,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/isorelax.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=isorelax"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -262,7 +262,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/javac2.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=javac2"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -270,7 +270,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/jaxen-1.1.3.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=jaxen-1.1.3"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -278,7 +278,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/jayatana-1.2.4.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=jayatana-1.2.4"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -286,7 +286,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/jcip-annotations.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=jcip-annotations"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -294,7 +294,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/jdkAnnotations.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=jdkAnnotations"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -302,7 +302,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/jdom.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=jdom"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -310,7 +310,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/jgoodies-common-1.2.1.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=jgoodies-common-1.2.1"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -318,7 +318,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/jgoodies-forms.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=jgoodies-forms"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -326,7 +326,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/jgoodies-looks-2.4.2.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=jgoodies-looks-2.4.2"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -334,7 +334,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/jh.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=jh"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -342,7 +342,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/jing.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=jing"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -350,7 +350,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/jna.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=jna"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -358,7 +358,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/jna-utils.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=jna-utils"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -366,7 +366,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/jps-launcher.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=jps-launcher"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -374,7 +374,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/jps-model.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=jps-model"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -382,7 +382,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/jps-server.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=jps-server"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -390,7 +390,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/jsch-0.1.51.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=jsch-0.1.51"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -398,7 +398,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/jsch.agentproxy.connector-factory.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=jsch.agentproxy.connector-factory"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -406,7 +406,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/jsch.agentproxy.core.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=jsch.agentproxy.core"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -414,7 +414,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/jsch.agentproxy.pageant.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=jsch.agentproxy.pageant"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -422,7 +422,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/jsch.agentproxy.sshagent.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=jsch.agentproxy.sshagent"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -430,7 +430,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/jsch.agentproxy.usocket-jna.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=jsch.agentproxy.usocket-jna"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -438,7 +438,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/jsch.agentproxy.usocket-nc.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=jsch.agentproxy.usocket-nc"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -446,7 +446,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/jsr166e.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=jsr166e"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -454,7 +454,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/jsr173_1.0_api.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=jsr173_1.0_api"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -462,7 +462,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/junit-4.11.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=junit-4.11"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -470,7 +470,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/junit.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=junit"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -478,7 +478,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/jzlib-1.1.1.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=jzlib-1.1.1"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -486,7 +486,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/log4j.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=log4j"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -494,7 +494,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/markdown4j-2.2.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=markdown4j-2.2"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -502,7 +502,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/markdownj-core-0.4.2-SNAPSHOT.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=markdownj-core-0.4.2-SNAPSHOT"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -510,7 +510,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/microba.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=microba"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -518,7 +518,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/miglayout-swing.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=miglayout-swing"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -526,7 +526,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/nanoxml-2.2.3.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=nanoxml-2.2.3"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -534,7 +534,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/nekohtml-1.9.14.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=nekohtml-1.9.14"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -542,7 +542,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/netty-all-4.1.0.Beta4.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=netty-all-4.1.0.Beta4"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -550,7 +550,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/openapi.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=openapi"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -558,7 +558,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/optimizedFileManager.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=optimizedFileManager"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -566,7 +566,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/oromatcher.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=oromatcher"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -574,7 +574,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/picocontainer.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=picocontainer"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -582,7 +582,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/protobuf-2.5.0.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=protobuf-2.5.0"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -590,7 +590,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/proxy-vole_20131209.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=proxy-vole_20131209"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -598,7 +598,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/pty4j-0.4.22.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=pty4j-0.4.22"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -606,7 +606,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/purejavacomm.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=purejavacomm"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -614,7 +614,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/resolver.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=resolver"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -622,7 +622,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/resources_en.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=resources_en"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -630,7 +630,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/resources.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=resources"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -638,7 +638,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/rhino-js-1_7R4.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=rhino-js-1_7R4"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -646,7 +646,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/rngom-20051226-patched.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=rngom-20051226-patched"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -654,7 +654,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/sanselan-0.98-snapshot.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=sanselan-0.98-snapshot"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -662,7 +662,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/serviceMessages.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=serviceMessages"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -670,7 +670,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/slf4j-api-1.7.10.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=slf4j-api-1.7.10"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -678,7 +678,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/slf4j-log4j12-1.7.10.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=slf4j-log4j12-1.7.10"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -686,7 +686,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/snappy-in-java-0.3.1.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=snappy-in-java-0.3.1"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -694,7 +694,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/swingx-core-1.6.2.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=swingx-core-1.6.2"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -702,7 +702,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/trang-core.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=trang-core"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -710,7 +710,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/trove4j.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=trove4j"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -718,7 +718,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/trove4j_src.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=trove4j_src"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -726,7 +726,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/util.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=util"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -734,7 +734,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/velocity.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=velocity"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -742,7 +742,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/winp-1.21-patched.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=winp-1.21-patched"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -750,7 +750,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/xbean.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=xbean"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -758,7 +758,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/xerces.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=xerces"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -766,7 +766,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/xmlrpc-2.0.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=xmlrpc-2.0"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -774,7 +774,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/xpp3-1.1.4-min.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=xpp3-1.1.4-min"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -782,7 +782,7 @@
       <arg value="-DgroupId=com.intellij"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/lib/xstream-1.4.3.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=xstream-1.4.3"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -790,7 +790,7 @@
       <arg value="-DgroupId=com.intellij.plugins.tasks"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/tasks/lib/axis-1.4.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=axis-1.4"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -798,7 +798,7 @@
       <arg value="-DgroupId=com.intellij.plugins.tasks"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/tasks/lib/axis-jaxrpc-1.4.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=axis-jaxrpc-1.4"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -806,7 +806,7 @@
       <arg value="-DgroupId=com.intellij.plugins.tasks"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/tasks/lib/axis-saaj-1.3.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=axis-saaj-1.3"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -814,7 +814,7 @@
       <arg value="-DgroupId=com.intellij.plugins.tasks"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/tasks/lib/commons-discovery-0.4.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=commons-discovery-0.4"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -822,7 +822,7 @@
       <arg value="-DgroupId=com.intellij.plugins.tasks"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/tasks/lib/jira.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=jira"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -830,7 +830,7 @@
       <arg value="-DgroupId=com.intellij.plugins.tasks"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/tasks/lib/json-path-0.8.0.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=json-path-0.8.0"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -838,7 +838,7 @@
       <arg value="-DgroupId=com.intellij.plugins.tasks"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/tasks/lib/json-smart-1.1.1.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=json-smart-1.1.1"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -846,7 +846,7 @@
       <arg value="-DgroupId=com.intellij.plugins.tasks"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/tasks/lib/tasks-api.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=tasks-api"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -854,7 +854,7 @@
       <arg value="-DgroupId=com.intellij.plugins.tasks"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/tasks/lib/tasks-core.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=tasks-core"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -862,7 +862,7 @@
       <arg value="-DgroupId=com.intellij.plugins.tasks"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/tasks/lib/tasks-java.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=tasks-java"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -870,7 +870,7 @@
       <arg value="-DgroupId=com.intellij.plugins.tasks"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/tasks/lib/wsdl4j-1.4.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=wsdl4j-1.4"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -878,7 +878,7 @@
       <arg value="-DgroupId=com.intellij.plugins.git4idea"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/git4idea/lib/git4idea.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=git4idea"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -886,7 +886,7 @@
       <arg value="-DgroupId=com.intellij.plugins.git4idea"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/git4idea/lib/git4idea-rt.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=git4idea-rt"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -894,7 +894,7 @@
       <arg value="-DgroupId=com.intellij.plugins.git4idea"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/git4idea/lib/ini4j-0.5.2-patched.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=ini4j-0.5.2-patched"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -902,7 +902,7 @@
       <arg value="-DgroupId=com.intellij.plugins.git4idea"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/git4idea/lib/remote-servers-git.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=remote-servers-git"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -910,7 +910,7 @@
       <arg value="-DgroupId=com.intellij.plugins.git4idea"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/git4idea/lib/resources_en.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=resources_en"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -918,7 +918,7 @@
       <arg value="-DgroupId=com.intellij.plugins.git4idea"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/git4idea/lib/trilead-ssh2.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=trilead-ssh2"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -926,7 +926,7 @@
       <arg value="-DgroupId=com.intellij.plugins.svn4idea"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/svn4idea/lib/antlr.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=antlr"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -934,7 +934,7 @@
       <arg value="-DgroupId=com.intellij.plugins.svn4idea"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/svn4idea/lib/jsch.agentproxy.svnkit-trilead-ssh2.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=jsch.agentproxy.svnkit-trilead-ssh2"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -942,7 +942,7 @@
       <arg value="-DgroupId=com.intellij.plugins.svn4idea"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/svn4idea/lib/resources_en.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=resources_en"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -950,7 +950,7 @@
       <arg value="-DgroupId=com.intellij.plugins.svn4idea"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/svn4idea/lib/sequence-library.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=sequence-library"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -958,7 +958,7 @@
       <arg value="-DgroupId=com.intellij.plugins.svn4idea"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/svn4idea/lib/sqljet.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=sqljet"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -966,7 +966,7 @@
       <arg value="-DgroupId=com.intellij.plugins.svn4idea"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/svn4idea/lib/svn4idea.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=svn4idea"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -974,7 +974,7 @@
       <arg value="-DgroupId=com.intellij.plugins.svn4idea"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/svn4idea/lib/svnkit.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=svnkit"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -982,7 +982,7 @@
       <arg value="-DgroupId=com.intellij.plugins.svn4idea"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/svn4idea/lib/svnkit-javahl.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=svnkit-javahl"/>
     </exec>
     <exec executable="${maven.executable}">
@@ -990,7 +990,7 @@
       <arg value="-DgroupId=com.intellij.plugins.svn4idea"/>
       <arg value="-Dpackaging=jar"/>
       <arg value="-Dfile=${IDEA_HOME}/plugins/svn4idea/lib/trilead.jar"/>
-      <arg value="-Dversion=IC-141.2735.5"/>
+      <arg value="-Dversion=IC-141.3056.4"/>
       <arg value="-DartifactId=trilead"/>
     </exec>
   </target>

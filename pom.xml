@@ -15,6 +15,6 @@
         <module>ali-rest-client</module>
         <module>ali-plugin-main</module>
         <module>ali-test-support</module>
-        <module>idea-sdk-IC-141.2735.5</module>
+        <module>idea-sdk-IC-141.3056.4</module>
     </modules>
 </project>

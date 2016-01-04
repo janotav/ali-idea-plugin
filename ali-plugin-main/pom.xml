@@ -101,7 +101,7 @@
         </dependency>
         <dependency>
             <groupId>com.hp.alm.ali</groupId>
-            <artifactId>idea-sdk-IC-141.2735.5</artifactId>
+            <artifactId>idea-sdk-IC-141.3056.4</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
         </dependency>

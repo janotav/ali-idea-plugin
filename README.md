@@ -20,7 +20,7 @@ Intellij IDEA or download manually from the plugin [homepage].
 Building
 --------
 
- * Intellij community version 14.1.5 is supported. Building against other minor version or ultimate edition
+ * Intellij community version 14.1.6 is supported. Building against other minor version or ultimate edition
    is technically possible, but might require manual changes to the dependencies.
  * Requires Ant (for dependency extraction and build invocation) and Maven (for actual build). If maven is not present
    on the system path, append "-Dmaven.executable=/path/to/maven/bin/mvn" when executing ant commands described bellow.
@@ -29,13 +29,13 @@ First you need to populate your local maven repository with Intellij IDEA librar
 maven repository. Convenience Ant script is provided to simplify this task.
 
 ```
-    $ ant install-sdk -DIDEA_HOME=<Idea Community 14.1.5 Home>
+    $ ant install-sdk -DIDEA_HOME=<Idea Community 14.1.6 Home>
 ```
 
 Once the dependencies are present in the local repository, you can perform actual build:
 
 ```
-    $ ant build -DIDEA_HOME=<Idea Community 14.1.5 Home>
+    $ ant build -DIDEA_HOME=<Idea Community 14.1.6 Home>
 ```
 
 Resulting plugin is located in "ali-plugin-main/target/ali-idea-plugin.zip".
