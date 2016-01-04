@@ -5,7 +5,7 @@
     <version>3.16.@{idea.build}</version>
     <vendor logo="/ali_icon.png" url="https://hpln.hp.com/group/application-lifecycle-intelligence">HP</vendor>
 
-    <idea-version since-build="@{idea.build}"/>
+    <idea-version since-build="@{idea.build.min}"/>
 
     <change-notes>
         <![CDATA[
