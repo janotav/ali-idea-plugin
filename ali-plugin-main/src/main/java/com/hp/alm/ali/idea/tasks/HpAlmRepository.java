@@ -52,11 +52,11 @@ final public class HpAlmRepository extends TaskRepository implements Comparable<
      *  assert clone.equals(repository) : repository.getClass().getName();
      *
      * This assertion prevents us from defining equals for identity only. On the other hand when equals is defined as
-     * true for all other (HP ALM) repositories, removal operation is not working properly when multiple
-     * (HP ALM) repositories are present - the first occurrence is removed instead of the one that was selected.
+     * true for all other (HPE ALM) repositories, removal operation is not working properly when multiple
+     * (HPE ALM) repositories are present - the first occurrence is removed instead of the one that was selected.
      * I wonder if this was worth the trouble, but auxiliary id fixes the problem....
      *
-     * More importantly id defines order and allows to ignore duplicated repositories when making queries to HP ALM system...
+     * More importantly id defines order and allows to ignore duplicated repositories when making queries to HPE ALM system...
      */
     private long id;
 
@@ -101,7 +101,7 @@ final public class HpAlmRepository extends TaskRepository implements Comparable<
     }
 
     public String getPresentableName() {
-      return "HP ALM";
+      return "HPE ALM";
     }
 
     public boolean isConfigured() {
@@ -152,7 +152,7 @@ final public class HpAlmRepository extends TaskRepository implements Comparable<
                 if(stored != null) {
                     filter.copyFrom(stored);
                 } else {
-                    Notifications.Bus.notify(new Notification("HP ALM Integration", "Cannot retrieve task information from HP ALM:<br/> '"+config.getStoredQuery()+"' query not found",
+                    Notifications.Bus.notify(new Notification("HPE ALM Integration", "Cannot retrieve task information from HPE ALM:<br/> '"+config.getStoredQuery()+"' query not found",
                             "<p><a href=\"\">Configure task integration ...</a></p>", NotificationType.ERROR,
                         new NotificationListener() {
                             public void hyperlinkUpdate(Notification notification, HyperlinkEvent event) {

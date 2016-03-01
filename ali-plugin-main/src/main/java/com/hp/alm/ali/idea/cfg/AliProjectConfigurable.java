@@ -29,14 +29,14 @@ public class AliProjectConfigurable extends AliAbstractConfigurable {
     private AliProjectConfiguration projectConfiguration;
     private AliConfiguration ideConfiguration;
 
-    public static String DISPLAY_NAME = "HP ALI (project)";
+    public static String DISPLAY_NAME = "HPE ALI (project)";
 
     public AliProjectConfigurable(Project project) {
         this.project = project;
     }
 
     public String getId() {
-        return "HP_ALI";
+        return "HPE_ALI";
     }
 
     public String getDisplayName() {

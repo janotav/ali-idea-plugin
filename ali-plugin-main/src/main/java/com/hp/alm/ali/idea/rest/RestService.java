@@ -74,8 +74,8 @@ public class RestService implements ConfigurationListener {
         conf.addListener(this);
         ApplicationManager.getApplication().getComponent(AliConfiguration.class).addListener(this);
 
-        errorNotification = new Notification("HP ALM Integration", "Cannot connect to HP ALM",
-                "<p><a href=\"\">Configure HP ALM integration ...</a></p>", NotificationType.ERROR,
+        errorNotification = new Notification("HPE ALM Integration", "Cannot connect to HPE ALM",
+                "<p><a href=\"\">Configure HPE ALM integration ...</a></p>", NotificationType.ERROR,
                 new NotificationListener() {
                     public void hyperlinkUpdate(Notification notification, HyperlinkEvent event) {
                         notification.expire();
@@ -108,7 +108,7 @@ public class RestService implements ConfigurationListener {
 
                     // not sure how IdeaWideAuthenticator & co. is supposed to work, let's try something simple:
                     if(httpConfigurable.PROXY_AUTHENTICATION) {
-                        PasswordAuthentication authentication = httpConfigurable.getPromptedAuthentication("HP ALI", address.getHostName());
+                        PasswordAuthentication authentication = httpConfigurable.getPromptedAuthentication("HPE ALI", address.getHostName());
                         if(authentication != null) {
                             restClient.setHttpProxyCredentials(authentication.getUserName(), new String(authentication.getPassword()));
                         }
@@ -248,7 +248,7 @@ public class RestService implements ConfigurationListener {
                     }
                     UIUtil.invokeLaterIfNeeded(new Runnable() {
                         public void run() {
-                            ToolWindow toolWindow = project.getComponent(ToolWindowManager.class).getToolWindow("HP ALI");
+                            ToolWindow toolWindow = project.getComponent(ToolWindowManager.class).getToolWindow("HPE ALI");
                             if (toolWindow != null && toolWindow.getContentManager().getContentCount() > 1) {
                                 expireConnectivityError();
                                 Notifications.Bus.notify(errorNotification, project);

@@ -50,10 +50,10 @@ public class AliConfigurable extends AliAbstractConfigurable implements Document
     private JCheckBox spellChecker;
     private JCheckBox devMotiveAnnotation;
 
-    public static String DISPLAY_NAME = "HP ALI (global)";
+    public static String DISPLAY_NAME = "HPE ALI (global)";
 
     public String getId() {
-        return "HP_ALI_ide";
+        return "HPE_ALI_ide";
     }
 
     public String getDisplayName() {
@@ -216,10 +216,10 @@ public class AliConfigurable extends AliAbstractConfigurable implements Document
             if(e.getHttpStatus() == HttpStatus.SC_UNAUTHORIZED) {
                 throw new AuthenticationFailed();
             } else {
-                throw new RuntimeException("Failed to connect to HP ALM: " + handleGenericException(restClient, restClient.getDomain(), restClient.getProject()));
+                throw new RuntimeException("Failed to connect to HPE ALM: " + handleGenericException(restClient, restClient.getDomain(), restClient.getProject()));
             }
         } catch(Exception e) {
-            throw new RuntimeException("Failed to connect to HP ALM: " + handleGenericException(restClient, restClient.getDomain(), restClient.getProject()));
+            throw new RuntimeException("Failed to connect to HPE ALM: " + handleGenericException(restClient, restClient.getDomain(), restClient.getProject()));
         } finally {
             if(loginLogout) {
                 RestService.logout(restClient);

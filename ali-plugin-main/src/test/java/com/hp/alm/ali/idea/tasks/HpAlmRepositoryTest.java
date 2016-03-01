@@ -142,8 +142,8 @@ public class HpAlmRepositoryTest extends IntellijTest {
         connection.subscribe(Notifications.TOPIC, new Notifications() {
             @Override
             public void notify(@NotNull Notification notification) {
-                Assert.assertEquals("HP ALM Integration", notification.getGroupId());
-                Assert.assertEquals("Cannot retrieve task information from HP ALM:<br/> 'fav2 (project)' query not found", notification.getTitle());
+                Assert.assertEquals("HPE ALM Integration", notification.getGroupId());
+                Assert.assertEquals("Cannot retrieve task information from HPE ALM:<br/> 'fav2 (project)' query not found", notification.getTitle());
                 Assert.assertEquals(NotificationType.ERROR, notification.getType());
                 connection.disconnect();
                 handler.done();

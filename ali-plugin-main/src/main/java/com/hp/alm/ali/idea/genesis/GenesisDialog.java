@@ -66,7 +66,7 @@ public class GenesisDialog extends AbstractWizard<GenesisStep> implements ItemLi
 
         JPanel panel2 = new JPanel();
         panel2.setLayout(new GridLayout(0, 1));
-        context.locationLbl = new JLabel("HP ALM Location:");
+        context.locationLbl = new JLabel("HPE ALM Location:");
         panel2.add(context.locationLbl);
         context.location = new JTextField(conf.ALM_LOCATION);
         context.location.setPreferredSize(new Dimension(200, context.location.getPreferredSize().height));

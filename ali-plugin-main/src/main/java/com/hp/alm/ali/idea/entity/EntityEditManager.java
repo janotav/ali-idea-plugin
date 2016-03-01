@@ -127,7 +127,7 @@ public class EntityEditManager implements ProjectManagerListener, ContentManager
     }
 
     public int askUser() {
-        return Messages.showYesNoCancelDialog(project, "There are unsaved changes, if you proceed they will be discarded. Proceed?", "HP ALI", Messages.getQuestionIcon());
+        return Messages.showYesNoCancelDialog(project, "There are unsaved changes, if you proceed they will be discarded. Proceed?", "HPE ALI", Messages.getQuestionIcon());
     }
 
     private boolean askForApproval() {

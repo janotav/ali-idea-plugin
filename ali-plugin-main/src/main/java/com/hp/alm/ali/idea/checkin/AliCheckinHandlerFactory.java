@@ -27,7 +27,7 @@ public class AliCheckinHandlerFactory extends CheckinHandlerFactory {
     public CheckinHandler createHandler(CheckinProjectPanel checkinProjectPanel, CommitContext commitContext) {
         // attempt to initialize connection if not yet initialized
         // work item chooser in the commit dialog requires working connection
-        // and user may attempt to commit without ever opening the HP ALI tool window
+        // and user may attempt to commit without ever opening the HPE ALI tool window
         checkinProjectPanel.getProject().getComponent(RestService.class).checkConnectivity();
         return new AliCheckinHandler(checkinProjectPanel);
     }

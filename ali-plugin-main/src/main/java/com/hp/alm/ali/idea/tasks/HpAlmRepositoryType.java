@@ -28,7 +28,7 @@ import javax.swing.*;
 public class HpAlmRepositoryType extends TaskRepositoryType<HpAlmRepository> {
 
     public String getName() {
-        return "HP_ALM";
+        return "HPE_ALM";
     }
 
     public Icon getIcon() {

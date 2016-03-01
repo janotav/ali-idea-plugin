@@ -101,7 +101,7 @@ public class HpAlmRepositoryEditor extends TaskRepositoryEditor implements ItemL
 
         content.add(options, BorderLayout.CENTER);
 
-        JLabel warning = new JLabel("<html><body>Integration with HP ALM repository can be defined only once per project.</body></html>", IconLoader.getIcon("/general/errorDialog.png"), SwingConstants.LEFT);
+        JLabel warning = new JLabel("<html><body>Integration with HPE ALM repository can be defined only once per project.</body></html>", IconLoader.getIcon("/general/errorDialog.png"), SwingConstants.LEFT);
 
         final CardLayout cardLayout = new CardLayout();
         final JPanel contentOrWarning = new JPanel(cardLayout);
@@ -126,8 +126,8 @@ public class HpAlmRepositoryEditor extends TaskRepositoryEditor implements ItemL
 
         evaluateDefectOrRequirementWarning();
 
-        // try to connect (necessary if HP ALI tool hasn't been activated when user opens tasks configuration)
-        ToolWindow toolWindow = project.getComponent(ToolWindowManager.class).getToolWindow("HP ALI");
+        // try to connect (necessary if HPE ALI tool hasn't been activated when user opens tasks configuration)
+        ToolWindow toolWindow = project.getComponent(ToolWindowManager.class).getToolWindow("HPE ALI");
         ServerType serverType = project.getComponent(RestService.class).getServerTypeIfAvailable();
         if(toolWindow.getContentManager().getContentCount() == 1 &&
                 !serverType.isConnected() &&

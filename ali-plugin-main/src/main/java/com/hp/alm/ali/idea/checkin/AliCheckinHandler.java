@@ -114,7 +114,7 @@ public class AliCheckinHandler extends CheckinHandler implements ActionListener,
 
         panel = new JPanel();
         panel.setLayout(new BorderLayout());
-        panel.setBorder(BorderFactory.createTitledBorder("HP ALI"));
+        panel.setBorder(BorderFactory.createTitledBorder("HPE ALI"));
 
         activeItemService.addListener(this);
         restService.addServerTypeListener(this);

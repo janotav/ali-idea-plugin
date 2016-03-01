@@ -45,7 +45,7 @@ import java.util.*;
 import static com.hp.alm.ali.utils.PathUtils.pathJoin;
 
 /**
- * Thin wrapper around commons-http client that provides basic support for communication with the HP ALM REST.
+ * Thin wrapper around commons-http client that provides basic support for communication with the HPE ALM REST.
  * <p>
  *
  * No higher level abstractions are currently provided, this library only simplifies following tasks:
@@ -263,7 +263,7 @@ public class AliRestClient implements RestClient {
         addTenantCookie(ssoCookie);
 
         //Since ALM 12.00 it is required explicitly ask for QCSession calling "/rest/site-session"
-        //For all the rest of HP ALM / AGM versions it is optional
+        //For all the rest of HPE ALM / AGM versions it is optional
         String siteSessionPoint = pathJoin("/", location, "/rest/site-session");
         String sessionParamXml = createRestSessionXml();
         post = initPostMethod(siteSessionPoint, sessionParamXml);

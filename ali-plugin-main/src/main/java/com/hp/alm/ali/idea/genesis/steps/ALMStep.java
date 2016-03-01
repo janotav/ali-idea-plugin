@@ -34,7 +34,7 @@ public class ALMStep extends GenesisStep {
         try {
             ctx.client.login();
         } catch (Exception e) {
-            throw new CommitStepException("Could not login into HP ALM, verify location parameter and credentials");
+            throw new CommitStepException("Could not login into HPE ALM, verify location parameter and credentials");
         }
     }
 

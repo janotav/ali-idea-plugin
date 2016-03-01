@@ -44,7 +44,7 @@ public class TroubleShootService implements RestServiceLogger {
     final Notification serviceNotification;
 
     public TroubleShootService() {
-        serviceNotification = new Notification("HP ALM Integration", "Troubleshooting mode is on and all REST " +
+        serviceNotification = new Notification("HPE ALM Integration", "Troubleshooting mode is on and all REST " +
                 "communication is being tracked.",
                 "<p>Don't forget to <a href=\"\">stop tracking</a> when no longer needed.</p>", NotificationType.INFORMATION,
                 new NotificationListener() {

@@ -56,7 +56,7 @@ import java.io.InputStream;
 
 public abstract class AliAbstractConfigurable implements SearchableConfigurable, DocumentListener {
 
-    public static final String HP_ALM_INTEGRATION = "HP ALM Integration Configuration";
+    public static final String HP_ALM_INTEGRATION = "HPE ALM Integration Configuration";
 
     protected ConfigurationField locationField;
     protected ConfigurationField domainField;
@@ -279,10 +279,10 @@ public abstract class AliAbstractConfigurable implements SearchableConfigurable,
         c.gridwidth = 1;
         jPanel.add(new JLabel(IconLoader.getIcon("/horizon.png")), c);
 
-        JTextPane desc = HTMLAreaField.createTextPane("<html>When connecting to HP Agile Manager you can either fill in the above form<br>" +
+        JTextPane desc = HTMLAreaField.createTextPane("<html>When connecting to HPE Agile Manager you can either fill in the above form<br>" +
                 "manually or upload the tenant descriptor to auto-configure the values.<br>" +
                 "You can obtain the tenant descriptor from the ALI Summary tab in the<br>" +
-                "HP Agile Manager configuration</html>");
+                "HPE Agile Manager configuration</html>");
         desc.setOpaque(false);
         c.gridwidth = 3;
         c.gridx++;

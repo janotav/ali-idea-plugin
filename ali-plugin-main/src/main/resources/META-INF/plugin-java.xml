@@ -1,9 +1,9 @@
 <idea-plugin>
     <actions>
-        <action id="genesisActionBig" class="com.hp.alm.ali.idea.genesis.GenesisAction" text="Environment Provisioning" description="Setup your development environment using HP ALI" icon="/ali_icon_64x64.png">
+        <action id="genesisActionBig" class="com.hp.alm.ali.idea.genesis.GenesisAction" text="Environment Provisioning" description="Setup your development environment using HPE ALI" icon="/ali_icon_64x64.png">
             <add-to-group group-id="WelcomeScreen.QuickStart.IDEA" anchor="first"/>
         </action>
-        <action id="genesisAction" class="com.hp.alm.ali.idea.genesis.GenesisAction" text="Environment Provisioning" description="Setup your development environment using HP ALI" icon="/ali_icon.png">
+        <action id="genesisAction" class="com.hp.alm.ali.idea.genesis.GenesisAction" text="Environment Provisioning" description="Setup your development environment using HPE ALI" icon="/ali_icon.png">
             <add-to-group group-id="OpenProjectGroup" anchor="last"/>
         </action>
     </actions>

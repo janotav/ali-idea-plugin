@@ -5,7 +5,7 @@
     <groupId>com.hp.alm.ali</groupId>
     <artifactId>ali-root</artifactId>
     <name>${project.artifactId}:${project.version}</name>
-    <description>HP ALI Intellij Plugin</description>
+    <description>HPE ALI Intellij Plugin</description>
     <packaging>pom</packaging>
     <version>3.16</version>
 

@@ -1,4 +1,4 @@
-<project name="HP ALI custom build">
+<project name="HPE ALI custom build">
 
     <property environment="env"/>
 

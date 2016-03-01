@@ -118,7 +118,7 @@ public class SettingsPanel extends JPanel implements ConfigurationListener, Disp
 
         final JTextPane textPane = new JTextPane();
         textPane.setEditorKit(new HTMLEditorKit());
-        textPane.setText("<html><body>HP ALM integration can be configured on <a href=\"ide\">IDE</a> and overridden on <a href=\"project\">project</a> level.</body></html>");
+        textPane.setText("<html><body>HPE ALM integration can be configured on <a href=\"ide\">IDE</a> and overridden on <a href=\"project\">project</a> level.</body></html>");
         textPane.setEditable(false);
         textPane.addHyperlinkListener(this);
         textPane.setBackground(bgColor);
@@ -206,10 +206,10 @@ public class SettingsPanel extends JPanel implements ConfigurationListener, Disp
             if(e.getHttpStatus() == HttpStatus.SC_UNAUTHORIZED) {
                 throw new AuthenticationFailed();
             } else {
-                throw new RuntimeException("Failed to connect to HP ALM");
+                throw new RuntimeException("Failed to connect to HPE ALM");
             }
         } catch(Exception e) {
-            throw new RuntimeException("Failed to connect to HP ALM");
+            throw new RuntimeException("Failed to connect to HPE ALM");
         }
     }
 

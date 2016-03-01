@@ -1,9 +1,9 @@
 <idea-plugin>
     <id>com.hp.alm.ali</id>
-    <name>HP ALI</name>
-    <description>Application Lifecycle Intelligence for HP ALM</description>
+    <name>HPE ALI</name>
+    <description>Application Lifecycle Intelligence for HPE ALM</description>
     <version>3.16.@{idea.build}</version>
-    <vendor logo="/ali_icon.png" url="https://hpln.hp.com/group/application-lifecycle-intelligence">HP</vendor>
+    <vendor logo="/ali_icon.png" url="https://hpln.hp.com/group/application-lifecycle-intelligence">HPE</vendor>
 
     <idea-version since-build="@{idea.build.min}"/>
 
@@ -57,7 +57,7 @@
 
       <h3>Changes in 3.8</h3>
       <ul>
-        <li>[compatibility] support HP ALM 12</li>
+        <li>[compatibility] support HPE ALM 12</li>
         <li>[compatibility] enable plugin in RubyMine IDE</li>
         <li>[enhancement] improved code changes detail
         <li>[bugfix] consider HTTP proxy exception list</li>
@@ -78,7 +78,7 @@
       <h3>Changes in Rev. 137338</h3>
       <ul>
         <li>This is a major version upgrade that includes many feature and usability enhancements</li>
-        <li>Beta support for HP Agile Manager</li>
+        <li>Beta support for HPE Agile Manager</li>
       </ul>
 
       <h3>Changes in Rev. 134369</h3>
@@ -478,7 +478,7 @@
     </extensionPoints>
 
     <extensions defaultExtensionNs="com.intellij">
-       <toolWindow id="HP ALI" icon="/ali_icon_13x13.png" anchor="bottom" factoryClass="com.hp.alm.ali.idea.content.AliContentFactory" canCloseContents="true"/>
+       <toolWindow id="HPE ALI" icon="/ali_icon_13x13.png" anchor="bottom" factoryClass="com.hp.alm.ali.idea.content.AliContentFactory" canCloseContents="true"/>
        <applicationConfigurable groupId="tools" implementation="com.hp.alm.ali.idea.cfg.AliConfigurable"/>
        <projectConfigurable groupId="tools" implementation="com.hp.alm.ali.idea.cfg.AliProjectConfigurable"/>
        <checkinHandlerFactory implementation="com.hp.alm.ali.idea.checkin.AliCheckinHandlerFactory"/>

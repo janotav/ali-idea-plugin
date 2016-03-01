@@ -7,7 +7,7 @@
     <groupId>com.hp.alm.ali</groupId>
     <artifactId>ali-parent</artifactId>
     <name>${project.artifactId}:${project.version}</name>
-    <description>Common HP ALI parent</description>
+    <description>Common HPE ALI parent</description>
     <packaging>pom</packaging>
     <version>3.16</version>
 

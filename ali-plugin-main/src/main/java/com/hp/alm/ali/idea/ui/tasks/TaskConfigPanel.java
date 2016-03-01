@@ -149,7 +149,7 @@ public class TaskConfigPanel extends JPanel implements RestListener {
                     if(itemEvent.getItem() instanceof ServerFavorites) {
                         RestService restService = project.getComponent(RestService.class);
                         if(!restService.getServerTypeIfAvailable().isConnected()) {
-                            Messages.showDialog("Not connected to HP ALM, server favorites are not available.", "Not Connected", new String[]{"Continue"}, 0, Messages.getErrorIcon());
+                            Messages.showDialog("Not connected to HPE ALM, server favorites are not available.", "Not Connected", new String[]{"Continue"}, 0, Messages.getErrorIcon());
                             revert();
                             return;
                         }

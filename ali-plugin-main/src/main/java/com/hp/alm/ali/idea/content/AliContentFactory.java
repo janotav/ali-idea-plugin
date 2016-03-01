@@ -52,7 +52,7 @@ import java.util.List;
 
 public class AliContentFactory implements ToolWindowFactory {
 
-    public static final String TOOL_WINDOW_MAIN = "HP ALI";
+    public static final String TOOL_WINDOW_MAIN = "HPE ALI";
     public static final String TOOL_WINDOW_DETAIL = "ALI Detail";
 
     @Override

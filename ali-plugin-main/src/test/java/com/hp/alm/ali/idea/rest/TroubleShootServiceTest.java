@@ -126,7 +126,7 @@ public class TroubleShootServiceTest extends IntellijTest {
         connection.subscribe(Notifications.TOPIC, new Notifications() {
             @Override
             public void notify(@NotNull Notification notification) {
-                Assert.assertEquals("HP ALM Integration", notification.getGroupId());
+                Assert.assertEquals("HPE ALM Integration", notification.getGroupId());
                 Assert.assertEquals("Troubleshooting mode is on and all REST communication is being tracked.", notification.getTitle());
                 Assert.assertEquals(NotificationType.INFORMATION, notification.getType());
                 times.add(1);
