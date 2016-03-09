@@ -97,7 +97,7 @@
         <dependency>
             <groupId>com.intellij</groupId>
             <artifactId>gson-2.3</artifactId>
-            <version>IC-141.177.4</version>
+            <version>${idea.version}</version>
         </dependency>
         <dependency>
             <groupId>com.hp.alm.ali</groupId>
