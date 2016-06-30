@@ -133,7 +133,8 @@ public class TeamType extends ReferenceType {
                     public List<ComboItem> load() {
                         EntityQuery query = new EntityQuery("team");
                         String releaseCondition = context.getEntityQuery().getValue("release-backlog-item.release-id");
-                        query.setValue("release.id", releaseCondition);
+                        String releaseConditionResolved = project.getComponent(ReleaseType.class).getFilterResolver().toRESTQuery(releaseCondition);
+                        query.setValue("release.id", releaseConditionResolved);
                         query.setPropertyResolved("release.id", true);
                         query.addColumn("id", 1);
                         query.addColumn("name", 1);
