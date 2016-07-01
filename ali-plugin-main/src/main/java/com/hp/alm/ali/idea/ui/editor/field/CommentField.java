@@ -110,16 +110,9 @@ public class CommentField extends BaseField {
         }
 
         StringBuffer sb = new StringBuffer();
-        if(!"".equals(html_end)) {
-            // we assume there is already something, append...
-            sb.append(existingComment);
-            sb.append("<br><font color=\"#000080\"><b>________________________________________</b></font><br>");
-        } else {
-            // non-html content? start from scratch...
-            sb.append("<html><body>");
-            html_end = "</body></html>";
-        }
-
+        // neither latest ALM nor AGM store the outer-most html tags, simply add to what we have found
+        sb.append(existingComment);
+        sb.append("<br><font color=\"#000080\"><b>________________________________________</b></font><br>");
         sb.append("<font color=\"#000080\"><b>");
 
         if (fullName != null) {
