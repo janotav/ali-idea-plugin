@@ -2,27 +2,33 @@
     <id>com.hp.alm.ali</id>
     <name>HP ALI</name>
     <description>Application Lifecycle Intelligence for HP ALM</description>
-    <version>3.16.@{idea.build}</version>
+    <version>3.17.@{idea.build}</version>
     <vendor logo="/ali_icon.png" url="https://hpln.hp.com/group/application-lifecycle-intelligence">HP</vendor>
 
     <idea-version since-build="@{idea.build.min}"/>
 
     <change-notes>
         <![CDATA[
+      <h3>Changes in 3.17</h3>
+      <ul>
+        <li>[bugfix] fixed team filtering with multiple releases</li>
+        <li>[bugfix] fixed old comments removal when adding new</li>
+      </ul>
+
       <h3>Changes in 3.16</h3>
       <ul>
-        <li>[enhancement] add invested task time action
+        <li>[enhancement] add invested task time action</li>
       </ul>
 
       <h3>Changes in 3.15</h3>
       <ul>
-        <li>[enhancement] support "agmlink" attachments
+        <li>[enhancement] support "agmlink" attachments</li>
       </ul>
 
       <h3>Changes in 3.14</h3>
       <ul>
         <li>[compatibility] support Intellij 14.1</li>
-        <li>[enhancement] support Development history (DevMotive)
+        <li>[enhancement] support Development history (DevMotive)</li>
       </ul>
 
       <h3>Changes in 3.13</h3>
