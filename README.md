@@ -1,3 +1,9 @@
+Project Discontinued
+--------------------
+
+This project is no longer actively maintained. While it's likely that it will remain usable for certain time, no fixes
+or new versions will be provided. If you want to use it, you're on your own...
+
 Introduction
 ------------
 
