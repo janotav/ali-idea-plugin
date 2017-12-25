@@ -20,13 +20,13 @@ import com.intellij.openapi.vcs.VcsRoot;
 import com.intellij.openapi.vcs.history.VcsRevisionNumber;
 import org.jetbrains.idea.svn.SvnRevisionNumber;
 import org.jetbrains.idea.svn.SvnVcs;
-import org.tmatesoft.svn.core.wc.SVNRevision;
+import org.jetbrains.idea.svn.api.Revision;
 
 public class SubversionRevisionFactory implements RevisionFactory {
     @Override
     public VcsRevisionNumber create(String revision) {
         try {
-            return new SvnRevisionNumber(SVNRevision.create(Long.valueOf(revision)));
+            return new SvnRevisionNumber(Revision.of(Long.valueOf(revision)));
         } catch (NumberFormatException e) {
             return null;
         }

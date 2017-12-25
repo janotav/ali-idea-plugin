@@ -24,13 +24,13 @@ import com.intellij.openapi.vcs.history.VcsRevisionNumber;
 import com.intellij.testFramework.LightVirtualFile;
 import org.jetbrains.idea.svn.SvnRevisionNumber;
 import org.jetbrains.idea.svn.SvnVcs;
+import org.jetbrains.idea.svn.api.Url;
+import org.jetbrains.idea.svn.commandLine.SvnBindException;
 import org.jetbrains.idea.svn.info.Info;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
-import org.tmatesoft.svn.core.SVNException;
-import org.tmatesoft.svn.core.SVNURL;
 
 public class SubversionRevisionFactoryTest extends IntellijTest {
 
@@ -48,9 +48,9 @@ public class SubversionRevisionFactoryTest extends IntellijTest {
     }
 
     @Test
-    public void testMatches() throws SVNException {
+    public void testMatches() throws SvnBindException {
         Info info = Mockito.mock(Info.class);
-        Mockito.when(info.getRepositoryRootURL()).thenReturn(SVNURL.parseURIDecoded("http://host/svn/repo"));
+        Mockito.when(info.getRepositoryRootURL()).thenReturn(Url.parse("http://host/svn/repo", false));
         SvnVcs spy = Mockito.spy(svnVcs);
         LightVirtualFile file = new LightVirtualFile();
         Mockito.doReturn(info).when(spy).getInfo(file);
